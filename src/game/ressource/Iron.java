@@ -1,4 +1,4 @@
-package game.planet.ressource;
+package game.ressource;
 
 public class Iron extends ARessource {
 

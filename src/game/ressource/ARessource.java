@@ -1,4 +1,4 @@
-package game.planet.ressource;
+package game.ressource;
 
 public abstract class ARessource {
 	
