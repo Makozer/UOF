@@ -4,4 +4,9 @@ package game.utils;
 
 public class Euler extends AMath {
 
+	@Override
+	public double getValue(int x) {
+		throw new IllegalArgumentException("Euler AMath ist noch nicht umgesetzt worden.");
+	}
+
 }

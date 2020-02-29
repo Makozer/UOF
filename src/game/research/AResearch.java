@@ -12,7 +12,7 @@ public abstract class AResearch {
 	}	
 	
 	public double getValue() {
-		return modification.getY(level);
+		return modification.getValue(level);
 	}
 
 }

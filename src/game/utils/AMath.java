@@ -2,9 +2,7 @@ package game.utils;
 
 public abstract class AMath {
 
-	public double getY(int x) {
-		return 0;
-	}
+	public abstract double getValue(int x);
 	
 	@Override
 	public String toString() {

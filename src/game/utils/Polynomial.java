@@ -37,16 +37,16 @@ public class Polynomial extends AMath {
 
 	public static void main(String[] args) {
 		Polynomial polynomial = new Polynomial(13.0);
-		System.out.println("Testing(x=1) constant\t" + polynomial.toString() + "\n" + polynomial.getY(1) + "\n");
+		System.out.println("Testing(x=1) constant\t" + polynomial.toString() + "\n" + polynomial.getValue(1) + "\n");
 		polynomial = new Polynomial(3, 0);
-		System.out.println("Testing(x=1) 3x\t\t" + polynomial.toString() + "\n" + polynomial.getY(1) + "\n");
+		System.out.println("Testing(x=1) 3x\t\t" + polynomial.toString() + "\n" + polynomial.getValue(1) + "\n");
 		polynomial = new Polynomial(2, 0, 0);
-		System.out.println("Testing(x=1) 2x^2\t" + polynomial.toString() + "\n" + polynomial.getY(1) + "\n");
+		System.out.println("Testing(x=1) 2x^2\t" + polynomial.toString() + "\n" + polynomial.getValue(1) + "\n");
 	}
 	
 	
 	@Override
-	public double getY(int x) {
+	public double getValue(int x) {
 		return (coefficientX4 * Math.pow(x, 4.0)) + (coefficientX3 * Math.pow(x, 3.0)) + (coefficientX2 * Math.pow(x, 2.0)) + (coefficientX1 * Math.pow(x, 1.0)) + constant;
 	}
 

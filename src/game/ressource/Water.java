@@ -6,4 +6,9 @@ public class Water extends ARessource {
 		super(ressourcevalue);
 	}
 
+	@Override
+	public ARessource cloneMe(double mod) {
+		return new Water((int)(this.getVal() * mod));
+	}
+
 }

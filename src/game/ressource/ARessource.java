@@ -16,7 +16,7 @@ public abstract class ARessource {
 		this.ressourcevalue = ressourcevalue;
 	}
 	
-	
+	public abstract ARessource cloneMe(double mod);
 	
 
 }

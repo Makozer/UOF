@@ -1,47 +1,55 @@
 package game.fleet;
 
+import java.util.ArrayList;
+
 import game.research.TechTree;
+import game.ressource.ARessource;
+import game.utils.*;
 
 public abstract class ASpaceShip {
 	
-	protected int attack = 0;				// attack rating
-	protected int defense = 0;				// defense rating
-	protected int health = 0;				// healthpoints
-	protected double speed = 0;				// speed x lightspeed = real speed of ships
-	protected int capacity = 0;				// loading capacity
-	protected int quantity = 0;				// amount of ships
-	protected boolean available = false; 	// if the ship is already researched
+	// Basic Attributes
+	protected int 		attack 		= 0;	// attack rating
+	protected int 		defense 	= 0;	// defense rating
+	protected double 	speed 		= 0;	// speed x lightspeed = real speed of ships
+	protected int		capacity 	= 0;	// loading capacity
 	
-	protected TechTree techtree = null;
+	protected int 		quantity 	= 0;	// amount of ships
 	
-	// Idea
-	protected int level = 0; // Maybe leveling up system? though fights or research?
+	// Research Attributes
+	protected boolean 	available = false; 	// if the ship is already researched	
+	protected TechTree 	techtree = null;
+	protected int 		level = 1;	
+	protected AMath 	levelMod = null;
+	
+	// Costs	
+	protected ArrayList<ARessource> costs = null;
 	
 	
 	public ASpaceShip(TechTree techtree, int quantity) {
-		this.quantity = quantity;
-		this.techtree = techtree;
+		if (techtree == null) {
+			throw new IllegalArgumentException("TechTree war null!");
+		} else {
+			this.quantity = quantity;
+			this.techtree = techtree;
+		}		
 	}
 
 
 	public int getAttack() {
-		return (int)((this.attack + 0) * this.techtree.getAttack());
+		return (int)((this.attack * levelMod.getValue(level) ) * this.techtree.getAttack());
 	}
 
 	public int getDefense() {
-		return defense;
-	}
-
-	public int getHealth() {
-		return health;
+		return (int)((this.defense * levelMod.getValue(level) ) * this.techtree.getDefense());
 	}
 
 	public double getSpeed() {
-		return speed;
+		return (int)((this.speed * (levelMod.getValue(level) / 10) ) * this.techtree.getSpeed());
 	}
 
 	public int getCapacity() {
-		return capacity;
+		return (int)((this.capacity * levelMod.getValue(level) ) * this.techtree.getCapacity());
 	}
 
 	public int getQuantity() {
@@ -61,6 +69,26 @@ public abstract class ASpaceShip {
 
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+
+
+	public ArrayList<ARessource> getCosts() {
+		// Maybe lower the costs with better Research? :>
+		return costs;
+	}
+
+
+	/** getResearchCosts() returns the actual Research Costs
+	 * It calculates the costs from the basic costs and the levelMod with the Ship lvl
+	 * Example: Basic cost 30, Ship lvl 3 and mod = 100%, new research costs are 60
+	 * @return
+	 */
+	public ArrayList<ARessource> getResearchCosts() {
+		ArrayList<ARessource> output = new ArrayList<ARessource>();
+		for (ARessource r: costs) {
+			output.add(r.cloneMe(levelMod.getValue(level)));			
+		}
+		return costs;
 	}
 	
 	

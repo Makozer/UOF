@@ -22,7 +22,6 @@ public class Fleet {
 		Fleet fleet = new Fleet();
 		fleet.addShips(new Falcon(techtree, 4));
 		fleet.addShips(new Cheetah(techtree, 1));
-		fleet.addShips(new Yamato(techtree, 1));
 		System.out.println(fleet.toString());
 	}
 	
@@ -42,13 +41,6 @@ public class Fleet {
 		return output;
 	}
 	
-	public int getHealth() {
-		int output = 0;
-		for (ASpaceShip s: fleet) {
-			output += s.getHealth() * s.getQuantity();
-		}
-		return output;
-	}
 	
 	/** getSpeed returns the slowest shipspeed in the fleet
 	 * @return fleet speed
@@ -81,7 +73,7 @@ public class Fleet {
 
 	@Override
 	public String toString() {
-		return "Fleet [getAttack()=" + getAttack() + ", getDefense()=" + getDefense() + ", getHealth()=" + getHealth()
+		return "Fleet [getAttack()=" + getAttack() + ", getDefense()=" + getDefense() 
 				+ ", getSpeed()=" + getSpeed() + ", getCapacy()=" + getCapacy() + "]";
 	}
 	

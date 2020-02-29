@@ -6,4 +6,9 @@ public class Iron extends ARessource {
 		super(ressourcevalue);
 	}
 
+	@Override
+	public ARessource cloneMe(double mod) {
+		return new Iron((int)(this.getVal() * mod));
+	}
+
 }

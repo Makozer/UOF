@@ -8,11 +8,12 @@ public class Falcon extends ASpaceShip {
 	
 	public Falcon(TechTree techtree, int quantity) {
 		super(techtree, quantity);
-		this.attack = FALCON_ATTACK;				
-		this.defense = FALCON_DEFENSE;				
-		this.health = FALCON_HEALTH;				
-		this.speed = FALCON_SPEED;				
-		this.capacity = FALCON_CAPACITY;				
+		this.attack = 	FALCON_ATTACK;				
+		this.defense = 	FALCON_DEFENSE;							
+		this.speed = 	FALCON_SPEED;				
+		this.capacity = FALCON_CAPACITY;	
+		this.levelMod = FALCON_LEVELMOD;
+		this.costs =	FALCON_COSTS;
 	}
 	
 }
