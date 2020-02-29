@@ -16,11 +16,11 @@ public class Fleet {
 		
 		// TechTree initialisieren, wird fürs Schiff benötigt
 		TechTree techtree = new TechTree();
-		AResearch lp = new LaserPointer(2);
+		AResearch lp = new LaserPointer(3);
 		techtree.addAttackResearch(lp);
 		
 		Fleet fleet = new Fleet();
-		fleet.addShips(new Falcon(techtree, 1));
+		fleet.addShips(new Falcon(techtree, 4));
 		fleet.addShips(new Cheetah(techtree, 1));
 		fleet.addShips(new Yamato(techtree, 1));
 		System.out.println(fleet.toString());
