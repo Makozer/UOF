@@ -1,0 +1,9 @@
+package game;
+
+public class Settings {
+	
+	public static final int 		GAMESPEED = 100; 		// The Gamespeed in %
+	public static final boolean 	DEBUG = false;			// debugmode, to display something
+	public static final boolean 	MAINTENANCE = false;	// if activated, only admins have access
+
+}
