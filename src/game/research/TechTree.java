@@ -8,11 +8,13 @@ import java.util.ArrayList;
  */
 public class TechTree {
 	
-	ArrayList<AResearch> attackMod = new ArrayList<AResearch>();
-	ArrayList<AResearch> defenseMod = new ArrayList<AResearch>();	
-	ArrayList<AResearch> healthMod = new ArrayList<AResearch>();
-	ArrayList<AResearch> speedMod = new ArrayList<AResearch>();
-	ArrayList<AResearch> capacityMod = new ArrayList<AResearch>();
+	private ArrayList<AResearch> attackMod = new ArrayList<AResearch>();
+	private ArrayList<AResearch> defenseMod = new ArrayList<AResearch>();	
+	private ArrayList<AResearch> healthMod = new ArrayList<AResearch>();
+	private ArrayList<AResearch> speedMod = new ArrayList<AResearch>();
+	private ArrayList<AResearch> capacityMod = new ArrayList<AResearch>();
+	
+	
 
 	public static void main(String[] args) {
 		// Testmain

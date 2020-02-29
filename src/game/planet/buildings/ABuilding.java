@@ -1,7 +1,7 @@
 package game.planet.buildings;
 
 import java.util.*;
-import game.planet.ressource.*;
+import game.ressource.*;
 import game.utils.*;
 
 public abstract class ABuilding {

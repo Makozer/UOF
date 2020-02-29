@@ -4,7 +4,7 @@ import game.utils.*;
 
 public abstract class AResearch {
 	
-	protected AMath polyMod = new Polynomial(1);
+	protected AMath modification = new Polynomial(1);
 	protected int level = 0;
 	
 	public AResearch(int level) {
@@ -12,7 +12,7 @@ public abstract class AResearch {
 	}	
 	
 	public double getValue() {
-		return polyMod.getY(level);
+		return modification.getY(level);
 	}
 
 }

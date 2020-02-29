@@ -1,12 +1,13 @@
 package game.research;
 
-import game.utils.Polynomial;
+import game.utils.*;
+import static game.settings.ResearchSettings.*;
 
 public class LaserPointer extends AResearch {
 
 	public LaserPointer(int level) {
 		super(level);
-		this.polyMod = new Polynomial(2, 0);
+		this.modification = LASERPOINTER_LEVELMOD;
 	}
 
 }
