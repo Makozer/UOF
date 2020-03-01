@@ -8,7 +8,7 @@ import game.utils.*;
 
 public abstract class ABuilding {
 	
-	private TechTree 	techtree = null;	
+	protected TechTree 	techtree = null;	
 	protected AMath		levelMod = null;
 	
 	public ABuilding(TechTree techtree) {
