@@ -8,6 +8,7 @@ public class LaserPointer extends AResearch {
 	public LaserPointer(int level) {
 		super(level);
 		this.modification = LASERPOINTER_LEVELMOD;
+		this.costs = LASERPOINTER_COSTS;
 	}
 
 }

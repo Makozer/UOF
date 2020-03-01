@@ -16,10 +16,8 @@ public abstract class ASpaceShip {
 	
 	protected int 		quantity 	= 0;	// amount of ships
 	
-	// Research Attributes
-	protected boolean 	available = false; 	// if the ship is already researched	
+	// Research Attributes	
 	protected TechTree 	techtree = null;
-	protected int 		level = 1;	
 	protected AMath 	levelMod = null;
 	
 	// Costs	
@@ -31,25 +29,29 @@ public abstract class ASpaceShip {
 			throw new IllegalArgumentException("TechTree war null!");
 		} else {
 			this.quantity = quantity;
-			this.techtree = techtree;
+			this.techtree = techtree;			
 		}		
 	}
 
-
-	public int getAttack() {
-		return (int)((this.attack * levelMod.getValue(level) ) * this.techtree.getAttack());
+	
+	public String getName() {
+		return this.getClass().getSimpleName();
 	}
 
-	public int getDefense() {
-		return (int)((this.defense * levelMod.getValue(level) ) * this.techtree.getDefense());
+	public double getAttack() {
+		return ((this.attack / 100.0) * (100.0 + levelMod.getValue(techtree.getLevel(this.getName()))))  / 100.0 * (100.0 + this.techtree.getAttack());
+	}
+
+	public double getDefense() {
+		return (((this.defense / 100.0) * (100.0 + levelMod.getValue(techtree.getLevel(this.getName()))))  / 100.0 * (100.0 + this.techtree.getDefense()));
 	}
 
 	public double getSpeed() {
-		return (int)((this.speed * (levelMod.getValue(level) / 10) ) * this.techtree.getSpeed());
+		return (((this.speed / 100) * (100 + (levelMod.getValue(techtree.getLevel(this.getName())) / 10)))  / 100 * (100 + this.techtree.getSpeed()));
 	}
 
 	public int getCapacity() {
-		return (int)((this.capacity * levelMod.getValue(level) ) * this.techtree.getCapacity());
+		return (int)(((this.capacity / 100.0) * (100.0 + levelMod.getValue(techtree.getLevel(this.getName()))))  / 100.0 * (100.0 + this.techtree.getCapacity()));
 	}
 
 	public int getQuantity() {
@@ -60,17 +62,6 @@ public abstract class ASpaceShip {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-
-	public boolean isAvailable() {
-		return available;
-	}
-
-
-	public void setAvailable(boolean available) {
-		this.available = available;
-	}
-
 
 	public ArrayList<ARessource> getCosts() {
 		// Maybe lower the costs with better Research? :>
@@ -86,10 +77,20 @@ public abstract class ASpaceShip {
 	public ArrayList<ARessource> getResearchCosts() {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
 		for (ARessource r: costs) {
-			output.add(r.cloneMe(levelMod.getValue(level)));			
+			output.add(r.cloneMe(levelMod.getValue(techtree.getLevel(this.getName()))));			
 		}
 		return costs;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ASpaceShip [attack=" + attack + ", defense=" + defense + ", speed=" + speed + ", capacity=" + capacity
+				+ ", quantity=" + quantity + ", getAttack()=" + getAttack() + ", getDefense()=" + getDefense()
+				+ ", getSpeed()=" + getSpeed() + ", getCapacity()=" + getCapacity() + ", getQuantity()=" + getQuantity()
+				+ "]";
+	}
+
 	
 	
 	

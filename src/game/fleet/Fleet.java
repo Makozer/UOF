@@ -16,43 +16,47 @@ public class Fleet {
 		
 		// TechTree initialisieren, wird fürs Schiff benötigt
 		TechTree techtree = new TechTree();
-		AResearch lp = new LaserPointer(3);
+		AResearch lp = new LaserPointer(10);
+		System.out.println(lp.toString());
 		techtree.addAttackResearch(lp);
 		
+		
 		Fleet fleet = new Fleet();
-		fleet.addShips(new Falcon(techtree, 4));
-		fleet.addShips(new Cheetah(techtree, 1));
+		Falcon falcon = new Falcon(techtree, 2);
+		techtree.setLevel(falcon.getName(), 10);
+		fleet.addShips(falcon);
+		System.out.println(falcon.toString());
 		System.out.println(fleet.toString());
 	}
 	
 	public int getAttack() {
-		int output = 0;
+		double output = 0;
 		for (ASpaceShip s: fleet) {
 			output += s.getAttack() * s.getQuantity();
 		}
-		return output;
+		return (int)output;
 	}
 	
 	public int getDefense() {
-		int output = 0;
+		double output = 0;
 		for (ASpaceShip s: fleet) {
 			output += s.getDefense() * s.getQuantity();
 		}
-		return output;
+		return (int)output;
 	}
 	
 	
 	/** getSpeed returns the slowest shipspeed in the fleet
 	 * @return fleet speed
 	 */
-	public double getSpeed() {
+	public int getSpeed() {
 		double output = 999999;
 		for (ASpaceShip s: fleet) {
 			if (s.getSpeed() < output) {
 				output = s.getSpeed();
 			}
 		}
-		return output;
+		return (int)output;
 	}
 	
 	public int getCapacy() {

@@ -1,6 +1,6 @@
 package game.research;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /** This class saves and represents the Players TechTree.
  * @author Martin
@@ -10,9 +10,10 @@ public class TechTree {
 	
 	private ArrayList<AResearch> attackMod = new ArrayList<AResearch>();
 	private ArrayList<AResearch> defenseMod = new ArrayList<AResearch>();	
-	private ArrayList<AResearch> healthMod = new ArrayList<AResearch>();
 	private ArrayList<AResearch> speedMod = new ArrayList<AResearch>();
 	private ArrayList<AResearch> capacityMod = new ArrayList<AResearch>();
+	
+	private HashMap<String, Integer> levels = new HashMap<String, Integer>();
 	
 	
 
@@ -44,18 +45,6 @@ public class TechTree {
 		return output;
 	}
 	
-	public void addhealthResearch(AResearch research) {
-		healthMod.add(research);
-	}
-	
-	public double getHealth() {
-		double output = 0;
-		for (AResearch r: healthMod) {
-			output += r.getValue();
-		}
-		return output;
-	}
-	
 	public void addSpeedResearch(AResearch research) {
 		speedMod.add(research);
 	}
@@ -78,5 +67,17 @@ public class TechTree {
 			output += r.getValue();
 		}
 		return output;
+	}
+	
+	public void setLevel(String name, int n) {
+		levels.put(name, n);
+	}
+	
+	public int getLevel(String name) {
+		Integer output = levels.get(name);
+		if (output == null) {
+			return 0;
+		}
+		return (int)output;
 	}
 }
