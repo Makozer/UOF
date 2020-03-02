@@ -69,12 +69,24 @@ public class Player {
 		this.planets.add(planet);
 	}
 	
+	public ArrayList<Planet> getPlanets() {
+		return planets;
+	}
+	
 	public Planet getPlanet(int n) {
 		return planets.get(n);
 	}
 	
 	public void removePlanet(Planet planet) {
 		this.planets.remove(planet);
+	}	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

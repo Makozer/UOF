@@ -18,11 +18,11 @@ public class Coordinates {
 		return galaxy;
 	}
 
-	public int getSolarsystem() {
+	public int getSolarSystem() {
 		return solarsystem;
 	}
 
-	public int getPlanetnumber() {
+	public int getPlanetNumber() {
 		return planetnumber;
 	}
 	

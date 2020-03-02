@@ -52,7 +52,9 @@ public class Planet {
 		this.headQuarter = hq;
 		this.ironMine = im;
 		this.ressources.add(new Iron(3333));
+		this.ressources.add(new RareEarth(3333));
 		this.ressources.add(new Water(3333));
+		this.ressources.add(new Tritium(3333));
 		this.fleet = fl;
 		
 		

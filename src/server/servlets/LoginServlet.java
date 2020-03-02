@@ -33,6 +33,8 @@ public class LoginServlet extends HttpServlet {
 		player.testFill();
 		session.setAttribute("player", player);
 		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
 		//String email = request.getParameter("email");
 		//String password = request.getParameter("password");
 		
