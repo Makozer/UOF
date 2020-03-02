@@ -28,7 +28,7 @@ public abstract class ASpaceShip {
 		if (techtree == null) {
 			throw new IllegalArgumentException("TechTree war null!");
 		} else {
-			this.quantity = quantity;
+			this.setQuantity(quantity);
 			this.techtree = techtree;			
 		}		
 	}
@@ -58,9 +58,22 @@ public abstract class ASpaceShip {
 		return quantity;
 	}
 
-
 	public void setQuantity(int quantity) {
+		if (quantity < 0) {
+			throw new IllegalArgumentException("ASpaceShip.setQuantity(" + quantity + ") is not possible!");
+		}
 		this.quantity = quantity;
+	}
+	
+	public void addQuantity(int quantity) {
+		this.quantity += quantity;
+	}
+	
+	public void reduceQuantity(int quantity) {
+		if (this.quantity - quantity < 0) {
+			throw new IllegalArgumentException("ASpaceShip.reduceQuantity(" + quantity + ") is not possible!");
+		}
+		this.quantity -= quantity;		
 	}
 
 	public ArrayList<ARessource> getCosts() {

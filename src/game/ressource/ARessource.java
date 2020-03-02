@@ -3,6 +3,10 @@ package game.ressource;
 public abstract class ARessource {
 	
 	protected int ressourcevalue = 0;
+	
+	public ARessource() {
+		
+	}
 
 	public ARessource(int ressourcevalue) {
 		this.ressourcevalue = ressourcevalue;
@@ -17,6 +21,10 @@ public abstract class ARessource {
 	}
 	
 	public abstract ARessource cloneMe(double mod);
+	
+	public String getName() {
+		return this.getClass().getSimpleName();
+	}	
 	
 
 }

@@ -21,6 +21,17 @@ public class TechTree {
 		// Testmain
 	}
 	
+	public void testFill() {
+		this.addAttackResearch(new LaserPointer(11));
+		this.addDefenseResearch(new LaserPointer(11));
+		this.addSpeedResearch(new LaserPointer(11));
+		this.addCapacityResearch(new LaserPointer(11));
+		this.setLevel("Falcon", 11);
+		this.setLevel("Yamato", 11);
+		this.setLevel("IronMine", 11);
+		this.setLevel("HeadQuarter", 11);
+	}
+	
 	public void addAttackResearch(AResearch research) {
 		attackMod.add(research);
 	}

@@ -11,6 +11,10 @@ public abstract class ABuilding {
 	protected TechTree 	techtree = null;	
 	protected AMath		levelMod = null;
 	
+	public ABuilding() {
+		
+	}
+	
 	public ABuilding(TechTree techtree) {
 		this.techtree = techtree;
 	}
@@ -18,5 +22,9 @@ public abstract class ABuilding {
 	public String getName() {
 		return this.getClass().getSimpleName();
 	}	
+	
+	public int getLvl() {
+		return this.techtree.getLevel(this.getName());
+	}
 
 }
