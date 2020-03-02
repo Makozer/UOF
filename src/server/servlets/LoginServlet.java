@@ -30,10 +30,13 @@ public class LoginServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();				
 		Player player = new Player();
+		player.testFill();
+		session.setAttribute("player", player);
 		
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		//String email = request.getParameter("email");
+		//String password = request.getParameter("password");
 		
+		/*
 		if (email.equals("martin@martin-kohne.de") && password.equals("123")) {
 			//player.setEmail(email);
 			//player.setName("Martin");
@@ -42,6 +45,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
+		*/
 		
 	}
 

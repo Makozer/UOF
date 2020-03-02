@@ -11,6 +11,14 @@
 </head>
 <body>
 
+<form action="./LoginServlet" method="post">
+<button type="submit">Session holen</button>
+</form>
+<p>
+
+
+</p>
+
 
 </body>
 </html>

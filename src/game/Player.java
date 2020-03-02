@@ -46,7 +46,7 @@ public class Player {
 		// initalize
 	}
 	
-	public void fillWithTestData() {
+	public void testFill() {
 		this.id = 1337;
 		this.email = "martin@martin-kohne.de";
 		this.displayName = "Makozer";
@@ -67,6 +67,10 @@ public class Player {
 	
 	public void addPlanet(Planet planet) {
 		this.planets.add(planet);
+	}
+	
+	public Planet getPlanet(int n) {
+		return planets.get(n);
 	}
 	
 	public void removePlanet(Planet planet) {

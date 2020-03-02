@@ -72,6 +72,14 @@ public class Planet {
 
 	public ArrayList<ARessource> getRessources() {
 		return ressources;
+	}	
+
+	public HeadQuarter getHeadQuarter() {
+		return headQuarter;
+	}
+
+	public IronMine getIronMine() {
+		return ironMine;
 	}
 
 	public Fleet getFleet() {
