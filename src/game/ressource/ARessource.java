@@ -12,11 +12,11 @@ public abstract class ARessource {
 		this.ressourcevalue = ressourcevalue;
 	}
 
-	public int getVal() {
+	public int getValue() {
 		return ressourcevalue;
 	}
 
-	public void setVal(int ressourcevalue) {
+	public void setValue(int ressourcevalue) {
 		this.ressourcevalue = ressourcevalue;
 	}
 	

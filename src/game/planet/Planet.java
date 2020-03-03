@@ -6,6 +6,10 @@ import game.fleet.*;
 import game.fleet.tier1.*;
 import game.fleet.tier3.*;
 import game.planet.buildings.*;
+import game.planet.buildings.mining.Fountain;
+import game.planet.buildings.mining.IronMine;
+import game.planet.buildings.mining.RareEarthMine;
+import game.planet.buildings.mining.TritiumFabric;
 import game.research.*;
 import game.ressource.*;
 
@@ -16,7 +20,13 @@ public class Planet {
 	
 	// Buildings
 	private HeadQuarter 			headQuarter = null;
+	private University				university = null;
+	private SpacePort				spacePort = null;
+	
 	private IronMine				ironMine = null;
+	private RareEarthMine			rareEarthMine = null;
+	private Fountain				fountain = null;
+	private TritiumFabric			tritiumFabric = null;
 	
 	
 	private ArrayList<ARessource>	ressources = new ArrayList<ARessource>();

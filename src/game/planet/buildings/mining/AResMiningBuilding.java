@@ -1,7 +1,8 @@
-package game.planet.buildings;
+package game.planet.buildings.mining;
 
 import java.util.*;
 import game.ressource.*;
+import game.planet.buildings.ABuilding;
 import game.research.*;
 import static game.settings.GameSettings.*;
 
@@ -25,7 +26,7 @@ public class AResMiningBuilding extends ABuilding {
 	 * @return int current Ressource Value
 	 */
 	public int getRessourceValue() {
-		return (int)(ressource.getVal() + (((this.date.getTime() - new Date().getTime()) / 1000.0) * GAME_SPEED * levelMod.getValue(this.techtree.getLevel(this.getName()))));
+		return (int)(ressource.getValue() + (((this.date.getTime() - new Date().getTime()) / 1000.0) * GAME_SPEED * levelMod.getValue(this.techtree.getLevel(this.getName()))));
 	}
 
 	public void setRessource(ARessource ressource, Date date) {

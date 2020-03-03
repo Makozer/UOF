@@ -8,7 +8,7 @@ public class Iron extends ARessource {
 
 	@Override
 	public ARessource cloneMe(double mod) {
-		return new Iron((int)(this.getVal() * mod));
+		return new Iron((int)(this.getValue() * mod));
 	}
 
 }

@@ -1,4 +1,4 @@
-package game.planet.buildings;
+package game.planet.buildings.mining;
 
 import java.util.Date;
 

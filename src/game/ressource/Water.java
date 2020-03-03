@@ -8,7 +8,7 @@ public class Water extends ARessource {
 
 	@Override
 	public ARessource cloneMe(double mod) {
-		return new Water((int)(this.getVal() * mod));
+		return new Water((int)(this.getValue() * mod));
 	}
 
 }
