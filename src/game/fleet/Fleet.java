@@ -12,7 +12,7 @@ import game.research.*;
 public class Fleet {
 	
 	protected ArrayList<ASpaceShip> fleet = new ArrayList<ASpaceShip>();
-	
+
 	public static void main(String[] args) {
 		
 		// TechTree initialisieren, wird fürs Schiff benötigt
@@ -31,7 +31,8 @@ public class Fleet {
 	}
 	
 	public void testFill(TechTree techtree) {
-		this.addShips(new Falcon(techtree, 2));
+		this.addShips(new Falcon(techtree, 666));
+		this.addShips(new Cheetah(techtree, 33));
 		this.addShips(new Yamato(techtree, 1));
 	}
 	

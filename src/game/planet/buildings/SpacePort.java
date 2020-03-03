@@ -1,5 +1,14 @@
 package game.planet.buildings;
 
-public class SpacePort {
+import static game.settings.BuildingSettings.*;
+import game.research.TechTree;
+
+public class SpacePort extends ABuilding {
+
+	public SpacePort(TechTree techtree, int level) {
+		super(techtree, level);
+		this.levelMod = SPACEPORT_LEVELMOD;
+		this.costs = SPACEPORT_COSTS;
+	}
 
 }

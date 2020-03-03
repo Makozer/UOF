@@ -58,10 +58,16 @@ public class Player {
 		TechTree techtree = new TechTree();
 		techtree.testFill();
 		
-		Planet planet = new Planet();
-		planet.testFill(techtree);
-		
+		Planet planet = new Planet(techtree, new Coordinates(1, 33, 7), "MartinsPlanet1", 6666, 3333, 6666, 666, 3, 2, 2, 5, 2, 3, 1, 4, 3, 2, 1);
+		planet.testFill();
 		this.addPlanet(planet);
+		
+		TravelingFleet tv = new TravelingFleet(new Coordinates(1, 33, 6), new Date());
+		TravelingFleet tv2 = new TravelingFleet(new Coordinates(1, 33, 8), new Date());
+		tv.testFill(techtree);
+		tv2.testFill(techtree);
+		this.travelingFleets.add(tv);
+		this.travelingFleets.add(tv2);
 		
 	}
 	
@@ -136,8 +142,9 @@ public class Player {
 	public Date getCreated() {
 		return created;
 	}
-	
-	
-	
+
+	public ArrayList<TravelingFleet> getTravelingFleets() {
+		return travelingFleets;
+	}	
 
 }

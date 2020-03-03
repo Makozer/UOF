@@ -10,10 +10,6 @@ public class AResMiningBuilding extends ABuilding {
 	
 	protected Date 			date = null;
 	protected ARessource 	ressource = null;
-	
-	public AResMiningBuilding() {
-		
-	}
 
 	public AResMiningBuilding(TechTree techtree, int level, Date date, ARessource ressource) {
 		super(techtree, level);

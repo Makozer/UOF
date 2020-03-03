@@ -2,7 +2,11 @@ package game.fleet;
 
 import java.util.*;
 
+import game.fleet.tier1.Falcon;
+import game.fleet.tier2.Cheetah;
+import game.fleet.tier3.Yamato;
 import game.planet.*;
+import game.research.TechTree;
 import game.ressource.*;
 
 public class TravelingFleet extends Fleet {
@@ -29,8 +33,17 @@ public class TravelingFleet extends Fleet {
 		calculateTime();
 	}
 	
+	@Override
+	public void testFill(TechTree techtree) {
+		this.addShips(new Falcon(techtree, 666));
+		this.addShips(new Cheetah(techtree, 33));
+		this.addShips(new Yamato(techtree, 1));
+	}
+	
 	private void calculateTime() {
-		
+		// TODO Zeit Berechnung
+		this.arrivalTime = new Date();
+		this.endTime = new Date();
 	}
 
 	public Coordinates getTarget() {

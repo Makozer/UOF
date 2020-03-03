@@ -16,13 +16,13 @@ public abstract class AResearch {
 	}	
 	
 	public double getValue() {
-		return modification.getValue(level);
+		return modification.getValue(this.level);
 	}
 	
 	public ArrayList<ARessource> getResearchCosts() {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
 		for (ARessource r: costs) {
-			output.add(r.cloneMe(modification.getValue(level)));			
+			output.add(r.cloneMe(modification.getValue(this.level)));			
 		}
 		return costs;
 	}

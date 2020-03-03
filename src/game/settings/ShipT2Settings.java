@@ -14,6 +14,7 @@ public class ShipT2Settings {
 	public static final AMath 					CHEETAH_LEVELMOD = new Polynomial(1, 1);
 	public static final ArrayList<ARessource> 	CHEETAH_COSTS = new ArrayList<ARessource>(Arrays.asList(
 													new Iron(2000), 
+													new RareEarth(2000),
 													new Water(2000)));
 
 

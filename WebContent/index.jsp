@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="WEB-INF/taglib/customtags.tld" prefix="my"%>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.io.*,java.util.*, javax.servlet.*" %>
 <!DOCTYPE html>
 <html>
@@ -14,8 +15,8 @@
 <form action="./LoginServlet" method="post">
 <button type="submit">Session holen</button>
 </form>
-<p>
-<table>
+
+<table border="1">
 <tr><th>Daten über den Spieler</th></tr>
 <tr><td>Spieler ID:</td><td>${ player.getId() }</td></tr>
 <tr><td>Spieler inGame Nick:</td><td> ${ player.getDisplayName() }</td></tr>
@@ -28,14 +29,37 @@
 <tr><th>Daten über den Planeten</th></tr>
 <tr><td>Spieler Planetenanzahl: </td><td>${ player.getPlanets().size() } </td></tr>
 <tr><td>Planet 1 Name:</td><td> ${ player.getPlanet(0).getName() } </td></tr>
-<tr><td>Planet 1 Koordinaten:</td><td> ${ player.getPlanet(0).getCoords() } ${ player.getPlanet(0).getCoords().asCoords() } ${ player.getPlanet(0).getCoords().getGalaxy() }:${ player.getPlanet(0).getCoords().getSolarSystem() }:${ player.getPlanet(0).getCoords().getPlanetNumber() }  </td></tr>
-<tr><td>Planet 1 ${ player.getPlanet(0).getRessources()[0].getName() }</td><td> ${ player.getPlanet(0).getRessources()[0].getValue() } </td></tr>
-<tr><td>Planet 1 ${ player.getPlanet(0).getRessources()[1].getName() }</td><td> ${ player.getPlanet(0).getRessources()[1].getValue() } </td></tr>
-<tr><td>Planet 1 ${ player.getPlanet(0).getRessources()[2].getName() }</td><td> ${ player.getPlanet(0).getRessources()[2].getValue() } </td></tr>
-<tr><td>Planet 1 ${ player.getPlanet(0).getRessources()[3].getName() }</td><td> ${ player.getPlanet(0).getRessources()[3].getValue() } </td></tr>
-<tr><th>Gebäude</th></tr>
-</p>
+<tr><td>Planet 1 Koordinaten:</td><td>Verschiedene Arten an Koordinaten zu kommen:<br /> ${ player.getPlanet(0).getCoords() } <br />${ player.getPlanet(0).getCoords().asCoords() } <br />${ player.getPlanet(0).getCoords().getGalaxy() }:${ player.getPlanet(0).getCoords().getSolarSystem() }:${ player.getPlanet(0).getCoords().getPlanetNumber() }  </td></tr>
+<tr><td>Planet 1 ${ player.getPlanet(0).getIron().getName() }</td><td> ${ player.getPlanet(0).getIronMine().getRessourceValue() } </td></tr>
+<tr><td>Planet 1 ${ player.getPlanet(0).getRareEarth().getName() }</td><td> ${ player.getPlanet(0).getRareEarthMine().getRessourceValue() } </td></tr>
+<tr><td>Planet 1 ${ player.getPlanet(0).getWater().getName() }</td><td> ${ player.getPlanet(0).getFountain().getRessourceValue() } </td></tr>
+<tr><td>Planet 1 ${ player.getPlanet(0).getTritium().getName() }</td><td> ${ player.getPlanet(0).getTritiumFabric().getRessourceValue() } </td></tr>
+</table>
+<br />
+<table border="1">
+<tr><th>Gebäude</th><th>Level</th><th>BauKosten</th></tr>
+<tr><td>${ player.getPlanet(0).getHeadQuarter().getName() }</td><td>${ player.getPlanet(0).getHeadQuarter().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getHeadQuarter().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getUniversity().getName() }</td><td>${ player.getPlanet(0).getUniversity().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getUniversity().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getSpacePort().getName() }</td><td>${ player.getPlanet(0).getSpacePort().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getSpacePort().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getIronMine().getName() }</td><td>${ player.getPlanet(0).getIronMine().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getIronMine().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getIronStorage().getName() }</td><td>${ player.getPlanet(0).getIronStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getIronStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getRareEarthMine().getName() }</td><td>${ player.getPlanet(0).getRareEarthMine().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getRareEarthMine().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getRareEarthStorage().getName() }</td><td>${ player.getPlanet(0).getRareEarthStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getRareEarthStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getFountain().getName() }</td><td>${ player.getPlanet(0).getFountain().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getFountain().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getWaterStorage().getName() }</td><td>${ player.getPlanet(0).getWaterStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getWaterStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getTritiumFabric().getName() }</td><td>${ player.getPlanet(0).getTritiumFabric().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getTritiumFabric().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getTritiumStorage().getName() }</td><td>${ player.getPlanet(0).getTritiumStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getTritiumStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+</table>
+<h3>Flugzeuge auf Planet 1</h3>
+<table border="1">
+<tr><th>Flugzeug</th><th>Anzahl</th><th>Attack</th><th>Defense</th><th>Speed</th><th>Capacity</th><th>Costs</th></tr>
+<c:forEach var="ship" items="${player.getPlanet(0).getFleet().getFleet()}"><tr><td><c:out value="${ship.getName()}"/></td><td><c:out value="${ship.getQuantity()}"/></td><td><c:out value="${ship.getAttack()}"/></td><td><c:out value="${ship.getDefense()}"/></td><td><c:out value="${ship.getSpeed()}"/></td><td><c:out value="${ship.getCapacity()}"/></td><td><c:forEach var="cost" items="${ship.getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr></c:forEach>
+</table>
 
-
+<h3>Flotten die gerade Angreifen oder Rohstoffe transportieren</h3>
+<table border="1">
+<tr><th>Ziel</th><th>StartZeit</th><th>Ankunftszeit</th><th>RückReiseZeitpunkt</th></tr>
+<c:forEach var="fleet" items="${player.getTravelingFleets()}"><tr><td><c:out value="${fleet.getTarget().asCoords()}"/></td><td><c:out value="${fleet.getStartTime()}"/></td><td><c:out value="${fleet.getArrivalTime()}"/></td><td><c:out value="${fleet.getEndTime()}"/></td></tr></c:forEach>
+</table>
 </body>
 </html>
