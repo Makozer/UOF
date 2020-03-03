@@ -52,8 +52,8 @@ public class Polynomial extends AMath {
 
 	@Override
 	public String toString() {
-		return "Polynomial [coefficientX4=" + coefficientX4 + ", coefficientX3=" + coefficientX3 + ", coefficientX2="
-				+ coefficientX2 + ", coefficientX1=" + coefficientX1 + ", constant=" + constant + "]";
+		return "Polynomial[°4=" + coefficientX4 + ", °3=" + coefficientX3 + ", °2="
+				+ coefficientX2 + ", °1=" + coefficientX1 + ", constant=" + constant + "]";
 	}
 	
 	

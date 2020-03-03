@@ -12,5 +12,17 @@ public class Fountain extends AResMiningBuilding {
 		this.levelMod = FOUNTAIN_LEVELMOD;
 		this.costs = FOUNTAIN_COSTS;
 	}
+	
+	public static void main(String[] args) {
+		TechTree techtree = new TechTree();
+		techtree.testFill();
+		int level = 3;
+		Date date = new Date();
+		Water water = new Water(3000);
+		
+		Fountain fountain = new Fountain(techtree, level, date, water);
+		System.out.println(fountain.toString() + "\n");
+		System.out.println(fountain.testLevelMod());
+	}
 
 }

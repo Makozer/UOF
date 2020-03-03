@@ -3,11 +3,10 @@ package game.ressource;
 public abstract class ARessource {
 	
 	protected int ressourcevalue = 0;
-	
-	public ARessource() {
-		
-	}
 
+	/** Creates a Ressource with a given int Value
+	 * @param ressourcevalue int 
+	 */
 	public ARessource(int ressourcevalue) {
 		this.ressourcevalue = ressourcevalue;
 	}
@@ -24,7 +23,13 @@ public abstract class ARessource {
 	
 	public String getName() {
 		return this.getClass().getSimpleName();
+	}
+
+	@Override
+	public String toString() {
+		return getName() + ": " + getValue();
 	}	
+	
 	
 
 }
