@@ -11,8 +11,8 @@ public class HeadQuarter extends ABuilding {
 		
 	}
 	
-	public HeadQuarter(TechTree techtree) {
-		super(techtree);
+	public HeadQuarter(TechTree techtree, int level) {
+		super(techtree, level);
 		this.levelMod = HEADQUARTER_LEVELMOD;
 	}
 

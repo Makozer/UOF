@@ -12,8 +12,8 @@ public class IronMine extends AResMiningBuilding {
 		
 	}
 	
-	public IronMine(TechTree techtree, Date date, ARessource ressource) {
-		super(techtree, date, ressource);
+	public IronMine(TechTree techtree, int level, Date date, ARessource ressource) {
+		super(techtree, level, date, ressource);
 	}
 	
 	

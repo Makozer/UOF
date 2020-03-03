@@ -26,10 +26,23 @@ public class TechTree {
 		this.addDefenseResearch(new LaserPointer(11));
 		this.addSpeedResearch(new LaserPointer(11));
 		this.addCapacityResearch(new LaserPointer(11));
+		// SpaceShips
 		this.setLevel("Falcon", 11);
 		this.setLevel("Yamato", 11);
-		this.setLevel("IronMine", 11);
+		// Buildings		
 		this.setLevel("HeadQuarter", 11);
+		this.setLevel("University", 11);
+		this.setLevel("SpacePort", 11);
+		// Mining Buildings
+		this.setLevel("IronMine", 11);
+		this.setLevel("RareEarthMine", 11);
+		this.setLevel("Fountain", 11);
+		this.setLevel("TritiumFabric", 11);
+		// Storage Buildings
+		this.setLevel("IronStorage", 11);
+		this.setLevel("RareEarthStorage", 11);
+		this.setLevel("WaterStorage", 11);
+		this.setLevel("TritiumStorage", 11);
 	}
 	
 	public void addAttackResearch(AResearch research) {

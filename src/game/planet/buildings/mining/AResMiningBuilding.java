@@ -15,8 +15,8 @@ public class AResMiningBuilding extends ABuilding {
 		
 	}
 
-	public AResMiningBuilding(TechTree techtree, Date date, ARessource ressource) {
-		super(techtree);
+	public AResMiningBuilding(TechTree techtree, int level, Date date, ARessource ressource) {
+		super(techtree, level);
 		this.date = date;
 		this.ressource = ressource;
 	}
