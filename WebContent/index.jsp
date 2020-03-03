@@ -57,7 +57,7 @@
 <h3>Flugzeuge auf Planet 1</h3>
 <table border="1">
 <tr><th>Flugzeug</th><th>Anzahl</th><th>Attack</th><th>Defense</th><th>Speed</th><th>Capacity</th><th>Costs</th></tr>
-<c:forEach var="ship" items="${player.getPlanet(0).getFleet().getFleet()}"><tr><td><c:out value="${ship.getName()}"/></td><td><c:out value="${ship.getQuantity()}"/></td><td><c:out value="${ship.getAttack()}"/></td><td><c:out value="${ship.getDefense()}"/></td><td><c:out value="${ship.getSpeed()}"/></td><td><c:out value="${ship.getCapacity()}"/></td><td><c:forEach var="cost" items="${ship.getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr></c:forEach>
+<c:forEach var="ship" items="${player.getPlanet(0).getFleet().getFleet()}"><tr><td><c:out value="${ship.getName()}"/></td><td><c:out value="${ship.getQuantity()}"/></td><td><c:out value="${ship.getAttackAsString()}"/></td><td><c:out value="${ship.getDefenseAsString()}"/></td><td><c:out value="${ship.getSpeedAsString()}"/></td><td><c:out value="${ship.getCapacity()}"/></td><td><c:forEach var="cost" items="${ship.getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr></c:forEach>
 </table>
 
 <h3>Flotten die gerade Angreifen oder Rohstoffe transportieren</h3>

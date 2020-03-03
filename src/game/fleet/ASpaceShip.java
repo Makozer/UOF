@@ -41,13 +41,25 @@ public abstract class ASpaceShip {
 	public double getAttack() {
 		return ((this.attack / 100.0) * (100.0 + levelMod.getValue(techtree.getLevel(this.getName()))))  / 100.0 * (100.0 + this.techtree.getAttack());
 	}
+	
+	public String getAttackAsString() {
+		return NumberUtils.round(this.getAttack());
+	}
 
 	public double getDefense() {
 		return (((this.defense / 100.0) * (100.0 + levelMod.getValue(techtree.getLevel(this.getName()))))  / 100.0 * (100.0 + this.techtree.getDefense()));
 	}
+	
+	public String getDefenseAsString() {
+		return NumberUtils.round(this.getDefense());
+	}
 
 	public double getSpeed() {
 		return (((this.speed / 100) * (100 + (levelMod.getValue(techtree.getLevel(this.getName())) / 10)))  / 100 * (100 + this.techtree.getSpeed()));
+	}
+	
+	public String getSpeedAsString() {
+		return NumberUtils.round(this.getSpeed());
 	}
 
 	public int getCapacity() {
