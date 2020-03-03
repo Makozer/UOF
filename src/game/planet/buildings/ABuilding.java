@@ -40,7 +40,7 @@ public abstract class ABuilding {
 	public String testLevelMod() {
 		String output = this.getName() + " levelModValue: \n";
 		for (int i = 0; i < 12; i++) {
-			output += i + ": \t" + NumberUtils.round(this.getLevelModValue(i)) + ";\n";
+			output += i + ": \t" + NumberUtils.round2dec(this.getLevelModValue(i)) + ";\n";
 		}
 		return output;
 	}

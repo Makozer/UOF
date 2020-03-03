@@ -41,10 +41,6 @@
 <tr><td>${ player.getPlanet(0).getHeadQuarter().getName() }</td><td>${ player.getPlanet(0).getHeadQuarter().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getHeadQuarter().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
 <tr><td>${ player.getPlanet(0).getUniversity().getName() }</td><td>${ player.getPlanet(0).getUniversity().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getUniversity().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
 <tr><td>${ player.getPlanet(0).getSpacePort().getName() }</td><td>${ player.getPlanet(0).getSpacePort().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getSpacePort().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
-<tr><td>${ player.getPlanet(0).getIronStorage().getName() }</td><td>${ player.getPlanet(0).getIronStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getIronStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
-<tr><td>${ player.getPlanet(0).getRareEarthStorage().getName() }</td><td>${ player.getPlanet(0).getRareEarthStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getRareEarthStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
-<tr><td>${ player.getPlanet(0).getWaterStorage().getName() }</td><td>${ player.getPlanet(0).getWaterStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getWaterStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
-<tr><td>${ player.getPlanet(0).getTritiumStorage().getName() }</td><td>${ player.getPlanet(0).getTritiumStorage().getLevel() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getTritiumStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
 </table>
 <br />
 <table border="1">
@@ -54,6 +50,16 @@
 <tr><td>${ player.getPlanet(0).getFountain().getName() }</td><td>${ player.getPlanet(0).getFountain().getLevel() }</td><td>${ player.getPlanet(0).getFountain().getResPerHour() } </td><td><c:forEach var="cost" items="${player.getPlanet(0).getFountain().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
 <tr><td>${ player.getPlanet(0).getTritiumFabric().getName() }</td><td>${ player.getPlanet(0).getTritiumFabric().getLevel() }</td><td>${ player.getPlanet(0).getTritiumFabric().getResPerHour() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getTritiumFabric().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
 </table>
+<br />
+<table border="1">
+<tr><th>Gebäude</th><th>Level</th><th>Nicht stehlbare RessourcenGrenze</th><th>Max RessourcenGrenze</th><th>BauKosten</th></tr>
+<tr><td>${ player.getPlanet(0).getIronStorage().getName() }</td><td>${ player.getPlanet(0).getIronStorage().getLevel() }</td><td>${ player.getPlanet(0).getIronStorage().getSaveCapacityAsString() }</td><td>${ player.getPlanet(0).getIronStorage().getMaxCapacityAsString() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getIronStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getRareEarthStorage().getName() }</td><td>${ player.getPlanet(0).getRareEarthStorage().getLevel() }</td><td>${ player.getPlanet(0).getRareEarthStorage().getSaveCapacityAsString() }</td><td>${ player.getPlanet(0).getRareEarthStorage().getMaxCapacityAsString() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getRareEarthStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getWaterStorage().getName() }</td><td>${ player.getPlanet(0).getWaterStorage().getLevel() }</td><td>${ player.getPlanet(0).getWaterStorage().getSaveCapacityAsString() }</td><td>${ player.getPlanet(0).getWaterStorage().getMaxCapacityAsString() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getWaterStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+<tr><td>${ player.getPlanet(0).getTritiumStorage().getName() }</td><td>${ player.getPlanet(0).getTritiumStorage().getLevel() }</td><td>${ player.getPlanet(0).getTritiumStorage().getSaveCapacityAsString() }</td><td>${ player.getPlanet(0).getTritiumStorage().getMaxCapacityAsString() }</td><td><c:forEach var="cost" items="${player.getPlanet(0).getTritiumStorage().getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr>
+
+</table>
+
 <h3>Flugzeuge auf Planet 1</h3>
 <table border="1">
 <tr><th>Flugzeug</th><th>Anzahl</th><th>Attack</th><th>Defense</th><th>Speed</th><th>Capacity</th><th>Costs</th></tr>

@@ -43,7 +43,7 @@ public abstract class ASpaceShip {
 	}
 	
 	public String getAttackAsString() {
-		return NumberUtils.round(this.getAttack());
+		return NumberUtils.round2dec(this.getAttack());
 	}
 
 	public double getDefense() {
@@ -51,7 +51,7 @@ public abstract class ASpaceShip {
 	}
 	
 	public String getDefenseAsString() {
-		return NumberUtils.round(this.getDefense());
+		return NumberUtils.round2dec(this.getDefense());
 	}
 
 	public double getSpeed() {
@@ -59,7 +59,7 @@ public abstract class ASpaceShip {
 	}
 	
 	public String getSpeedAsString() {
-		return NumberUtils.round(this.getSpeed());
+		return NumberUtils.round2dec(this.getSpeed());
 	}
 
 	public int getCapacity() {
