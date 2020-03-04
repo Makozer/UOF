@@ -77,11 +77,5 @@
 </td><td><c:forEach var="cost" items="${gameEvent.getRessource()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr></c:forEach>
 </table>
 
-<h2 style="color:red;">VERALTET:</h2>
-<h3>Flotten die gerade Angreifen oder Rohstoffe transportieren</h3>
-<table border="1">
-<tr><th>Ziel</th><th>StartZeit</th><th>Ankunftszeit</th><th>RückReiseZeitpunkt</th></tr>
-<c:forEach var="fleet" items="${player.getTravelingFleets()}"><tr><td><c:out value="${fleet.getTarget().asCoords()}"/></td><td><c:out value="${fleet.getStartTime()}"/></td><td><c:out value="${fleet.getArrivalTime()}"/></td><td><c:out value="${fleet.getEndTime()}"/></td></tr></c:forEach>
-</table>
 </body>
 </html>

@@ -29,7 +29,6 @@ public class Player {
 	
 	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
 	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
-	private ArrayList<TravelingFleet> 	travelingFleets = new ArrayList<TravelingFleet>();
 	
 	public Player() {}
 
@@ -225,9 +224,5 @@ public class Player {
 	public Date getCreated() {
 		return created;
 	}
-
-	public ArrayList<TravelingFleet> getTravelingFleets() {
-		return travelingFleets;
-	}	
 
 }
