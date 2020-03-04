@@ -4,6 +4,7 @@ import java.util.*;
 
 import game.fleet.*;
 import game.planet.*;
+import game.planet.buildings.*;
 import game.research.TechTree;
 
 public class Player {
@@ -20,6 +21,7 @@ public class Player {
 	
 	private TechTree techtree = null;
 	
+	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
 	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
 	private ArrayList<TravelingFleet> 	travelingFleets = new ArrayList<TravelingFleet>();
 	
@@ -71,6 +73,24 @@ public class Player {
 		
 	}
 	
+	public boolean doAttack(Coordinates planetcoords, Coordinates target, Fleet fleet) {
+		// TODO
+		// Create Game Event
+		return false;
+	}
+	
+	public boolean doResearch(Coordinates planetcoords, String research) {
+		// TODO
+		// Create Game Event
+		return false;
+	}
+	
+	public boolean doBuild(Coordinates planetcoords, String building) {
+		// TODO
+		// Create Game Event
+		return false;
+	}
+	
 	public void addPlanet(Planet planet) {
 		this.planets.add(planet);
 	}
@@ -81,6 +101,16 @@ public class Player {
 	
 	public Planet getPlanet(int n) {
 		return planets.get(n);
+	}
+	
+	public Planet getPlanetByCoordinates(Coordinates coordinates) {
+		Planet output = null;
+		for (Planet p: planets) {
+			if (coordinates.asCoords().equals(p.getCoords().asCoords())) {
+				return p;
+			}
+		}
+		return output;
 	}
 	
 	public void removePlanet(Planet planet) {

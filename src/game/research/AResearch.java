@@ -7,11 +7,13 @@ import game.utils.*;
 
 public abstract class AResearch {	
 	
-	protected int level = 0;
-	protected AMath modification = new Polynomial(1);
+	protected ResearchEnum 			type = null;
+	protected int 					level = 0;
+	protected AMath 				modification = new Polynomial(1);
 	protected ArrayList<ARessource> costs = null;
 	
-	public AResearch(int level) {
+	public AResearch(ResearchEnum type, int level) {
+		this.type = type;
 		this.level = level;
 	}	
 	

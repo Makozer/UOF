@@ -1,0 +1,12 @@
+Verschiedene Forschungen:
+
+Angriff/Verteidigung von Raumschiffen:
+ - Forschung 1: erhöht Basic Angriffswert
+ - Forschung 2: erhöht Angriff um %
+ - Forschung 3: erhöht Basic Verteidigungswert
+ - Forschung 4: erhöht Verteidigungswert um %
+ - Forschung 5: erhöht Ladekapazität
+
+Ideen: kann auch aufgeteilt werden auf mehrere Forschungen
+
+Forschung um Ressourcengebäude schneller zu machen?

@@ -1,0 +1,26 @@
+Planet hat:
+
+Ressourcen generell:
+Ressource 1 ( Vorschlag: Eisen/Stahl )
+Ressource 2 ( Edelressource? Was braucht man noch zum Bauen von Gebäuden / Raumschiffen )
+Ressource 3 ( Vorschlag: Wasser )
+Ressource 4 ( Irgendwas für Energie welches Raumschiffe verbrauchen )
+Ressource 5?
+
+Gebäude:
+Headquarter 		- Beschleunigt die Bauzeit aller anderen Gebäude
+Forschungsgebäude 	- Stufe 1 wird benötigt für generelle Forschung, weitere Stufen = schnellere Forschung
+Schiffswerft		- Stufe 1 um Schiffe zu bauen, weitere = schneller
+
+Ressourcengebäude:
+Ressourcenspeicher für Ressource X
+Ressourcenspeicher haben einen %Satz Anteil von Ressourcen die dadurch nicht stehlbar werden bei Angriff
+Wenn der Ressourcenspeicher voll ist, dann produziert das Ressourcengebäude nur mit 25% Speed weiter
+Beispiel:
+Eisenspeicher 20.000 Kapazität
+Nicht stehlbar: 2.000
+Wenn über 20.000 Eisen vorhanden, dann nur 25% Förderungsrate von Eisen
+
+---
+Idee ( aber noch nicht umsetzung )
+Verteidigungsgebäude

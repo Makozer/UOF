@@ -1,0 +1,3 @@
+Universum hat N Galaxien ( zu begin an erstmal 2 )
+Galaxie hat N Sonnensysteme ( zu begin an erstmal 11 )
+Sonnensystem hat rnd(max 11) Planeten

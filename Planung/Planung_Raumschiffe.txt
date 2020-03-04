@@ -1,0 +1,26 @@
+Ein Raumschiff hat:
+ - Laderaum 		Für KraftStoff/Energie und gestohlene Ressourcen
+ - Angriffswert 	Basis +	X ( Wird modifiziert durch Forschung  )
+ - Verteidigungswert 	Basis + X ( Wird modifiziert durch Forschung  )
+ - Geschwindigkeit	Zur Berechnung der benötigten Zeit von Reisen
+
+Hinweis: Geschwindigkeit wird in Lichtgeschwindigkeit angegeben falls man es real&spielbar halten möchte
+
+
+Idee: Manche Raumschiffe benötigen bestimmte Forschungsstufen um erforscht/hergestellt zu werden
+
+
+Basic Raumschiffe, erstmal nur SonnenSystemweit:
+ - Sonde		Sehr schnelles SpionageRaumschiff um von anderen Spielern den Planeten zu erkunden
+ - Transporter		Raumschiff mit kaum Angriff/Verteidigung aber großem Laderaum
+ - SpaceShip1		geringer Angriff/Verteidigung mit bissl Laderaum
+Idee: 3 Basic Raumschifftypen wo eins ausgeglichen ist, eines mehr angriff, eins mehr defensive
+
+Forschrittliche Raumschiffe, innerhalb der Galaxie:
+ - Recycler 		Raumschiff, das nach Kämpfen die zerstörten Einheiten recyclen kann und Ressourcen mitnimmt
+ - Ideen hier rein
+
+
+God Tier Raumschiffe, überall zum anfliegen:
+ - Flottentransporter, der den Speed der gesamten Flotte auf das Niveau des schnellsten Schiffes anpasst ( außer Sonde )
+ - Behemoth 		Sehr teures / starkes Schiff
