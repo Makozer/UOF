@@ -43,7 +43,12 @@ public class Planet {
 	// Fleet that idles on the Planet
 	private Fleet					fleet = new Fleet();
 	
-	public Planet(TechTree techtree, Coordinates coordinates, String name, int ironValue, int rareEarthValue, int waterValue, int tritiumValue, int headQuarterLvl, int universityLvl, int spacePortLvl, int ironMineLvl, int rareEarthMineLvl, int fountainLvl, int tritiumFabricLvl, int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl) {
+	public Planet(TechTree techtree, Coordinates coordinates, String name, 
+						int ironValue, int rareEarthValue, int waterValue, int tritiumValue, 
+						int headQuarterLvl, int universityLvl, int spacePortLvl, 
+						int ironMineLvl, int rareEarthMineLvl, int fountainLvl, int tritiumFabricLvl, 
+						int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl) {
+		
 		Date date = new Date(); // get the actual Date
 		// Basic
 		this.techtree = techtree;

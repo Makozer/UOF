@@ -23,7 +23,7 @@ public class DateUtils {
 	public static Date getDate(int year, int month, int day, int hour, int minute, int second, int millisecond) {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month);
+		cal.set(Calendar.MONTH, (month - 1));
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		cal.set(Calendar.HOUR_OF_DAY, hour);
 		cal.set(Calendar.MINUTE, minute);
@@ -31,6 +31,20 @@ public class DateUtils {
 		cal.set(Calendar.MILLISECOND, millisecond);
 		Date output = cal.getTime();
 		return output;
+	}
+	
+	public static Date getFutureDateByHours(int hours) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.HOUR_OF_DAY, hours);
+		Date output = cal.getTime();		
+		return output;
+	}
+	
+	public static Calendar getTodayCalendar() {
+		Date date = new Date();// the date instance
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar;
 	}
 
 }

@@ -1,6 +1,7 @@
 package game.planet.buildings;
 
-import java.util.ArrayList;
+
+import java.util.*;
 import game.research.*;
 import game.ressource.ARessource;
 import game.utils.*;
@@ -23,6 +24,15 @@ public abstract class ABuilding {
 	
 	public int getLevel() {
 		return this.level;
+	}
+	
+	public void levelUp() {
+		this.level += 1;
+	}
+	
+	public void levelUp(Date date) {
+		this.level += 1;
+		// TODO Message erstellen für User
 	}
 	
 	public double getLevelModValue() {

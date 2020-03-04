@@ -2,10 +2,15 @@ package game;
 
 import java.util.*;
 
+import game.GameEvent.Type;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.*;
 import game.research.TechTree;
+import game.ressource.ARessource;
+import game.ressource.Iron;
+import game.ressource.Water;
+import game.utils.DateUtils;
 
 public class Player {
 	
@@ -64,13 +69,29 @@ public class Player {
 		planet.testFill();
 		this.addPlanet(planet);
 		
-		TravelingFleet tv = new TravelingFleet(new Coordinates(1, 33, 6), new Date());
-		TravelingFleet tv2 = new TravelingFleet(new Coordinates(1, 33, 8), new Date());
-		tv.testFill(techtree);
-		tv2.testFill(techtree);
-		this.travelingFleets.add(tv);
-		this.travelingFleets.add(tv2);
 		
+		// Erstellung von 4 BeispielEvents
+		Fleet fleet1 = new Fleet();
+		Fleet fleet2 = new Fleet();
+		fleet1.testFill(techtree);
+		fleet2.testFill(techtree);
+		
+		Date in1h = DateUtils.getFutureDateByHours(1);
+		Date in2h = DateUtils.getFutureDateByHours(2);
+		Date in11h = DateUtils.getFutureDateByHours(11);
+		Date in22h = DateUtils.getFutureDateByHours(22);
+		
+		ArrayList<ARessource> ress = new ArrayList<ARessource>(Arrays.asList(new Iron(1234), new Water(4321)));
+
+		GameEvent attack 	= new GameEvent(GameEvent.Type.ATTACK, 		this.getPlanet(0).getCoords(), 	new Coordinates(1, 33, 6), 		fleet1, null, new Date(), in1h);
+		GameEvent defend 	= new GameEvent(GameEvent.Type.DEFEND, 		new Coordinates(1, 33, 8), 		this.getPlanet(0).getCoords(), 	fleet2, null, new Date(), in2h);
+		GameEvent transport = new GameEvent(GameEvent.Type.TRANSPORT, 	this.getPlanet(0).getCoords(), 	new Coordinates(1, 33, 8), 		fleet2, ress, new Date(), in11h);
+		GameEvent build 	= new GameEvent(GameEvent.Type.BUILD, 		this.getPlanet(0).getCoords(), 	null, new Date(), in22h);
+		
+		this.events.add(attack);
+		this.events.add(defend);
+		this.events.add(transport);
+		this.events.add(build);
 	}
 	
 	public boolean doAttack(Coordinates planetcoords, Coordinates target, Fleet fleet) {
@@ -85,10 +106,23 @@ public class Player {
 		return false;
 	}
 	
+	public void doCancelResearch(GameEvent event) {
+		// TODO
+	}
+	
 	public boolean doBuild(Coordinates planetcoords, String building) {
 		// TODO
 		// Create Game Event
 		return false;
+	}
+	
+	public void doCancelBuild(GameEvent event) {
+		// TODO
+	}
+	
+	public void eventUpdate() {
+		// TODO updates and calculates all Events
+		
 	}
 	
 	public void addPlanet(Planet planet) {
@@ -115,8 +149,12 @@ public class Player {
 	
 	public void removePlanet(Planet planet) {
 		this.planets.remove(planet);
-	}	
+	}		
 	
+	public ArrayList<GameEvent> getEvents() {
+		return events;
+	}
+
 	public int getId() {
 		return id;
 	}
