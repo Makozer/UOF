@@ -6,7 +6,7 @@ import game.fleet.*;
 import game.planet.*;
 import game.ressource.ARessource;
 
-public class GameEvent {
+public class GameEvent implements Comparable {
 	
 	enum Type {
 		ATTACK,
@@ -77,6 +77,13 @@ public class GameEvent {
 	}
 	public Date getEndTime() {
 		return endTime;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		int output = 0;
+		GameEvent other = (GameEvent) o;		
+		return this.endTime.compareTo(other.getEndTime());
 	}
 	
 }

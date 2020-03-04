@@ -32,8 +32,8 @@ public class LoginServlet extends HttpServlet {
 		Player player = new Player();
 		player.testFill();
 		session.setAttribute("player", player);
-		
-		request.getRequestDispatcher("example.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/example.jsp");
+		//request.getRequestDispatcher("example.jsp").forward(request, response);
 		
 		//String email = request.getParameter("email");
 		//String password = request.getParameter("password");

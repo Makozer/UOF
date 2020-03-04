@@ -20,6 +20,7 @@ public class Player {
 	private String 	displayName = "";
 	private String 	preName = "";
 	private String 	surName = "";
+	private Date	birthday = null;
 	
 	private Date 	created = 	null;
 	private Date 	lastLogin = null;	
@@ -55,10 +56,10 @@ public class Player {
 	
 	public void testFill() {
 		this.id = 1337;
-		this.email = "martin@martin-kohne.de";
+		this.email = "mk113@web.de";
 		this.displayName = "Makozer";
 		this.preName = "Martin";
-		this.surName = "Kohne";
+		this.surName = "K";
 		this.created = new Date(2011);
 		this.lastLogin = new Date();
 		
@@ -154,6 +155,16 @@ public class Player {
 	public ArrayList<GameEvent> getEvents() {
 		return events;
 	}
+	
+	public ArrayList<GameEvent> getEventsSorted() {
+		events.sort(
+				new Comparator<GameEvent>() {
+					public int compare(GameEvent first, GameEvent second) {
+						return first.compareTo(second);
+					}
+				});
+		return events;
+	}
 
 	public int getId() {
 		return id;
@@ -189,6 +200,10 @@ public class Player {
 
 	public String getSurName() {
 		return surName;
+	}	
+
+	public Date getBirthday() {
+		return birthday;
 	}
 
 	public void setSurName(String surName) {

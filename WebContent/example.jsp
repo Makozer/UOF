@@ -64,6 +64,20 @@
 <c:forEach var="ship" items="${player.getPlanet(0).getFleet().getFleet()}"><tr><td><c:out value="${ship.getName()}"/></td><td><c:out value="${ship.getQuantity()}"/></td><td><c:out value="${ship.getAttackAsString()}"/></td><td><c:out value="${ship.getDefenseAsString()}"/></td><td><c:out value="${ship.getSpeedAsString()}"/></td><td><c:out value="${ship.getCapacity()}"/></td><td><c:forEach var="cost" items="${ship.getCosts()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr></c:forEach>
 </table>
 
+<h3>Game Events:</h3>
+<table border="1">
+<tr><th>Zeitpunkt</th><th>Art</th><th>Koordinaten</th><th>Ziel</th><th>StartZeit</th><th>Flotte</th><th>Ressourcen</th></tr>
+<c:forEach var="gameEvent" items="${player.getEventsSorted()}"><tr><td><c:out value="${gameEvent.getEndTime()}"/></td><td><c:out value="${gameEvent.getType()}"/></td><td><c:out value="${gameEvent.getCoordinates()}"/></td><td><c:out value="${gameEvent.getTarget()}"/></td><td><c:out value="${gameEvent.getStartTime()}"/></td><td>
+
+<table border="1">
+<tr><th>Flugzeug</th><th>Anzahl</th><th>Attack</th><th>Defense</th><th>Speed</th><th>Capacity</th></tr>
+<c:forEach var="ship" items="${gameEvent.getFleet().getFleet()}"><tr><td><c:out value="${ship.getName()}"/></td><td><c:out value="${ship.getQuantity()}"/></td><td><c:out value="${ship.getAttackAsString()}"/></td><td><c:out value="${ship.getDefenseAsString()}"/></td><td><c:out value="${ship.getSpeedAsString()}"/></td><td><c:out value="${ship.getCapacity()}"/></td></tr></c:forEach>
+</table>
+
+</td><td><c:forEach var="cost" items="${gameEvent.getRessource()}"><c:out value="${cost.getName()} : ${cost.getValue()}; "/></c:forEach></td></tr></c:forEach>
+</table>
+
+<h2 style="color:red;">VERALTET:</h2>
 <h3>Flotten die gerade Angreifen oder Rohstoffe transportieren</h3>
 <table border="1">
 <tr><th>Ziel</th><th>StartZeit</th><th>Ankunftszeit</th><th>RückReiseZeitpunkt</th></tr>
