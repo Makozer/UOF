@@ -9,6 +9,7 @@ public class University extends ABuilding {
 		super(techtree, level);
 		this.levelMod = UNIVERSITY_LEVELMOD;
 		this.costs = UNIVERSITY_COSTS;
+		this.description = UNIVERSITY_DESCRIPTION;
 	}
 
 }

@@ -11,6 +11,7 @@
 <title>Universe on Fire</title>
 </head>
 <body>
+<jsp:include page="./include/leftmenu.jsp" />
 <h1>Universe on Fire</h1>
 <form action="./LoginServlet" method="post">
 <button type="submit">Session holen</button>

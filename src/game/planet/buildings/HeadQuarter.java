@@ -9,6 +9,7 @@ public class HeadQuarter extends ABuilding {
 		super(techtree, level);
 		this.levelMod = HEADQUARTER_LEVELMOD;
 		this.costs = HEADQUARTER_COSTS;
+		this.description = HEADQUARTER_DESCRIPTION;
 	}
 
 }

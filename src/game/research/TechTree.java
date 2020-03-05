@@ -22,13 +22,31 @@ public class TechTree {
 	}
 	
 	public void testFill() {
-		this.addAttackResearch(new LaserPointer(4));
-		this.addDefenseResearch(new LaserPointer(3));
-		this.addSpeedResearch(new LaserPointer(2));
-		this.addCapacityResearch(new LaserPointer(1));
+		this.addAttackResearch(new LaserPointer(this));
+		this.addDefenseResearch(new LaserPointer(this));
+		this.addSpeedResearch(new LaserPointer(this));
+		this.addCapacityResearch(new LaserPointer(this));
+		this.setLevel("LaserPointer", 11);
 		// SpaceShips
 		this.setLevel("Falcon", 11);
 		this.setLevel("Yamato", 11);
+	}
+	
+	public void addResearch(AResearch research) {
+		switch (research.getType()) {
+		case ATTACK:
+			this.addAttackResearch(research);
+			break;
+		case DEFEND:
+			this.addDefenseResearch(research);
+			break;
+		case CAPACITY:
+			this.addCapacityResearch(research);
+			break;
+		case SPEED:
+			this.addCapacityResearch(research);
+			break;
+		}
 	}
 	
 	public void addAttackResearch(AResearch research) {
@@ -38,7 +56,7 @@ public class TechTree {
 	public double getAttack() {
 		double output = 0;
 		for (AResearch r: attackMod) {
-			output += r.getValue();
+			output += r.getModValue();
 		}
 		return output;
 	}
@@ -50,7 +68,7 @@ public class TechTree {
 	public double getDefense() {
 		double output = 0;
 		for (AResearch r: defenseMod) {
-			output += r.getValue();
+			output += r.getModValue();
 		}
 		return output;
 	}
@@ -62,7 +80,7 @@ public class TechTree {
 	public double getSpeed() {
 		double output = 0;
 		for (AResearch r: speedMod) {
-			output += r.getValue();
+			output += r.getModValue();
 		}
 		return output;
 	}
@@ -74,7 +92,7 @@ public class TechTree {
 	public double getCapacity() {
 		double output = 0;
 		for (AResearch r: capacityMod) {
-			output += r.getValue();
+			output += r.getModValue();
 		}
 		return output;
 	}

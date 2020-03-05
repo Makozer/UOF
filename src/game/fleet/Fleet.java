@@ -17,7 +17,8 @@ public class Fleet {
 		
 		// TechTree initialisieren, wird fürs Schiff benötigt
 		TechTree techtree = new TechTree();
-		AResearch lp = new LaserPointer(10);
+		techtree.setLevel("LaserPointer", 11);
+		AResearch lp = new LaserPointer(techtree);
 		System.out.println(lp.toString());
 		techtree.addAttackResearch(lp);
 		

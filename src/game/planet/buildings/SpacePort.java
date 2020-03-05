@@ -9,6 +9,7 @@ public class SpacePort extends ABuilding {
 		super(techtree, level);
 		this.levelMod = SPACEPORT_LEVELMOD;
 		this.costs = SPACEPORT_COSTS;
+		this.description = SPACEPORT_DESCRIPTION;
 	}
 
 }

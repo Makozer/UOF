@@ -11,6 +11,7 @@ public class TritiumFabric extends AResMiningBuilding {
 		super(techtree, level, date, ressource);
 		this.levelMod = TRITIUMFABRIC_LEVELMOD;
 		this.costs = TRITIUMFABRIC_COSTS;
+		this.description = TRITIUMFABRIC_DESCRIPTION;
 	}
 
 }

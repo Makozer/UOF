@@ -12,19 +12,12 @@ public abstract class ABuilding {
 	protected int						level = 0;
 	protected AMath						levelMod = null;
 	protected ArrayList<ARessource> 	costs = null;
+	protected String					description = "";
 	
 	public ABuilding(TechTree techtree, int level) {
 		this.techtree = techtree;
 		this.level = level;
-	}
-	
-	public String getName() {
-		return this.getClass().getSimpleName();
 	}	
-	
-	public int getLevel() {
-		return this.level;
-	}
 	
 	public void levelUp() {
 		this.level += 1;
@@ -47,12 +40,37 @@ public abstract class ABuilding {
 		return costs;
 	}	
 	
+	public ArrayList<ARessource> getBuildCosts() {
+		ArrayList<ARessource> output = new ArrayList<ARessource>();
+		for (ARessource r: costs) {
+			output.add(r.cloneMe(levelMod.getValue(this.level)));			
+		}
+		return costs;
+	}
+	
+	public Date getBuildTime() {
+		// TODO !!!!
+		return DateUtils.getFutureDateByHours(2);
+	}
+	
 	public String testLevelMod() {
 		String output = this.getName() + " levelModValue: \n";
 		for (int i = 0; i < 12; i++) {
 			output += i + ": \t" + NumberUtils.round2dec(this.getLevelModValue(i)) + ";\n";
 		}
 		return output;
+	}
+	
+	public String getName() {
+		return this.getClass().getSimpleName();
+	}
+		
+	public String getDescription() {
+		return description;
+	}
+
+	public int getLevel() {
+		return this.level;
 	}
 
 }

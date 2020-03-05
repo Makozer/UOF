@@ -11,6 +11,7 @@ public class IronMine extends AResMiningBuilding {
 		super(techtree, level, date, ressource);
 		this.levelMod = IRONMINE_LEVELMOD;
 		this.costs = IRONMINE_COSTS;
+		this.description = IRONMINE_DESCRIPTION;
 	}
 
 }

@@ -9,6 +9,7 @@ public class RareEarthStorage extends AResStorageBuilding {
 		super(techtree, level);
 		this.levelMod = RAREEARTHSTORAGE_LEVELMOD;
 		this.costs = RAREEARTHSTORAGE_COSTS;
+		this.description = RAREEARTHMINE_DESCRIPTION;
 	}
 
 }

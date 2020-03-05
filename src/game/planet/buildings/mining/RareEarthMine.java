@@ -11,6 +11,7 @@ public class RareEarthMine extends AResMiningBuilding {
 		super(techtree, level, date, ressource);
 		this.levelMod = RAREEARTHMINE_LEVELMOD;
 		this.costs = RAREEARTHMINE_COSTS;
+		this.description = RAREEARTHMINE_DESCRIPTION;
 	}
 
 }

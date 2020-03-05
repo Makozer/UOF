@@ -9,6 +9,7 @@ public class WaterStorage extends AResStorageBuilding {
 		super(techtree, level);
 		this.levelMod = WATERSTORAGE_LEVELMOD;
 		this.costs = WATERSTORAGE_COSTS;
+		this.description = WATERSTORAGE_DESCRIPTION;
 	}
 
 }

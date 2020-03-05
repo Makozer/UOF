@@ -9,6 +9,7 @@ public class IronStorage extends AResStorageBuilding {
 		super(techtree, level);
 		this.levelMod = IRONSTORAGE_LEVELMOD;
 		this.costs = IRONSTORAGE_COSTS;
+		this.description = IRONMINE_DESCRIPTION;
 	}
 
 }

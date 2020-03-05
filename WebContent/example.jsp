@@ -11,7 +11,7 @@
 <title>Universe on Fire</title>
 </head>
 <body>
-
+<jsp:include page="./include/leftmenu.jsp" />
 <h1>BeispielDaten </h1>
 
 <table border="1">
@@ -67,7 +67,7 @@
 <h3>Game Events:</h3>
 <table border="1">
 <tr><th>Zeitpunkt</th><th>Art</th><th>Koordinaten</th><th>Ziel</th><th>StartZeit</th><th>Flotte</th><th>Ressourcen</th></tr>
-<c:forEach var="gameEvent" items="${player.getEventsSorted()}"><tr><td><c:out value="${gameEvent.getEndTime()}"/></td><td><c:out value="${gameEvent.getType()}"/></td><td><c:out value="${gameEvent.getCoordinates()}"/></td><td><c:out value="${gameEvent.getTarget()}"/></td><td><c:out value="${gameEvent.getStartTime()}"/></td><td>
+<c:forEach var="gameEvent" items="${player.getEventsSorted()}"><tr><td><c:out value="${gameEvent.getEndTime()}"/></td><td><c:out value="${gameEvent.getType()}"/></td><td><c:out value="${gameEvent.getCoordinates().asCoords()}"/></td><td><c:out value="${gameEvent.getTarget().asCoords()}"/></td><td><c:out value="${gameEvent.getStartTime()}"/></td><td>
 
 <table border="1">
 <tr><th>Flugzeug</th><th>Anzahl</th><th>Attack</th><th>Defense</th><th>Speed</th><th>Capacity</th></tr>

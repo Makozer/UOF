@@ -6,7 +6,7 @@ import game.fleet.*;
 import game.planet.*;
 import game.ressource.ARessource;
 
-public class GameEvent implements Comparable {
+public class GameEvent implements Comparable<GameEvent> {
 	
 	enum Type {
 		ATTACK,
@@ -18,15 +18,17 @@ public class GameEvent implements Comparable {
 	private Type 					type = null;	
 	private Coordinates 			coordinates = null;
 	private Coordinates 			target = null;	
+	private String					buildingName = "";
 	private Fleet					fleet = null;	
 	private ArrayList<ARessource> 	ressource = null; 	
 	private Date 					startTime = null;
 	private Date 					arrivalTime = null;
 	private Date 					endTime = null;	
 	
-	public GameEvent(Type type, Coordinates coordinates, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
+	public GameEvent(Type type, Coordinates coordinates, String buildingName, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
 		this.type = type;
 		this.coordinates = coordinates;
+		this.buildingName = buildingName;
 		this.ressource = ressource;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -55,8 +57,12 @@ public class GameEvent implements Comparable {
 	}
 	public Coordinates getTarget() {
 		return target;
-	}	
+	}		
 	
+	public String getBuildingName() {
+		return buildingName;
+	}
+
 	public Fleet getFleet() {
 		return fleet;
 	}
@@ -80,8 +86,7 @@ public class GameEvent implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		int output = 0;
+	public int compareTo(GameEvent o) {
 		GameEvent other = (GameEvent) o;		
 		return this.endTime.compareTo(other.getEndTime());
 	}

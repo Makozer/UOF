@@ -19,13 +19,17 @@ public class Planet {
 	// Basic Propertys
 	private Coordinates 			coordinates = null;
 	private String 					name = "";
+	
+	// Activitys
+	private String					isBuilding = "";
+	private boolean					isResearching = false;
+	
 	// Ressources
-	private ARessource				iron = null;
-	private ARessource				rareEarth = null;
-	private ARessource				water = null;
-	private ARessource				tritium = null;
+	private HashMap<String, ARessource>	ressources = new HashMap<String, ARessource>();
 	
 	// Buildings
+	private HashMap<String, ABuilding>	buildings = new HashMap<String, ABuilding>();
+	/*
 	private HeadQuarter 			headQuarter = null;
 	private University				university = null;
 	private SpacePort				spacePort = null;
@@ -38,7 +42,8 @@ public class Planet {
 	private IronStorage				ironStorage = null;
 	private RareEarthStorage		rareEarthStorage = null;
 	private WaterStorage			waterStorage = null;
-	private TritiumStorage			tritiumStorage = null;	
+	private TritiumStorage			tritiumStorage = null;
+	*/
 	
 	// Fleet that idles on the Planet
 	private Fleet					fleet = new Fleet();
@@ -55,24 +60,40 @@ public class Planet {
 		this.coordinates = coordinates;
 		this.setName(name);
 		// Ressources
-		this.iron = new Iron(ironValue);
-		this.rareEarth = new RareEarth(rareEarthValue);
-		this.water = new Water(waterValue);
-		this.tritium = new Tritium(tritiumValue);
+		Iron iron = new Iron(ironValue);
+		RareEarth rareEarth = new RareEarth(rareEarthValue);
+		Water water = new Water(waterValue);
+		Tritium tritium = new Tritium(tritiumValue);
+		ressources.put(iron.getName(), iron);
+		ressources.put(rareEarth.getName(), rareEarth);
+		ressources.put(water.getName(), water);
+		ressources.put(tritium.getName(), tritium);
 		// Buildings
-		this.headQuarter = new HeadQuarter(techtree, headQuarterLvl);
-		this.university = new University(techtree, universityLvl);
-		this.spacePort = new SpacePort(techtree, spacePortLvl);
+		HeadQuarter headQuarter = new HeadQuarter(techtree, headQuarterLvl);
+		University university = new University(techtree, universityLvl);
+		SpacePort spacePort = new SpacePort(techtree, spacePortLvl);
+		buildings.put(headQuarter.getName(), headQuarter);
+		buildings.put(university.getName(), university);
+		buildings.put(spacePort.getName(), spacePort);
+		
 		// Res Mining Buildings
-		this.ironMine = new IronMine(techtree, ironMineLvl, date, this.getIron());
-		this.rareEarthMine = new RareEarthMine(techtree, rareEarthMineLvl, date, this.getRareEarth());
-		this.fountain = new Fountain(techtree, fountainLvl, date, this.getWater());
-		this.tritiumFabric = new TritiumFabric(techtree, tritiumFabricLvl, date, this.getTritium());
+		IronMine ironMine = new IronMine(techtree, ironMineLvl, date, this.getIron());
+		RareEarthMine rareEarthMine = new RareEarthMine(techtree, rareEarthMineLvl, date, this.getRareEarth());
+		Fountain fountain = new Fountain(techtree, fountainLvl, date, this.getWater());
+		TritiumFabric tritiumFabric = new TritiumFabric(techtree, tritiumFabricLvl, date, this.getTritium());
+		buildings.put(ironMine.getName(), ironMine);
+		buildings.put(rareEarthMine.getName(), rareEarthMine);
+		buildings.put(fountain.getName(), fountain);
+		buildings.put(tritiumFabric.getName(), tritiumFabric);
 		// Res Storage Buildings
-		this.ironStorage 		= new IronStorage(techtree, ironStorageLvl);
-		this.rareEarthStorage 	= new RareEarthStorage(techtree, rareEarthStorageLvl);
-		this.waterStorage		= new WaterStorage(techtree, waterStorageLvl);
-		this.tritiumStorage 	= new TritiumStorage(techtree, tritiumStorageLvl);
+		IronStorage ironStorage 		= new IronStorage(techtree, ironStorageLvl);
+		RareEarthStorage rareEarthStorage 	= new RareEarthStorage(techtree, rareEarthStorageLvl);
+		WaterStorage waterStorage		= new WaterStorage(techtree, waterStorageLvl);
+		TritiumStorage tritiumStorage 	= new TritiumStorage(techtree, tritiumStorageLvl);
+		buildings.put(ironStorage.getName(), ironStorage);
+		buildings.put(rareEarthStorage.getName(), rareEarthStorage);
+		buildings.put(waterStorage.getName(), waterStorage);
+		buildings.put(tritiumStorage.getName(), tritiumStorage);
 		
 	}
 	
@@ -84,6 +105,18 @@ public class Planet {
 		this.fleet.addShips(new Falcon(this.techtree, 666));
 		this.fleet.addShips(new Cheetah(this.techtree, 33));
 		this.fleet.addShips(new Yamato(this.techtree, 1));
+	}
+	
+	public void increaseRessources(ArrayList<ARessource> ressources) {
+		for (ARessource r: ressources) {
+			this.getRessourceByName(r.getName()).increaseValue(r.getValue());
+		}
+	}
+	
+	public void decreaseRessources(ArrayList<ARessource> ressources) {
+		for (ARessource r: ressources) {
+			this.getRessourceByName(r.getName()).decreaseValue(r.getValue());
+		}
 	}
 
 	public Coordinates getCoords() {
@@ -104,67 +137,130 @@ public class Planet {
 	}
 
 	public ARessource getIron() {
-		return iron;
+		return ressources.get(new Iron(0).getName());
 	}
 
 	public ARessource getRareEarth() {
-		return rareEarth;
+		return ressources.get(new RareEarth(0).getName());
 	}
 
 	public ARessource getWater() {
-		return water;
+		return ressources.get(new Water(0).getName());
 	}
 
 	public ARessource getTritium() {
-		return tritium;
+		return ressources.get(new Tritium(0).getName());
 	}	
+	
+	public ABuilding getBuildingByName(String name) {
+		return this.buildings.get(name);
+	}
+	
+	public ArrayList<ABuilding> getBasicBuildings() {
+		ArrayList<ABuilding> output = new ArrayList<ABuilding>();
+		output.add(getHeadQuarter());
+		output.add(getUniversity());
+		return output;
+	}
+	
+	public ArrayList<ABuilding> getWarBuildings() {
+		ArrayList<ABuilding> output = new ArrayList<ABuilding>();
+		output.add(getSpacePort());
+		return output;
+	}
+	
+	public ArrayList<AResMiningBuilding> getResBuildings() {
+		ArrayList<AResMiningBuilding> output = new ArrayList<AResMiningBuilding>();
+		output.add(getIronMine());
+		output.add(getRareEarthMine());
+		output.add(getFountain());
+		output.add(getTritiumFabric());
+		return output;
+	}
+	
+	public ArrayList<AResStorageBuilding> getResStorageBuildings() {
+		ArrayList<AResStorageBuilding> output = new ArrayList<AResStorageBuilding>();
+		output.add(getIronStorage());
+		output.add(getRareEarthStorage());
+		output.add(getWaterStorage());
+		output.add(getTritiumStorage());
+		return output;
+	}
 
 	public HeadQuarter getHeadQuarter() {
-		return headQuarter;
+		return (HeadQuarter)buildings.get("HeadQuarter");
 	}
 
 	public University getUniversity() {
-		return university;
+		return (University)buildings.get("University");
 	}
 
 	public SpacePort getSpacePort() {
-		return spacePort;
+		return (SpacePort)buildings.get("SpacePort");
 	}
 
 	public IronMine getIronMine() {
-		return ironMine;
+		return (IronMine)buildings.get("IronMine");
 	}
 
 	public RareEarthMine getRareEarthMine() {
-		return rareEarthMine;
+		return (RareEarthMine)buildings.get("RareEarthMine");
 	}
 
 	public Fountain getFountain() {
-		return fountain;
+		return (Fountain)buildings.get("Fountain");
 	}
 
 	public TritiumFabric getTritiumFabric() {
-		return tritiumFabric;
+		return (TritiumFabric)buildings.get("TritiumFabric");
 	}
 
 	public IronStorage getIronStorage() {
-		return ironStorage;
+		return (IronStorage)buildings.get("IronStorage");
 	}
 
 	public RareEarthStorage getRareEarthStorage() {
-		return rareEarthStorage;
+		return (RareEarthStorage)buildings.get("RareEarthStorage");
 	}
 
 	public WaterStorage getWaterStorage() {
-		return waterStorage;
+		return (WaterStorage)buildings.get("WaterStorage");
 	}
 
 	public TritiumStorage getTritiumStorage() {
-		return tritiumStorage;
+		return (TritiumStorage)buildings.get("TritiumStorage");
+	}
+
+	public boolean isBuilding() {
+		return isBuilding.length() > 0;
 	}
 	
+	public String isBuildingName() {
+		return isBuilding;
+	}
+
+	public void setIsBuilding(String isBuilding) {
+		this.isBuilding = isBuilding;
+	}
+
+	public boolean isResearching() {
+		return isResearching;
+	}
+
+	public void setIsResearching(boolean isResearching) {
+		this.isResearching = isResearching;
+	}
+
+	public HashMap<String, ABuilding> getBuildings() {
+		return buildings;
+	}
+
+	public HashMap<String, ARessource> getRessources() {
+		return ressources;
+	}	
 	
-	
-	
+	public ARessource getRessourceByName(String name) {
+		return this.ressources.get(name);
+	}
 
 }

@@ -9,6 +9,7 @@ public class TritiumStorage extends AResStorageBuilding {
 		super(techtree, level);
 		this.levelMod = TRITIUMSTORAGE_LEVELMOD;
 		this.costs = TRITIUMSTORAGE_COSTS;
+		this.description = TRITIUMSTORAGE_DESCRIPTION;
 	}
 	
 	@Override

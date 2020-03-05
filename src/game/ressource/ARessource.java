@@ -19,6 +19,14 @@ public abstract class ARessource {
 		this.ressourcevalue = ressourcevalue;
 	}
 	
+	public void increaseValue(int n) {
+		this.ressourcevalue += n;
+	}
+	
+	public void decreaseValue(int n) {
+		this.ressourcevalue -= n;
+	}
+	
 	public abstract ARessource cloneMe(double mod);
 	
 	public String getName() {
