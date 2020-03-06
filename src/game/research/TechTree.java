@@ -1,6 +1,8 @@
 package game.research;
 
 import java.util.*;
+import game.fleet.*;
+import game.settings.*;
 
 /** This class saves and represents the Players TechTree.
  * @author Martin
@@ -28,7 +30,9 @@ public class TechTree {
 		this.addCapacityResearch(new LaserPointer(this));
 		this.setLevel("LaserPointer", 11);
 		// SpaceShips
+		this.setLevel("SpyDrone", 11);
 		this.setLevel("Falcon", 11);
+		this.setLevel("Cheetah", 11);
 		this.setLevel("Yamato", 11);
 	}
 	
@@ -108,4 +112,37 @@ public class TechTree {
 		}
 		return (int)output;
 	}
+	
+	public ArrayList<ASpaceShip> getResearchedSpecialSpaceShips() {
+		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
+		for (ASpaceShip s:ShipSettings.getSpecialShipList(this)) {
+			if (this.getLevel(s.getName()) > 0) { output.add(s);}
+		}
+		return output;
+	}
+	
+	public ArrayList<ASpaceShip> getResearchedT1SpaceShips() {
+		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
+		for (ASpaceShip s:ShipSettings.getT1ShipList(this)) {
+			if (this.getLevel(s.getName()) > 0) { output.add(s);}
+		}
+		return output;
+	}
+	
+	public ArrayList<ASpaceShip> getResearchedT2SpaceShips() {
+		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
+		for (ASpaceShip s:ShipSettings.getT2ShipList(this)) {
+			if (this.getLevel(s.getName()) > 0) { output.add(s);}
+		}
+		return output;
+	}
+	
+	public ArrayList<ASpaceShip> getResearchedT3SpaceShips() {
+		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
+		for (ASpaceShip s:ShipSettings.getT3ShipList(this)) {
+			if (this.getLevel(s.getName()) > 0) { output.add(s);}
+		}
+		return output;
+	}
+		
 }

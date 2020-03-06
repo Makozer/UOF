@@ -29,14 +29,14 @@ public class DateUtils {
 		cal.set(Calendar.MINUTE, minute);
 		cal.set(Calendar.SECOND, second);
 		cal.set(Calendar.MILLISECOND, millisecond);
-		Date output = cal.getTime();
+		Date output = (Date)cal.getTime();
 		return output;
 	}
 	
 	public static Date getFutureDateByHours(int hours) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.HOUR_OF_DAY, hours);
-		Date output = cal.getTime();		
+		Date output = (Date) cal.getTime();		
 		return output;
 	}
 	

@@ -2,11 +2,12 @@ package game.fleet;
 
 import java.util.ArrayList;
 
-import game.research.TechTree;
-import game.ressource.ARessource;
+import game.*;
+import game.research.*;
+import game.ressource.*;
 import game.utils.*;
 
-public abstract class ASpaceShip {
+public abstract class ASpaceShip extends AGameObject {
 	
 	// Basic Attributes
 	protected int 		attack 		= 0;	// attack rating

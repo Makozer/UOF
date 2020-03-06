@@ -4,7 +4,7 @@ import java.util.*;
 import game.ressource.*;
 import game.utils.*;
 
-public class ShipTSpecialSettings {
+public class ShipSpecialSettings {
 	
 	// SPYDRONE
 	public static final int 					SPYDRONE_ATTACK = 3;				

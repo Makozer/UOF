@@ -1,6 +1,6 @@
-package game.fleet.tierspecial;
+package game.fleet.special;
 
-import static game.settings.ShipTSpecialSettings.*;
+import static game.settings.ShipSpecialSettings.*;
 
 import game.fleet.ASpaceShip;
 import game.research.TechTree;

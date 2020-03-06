@@ -22,28 +22,13 @@ public class Planet {
 	
 	// Activitys
 	private String					isBuilding = "";
-	private boolean					isResearching = false;
+	private String					isResearching = "";
 	
 	// Ressources
 	private HashMap<String, ARessource>	ressources = new HashMap<String, ARessource>();
 	
 	// Buildings
 	private HashMap<String, ABuilding>	buildings = new HashMap<String, ABuilding>();
-	/*
-	private HeadQuarter 			headQuarter = null;
-	private University				university = null;
-	private SpacePort				spacePort = null;
-	// Mining Buildings
-	private IronMine				ironMine = null;
-	private RareEarthMine			rareEarthMine = null;
-	private Fountain				fountain = null;
-	private TritiumFabric			tritiumFabric = null;
-	// Storage Buildings
-	private IronStorage				ironStorage = null;
-	private RareEarthStorage		rareEarthStorage = null;
-	private WaterStorage			waterStorage = null;
-	private TritiumStorage			tritiumStorage = null;
-	*/
 	
 	// Fleet that idles on the Planet
 	private Fleet					fleet = new Fleet();
@@ -98,6 +83,10 @@ public class Planet {
 	}
 	
 	public static void main(String[] args) {
+		
+	}
+	
+	public void doBuildSpaceShips(Fleet fleet) {
 		
 	}
 	
@@ -244,10 +233,14 @@ public class Planet {
 	}
 
 	public boolean isResearching() {
+		return isResearching.length() > 0;
+	}
+	
+	public String isResearchingName() {
 		return isResearching;
 	}
 
-	public void setIsResearching(boolean isResearching) {
+	public void setIsResearching(String isResearching) {
 		this.isResearching = isResearching;
 	}
 

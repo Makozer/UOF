@@ -1,12 +1,11 @@
 package game.fleet;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
+import game.fleet.special.*;
 import game.fleet.tier1.*;
 import game.fleet.tier2.*;
 import game.fleet.tier3.*;
-import game.fleet.tierspecial.*;
 import game.research.*;
 
 public class Fleet {
