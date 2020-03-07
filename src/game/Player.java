@@ -62,7 +62,7 @@ public class Player {
 		
 		TechTree techtree = new TechTree();
 		techtree.testFill();
-		
+		this.setTechtree(techtree);
 		Planet planet = new Planet(techtree, new Coordinates(1, 33, 7), "Martin und Nehles Planet", 66666, 33333, 66666, 666, 3, 2, 2, 5, 2, 3, 1, 4, 3, 2, 1);
 		planet.testFill();
 		this.addPlanet(planet);
@@ -271,7 +271,7 @@ public class Player {
 		this.surName = surName;
 	}
 
-	public TechTree getTechtree() {
+	public TechTree getTechTree() {
 		return techtree;
 	}
 

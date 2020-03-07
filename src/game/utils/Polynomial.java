@@ -52,8 +52,13 @@ public class Polynomial extends AMath {
 
 	@Override
 	public String toString() {
-		return "Polynomial[°4=" + coefficientX4 + ", °3=" + coefficientX3 + ", °2="
-				+ coefficientX2 + ", °1=" + coefficientX1 + ", constant=" + constant + "]";
+		String output = "f(x)= ";
+		if (coefficientX4 != 0) { output += coefficientX4 + "x^4";}
+		if (coefficientX3 != 0) { output += " + " + coefficientX3 + "x^3";}
+		if (coefficientX2 != 0) { output += " + " + coefficientX2 + "x^2";}
+		if (coefficientX1 != 0) { output += " + " + coefficientX1 + "x";}
+		if (constant != 0) { output += " + " + constant;}
+		return output;
 	}
 	
 	
