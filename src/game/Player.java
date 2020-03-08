@@ -1,6 +1,8 @@
 package game;
 
 import java.util.*;
+
+import community.message.*;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.*;
@@ -25,8 +27,10 @@ public class Player {
 	
 	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
 	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
+	private ArrayList<Message>			messages		= new ArrayList<Message>();
 	
-	private int 						activePlanet = 0;
+	boolean 							hasNewMessage 	= false;
+	private int 						activePlanet 	= 0;
 	
 	public Player() {}
 
@@ -90,6 +94,8 @@ public class Player {
 		this.events.add(defend);
 		this.events.add(transport);
 		this.events.add(build);
+		
+		this.addMessage(new GameMessage("Pain is Lord", "Test"));
 	}
 	
 	public boolean doAttack(Coordinates planetcoords, Coordinates target, Fleet fleet) {
@@ -293,6 +299,50 @@ public class Player {
 
 	public void setActivePlanet(int activePlanet) {
 		this.activePlanet = activePlanet;
+	}
+
+	public ArrayList<Message> getMessages() {
+		this.messages.sort(
+				new Comparator<Message>() {
+					public int compare(Message first, Message second) {
+						return first.compareTo(second);
+					}
+				});
+		this.setHasNewMessage(false);
+		return messages;
+	}
+
+	public void addMessage(Message message) {
+		this.messages.add(message);
+		this.setHasNewMessage(true);
 	}	
+	
+	public void deleteMessage(int msgId) {
+		for (Message m: messages) {
+			if (m.getMsgId() == msgId) {
+				this.messages.remove(m);
+				break;
+			}
+		}
+		
+	}
+	
+	public int getMessageCount() {
+		return this.messages.size();
+	}
+	
+	public int getNewMessageCount() {
+		return 1;
+	}
+
+	public boolean hasNewMessage() {
+		return hasNewMessage;
+	}
+
+	public void setHasNewMessage(boolean hasNewMessage) {
+		this.hasNewMessage = hasNewMessage;
+	}
+	
+	
 	
 }

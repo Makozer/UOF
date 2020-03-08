@@ -2,8 +2,11 @@ package community.message;
 
 import java.util.*;
 
-public class Message {
+import game.*;
 
+public class Message implements Comparable<Message> {
+
+	protected int msgId = 0;
 	protected int fromId = 0;
 	protected int toId = 0;
 	protected String title = "";
@@ -15,12 +18,17 @@ public class Message {
 		this.message = message;
 	}
 
-	public Message(int fromId, int toId, String title, String message, Date timestamp) {
+	public Message(int msgId, int fromId, int toId, String title, String message, Date timestamp) {
+		this.msgId = msgId;
 		this.fromId = fromId;
 		this.toId = toId;
 		this.title = title;
 		this.message = message;
 		this.timestamp = timestamp;
+	}	
+
+	public int getMsgId() {
+		return msgId;
 	}
 
 	public int getFromId() {
@@ -41,6 +49,12 @@ public class Message {
 
 	public Date getTimestamp() {
 		return timestamp;
-	}	
+	}
+
+	@Override
+	public int compareTo(Message o) {
+		Message other = (Message) o;		
+		return this.timestamp.compareTo(other.getTimestamp());
+	}
 	
 }

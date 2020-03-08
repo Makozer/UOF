@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <div style="float:left; background-color:#ccc">
+<a href="messages.jsp">Nachrichten</a><br />
+
 <a href="index.jsp">index</a><br />
 --- <br/>
 <a href="planet.jsp">Übersicht</a><br />

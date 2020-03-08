@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class CommunityMessage extends Message {
 
-	public CommunityMessage(int fromId, int toId, String title, String message, Date timestamp) {
-		super(fromId, toId, title, message, timestamp);
+	public CommunityMessage(int msgId, int fromId, int toId, String title, String message, Date timestamp) {
+		super(msgId, fromId, toId, title, message, timestamp);
 	}
 
 }
