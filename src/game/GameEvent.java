@@ -87,8 +87,7 @@ public class GameEvent implements Comparable<GameEvent> {
 
 	@Override
 	public int compareTo(GameEvent o) {
-		GameEvent other = (GameEvent) o;		
-		return this.endTime.compareTo(other.getEndTime());
+		return this.endTime.compareTo(o.getEndTime());
 	}
 	
 }

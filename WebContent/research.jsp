@@ -6,6 +6,6 @@
 
 <jsp:include page="./include/header.jsp" />
 
-<h1>Planeten</h1>
+<h1>Forschung</h1>
 
 <jsp:include page="./include/footer.jsp" />

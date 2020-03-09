@@ -3,15 +3,10 @@
 <%@ taglib uri="WEB-INF/taglib/customtags.tld" prefix="my"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.io.*,java.util.*, javax.servlet.*" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Buildings</title>
-</head>
-<body>
+
+<jsp:include page="./include/header.jsp" />
+
 <form action="./BuildingServlet" method="post">
-<jsp:include page="./include/leftmenu.jsp" />
 <h1>Gebäude auf ${ player.getActivePlanet().getName()} (${player.getActivePlanet().getCoords().asCoords()})</h1>
 <table border="1">
 <tr><th colspan="2">Standard Gebäude</th></tr>
@@ -144,5 +139,8 @@
 </c:forEach>
 </table>
 </form>
-</body>
-</html>
+
+
+
+<jsp:include page="./include/footer.jsp" />
+

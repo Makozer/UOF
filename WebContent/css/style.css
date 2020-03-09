@@ -1,1 +1,57 @@
 @charset "ISO-8859-1";
+
+* {
+	color: #ddd;
+	font-family: Verdana;
+	table
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.red {
+	color: red;
+}
+
+body {
+	background-color: #507;
+	text-align: center;
+}
+
+table td { padding: 3px; vertical-align: top; }
+
+ul {
+	list-style-type:none;
+	text-align: left;
+}
+
+input, button {
+	color: #666;
+}
+
+.headnav a {
+	font-size:22px;
+	padding: 11px;
+}
+
+.main {
+	background-color: #333;
+	margin: 33px auto;
+	width:1337px;
+	text-align: center;
+}
+
+.main .middle, .main table {
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+	color: #8fa;
+}
+
+a:hover {
+	color: orange;
+	text-decoration: none;
+}

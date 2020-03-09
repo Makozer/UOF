@@ -6,6 +6,6 @@
 
 <jsp:include page="./include/header.jsp" />
 
-<h1>Planeten</h1>
+<h1>Planetenübersicht über einen einzeln angeclickten Planeten aus dem Galaxie Menü aus</h1>
 
 <jsp:include page="./include/footer.jsp" />

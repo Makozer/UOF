@@ -18,8 +18,7 @@ public class Message implements Comparable<Message> {
 		this.message = message;
 	}
 
-	public Message(int msgId, int fromId, int toId, String title, String message, Date timestamp) {
-		this.msgId = msgId;
+	public Message(int fromId, int toId, String title, String message, Date timestamp) {
 		this.fromId = fromId;
 		this.toId = toId;
 		this.title = title;
@@ -33,6 +32,11 @@ public class Message implements Comparable<Message> {
 
 	public int getFromId() {
 		return fromId;
+	}
+	
+	public String getFromName() {
+		// TODO : Database abfrage
+		return "Jon Doe";
 	}
 
 	public int getToId() {
