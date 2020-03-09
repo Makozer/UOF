@@ -48,6 +48,10 @@ public class Player {
 
 	public static void main(String[] args) {
 		// Testmain
+		
+		Player player = new Player();
+		player.testFill();
+		System.out.println(player.getDefendEvents().size());
 
 	}
 	
@@ -88,12 +92,12 @@ public class Player {
 		GameEvent attack 	= new GameEvent(GameEvent.Type.ATTACK, 		this.getPlanet(0).getCoords(), 	new Coordinates(1, 33, 6), 		fleet1, null, new Date(), in1h);
 		GameEvent defend 	= new GameEvent(GameEvent.Type.DEFEND, 		new Coordinates(1, 33, 8), 		this.getPlanet(0).getCoords(), 	fleet2, null, new Date(), in2h);
 		GameEvent transport = new GameEvent(GameEvent.Type.TRANSPORT, 	this.getPlanet(0).getCoords(), 	new Coordinates(1, 33, 8), 		fleet2, ress, new Date(), in11h);
-		GameEvent build 	= new GameEvent(GameEvent.Type.BUILD, 		this.getPlanet(0).getCoords(), 	"HeadQuarter",					ress, new Date(), in22h);
+		//GameEvent build 	= new GameEvent(GameEvent.Type.BUILD, 		this.getPlanet(0).getCoords(), 	"HeadQuarter",					ress, new Date(), in22h);
 		
 		this.events.add(attack);
 		this.events.add(defend);
 		this.events.add(transport);
-		this.events.add(build);
+		//this.events.add(build);
 		
 		this.addMessage(new GameMessage("HeadQuarter wurde auf 1:33:7 auf LvL 11 erhöht!", "Test"));
 		this.addMessage(new CommunityMessage(1337, 666, "You're evil", "muahahahhahaa", new Date()));
@@ -142,7 +146,7 @@ public class Player {
 		}
 		
 		// Creating GameEvent
-		GameEvent event = new GameEvent(GameEvent.Type.BUILD, planetcoords, buildingName, null, new Date(), building.getBuildTime());
+		GameEvent event = new GameEvent(GameEvent.Type.BUILD, planetcoords, buildingName, buildCosts, new Date(), building.getBuildTime());
 		this.addEvent(event);
 		planet.setIsBuilding(buildingName);
 		
@@ -213,7 +217,7 @@ public class Player {
 	public GameEvent getBuildEventByCoords(Coordinates coordinates) {
 		GameEvent output = null;
 		for (GameEvent e: events) {
-			if (e.getCoordinates().asCoords().equals(coordinates.asCoords())) {
+			if (e.getCoordinates().asCoords().equals(coordinates.asCoords()) && e.getType() == GameEvent.Type.BUILD) {
 				output = e;
 			}
 		}
@@ -221,7 +225,63 @@ public class Player {
 	}
 	
 	public ArrayList<GameEvent> getEvents() {
+		sortEvents();
 		return events;
+	}
+	
+	public ArrayList<GameEvent> getEvents(String type) {
+		sortEvents();
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
+		for (GameEvent e: events) {
+			if (e.getType().equals(type)) { output.add(e); }
+		}
+		return output;
+	}
+	
+	public ArrayList<GameEvent> getFleetEvents() {
+		sortEvents();
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
+		for (GameEvent e: events) {
+			if (e.getType() == GameEvent.Type.ATTACK || e.getType() == GameEvent.Type.TRANSPORT) { output.add(e); }
+		}
+		return output;
+	}
+
+	public ArrayList<GameEvent> getAttackEvents() {
+		sortEvents();
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
+		for (GameEvent e: events) {
+			if (e.getType() == GameEvent.Type.ATTACK) { output.add(e); }
+		}
+		return output;
+	}
+	
+	public ArrayList<GameEvent> getTransportEvents() {
+		sortEvents();
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
+		for (GameEvent e: events) {
+			if (e.getType() == GameEvent.Type.TRANSPORT) { output.add(e); }
+		}
+		return output;
+	}
+	
+	
+	public ArrayList<GameEvent> getDefendEvents() {
+		sortEvents();
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
+		for (GameEvent e: events) {
+			if (e.getType() == GameEvent.Type.DEFEND) { output.add(e); }
+		}
+		return output;
+	}
+	
+	public ArrayList<GameEvent> getBuildingEvents() {
+		sortEvents();
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
+		for (GameEvent e: events) {
+			if (e.getType() == GameEvent.Type.BUILD) { output.add(e); }
+		}
+		return output;
 	}
 	
 	public ArrayList<GameEvent> getEventsSorted() {
@@ -232,6 +292,15 @@ public class Player {
 					}
 				});
 		return events;
+	}
+	
+	public void sortEvents() {
+		events.sort(
+				new Comparator<GameEvent>() {
+					public int compare(GameEvent first, GameEvent second) {
+						return first.compareTo(second);
+					}
+				});
 	}
 
 	public int getId() {

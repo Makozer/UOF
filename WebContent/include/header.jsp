@@ -23,3 +23,20 @@
 			<jsp:include page="leftmenu.jsp" />
 		</td>
 		<td style="text-align: center;">
+			<table>
+				<tr>
+					<td colspan="4">${player.getActivePlanet().getCoords().asCoords()}  ${player.getActivePlanet().getName()} </td>
+				</tr>
+				<tr>				
+					<td>${ player.getActivePlanet().getIron().getName() }:</td>
+					<td>${ player.getActivePlanet().getRareEarth().getName() }:</td>
+					<td>${ player.getActivePlanet().getWater().getName() }:</td>
+					<td>${ player.getActivePlanet().getTritium().getName() }:</td>
+				</tr>
+				<tr>				
+					<td>${player.getActivePlanet().getIronMine().getResValAsString()}</td>
+					<td>${player.getActivePlanet().getRareEarthMine().getResValAsString()}</td>
+					<td>${player.getActivePlanet().getFountain().getResValAsString()}</td>
+					<td>${player.getActivePlanet().getTritiumFabric().getResValAsString()}</td>
+				</tr>
+			</table>

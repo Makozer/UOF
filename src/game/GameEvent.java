@@ -49,9 +49,14 @@ public class GameEvent implements Comparable<GameEvent> {
 		this.arrivalTime = new Date(new Date().getTime() + (this.endTime.getTime() - this.startTime.getTime() / 2));
 	}
 
-	public String getType() {
+	public Type getType() {
+		return type;
+	}
+	
+	public String getTypeAsString() {
 		return type.toString();
 	}
+	
 	public Coordinates getCoordinates() {
 		return coordinates;
 	}
@@ -89,5 +94,14 @@ public class GameEvent implements Comparable<GameEvent> {
 	public int compareTo(GameEvent o) {
 		return this.endTime.compareTo(o.getEndTime());
 	}
+
+	@Override
+	public String toString() {
+		return "GameEvent [type=" + type + ", coordinates=" + coordinates + ", target=" + target + ", buildingName="
+				+ buildingName + ", fleet=" + fleet + ", ressource=" + ressource + ", startTime=" + startTime
+				+ ", arrivalTime=" + arrivalTime + ", endTime=" + endTime + "]";
+	}
+	
+	
 	
 }

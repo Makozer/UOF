@@ -24,6 +24,7 @@ table td { padding: 3px; vertical-align: top; }
 ul {
 	list-style-type:none;
 	text-align: left;
+	padding:10px;
 }
 
 input, button {
@@ -44,6 +45,10 @@ input, button {
 
 .main .middle, .main table {
 	margin: 0 auto;
+}
+
+.main .defend td {
+	background-color: #a00;
 }
 
 a {

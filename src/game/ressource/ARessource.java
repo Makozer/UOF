@@ -1,5 +1,7 @@
 package game.ressource;
 
+import game.utils.NumberUtils;
+
 public abstract class ARessource {
 	
 	protected int ressourcevalue = 0;
@@ -31,6 +33,10 @@ public abstract class ARessource {
 	
 	public String getName() {
 		return this.getClass().getSimpleName();
+	}
+	
+	public String getValAsString() {
+		return NumberUtils.shortNumber(ressourcevalue);
 	}
 
 	@Override

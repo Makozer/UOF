@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import game.*;
+import game.utils.*;
 
 /**
  * Servlet implementation class LoginServlet
@@ -31,8 +32,12 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();				
 		Player player = new Player();
 		player.testFill();
+		DateUtils dateUtils = new DateUtils();
 		session.setAttribute("player", player);
+		session.setAttribute("dateUtils", dateUtils);
 		response.sendRedirect(request.getContextPath() + "/example.jsp");
+		
+		
 		//request.getRequestDispatcher("example.jsp").forward(request, response);
 		
 		//String email = request.getParameter("email");

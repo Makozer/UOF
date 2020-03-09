@@ -40,8 +40,10 @@ public class BuildingServlet extends HttpServlet {
 		Player player = (Player)session.getAttribute("player");
 		if (player.getActivePlanet().isBuilding()) {
 			GameEvent event = player.getBuildEventByCoords(player.getActivePlanet().getCoords());
+			//System.out.println("doCancelBuild:" + event.toString());
 			player.doCancelBuild(event);
 		} else {
+			//System.out.println("doBuild(" + building + ")");
 			player.doBuild(building);
 		}		
 		response.sendRedirect(request.getContextPath() + "/buildings.jsp");

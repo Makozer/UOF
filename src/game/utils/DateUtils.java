@@ -46,5 +46,27 @@ public class DateUtils {
 		calendar.setTime(date);
 		return calendar;
 	}
+	
+	public static String getRemainingTimeAsString(Date future) {
+		String output = "";
+		
+		Date now = new Date();
+		
+		long diff = future.getTime() - now.getTime();
+
+		long diffSeconds = diff / 1000 % 60;
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = diff / (60 * 60 * 1000) % 24;
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		
+		
+		if (diffDays > 0) {
+			output += diffDays + " Tage, " + diffHours + " Stunden, " + diffMinutes + " Minuten";
+		} else {
+			output += diffHours + ":" + diffMinutes + ":" + diffSeconds;
+		}
+		
+		return output;
+	}
 
 }

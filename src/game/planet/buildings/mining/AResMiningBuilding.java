@@ -26,6 +26,10 @@ public class AResMiningBuilding extends ABuilding {
 		return (int)(ressource.getValue() + (((new Date().getTime() - this.date.getTime()) / 1000.0) * GAME_SPEED * levelMod.getValue(this.level)));
 	}
 	
+	public String getResValAsString() {
+		return NumberUtils.shortNumber(this.getRessourceValue());
+	}
+	
 	public int getResPerSecond() {
 		return (int)(((DateUtils.getDate(2020, 3, 11, 11, 12).getTime() - DateUtils.getDate(2020, 3, 11, 11, 11).getTime()) / 1000.0) * GAME_SPEED * levelMod.getValue(this.level));
 	}
