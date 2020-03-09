@@ -86,6 +86,40 @@
 </c:choose>
 
 
+
+
+<tr><th colspan="2">Stationierte Flotte auf diesem Planet</th></tr>
+<c:choose>
+<c:when test="${player.getActivePlanet().getFleet().getFleet().size() > 0}">
+<tr><td colspan="2">	
+	<c:forEach var="ship" items="${player.getActivePlanet().getFleet().getFleet()}">		
+			${ship.getName()} : ${ ship.getQuantity()}<br />
+	</c:forEach>
+</td></tr>
+</c:when>    
+<c:otherwise>
+	<tr><td colspan="2">
+		Aktuell sind keine RaumSchiffe vorhanden.
+	</td></tr>
+</c:otherwise>
+</c:choose>
+
+<tr><th colspan="2">Raumschiffe in Bau</th></tr>
+<c:choose>
+<c:when test="${player.getActivePlanet().getSpacePort().getBuildQueue().size() > 0}">
+<tr><td colspan="2">	
+	<c:forEach var="ship" items="${player.getActivePlanet().getSpacePort().getBuildQueue()}">		
+			${ship.getName()} : ${ ship.getQuantity()}<br />
+	</c:forEach>
+</td></tr>
+</c:when>    
+<c:otherwise>
+	<tr><td colspan="2">
+		Aktuell sind keine RaumSchiffe in Bau.
+	</td></tr>
+</c:otherwise>
+</c:choose>
+
  
 
 </table>

@@ -23,9 +23,9 @@
 			<jsp:include page="leftmenu.jsp" />
 		</td>
 		<td style="text-align: center;">
-			<table>
+			<table class="planetResOv">
 				<tr>
-					<td colspan="4">${player.getActivePlanet().getCoords().asCoords()}  ${player.getActivePlanet().getName()} </td>
+					<td colspan="4" style="padding:11px;">${player.getActivePlanet().getCoords().asCoords()}  ${player.getActivePlanet().getName()} </td>
 				</tr>
 				<tr>				
 					<td>${ player.getActivePlanet().getIron().getName() }:</td>

@@ -19,4 +19,16 @@ public class SpacePort extends ABuilding {
 		this.description = SPACEPORT_DESCRIPTION;
 	}
 
+	public ArrayList<ASpaceShip> getBuildQueue() {
+		return buildQueue;
+	}
+
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
+	}
+
 }
