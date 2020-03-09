@@ -5,7 +5,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3">&copy;2020 Insert Cool Dude Names here</td>
+		<td colspan="3" style="padding:33px;">&copy;2020 Makozer & Cedric | Impressum | Datenschutzerklärung | Über Uns</td>
 	</tr>
 </table>
 </body>
