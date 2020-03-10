@@ -26,18 +26,12 @@ public abstract class ASpaceShip extends AGameObject {
 	
 	public ASpaceShip() {
 		
-	}
-	
+	}	
 	
 	public ASpaceShip(TechTree techtree, int quantity) {
-		if (techtree == null) {
-			throw new IllegalArgumentException("TechTree war null!");
-		} else {
-			this.setQuantity(quantity);
-			this.techtree = techtree;			
-		}		
+		this.setQuantity(quantity);
+		this.techtree = techtree;	
 	}
-
 	
 	public String getName() {
 		return this.getClass().getSimpleName();

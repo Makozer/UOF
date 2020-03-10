@@ -6,6 +6,10 @@ import static game.settings.ShipT1Settings.*;
 
 public class Falcon extends ASpaceShip {
 	
+	public Falcon() {
+		this(null, 1);
+	}
+	
 	public Falcon(TechTree techtree, int quantity) {
 		super(techtree, quantity);
 		this.attack = 	FALCON_ATTACK;				

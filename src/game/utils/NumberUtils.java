@@ -30,5 +30,15 @@ public class NumberUtils {
 		output = ThreadLocalRandom.current().nextInt(min, max + 1);
 		return output;
 	}
+	
+	public static int stringAsInt(String string) {
+		int output = 0;
+        try { output = Integer.parseInt(string); } 
+        catch (NumberFormatException e) { 
+        	output = 0; 
+        	//e.printStackTrace(); 
+        }
+        return output;
+	}
 
 }

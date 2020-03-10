@@ -5,6 +5,10 @@ import game.research.TechTree;
 import static game.settings.ShipT3Settings.*;
 
 public class Yamato extends ASpaceShip {
+	
+	public Yamato() {
+		this(null, 1);
+	}
 
 	public Yamato(TechTree techtree, int quantity) {
 		super(techtree, quantity);

@@ -86,8 +86,39 @@ public class Planet {
 		
 	}
 	
-	public void doBuildSpaceShips(Fleet fleet) {
+	public void update() {
+		updateShipQueue();		
+	}
+	
+	public void updateShipQueue() {
+		SpacePort spaceport = this.getSpacePort();
+		ArrayList<ASpaceShip> buildqueue = spaceport.getBuildQueue();
 		
+		Date past = spaceport.getTimestamp();
+		Date now = new Date();
+		long diff = now.getTime() - past.getTime();
+		
+		do {
+			
+		} while (diff > 0);
+	}
+	
+	public void addShip(ASpaceShip addShip) {
+		ArrayList<ASpaceShip> fleet = this.fleet.getFleet();
+		ASpaceShip thisShip = null;
+		boolean found = false;
+
+		for (int i = 0; i < fleet.size(); i++) {
+			thisShip = fleet.get(i);
+			if (thisShip.getName() == addShip.getName()) {
+				thisShip.addQuantity(addShip.getQuantity());
+				found = true;
+				break;
+			}
+			if (i == fleet.size() - 1 && found == false) {
+				fleet.add(addShip);
+			}
+		}
 	}
 	
 	public void testFill() {

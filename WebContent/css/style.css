@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 
 * {
-	color: #ddd;
+	color: #ccc;
 	font-family: Verdana;
 	table
 }
@@ -27,7 +27,7 @@ ul {
 	padding:10px;
 }
 
-input, button {
+input, button, option {
 	color: #000;
 }
 

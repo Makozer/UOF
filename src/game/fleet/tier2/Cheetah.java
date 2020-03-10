@@ -5,6 +5,10 @@ import game.fleet.ASpaceShip;
 import game.research.TechTree;
 
 public class Cheetah extends ASpaceShip {
+	
+	public Cheetah() {
+		this(null, 1);
+	}
 
 	public Cheetah(TechTree techtree, int quantity) {
 		super(techtree, quantity);

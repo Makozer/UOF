@@ -1,8 +1,8 @@
 package game.research;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import game.fleet.*;
-import game.fleet.tier1.Falcon;
 import game.settings.*;
 
 /** This class saves and represents the Players TechTree.
@@ -23,6 +23,60 @@ public class TechTree {
 	public static void main(String[] args) {
 		// Testmain
 
+	}
+	
+	public ASpaceShip createShip(String name, int quantity) {
+		ASpaceShip output = null;
+		ASpaceShip origin = this.getResearchedShip(name);
+		try {
+            output = origin.getClass().getDeclaredConstructor().newInstance();
+            output.setQuantity(quantity);
+            output.setTechtree(this);
+        } catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} 
+		
+		return output;
+		/*
+		 * Class aClass = Class.forName(origin.getClass().getPackageName() + "." + origin.getClass().getSimpleName());
+	       newShip = (ASpaceShip)aClass.getDeclaredConstructor().newInstance();
+	       newShip.setQuantity(quantity);
+	       newShip.setTechtree(techtree);
+	       ships.add(newShip);
+		 */
+	}
+	
+	public ASpaceShip createShip(ASpaceShip origin, int quantity) {
+		ASpaceShip output = null;
+		try {
+            output = origin.getClass().getDeclaredConstructor().newInstance();
+            output.setQuantity(quantity);
+            output.setTechtree(this);
+        } catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} 
+		
+		return output;
 	}
 	
 	public void testFill() {
@@ -114,6 +168,14 @@ public class TechTree {
 		}
 		return (int)output;
 	}
+	
+	public ASpaceShip getResearchedShip(String shipName) {
+		ArrayList<ASpaceShip> 	allShips = this.getAllResearchedShips();	// to know which Ships can be build
+		for (ASpaceShip s: allShips) {
+			if (shipName.equals(s.getName())) {return s;}
+		}
+    	return null;
+    }
 	
 	public ArrayList<ASpaceShip> getResearchedSpecialSpaceShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();

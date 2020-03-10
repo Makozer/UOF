@@ -1,17 +1,16 @@
 package server.servlets.game;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import game.*;
 import game.fleet.*;
-import game.fleet.tier1.*;
 import game.research.*;
+import game.utils.NumberUtils;
 
 /**
  * Servlet implementation class SpacePortServlet
@@ -25,7 +24,6 @@ public class SpacePortServlet extends HttpServlet {
      */
     public SpacePortServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -39,65 +37,36 @@ public class SpacePortServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO array von parametern auslesen
-		// Flotte erstellen
-		// als fleet in SpacePort einbauen
+		
+		// Required Objects
+		HttpSession 			session = request.getSession();	
+		Player 					player = (Player)session.getAttribute("player");		
+		TechTree 				techtree = player.getTechTree();
+		
+		ArrayList<ASpaceShip> 	ships = new ArrayList<ASpaceShip>();
+		ASpaceShip 				newShip = null;
+		String 					shipName = "";
+		int 					quantity = 0; 
 		
 		
-		// Benötigte Objekte
-		HttpSession session = request.getSession();	
-		Player player = (Player)session.getAttribute("player");		
-		TechTree techtree = player.getTechTree();					// Ships need their TechTree
-		ArrayList<ASpaceShip> ships = new ArrayList<ASpaceShip>();	// to save Ships which are build
-		ArrayList<ASpaceShip> allResearchedShips = techtree.getAllResearchedShips();	// to know which Ships can be build
-		int pVal = 0;
-		
-		ASpaceShip a = null; // Test
-		
+		// Loop to create all Ships given as String Array with Quantity Parameter
         Enumeration<String> parameterNames = request.getParameterNames(); 
         while (parameterNames.hasMoreElements()) { 
-            String shipName = parameterNames.nextElement();
-            ASpaceShip template = hasShip(allResearchedShips, shipName);
-            String[] paramSValue = request.getParameterValues(shipName);
+        	newShip = null;
+            shipName = parameterNames.nextElement();            
+            quantity = NumberUtils.stringAsInt(request.getParameterValues(shipName)[0]);
             
-            try { pVal = Integer.parseInt(paramSValue[0]); } catch (NumberFormatException e) { e.printStackTrace(); }
-            
-            try {
-	            Class aClass = Class.forName(template.getClass().getPackageName() + "." + template.getClass().getSimpleName());//Class.forName("yourPackagePath" + shipName); // need to pass full class name here
-	            a = (ASpaceShip)aClass.getDeclaredConstructor().newInstance();
-	            a.setQuantity(pVal);
-	            a.setTechtree(techtree);
-	            ships.add(a);
-            } catch (ClassNotFoundException e) {
-            	e.printStackTrace();
-            } catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				e.printStackTrace();
-			} 
-            
-
-            break;
-        }    
+            // TODO check if player has enough res on planet
+            // Creating and adding the ship to the List
+            if (quantity > 0) { newShip = techtree.createShip(shipName, quantity); }
+            // TODO reduce res on player planet!
+            if (newShip != null) { ships.add(newShip); }            
+        } 
         
-        for (ASpaceShip as : ships) System.out.println(as.getClass().getSimpleName());
-        System.out.println("Ende");
+        // Adding the list to the SpacePort buildQueue
+        player.getActivePlanet().getSpacePort().getBuildQueue().addAll(ships);
+        response.sendRedirect(request.getContextPath() + "/spaceport.jsp");
 
 	} // End doPost
-	
-	protected ASpaceShip hasShip(ArrayList<ASpaceShip> allShips, String shipName) {
-		for (ASpaceShip s: allShips) {
-			if (shipName.equals(s.getName())) {return s;}
-		}
-    	return null;
-    }
 
 }

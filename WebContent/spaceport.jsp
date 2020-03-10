@@ -10,9 +10,9 @@
 <h1>Produktion von Raumschiffen auf ${ player.getActivePlanet().getName() }</h1>
 <h2>Raumschiffe momentan in Bau:</h2>
 <select name="list_box_name[]" size="4" multiple="multiple">
-<option value="option1">Option1</option>
-<option value="option2">Option2</option>
-<option value="Option3">Option3</option>
+<c:forEach var="s" items="${ player.getActivePlanet().getSpacePort().getBuildQueue() }">
+		<option value="option1"><c:out value="${s.getName()}: ${s.getQuantity()}"/>	</option>
+</c:forEach>
 </select>
 <h2>Erforschte Raumschiffe:</h2>
 <table border="1">

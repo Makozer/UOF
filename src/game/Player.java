@@ -67,6 +67,10 @@ public class Player {
 
 	}
 	
+	public void update() {
+		this.getActivePlanet().update();
+	}
+	
 	public void init() {
 		// initalize
 	}
