@@ -2,7 +2,6 @@ package community.message;
 
 import java.util.*;
 
-import game.*;
 
 public class Message implements Comparable<Message> {
 

@@ -99,7 +99,7 @@ public class Planet {
 		long diff = now.getTime() - past.getTime();
 		
 		do {
-			
+			// TODO
 		} while (diff > 0);
 	}
 	

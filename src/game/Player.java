@@ -101,7 +101,6 @@ public class Player {
 		Date in1h = DateUtils.getFutureDateByHours(1);
 		Date in2h = DateUtils.getFutureDateByHours(2);
 		Date in11h = DateUtils.getFutureDateByHours(11);
-		Date in22h = DateUtils.getFutureDateByHours(22);
 		
 		ArrayList<ARessource> ress = new ArrayList<ARessource>(Arrays.asList(new Iron(1234), new Water(4321)));
 
