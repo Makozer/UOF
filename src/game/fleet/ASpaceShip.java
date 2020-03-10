@@ -118,7 +118,9 @@ public abstract class ASpaceShip extends AGameObject {
 	}
 
 	
-	
+	/*public ASpaceShip cloneMe() {
+		return .getClass().getConstructor(techtree, 1);
+	}*/
 	
 	
 }

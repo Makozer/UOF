@@ -8,6 +8,7 @@ import game.planet.*;
 import game.planet.buildings.*;
 import game.research.*;
 import game.ressource.*;
+import game.settings.ShipSettings;
 import game.utils.*;
 
 public class Player {
@@ -50,8 +51,19 @@ public class Player {
 		// Testmain
 		
 		Player player = new Player();
+		TechTree techtree = new TechTree();
+		techtree.testFill();
 		player.testFill();
-		System.out.println(player.getDefendEvents().size());
+		player.setTechtree(techtree);
+		System.out.println("Alle Schiffe:");
+		for (ASpaceShip s: ShipSettings.getWholeShipList(techtree)) {
+			System.out.println(s.toString());
+		}
+		System.out.println("Erforschte Schiffe:");
+		for (ASpaceShip s: techtree.getAllResearchedShips()) {
+			System.out.println(s.toString());
+		}
+		//System.out.println(player.getDefendEvents().size());
 
 	}
 	
@@ -103,6 +115,36 @@ public class Player {
 		this.addMessage(new CommunityMessage(1337, 666, "You're evil", "muahahahhahaa", new Date()));
 	}
 	
+	public void increaseRess(Planet planet, ArrayList<ARessource> ress) {
+		// Increasing Planets Ressources
+		HashMap<String, ARessource> planetRessources = planet.getRessources();
+		for (ARessource r: ress) {
+			planetRessources.get(r.getName()).increaseValue(r.getValue());					
+		}
+	}
+	
+	public boolean hasRess(Planet planet, ArrayList<ARessource> ressCosts) {
+		// Check if the Planet has enough Ressources
+		HashMap<String, ARessource> planetRessources = planet.getRessources();
+		for (ARessource r: ressCosts) {
+			if (r.getValue() > planetRessources.get(r.getName()).getValue()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean decreaseRess(Planet planet, ArrayList<ARessource> ressCosts) {
+		HashMap<String, ARessource> planetRessources = planet.getRessources();
+		if (!this.hasRess(planet, ressCosts)) { return false; }
+		for (ARessource r: ressCosts) {
+			planetRessources.get(r.getName()).decreaseValue(r.getValue());
+			
+		}
+		return true;
+	}
+	
+	
 	public boolean doAttack(Coordinates planetcoords, Coordinates target, Fleet fleet) {
 		// TODO
 		// Zeit Berechnung!
@@ -130,20 +172,8 @@ public class Player {
 		ABuilding building = getActivePlanet().getBuildingByName(buildingName);
 		ArrayList<ARessource> buildCosts = building.getBuildCosts();
 		
-		HashMap<String, ARessource> planetRessources = planet.getRessources();
-		
-		// Check if the Planet has enough Ressources
-		for (ARessource r: buildCosts) {
-			if (r.getValue() > planetRessources.get(r.getName()).getValue()) {
-				return false;
-			}
-		}
-
-		// Reducing Planets Ressources
-		for (ARessource r: buildCosts) {
-			planetRessources.get(r.getName()).decreaseValue(r.getValue());
-			
-		}
+		// Check if the Planet has enough Ressources and then decreases
+		if (!this.decreaseRess(planet, buildCosts)) { return false; }
 		
 		// Creating GameEvent
 		GameEvent event = new GameEvent(GameEvent.Type.BUILD, planetcoords, buildingName, buildCosts, new Date(), building.getBuildTime());
@@ -157,21 +187,18 @@ public class Player {
 	public boolean doCancelBuild(GameEvent event) {
 		
 		// Required Objects
-		Planet planet = this.getPlanetByCoordinates(event.getCoordinates());
+		Planet planet = getPlanetByCoordinates(event.getCoordinates());
 		ABuilding building = planet.getBuildingByName(event.getBuildingName());
 		ArrayList<ARessource> buildCosts = building.getBuildCosts();		
-		HashMap<String, ARessource> planetRessources = planet.getRessources();
 		
 		// Increasing Planets Ressources
-		for (ARessource r: buildCosts) {
-			planetRessources.get(r.getName()).increaseValue(r.getValue());					
-		}
+		this.increaseRess(planet, buildCosts);
 		
 		// Deleting GameEvent
 		this.removeEvent(event);
 		planet.setIsBuilding("");
 		
-		// TODO DataBase Connection :)		
+		// TODO DataBase Connection -> eintragen		
 		return true;
 	}
 	

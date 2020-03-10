@@ -5,9 +5,12 @@ import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
+
+import game.*;
+import game.fleet.*;
+import game.fleet.tier1.*;
+import game.research.*;
 
 /**
  * Servlet implementation class SpacePortServlet
@@ -39,27 +42,46 @@ public class SpacePortServlet extends HttpServlet {
 		// Flotte erstellen
 		// als fleet in SpacePort einbauen
 		
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/plain");
- 
-        Enumeration<String> parameterNames = request.getParameterNames();
- 
-        while (parameterNames.hasMoreElements()) {
- 
-            String paramName = parameterNames.nextElement();
-            out.write(paramName);
-            out.write("n");
- 
-            String[] paramValues = request.getParameterValues(paramName);
-            for (int i = 0; i < paramValues.length; i++) {
-                String paramValue = paramValues[i];
-                out.write(paramValue);
-                out.write(" | ");
+		
+		// Benötigte Objekte
+		HttpSession session = request.getSession();	
+		Player player = (Player)session.getAttribute("player");		
+		TechTree techtree = player.getTechTree();					// Ships need their TechTree
+		ArrayList<ASpaceShip> ships = new ArrayList<ASpaceShip>();	// to save Ships which are build
+		ArrayList<ASpaceShip> allResearchedShips = techtree.getAllResearchedShips();	// to save Ships which are build
+		
+		Falcon falcon = new Falcon(techtree, 1);
+		//falcon.getClass().;
+		
+        Enumeration<String> parameterNames = request.getParameterNames(); 
+        while (parameterNames.hasMoreElements()) { 
+            String shipName = parameterNames.nextElement();
+            String[] paramSValue = request.getParameterValues(shipName);
+            int pVal = Integer.parseInt(paramSValue[0]);
+            if (hasShip(allResearchedShips, shipName)) {
+            	if (pVal > 0) {
+            		//ASpaceShip newShip = new Class<falcon.getClass()>(techtree,1);
+            	}
             }
+
  
-        }
+            /*
+            for (int i = 0; i < paramValues.length; i++) {
+                String paramValue = paramValue[i];
+
+            }
+            */
  
-        out.close();
-	}
+        }    
+        
+
+	} // End doPost
+	
+	protected boolean hasShip(ArrayList<ASpaceShip> allShips, String shipName) {
+		for (ASpaceShip s: allShips) {
+			if (shipName.equals(s.getName())) {return true;}
+		}
+    	return false;
+    }
 
 }

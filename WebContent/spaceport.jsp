@@ -8,7 +8,12 @@
 
 <form action="./SpacePortServlet" method="post">
 <h1>Produktion von Raumschiffen auf ${ player.getActivePlanet().getName() }</h1>
-<p>HIER KOMMT DIE LISTE DER AKTUELL ZU BAUENDEN RAUMSCHIFFE</p>
+<h2>Raumschiffe momentan in Bau:</h2>
+<select name="list_box_name[]" size="4" multiple="multiple">
+<option value="option1">Option1</option>
+<option value="option2">Option2</option>
+<option value="Option3">Option3</option>
+</select>
 <h2>Erforschte Raumschiffe:</h2>
 <table border="1">
 	<tr><th>Erforschte SpezialRaumSchiffe</th><th>Anzahl</th></tr>

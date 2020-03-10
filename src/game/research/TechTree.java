@@ -146,5 +146,14 @@ public class TechTree {
 		}
 		return output;
 	}
+	
+	public ArrayList<ASpaceShip> getAllResearchedShips() {
+		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
+		output.addAll(getResearchedSpecialSpaceShips());
+		output.addAll(getResearchedT1SpaceShips());
+		output.addAll(getResearchedT2SpaceShips());
+		output.addAll(getResearchedT3SpaceShips());
+		return output;
+	}
 		
 }

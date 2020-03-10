@@ -9,7 +9,7 @@ public class ShipSpecialSettings {
 	// SPYDRONE
 	public static final int 					SPYDRONE_ATTACK = 3;				
 	public static final int 					SPYDRONE_DEFENSE = 1;							
-	public static final int 					SPYDRONE_SPEED = 3;				
+	public static final int 					SPYDRONE_SPEED = 999999;				
 	public static final int 					SPYDRONE_CAPACITY = 10;	
 	public static final AMath 					SPYDRONE_LEVELMOD = new Polynomial(1, 1);
 	public static final ArrayList<ARessource> 	SPYDRONE_COSTS = new ArrayList<ARessource>(Arrays.asList(

@@ -1,6 +1,7 @@
 package game.fleet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import game.fleet.special.*;
 import game.fleet.tier1.*;
@@ -8,7 +9,7 @@ import game.fleet.tier2.*;
 import game.fleet.tier3.*;
 import game.research.*;
 
-public class Fleet {
+public class Fleet implements Iterable<ASpaceShip> {
 	
 	protected ArrayList<ASpaceShip> fleet = new ArrayList<ASpaceShip>();
 
@@ -136,6 +137,11 @@ public class Fleet {
 	public String toString() {
 		return "Fleet [getAttack()=" + getAttack() + ", getDefense()=" + getDefense() 
 				+ ", getSpeed()=" + getSpeed() + ", getCapacy()=" + getCapacy() + "]";
+	}
+
+	@Override
+	public Iterator<ASpaceShip> iterator() {
+		return fleet.iterator();
 	}
 
 }
