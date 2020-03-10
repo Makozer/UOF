@@ -88,6 +88,19 @@ public abstract class ASpaceShip extends AGameObject {
 		}
 		this.quantity -= quantity;		
 	}
+	
+	
+	
+
+	public TechTree getTechtree() {
+		return techtree;
+	}
+
+
+	public void setTechtree(TechTree techtree) {
+		this.techtree = techtree;
+	}
+
 
 	public ArrayList<ARessource> getCosts() {
 		// Maybe lower the costs with better Research? :>

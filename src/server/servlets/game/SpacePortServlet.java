@@ -1,6 +1,7 @@
 package server.servlets.game;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import javax.servlet.ServletException;
@@ -49,36 +50,55 @@ public class SpacePortServlet extends HttpServlet {
 		TechTree techtree = player.getTechTree();					// Ships need their TechTree
 		ArrayList<ASpaceShip> ships = new ArrayList<ASpaceShip>();	// to save Ships which are build
 		ArrayList<ASpaceShip> allResearchedShips = techtree.getAllResearchedShips();	// to save Ships which are build
+		int pVal = 0;
+		
+		ASpaceShip a = null; // Test
 		
         Enumeration<String> parameterNames = request.getParameterNames(); 
         while (parameterNames.hasMoreElements()) { 
             String shipName = parameterNames.nextElement();
+            ASpaceShip template = hasShip(allResearchedShips, shipName);
             String[] paramSValue = request.getParameterValues(shipName);
-            int pVal = Integer.parseInt(paramSValue[0]);
-            if (hasShip(allResearchedShips, shipName)) {
-            	if (pVal > 0) {
-            		//ASpaceShip newShip = new Class<shipName>(techtree,1);
-            	}
-            }
+            
+            try { pVal = Integer.parseInt(paramSValue[0]); } catch (NumberFormatException e) { e.printStackTrace(); }
+            
+            try {
+            	System.out.println(template.getClass().getPackageName() + "." +  template.getClass().getSimpleName());
+	            Class aClass = Class.forName(template.getClass().getPackageName() + "." + template.getClass().getSimpleName());//Class.forName("yourPackagePath" + shipName); // need to pass full class name here
+	            a = (ASpaceShip)aClass.getDeclaredConstructor().newInstance();
+	            a.setQuantity(pVal);
+	            a.setTechtree(techtree);
+	            ships.add(a);
+            } catch (ClassNotFoundException e) {
+            	e.printStackTrace();
+            } catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} 
+            
 
- 
-            /*
-            for (int i = 0; i < paramValues.length; i++) {
-                String paramValue = paramValue[i];
-
-            }
-            */
- 
+            break;
         }    
         
+        for (ASpaceShip as : ships) System.out.println(as.getClass().getSimpleName());
+        System.out.println("Ende");
 
 	} // End doPost
 	
-	protected boolean hasShip(ArrayList<ASpaceShip> allShips, String shipName) {
+	protected ASpaceShip hasShip(ArrayList<ASpaceShip> allShips, String shipName) {
 		for (ASpaceShip s: allShips) {
-			if (shipName.equals(s.getName())) {return true;}
+			if (shipName.equals(s.getName())) {return s;}
 		}
-    	return false;
+    	return null;
     }
 
 }
