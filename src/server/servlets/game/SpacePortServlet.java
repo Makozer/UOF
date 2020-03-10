@@ -49,7 +49,7 @@ public class SpacePortServlet extends HttpServlet {
 		Player player = (Player)session.getAttribute("player");		
 		TechTree techtree = player.getTechTree();					// Ships need their TechTree
 		ArrayList<ASpaceShip> ships = new ArrayList<ASpaceShip>();	// to save Ships which are build
-		ArrayList<ASpaceShip> allResearchedShips = techtree.getAllResearchedShips();	// to save Ships which are build
+		ArrayList<ASpaceShip> allResearchedShips = techtree.getAllResearchedShips();	// to know which Ships can be build
 		int pVal = 0;
 		
 		ASpaceShip a = null; // Test
@@ -63,7 +63,6 @@ public class SpacePortServlet extends HttpServlet {
             try { pVal = Integer.parseInt(paramSValue[0]); } catch (NumberFormatException e) { e.printStackTrace(); }
             
             try {
-            	System.out.println(template.getClass().getPackageName() + "." +  template.getClass().getSimpleName());
 	            Class aClass = Class.forName(template.getClass().getPackageName() + "." + template.getClass().getSimpleName());//Class.forName("yourPackagePath" + shipName); // need to pass full class name here
 	            a = (ASpaceShip)aClass.getDeclaredConstructor().newInstance();
 	            a.setQuantity(pVal);

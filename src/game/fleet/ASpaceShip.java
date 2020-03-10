@@ -24,6 +24,10 @@ public abstract class ASpaceShip extends AGameObject {
 	// Costs	
 	protected ArrayList<ARessource> costs = null;
 	
+	public ASpaceShip() {
+		
+	}
+	
 	
 	public ASpaceShip(TechTree techtree, int quantity) {
 		if (techtree == null) {
