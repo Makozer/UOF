@@ -50,9 +50,6 @@ public class SpacePortServlet extends HttpServlet {
 		ArrayList<ASpaceShip> ships = new ArrayList<ASpaceShip>();	// to save Ships which are build
 		ArrayList<ASpaceShip> allResearchedShips = techtree.getAllResearchedShips();	// to save Ships which are build
 		
-		Falcon falcon = new Falcon(techtree, 1);
-		//falcon.getClass().;
-		
         Enumeration<String> parameterNames = request.getParameterNames(); 
         while (parameterNames.hasMoreElements()) { 
             String shipName = parameterNames.nextElement();
@@ -60,7 +57,7 @@ public class SpacePortServlet extends HttpServlet {
             int pVal = Integer.parseInt(paramSValue[0]);
             if (hasShip(allResearchedShips, shipName)) {
             	if (pVal > 0) {
-            		//ASpaceShip newShip = new Class<falcon.getClass()>(techtree,1);
+            		//ASpaceShip newShip = new Class<shipName>(techtree,1);
             	}
             }
 
