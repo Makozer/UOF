@@ -10,5 +10,10 @@ public class RareEarth extends ARessource {
 	public ARessource cloneMe(double mod) {
 		return new RareEarth((int)(this.getValue() * mod));
 	}
+	
+	@Override
+	public ARessource cloneMe() {
+		return new RareEarth(this.getValue());
+	}
 
 }

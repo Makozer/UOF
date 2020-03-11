@@ -104,6 +104,14 @@ public abstract class ASpaceShip extends AGameObject {
 		// Maybe lower the costs with better Research? :>
 		return costs;
 	}
+	
+	public ArrayList<ARessource> getCosts(int n) {
+		ArrayList<ARessource> output = new ArrayList<ARessource>();
+		for (ARessource r: costs) {
+			output.add(r.cloneMe(n));
+		}
+		return output;
+	}
 
 
 	/** getResearchCosts() returns the actual Research Costs

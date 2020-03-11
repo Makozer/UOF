@@ -9,7 +9,9 @@ import javax.servlet.http.*;
 
 import game.*;
 import game.fleet.*;
+import game.planet.*;
 import game.research.*;
+import game.ressource.ARessource;
 import game.utils.NumberUtils;
 
 /**
@@ -40,13 +42,16 @@ public class SpacePortServlet extends HttpServlet {
 		
 		// Required Objects
 		HttpSession 			session = request.getSession();	
-		Player 					player = (Player)session.getAttribute("player");		
+		Player 					player = (Player)session.getAttribute("player");	
+		Planet					planet = player.getActivePlanet();
 		TechTree 				techtree = player.getTechTree();
 		
 		ArrayList<ASpaceShip> 	ships = new ArrayList<ASpaceShip>();
 		ASpaceShip 				newShip = null;
 		String 					shipName = "";
 		int 					quantity = 0; 
+		
+		ArrayList<ARessource> 	shipCosts = new ArrayList<ARessource>();
 		
 		
 		// Loop to create all Ships given as String Array with Quantity Parameter
@@ -56,17 +61,20 @@ public class SpacePortServlet extends HttpServlet {
             shipName = parameterNames.nextElement();            
             quantity = NumberUtils.stringAsInt(request.getParameterValues(shipName)[0]);
             
-            // TODO check if player has enough res on planet
             // Creating and adding the ship to the List
-            if (quantity > 0) { newShip = techtree.createShip(shipName, quantity); }
-            // TODO reduce res on player planet!
-            if (newShip != null) { ships.add(newShip); }            
+            if (quantity > 0) { newShip = techtree.createShip(shipName, quantity);}
+            if (newShip != null) { 
+            	shipCosts = newShip.getCosts(quantity); 
+            	if (player.decreaseRess(planet, shipCosts)) { ships.add(newShip); }
+            }                        
         } 
         
         // Adding the list to the SpacePort buildQueue
         player.getActivePlanet().getSpacePort().getBuildQueue().addAll(ships);
+        
+        // Redirecting ...
         response.sendRedirect(request.getContextPath() + "/spaceport.jsp");
 
-	} // End doPost
+	}// End doPost
 
 }

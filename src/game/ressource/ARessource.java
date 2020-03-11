@@ -25,11 +25,16 @@ public abstract class ARessource {
 		this.ressourcevalue += n;
 	}
 	
+	public void multiplyValue(double m) {
+		this.ressourcevalue = (int)(ressourcevalue * m);
+	}
+	
 	public void decreaseValue(int n) {
 		this.ressourcevalue -= n;
 	}
 	
-	public abstract ARessource cloneMe(double mod);
+	public abstract ARessource cloneMe();
+	public abstract ARessource cloneMe(double multiply);
 	
 	public String getName() {
 		return this.getClass().getSimpleName();
