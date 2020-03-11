@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import game.*;
 import game.fleet.*;
 import game.planet.*;
+import game.planet.buildings.SpacePort;
 import game.research.*;
 import game.ressource.ARessource;
 import game.utils.NumberUtils;
@@ -44,6 +45,7 @@ public class SpacePortServlet extends HttpServlet {
 		HttpSession 			session = request.getSession();	
 		Player 					player = (Player)session.getAttribute("player");	
 		Planet					planet = player.getActivePlanet();
+		SpacePort				spaceport = planet.getSpacePort();
 		TechTree 				techtree = player.getTechTree();
 		
 		ArrayList<ASpaceShip> 	ships = new ArrayList<ASpaceShip>();
@@ -53,6 +55,7 @@ public class SpacePortServlet extends HttpServlet {
 		
 		ArrayList<ARessource> 	shipCosts = new ArrayList<ARessource>();
 		
+		if (spaceport.getBuildQueue().size() == 0) { spaceport.setTimestamp(new Date());}
 		
 		// Loop to create all Ships given as String Array with Quantity Parameter
         Enumeration<String> parameterNames = request.getParameterNames(); 
