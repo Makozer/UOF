@@ -24,8 +24,10 @@ public class Fleet implements Iterable<ASpaceShip> {
 		
 		
 		Fleet fleet = new Fleet();
+		SpyDrone spy = new SpyDrone(techtree, 2);
 		Falcon falcon = new Falcon(techtree, 2);
 		techtree.setLevel(falcon.getName(), 10);
+		fleet.addShips(spy);
 		fleet.addShips(falcon);
 		System.out.println(falcon.toString());
 		System.out.println(fleet.toString());
@@ -76,7 +78,15 @@ public class Fleet implements Iterable<ASpaceShip> {
 	}
 	
 	public void addShips(ASpaceShip ship) {
-		fleet.add(ship);
+		boolean found = false;
+		for (ASpaceShip s: this.getFleet()) {
+			if (s.getName().equals(ship.getName())) {
+				s.addQuantity(ship.getQuantity());
+				found = true;
+				break;
+			}
+		}
+		if (!found) { fleet.add(ship); }		
 	}
 	
 	public void removeShips(ASpaceShip ship) {

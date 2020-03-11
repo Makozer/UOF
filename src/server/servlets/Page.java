@@ -22,7 +22,6 @@ public class Page extends HttpServlet {
      */
     public Page() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -32,7 +31,8 @@ public class Page extends HttpServlet {
 		HttpSession session = request.getSession();	
 		String page = request.getParameter("p");
 		Player player = (Player)session.getAttribute("player");
-		response.sendRedirect(request.getContextPath() + page);
+		if (player != null) { player.update(); }
+		response.sendRedirect(request.getContextPath() + "/" + page + ".jsp");
 	}
 
 	/**

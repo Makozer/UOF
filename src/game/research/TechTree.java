@@ -1,8 +1,8 @@
 package game.research;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import game.fleet.*;
+import game.fleet.tier1.Falcon;
 import game.settings.*;
 
 /** This class saves and represents the Players TechTree.
@@ -21,7 +21,10 @@ public class TechTree {
 	
 
 	public static void main(String[] args) {
-		// Testmain
+		TechTree techtree = new TechTree();
+		techtree.setLevel("Falcon", 10);
+		Falcon falcon = new Falcon(techtree, 1);
+		System.out.println(falcon.toString());
 
 	}
 	
@@ -29,18 +32,13 @@ public class TechTree {
 		ASpaceShip output = null;
 		ASpaceShip origin = this.getResearchedShip(name);
 		try {
+			output = origin.cloneMe(quantity);
+			/*
             output = origin.getClass().getDeclaredConstructor().newInstance();
             output.setQuantity(quantity);
             output.setTechtree(this);
-        } catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
+            */
+        } catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -59,18 +57,13 @@ public class TechTree {
 	public ASpaceShip createShip(ASpaceShip origin, int quantity) {
 		ASpaceShip output = null;
 		try {
+			output = origin.cloneMe(quantity);
+			/*
             output = origin.getClass().getDeclaredConstructor().newInstance();
             output.setQuantity(quantity);
             output.setTechtree(this);
-        } catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
+            */
+        } catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -179,7 +172,7 @@ public class TechTree {
 	
 	public ArrayList<ASpaceShip> getResearchedSpecialSpaceShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
-		for (ASpaceShip s:ShipSettings.getSpecialShipList(this)) {
+		for (ASpaceShip s:ShipRegister.getSpecialShipList(this)) {
 			if (this.getLevel(s.getName()) > 0) { output.add(s);}
 		}
 		return output;
@@ -187,7 +180,7 @@ public class TechTree {
 	
 	public ArrayList<ASpaceShip> getResearchedT1SpaceShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
-		for (ASpaceShip s:ShipSettings.getT1ShipList(this)) {
+		for (ASpaceShip s:ShipRegister.getT1ShipList(this)) {
 			if (this.getLevel(s.getName()) > 0) { output.add(s);}
 		}
 		return output;
@@ -195,7 +188,7 @@ public class TechTree {
 	
 	public ArrayList<ASpaceShip> getResearchedT2SpaceShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
-		for (ASpaceShip s:ShipSettings.getT2ShipList(this)) {
+		for (ASpaceShip s:ShipRegister.getT2ShipList(this)) {
 			if (this.getLevel(s.getName()) > 0) { output.add(s);}
 		}
 		return output;
@@ -203,7 +196,7 @@ public class TechTree {
 	
 	public ArrayList<ASpaceShip> getResearchedT3SpaceShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
-		for (ASpaceShip s:ShipSettings.getT3ShipList(this)) {
+		for (ASpaceShip s:ShipRegister.getT3ShipList(this)) {
 			if (this.getLevel(s.getName()) > 0) { output.add(s);}
 		}
 		return output;

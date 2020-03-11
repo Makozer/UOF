@@ -12,6 +12,7 @@ public class ShipT3Settings {
 	public static final int 					YAMATO_SPEED = 9999;				
 	public static final int 					YAMATO_CAPACITY = 9999;	
 	public static final AMath 					YAMATO_LEVELMOD = new Polynomial(1, 1);
+	public static final int 					YAMATO_BUILDSECONDS = 3600;
 	public static final ArrayList<ARessource> 	YAMATO_COSTS = new ArrayList<ARessource>(Arrays.asList(
 													new Iron(9999), 
 													new RareEarth(9999),

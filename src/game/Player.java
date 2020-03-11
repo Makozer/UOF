@@ -8,7 +8,7 @@ import game.planet.*;
 import game.planet.buildings.*;
 import game.research.*;
 import game.ressource.*;
-import game.settings.ShipSettings;
+import game.settings.ShipRegister;
 import game.utils.*;
 
 public class Player {
@@ -56,7 +56,7 @@ public class Player {
 		player.testFill();
 		player.setTechtree(techtree);
 		System.out.println("Alle Schiffe:");
-		for (ASpaceShip s: ShipSettings.getWholeShipList(techtree)) {
+		for (ASpaceShip s: ShipRegister.getWholeShipList(techtree)) {
 			System.out.println(s.toString());
 		}
 		System.out.println("Erforschte Schiffe:");
@@ -68,7 +68,7 @@ public class Player {
 	}
 	
 	public void update() {
-		this.getActivePlanet().update();
+		for (Planet planet: this.getPlanets()) { planet.update();}
 	}
 	
 	public void init() {
@@ -203,11 +203,6 @@ public class Player {
 		
 		// TODO DataBase Connection -> eintragen		
 		return true;
-	}
-	
-	public void eventUpdate() {
-		// TODO updates and calculates all Events
-		
 	}
 	
 	public void addPlanet(Planet planet) {

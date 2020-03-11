@@ -70,7 +70,7 @@ public class SpacePortServlet extends HttpServlet {
         } 
         
         // Adding the list to the SpacePort buildQueue
-        player.getActivePlanet().getSpacePort().getBuildQueue().addAll(ships);
+        planet.getSpacePort().getBuildQueue().addAll(ships);
         
         // Redirecting ...
         response.sendRedirect(request.getContextPath() + "/spaceport.jsp");

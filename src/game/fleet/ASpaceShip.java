@@ -1,11 +1,13 @@
 package game.fleet;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import game.*;
 import game.research.*;
 import game.ressource.*;
 import game.utils.*;
+import static game.settings.GameSettings.*;
 
 public abstract class ASpaceShip extends AGameObject {
 	
@@ -23,9 +25,10 @@ public abstract class ASpaceShip extends AGameObject {
 	
 	// Costs	
 	protected ArrayList<ARessource> costs = null;
+	protected int					timeToBuild = 999999;
 	
 	public ASpaceShip() {
-		
+		this(new TechTree(), 1);
 	}	
 	
 	public ASpaceShip(TechTree techtree, int quantity) {
@@ -107,7 +110,7 @@ public abstract class ASpaceShip extends AGameObject {
 	
 	public ArrayList<ARessource> getCosts(int n) {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
-		for (ARessource r: costs) {
+		for (ARessource r: this.getCosts()) {
 			output.add(r.cloneMe(n));
 		}
 		return output;
@@ -121,25 +124,69 @@ public abstract class ASpaceShip extends AGameObject {
 	 */
 	public ArrayList<ARessource> getResearchCosts() {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
-		for (ARessource r: costs) {
+		for (ARessource r: this.getCosts()) {
 			output.add(r.cloneMe(levelMod.getValue(techtree.getLevel(this.getName()))));			
 		}
 		return costs;
 	}
+	
 
+	/** Returns the time needed to build this SpaceShip
+	 * @return int time to build in seconds
+	 */
+	public int getTimeToBuild(int spaceportlevel) {	
+		int output = 1;
+		output += 	this.timeToBuild;
+		output -= 	(int)(this.timeToBuild / 100.0 * this.getModValue());
+		output -= 	(int)(this.timeToBuild / 100.0 * (spaceportlevel * 2));
+		output = 	(int)(output / GAME_SPEED);
+		return output;
+	}
+	
+	public double getModValue() {
+		return levelMod.getValue(this.getLevel());
+	}
+	
+	public int getLevel() {
+		return this.techtree.getLevel(this.getName());
+	}
+	
+	public ASpaceShip cloneMe(int quantity) {
+		ASpaceShip output = this.cloneMe();
+		output.setQuantity(quantity);
+		return output;
+	}
+	
+	public ASpaceShip cloneMe() {
+		ASpaceShip output = null;
+		try {
+			output = this.getClass().getDeclaredConstructor().newInstance();
+			output.setQuantity(this.getQuantity());
+			output.setTechtree(this.getTechtree());
+			output.attack = this.attack;
+			output.defense = this.defense;
+			output.speed = this.speed;
+			output.capacity = this.capacity;
+			output.levelMod = this.levelMod;
+			output.costs = this.costs;
+			output.timeToBuild = this.timeToBuild;
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			System.out.println("Exception in ASpaceShip.cloneMe()");
+		}
+		return output;
+	}
 
 	@Override
 	public String toString() {
-		return "ASpaceShip [attack=" + attack + ", defense=" + defense + ", speed=" + speed + ", capacity=" + capacity
-				+ ", quantity=" + quantity + ", getAttack()=" + getAttack() + ", getDefense()=" + getDefense()
-				+ ", getSpeed()=" + getSpeed() + ", getCapacity()=" + getCapacity() + ", getQuantity()=" + getQuantity()
-				+ "]";
+		return this.getName() + "[attack=" + attack + ", defense=" + defense + ", speed=" + speed + ", capacity=" + capacity
+				+ ", quantity=" + quantity + ", techtree=" + techtree + ", levelMod=" + levelMod + ", costs=" + costs
+				+ ", getResearchCosts()=" + getResearchCosts() + ", getModValue()="
+				+ getModValue() + ", getTimeToBuild()=" + getTimeToBuild(1) + "]";
 	}
-
 	
-	/*public ASpaceShip cloneMe() {
-		return .getClass().getConstructor(techtree, 1);
-	}*/
+	
 	
 	
 }

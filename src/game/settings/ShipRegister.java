@@ -9,7 +9,7 @@ import game.fleet.tier3.*;
 import game.research.*;
 
 
-public class ShipSettings {	
+public class ShipRegister {	
 	
 	public static final ArrayList<ASpaceShip> getSpecialShipList(TechTree techtree) {
 		return new ArrayList<ASpaceShip>(Arrays.asList(

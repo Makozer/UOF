@@ -91,16 +91,36 @@ public class Planet {
 	}
 	
 	public void updateShipQueue() {
-		SpacePort spaceport = this.getSpacePort();
-		ArrayList<ASpaceShip> buildqueue = spaceport.getBuildQueue();
+		// If no ships are to build, then do nothing
+		if (this.getSpacePort().getBuildQueue().size() == 0) { return; }
+		
+		// Required Objects
+		SpacePort 				spaceport = this.getSpacePort();
+		ArrayList<ASpaceShip> 	buildqueue = spaceport.getBuildQueue();
+		Fleet					fleet = this.getFleet();
+		ASpaceShip 				shipToBuild = null;
 		
 		Date past = spaceport.getTimestamp();
 		Date now = new Date();
-		long diff = now.getTime() - past.getTime();
-		
+		int diff = (int)(now.getTime() - past.getTime()) / 1000;
+		int timeToBuild = 0;
+	
+		// Loop to build all ships
 		do {
-			// TODO
-		} while (diff > 0);
+			shipToBuild = null;
+			timeToBuild = 0;
+			shipToBuild = buildqueue.get(0);
+			if (shipToBuild != null) {
+				timeToBuild = shipToBuild.getTimeToBuild(spaceport.getLevel());
+				if (diff > timeToBuild) {
+					fleet.addShips(shipToBuild.cloneMe(1));
+					shipToBuild.reduceQuantity(1);
+					diff -= timeToBuild;
+				} else { break; }
+				if (shipToBuild.getQuantity() == 0 && buildqueue.size() > 0) { buildqueue.remove(0); }				
+			}			
+		} while (diff > 0 && buildqueue.size() > 0);
+		spaceport.setTimestamp(new Date(now.getTime() - (diff * 1000)));
 	}
 	
 	public void addShip(ASpaceShip addShip) {
