@@ -10,7 +10,7 @@ import game.utils.NumberUtils;
 
 public class GameEvent implements Comparable<GameEvent> {
 	
-	enum Type {
+	public enum Type {
 		ATTACK,
 		DEFEND,
 		TRANSPORT,

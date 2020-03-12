@@ -38,6 +38,8 @@ public class TechTree {
             output.setQuantity(quantity);
             output.setTechtree(this);
             */
+		} catch (NullPointerException e) {
+			// Everything fine xD
         } catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {

@@ -9,8 +9,12 @@ public abstract class ARessource {
 	/** Creates a Ressource with a given int Value
 	 * @param ressourcevalue int 
 	 */
-	public ARessource(int ressourcevalue) {
-		this.ressourcevalue = ressourcevalue;
+	public ARessource(int ressourceValue) {
+		this.ressourcevalue = ressourceValue;
+	}
+	
+	public ARessource(String ressourceValue) {
+		this.setValUsingString(ressourceValue);
 	}
 
 	public int getValue() {
@@ -19,6 +23,14 @@ public abstract class ARessource {
 
 	public void setValue(int ressourcevalue) {
 		this.ressourcevalue = ressourcevalue;
+	}
+	
+	public void setValUsingString(String number) {
+		try {
+			this.ressourcevalue = Integer.parseInt(number);
+		} catch (NumberFormatException e) {
+			this.ressourcevalue = 0;
+		}
 	}
 	
 	public void increaseValue(int n) {

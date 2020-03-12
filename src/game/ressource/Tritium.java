@@ -5,6 +5,10 @@ public class Tritium extends ARessource {
 	public Tritium(int ressourcevalue) {
 		super(ressourcevalue);
 	}
+	
+	public Tritium(String ressourceValue) {
+		super(ressourceValue);
+	}
 
 	@Override
 	public ARessource cloneMe(double mod) {

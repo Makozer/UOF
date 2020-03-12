@@ -27,16 +27,16 @@ public class Fleet implements Iterable<ASpaceShip> {
 		SpyDrone spy = new SpyDrone(techtree, 2);
 		Falcon falcon = new Falcon(techtree, 2);
 		techtree.setLevel(falcon.getName(), 10);
-		fleet.addShips(spy);
-		fleet.addShips(falcon);
+		fleet.addShip(spy);
+		fleet.addShip(falcon);
 		System.out.println(falcon.toString());
 		System.out.println(fleet.toString());
 	}
 	
 	public void testFill(TechTree techtree) {
-		this.addShips(new Falcon(techtree, 666));
-		this.addShips(new Cheetah(techtree, 33));
-		this.addShips(new Yamato(techtree, 1));
+		this.addShip(new Falcon(techtree, 666));
+		this.addShip(new Cheetah(techtree, 33));
+		this.addShip(new Yamato(techtree, 1));
 	}
 	
 	public int getAttack() {
@@ -77,7 +77,7 @@ public class Fleet implements Iterable<ASpaceShip> {
 		return output;
 	}
 	
-	public void addShips(ASpaceShip ship) {
+	public void addShip(ASpaceShip ship) {
 		boolean found = false;
 		for (ASpaceShip s: this.getFleet()) {
 			if (s.getName().equals(ship.getName())) {
@@ -87,6 +87,13 @@ public class Fleet implements Iterable<ASpaceShip> {
 			}
 		}
 		if (!found) { fleet.add(ship); }		
+	}
+	
+	public boolean hasShip(ASpaceShip ship) {
+		for (ASpaceShip fship: fleet) {
+			if (fship.getName().equals(ship.getName()) && fship.getQuantity() >= ship.getQuantity()) { return true; }
+		}
+		return false;
 	}
 	
 	public void removeShips(ASpaceShip ship) {
@@ -120,6 +127,13 @@ public class Fleet implements Iterable<ASpaceShip> {
 	
 	public ArrayList<ASpaceShip> getFleet() {
 		return this.fleet;
+	}
+	
+	public boolean hasFleet(Fleet fleet) {
+		for (ASpaceShip ship: fleet) {
+			if (!hasShip(ship)) { return false;}
+		}		
+		return true;
 	}
 	
 	public void reduceFleet(Fleet fleet) {

@@ -5,6 +5,10 @@ public class RareEarth extends ARessource {
 	public RareEarth(int ressourcevalue) {
 		super(ressourcevalue);
 	}
+	
+	public RareEarth(String ressourceValue) {
+		super(ressourceValue);
+	}
 
 	@Override
 	public ARessource cloneMe(double mod) {

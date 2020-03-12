@@ -113,7 +113,7 @@ public class Planet {
 			if (shipToBuild != null) {
 				timeToBuild = shipToBuild.getTimeToBuild(spaceport.getLevel());
 				if (diff > timeToBuild) {
-					fleet.addShips(shipToBuild.cloneMe(1));
+					fleet.addShip(shipToBuild.cloneMe(1));
 					shipToBuild.reduceQuantity(1);
 					diff -= timeToBuild;
 				} else { break; }
@@ -142,15 +142,22 @@ public class Planet {
 	}
 	
 	public void testFill() {
-		this.fleet.addShips(new Falcon(this.techtree, 666));
-		this.fleet.addShips(new Cheetah(this.techtree, 33));
-		this.fleet.addShips(new Yamato(this.techtree, 1));
+		this.fleet.addShip(new Falcon(this.techtree, 666));
+		this.fleet.addShip(new Cheetah(this.techtree, 33));
+		this.fleet.addShip(new Yamato(this.techtree, 1));
 	}
 	
 	public void increaseRessources(ArrayList<ARessource> ressources) {
 		for (ARessource r: ressources) {
 			this.getRessourceByName(r.getName()).increaseValue(r.getValue());
 		}
+	}
+	
+	public boolean hasRessources(ArrayList<ARessource> ressources) {
+		for (ARessource r: ressources) {
+			if (this.getRessourceByName(r.getName()).getValue() < r.getValue()) {return false;};
+		}
+		return true;
 	}
 	
 	public void decreaseRessources(ArrayList<ARessource> ressources) {

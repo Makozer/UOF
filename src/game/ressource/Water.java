@@ -5,6 +5,10 @@ public class Water extends ARessource {
 	public Water(int ressourcevalue) {
 		super(ressourcevalue);
 	}
+	
+	public Water(String ressourceValue) {
+		super(ressourceValue);
+	}
 
 	@Override
 	public ARessource cloneMe(double mod) {

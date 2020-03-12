@@ -55,6 +55,10 @@ input, button, option {
 	background-color: #a00;
 }
 
+.intinput {
+	width:55px;
+}
+
 a {
 	text-decoration: none;
 	color: #8fa;

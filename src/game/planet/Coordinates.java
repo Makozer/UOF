@@ -13,6 +13,18 @@ public class Coordinates {
 		this.solarsystem = solarsystem;
 		this.planetnumber = planetnumber;
 	}
+	
+	public Coordinates(String galaxy, String solar, String planet) {
+		try {
+			this.galaxy = Integer.parseInt(galaxy);
+			this.solarsystem = Integer.parseInt(solar);
+			this.planetnumber = Integer.parseInt(planet);
+		} catch (NumberFormatException e) {
+			this.galaxy = 0;
+			this.solarsystem = 0;
+			this.planetnumber = 0;
+		}
+	}
 
 	public int getGalaxy() {
 		return galaxy;

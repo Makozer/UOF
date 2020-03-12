@@ -5,6 +5,10 @@ public class Iron extends ARessource {
 	public Iron(int ressourcevalue) {
 		super(ressourcevalue);
 	}
+	
+	public Iron(String ressourceValue) {
+		super(ressourceValue);
+	}
 
 	@Override
 	public ARessource cloneMe(double mod) {
