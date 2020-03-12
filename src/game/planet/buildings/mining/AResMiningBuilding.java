@@ -10,7 +10,7 @@ import static game.settings.GameSettings.*;
 
 public class AResMiningBuilding extends ABuilding {
 	
-	protected Date 			date = null;
+	
 	protected ARessource 	ressource = null;
 
 	public AResMiningBuilding(HeadQuarter hq, TechTree techtree, int level, Date date, ARessource ressource) {

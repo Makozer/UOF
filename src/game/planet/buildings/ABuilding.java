@@ -15,6 +15,7 @@ public abstract class ABuilding {
 	protected AMath						levelMod = null;
 	protected ArrayList<ARessource> 	costs = null;
 	protected String					description = "";
+	protected Date 						date = null;
 	
 	public ABuilding(HeadQuarter hq, TechTree techtree, int level) {
 		this.headQuarter = hq;
@@ -27,16 +28,17 @@ public abstract class ABuilding {
 	}
 	
 	public void levelUp(Date date) {
+		this.date = date;
 		this.level += 1;
 		// TODO Message erstellen für User
 	}
 	
 	public double getLevelModValue() {
-		return levelMod.getValue(this.level);
+		return levelMod.getValue(this.level - 1);
 	}
 	
 	public double getLevelModValue(int n) {
-		return levelMod.getValue(n);
+		return levelMod.getValue(n - 1);
 	}
 
 	public ArrayList<ARessource> getCosts() {
@@ -54,7 +56,7 @@ public abstract class ABuilding {
 	public ArrayList<ARessource> getBuildCosts() {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
 		for (ARessource r: costs) {
-			output.add(r.cloneMe(levelMod.getValue(this.level)));			
+			output.add(r.cloneMe());			
 		}
 		return costs;
 	}

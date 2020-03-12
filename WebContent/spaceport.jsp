@@ -18,19 +18,19 @@
 <table border="1">
 	<tr><th>Erforschte SpezialRaumSchiffe</th><th>Anzahl</th></tr>
 	<c:forEach var="s" items="${ player.getTechTree().getResearchedSpecialSpaceShips() }">
-		<tr><td><c:out value="${s.getName()}"/><br/><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
+		<tr><td><c:out value="${s.getName()}"/><br/>Bauzeit: <c:out value="${s.getTimeToBuildAsString(player.getActivePlanet().getSpacePort().getLevel())}"/><br />Benötigte Ressourcen:<br /><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
 	</c:forEach>
 	<tr><th>Erforschte Tier 1 Raumschiffe</th><th>Anzahl</th></tr>
 	<c:forEach var="s" items="${ player.getTechTree().getResearchedT1SpaceShips() }">
-		<tr><td><c:out value="${s.getName()}"/><br/><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
+		<tr><td><c:out value="${s.getName()}"/><br/>Bauzeit: <c:out value="${s.getTimeToBuildAsString(player.getActivePlanet().getSpacePort().getLevel())}"/><br />Benötigte Ressourcen:<br /><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
 	</c:forEach>
 	<tr><th>Erforschte Tier 2 Raumschiffe</th><th>Anzahl</th></tr>
 	<c:forEach var="s" items="${ player.getTechTree().getResearchedT2SpaceShips() }">
-		<tr><td><c:out value="${s.getName()}"/><br/><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
+		<tr><td><c:out value="${s.getName()}"/><br/>Bauzeit: <c:out value="${s.getTimeToBuildAsString(player.getActivePlanet().getSpacePort().getLevel())}"/><br />Benötigte Ressourcen:<br /><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
 	</c:forEach>
 	<tr><th>Erforschte Tier 3 Raumschiffe</th><th>Anzahl</th></tr>
 	<c:forEach var="s" items="${ player.getTechTree().getResearchedT3SpaceShips() }">
-		<tr><td><c:out value="${s.getName()}"/><br/><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
+		<tr><td><c:out value="${s.getName()}"/><br/>Bauzeit: <c:out value="${s.getTimeToBuildAsString(player.getActivePlanet().getSpacePort().getLevel())}"/><br />Benötigte Ressourcen:<br /><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
 	</c:forEach>
 	<tr><th>Baubefehl:</th><th><input type="submit" value="Bauen"></th></tr>
 </table>

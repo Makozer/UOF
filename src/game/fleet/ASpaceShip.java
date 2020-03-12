@@ -2,6 +2,7 @@ package game.fleet;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import game.*;
 import game.research.*;
@@ -141,6 +142,12 @@ public abstract class ASpaceShip extends AGameObject {
 		output -= 	(int)(this.timeToBuild / 100.0 * (spaceportlevel * 2));
 		output = 	(int)(output / GAME_SPEED);
 		return output;
+	}
+	
+	public String getTimeToBuildAsString(int spaceportlevel) {
+		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
+				+ (long)(this.getTimeToBuild(spaceportlevel) * 1000)			
+					));
 	}
 	
 	public double getModValue() {
