@@ -5,6 +5,8 @@ import java.util.*;
 import game.fleet.*;
 import game.planet.*;
 import game.ressource.ARessource;
+import game.utils.DateUtils;
+import game.utils.NumberUtils;
 
 public class GameEvent implements Comparable<GameEvent> {
 	
@@ -78,6 +80,10 @@ public class GameEvent implements Comparable<GameEvent> {
 
 	public Date getRemainingTime() {
 		return new Date(endTime.getTime() - new Date().getTime());
+	}
+	
+	public String getRemainingTimeAsString() {
+		return DateUtils.getRemainingTimeAsString(endTime);
 	}
 	
 	public Date getStartTime() {

@@ -13,53 +13,53 @@ public class BuildingSettings {
 													new RareEarth(500),
 													new Water(1000)));
 	public static final ArrayList<ARessource> 	BUILDING_STORAGE_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(10000), 
-													new RareEarth(5000),
-													new Water(10000)));
+													new Iron(3000), 
+													new RareEarth(1000),
+													new Water(2000)));
 	
 	public static final AMath					BUILDING_STORAGE_MOD = new Polynomial(1, 0, 0);
 
 	// Basic Buildings
 	public static final AMath 					HEADQUARTER_LEVELMOD = BUILDING_MOD;
 	public static final ArrayList<ARessource> 	HEADQUARTER_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(10000), 
-													new RareEarth(10000),
-													new Water(10000)));
+													new Iron(600), 
+													new RareEarth(300),
+													new Water(150)));
 	
 	public static final AMath 					UNIVERSITY_LEVELMOD = BUILDING_MOD;
 	public static final ArrayList<ARessource> 	UNIVERSITY_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(1000), 
-													new RareEarth(5000),
-													new Water(2500)));
+													new Iron(300), 
+													new RareEarth(150),
+													new Water(300)));
 	
 	public static final AMath 					SPACEPORT_LEVELMOD = BUILDING_MOD;
 	public static final ArrayList<ARessource> 	SPACEPORT_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(10000), 
-													new RareEarth(10000),
-													new Water(5000)));
+													new Iron(1500), 
+													new RareEarth(4500),
+													new Water(1000),
+													new Tritium(50)));
 	
 	
 	// Ressource Mining Buildings
 	public static final AMath 					IRONMINE_LEVELMOD = BUILDING_RES_MOD;
 	public static final ArrayList<ARessource> 	IRONMINE_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(500), 
-													new RareEarth(500),
+													new Iron(300), 
+													new RareEarth(50),
 													new Water(100)));
 	public static final AMath 					RAREEARTHMINE_LEVELMOD = BUILDING_RES_MOD;
 	public static final ArrayList<ARessource> 	RAREEARTHMINE_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(500), 
-													new RareEarth(500),
+													new Iron(150), 
+													new RareEarth(50),
 													new Water(100)));
 	public static final AMath 					FOUNTAIN_LEVELMOD = BUILDING_RES_MOD;
 	public static final ArrayList<ARessource> 	FOUNTAIN_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(500), 
-													new RareEarth(100),
-													new Water(100)));
+													new Iron(100), 
+													new RareEarth(10)));
 	public static final AMath 					TRITIUMFABRIC_LEVELMOD = BUILDING_RES_MOD;
 	public static final ArrayList<ARessource> 	TRITIUMFABRIC_COSTS = new ArrayList<ARessource>(Arrays.asList(
-													new Iron(10000), 
-													new RareEarth(10000),
-													new Water(10000)));
+													new Iron(666), 
+													new RareEarth(1500),
+													new Water(1000)));
 	
 	// Ressource Storage Buildings
 	public static final AMath 					IRONSTORAGE_LEVELMOD = BUILDING_STORAGE_MOD;

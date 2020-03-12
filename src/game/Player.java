@@ -69,6 +69,64 @@ public class Player {
 	
 	public void update() {
 		for (Planet planet: this.getPlanets()) { planet.update();}
+		updateEvents();
+	}
+	
+	public boolean updateEvents() {
+		Date now = new Date();
+		Iterator<GameEvent> i = events.iterator();
+		while (i.hasNext()) {
+			GameEvent event = i.next();					
+			if (event.getEndTime().getTime() < now.getTime()) {
+				switch (event.getType()) {
+				case ATTACK:
+					calculateAttack(event, i);
+					break;
+				case DEFEND:
+					calculateDefend(event, i);
+					break;
+				case TRANSPORT:
+					calculateTransport(event, i);
+					break;
+				case BUILD:
+					calculateBuild(event, i);
+					break;
+				default:
+					throw new IllegalArgumentException("Wrong Event in your List");				
+				}
+			}
+		}
+		return true;
+	}
+	
+	public void calculateAttack(GameEvent event, Iterator<GameEvent> i) {
+		
+	}
+	
+	public void calculateDefend(GameEvent event, Iterator<GameEvent> i) {
+		
+	}
+	
+	public void calculateTransport(GameEvent event, Iterator<GameEvent> i) {
+		Planet planet = this.getPlanetByCoordinates(event.getTarget());
+		if (planet != null) {
+			planet.getFleet().addFleet(event.getFleet());
+			planet.increaseRessources(event.getRessource());
+			this.getEvents().remove(event);
+			// TODO DATABASE INFORM
+		} else {
+			// TODO calculate with Database from other players planet!!!
+		}
+	}
+
+	public void calculateBuild(GameEvent event, Iterator<GameEvent> i) {
+		Planet planet = this.getPlanetByCoordinates(event.getCoordinates());
+		if (planet == null) {return;}
+		ABuilding building = planet.getBuildingByName(event.getBuildingName());
+		building.levelUp(event.getEndTime());
+		planet.setIsBuilding("");
+		i.remove();
+		// TODO DATABASE inform!
 	}
 	
 	public void init() {
@@ -179,7 +237,8 @@ public class Player {
 		if (!this.decreaseRess(planet, buildCosts)) { return false; }
 		
 		// Creating GameEvent
-		GameEvent event = new GameEvent(GameEvent.Type.BUILD, planetcoords, buildingName, buildCosts, new Date(), building.getBuildTime());
+		Date endTime = new Date(new Date().getTime() + (long)(building.getTimeToBuild() * 1000));
+		GameEvent event = new GameEvent(GameEvent.Type.BUILD, planetcoords, buildingName, buildCosts, new Date(), endTime);
 		this.addEvent(event);
 		planet.setIsBuilding(buildingName);
 		

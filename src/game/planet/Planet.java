@@ -55,26 +55,26 @@ public class Planet {
 		ressources.put(tritium.getName(), tritium);
 		// Buildings
 		HeadQuarter headQuarter = new HeadQuarter(techtree, headQuarterLvl);
-		University university = new University(techtree, universityLvl);
-		SpacePort spacePort = new SpacePort(techtree, spacePortLvl);
+		University university = new University(headQuarter, techtree, universityLvl);
+		SpacePort spacePort = new SpacePort(headQuarter, techtree, spacePortLvl);
 		buildings.put(headQuarter.getName(), headQuarter);
 		buildings.put(university.getName(), university);
 		buildings.put(spacePort.getName(), spacePort);
 		
 		// Res Mining Buildings
-		IronMine ironMine = new IronMine(techtree, ironMineLvl, date, this.getIron());
-		RareEarthMine rareEarthMine = new RareEarthMine(techtree, rareEarthMineLvl, date, this.getRareEarth());
-		Fountain fountain = new Fountain(techtree, fountainLvl, date, this.getWater());
-		TritiumFabric tritiumFabric = new TritiumFabric(techtree, tritiumFabricLvl, date, this.getTritium());
+		IronMine ironMine = new IronMine(headQuarter, techtree, ironMineLvl, date, this.getIron());
+		RareEarthMine rareEarthMine = new RareEarthMine(headQuarter, techtree, rareEarthMineLvl, date, this.getRareEarth());
+		Fountain fountain = new Fountain(headQuarter, techtree, fountainLvl, date, this.getWater());
+		TritiumFabric tritiumFabric = new TritiumFabric(headQuarter, techtree, tritiumFabricLvl, date, this.getTritium());
 		buildings.put(ironMine.getName(), ironMine);
 		buildings.put(rareEarthMine.getName(), rareEarthMine);
 		buildings.put(fountain.getName(), fountain);
 		buildings.put(tritiumFabric.getName(), tritiumFabric);
 		// Res Storage Buildings
-		IronStorage ironStorage 		= new IronStorage(techtree, ironStorageLvl);
-		RareEarthStorage rareEarthStorage 	= new RareEarthStorage(techtree, rareEarthStorageLvl);
-		WaterStorage waterStorage		= new WaterStorage(techtree, waterStorageLvl);
-		TritiumStorage tritiumStorage 	= new TritiumStorage(techtree, tritiumStorageLvl);
+		IronStorage ironStorage 		= new IronStorage(headQuarter, techtree, ironStorageLvl);
+		RareEarthStorage rareEarthStorage 	= new RareEarthStorage(headQuarter, techtree, rareEarthStorageLvl);
+		WaterStorage waterStorage		= new WaterStorage(headQuarter, techtree, waterStorageLvl);
+		TritiumStorage tritiumStorage 	= new TritiumStorage(headQuarter, techtree, tritiumStorageLvl);
 		buildings.put(ironStorage.getName(), ironStorage);
 		buildings.put(rareEarthStorage.getName(), rareEarthStorage);
 		buildings.put(waterStorage.getName(), waterStorage);

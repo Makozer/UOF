@@ -3,10 +3,12 @@ package game.planet.buildings.storage;
 import game.research.TechTree;
 import static game.settings.BuildingSettings.*;
 
+import game.planet.buildings.HeadQuarter;
+
 public class TritiumStorage extends AResStorageBuilding {
 
-	public TritiumStorage(TechTree techtree, int level) {
-		super(techtree, level);
+	public TritiumStorage(HeadQuarter hq, TechTree techtree, int level) {
+		super(hq, techtree, level);
 		this.levelMod = TRITIUMSTORAGE_LEVELMOD;
 		this.costs = TRITIUMSTORAGE_COSTS;
 		this.description = TRITIUMSTORAGE_DESCRIPTION;

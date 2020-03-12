@@ -1,13 +1,14 @@
 package game.planet.buildings.storage;
 
 import game.planet.buildings.ABuilding;
+import game.planet.buildings.HeadQuarter;
 import game.research.*;
 import game.utils.NumberUtils;
 
 public abstract class AResStorageBuilding extends ABuilding {
 	
-	public AResStorageBuilding(TechTree techtree, int level) {
-		super(techtree, level);
+	public AResStorageBuilding(HeadQuarter hq, TechTree techtree, int level) {
+		super(hq, techtree, level);
 	}
 	
 	public int getMaxCapacity() {

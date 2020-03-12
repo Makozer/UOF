@@ -3,6 +3,7 @@ package game.planet.buildings.mining;
 import java.util.*;
 import game.ressource.*;
 import game.planet.buildings.ABuilding;
+import game.planet.buildings.HeadQuarter;
 import game.research.*;
 import game.utils.*;
 import static game.settings.GameSettings.*;
@@ -12,8 +13,8 @@ public class AResMiningBuilding extends ABuilding {
 	protected Date 			date = null;
 	protected ARessource 	ressource = null;
 
-	public AResMiningBuilding(TechTree techtree, int level, Date date, ARessource ressource) {
-		super(techtree, level);
+	public AResMiningBuilding(HeadQuarter hq, TechTree techtree, int level, Date date, ARessource ressource) {
+		super(hq, techtree, level);
 		this.date = date;
 		this.ressource = ressource;
 	}

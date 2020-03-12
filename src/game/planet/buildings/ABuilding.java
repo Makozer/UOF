@@ -5,16 +5,19 @@ import java.util.*;
 import game.research.*;
 import game.ressource.ARessource;
 import game.utils.*;
+import static game.settings.GameSettings.*;
 
 public abstract class ABuilding {
 	
 	protected TechTree 					techtree = null;
+	protected HeadQuarter				headQuarter = null;
 	protected int						level = 0;
 	protected AMath						levelMod = null;
 	protected ArrayList<ARessource> 	costs = null;
 	protected String					description = "";
 	
-	public ABuilding(TechTree techtree, int level) {
+	public ABuilding(HeadQuarter hq, TechTree techtree, int level) {
+		this.headQuarter = hq;
 		this.techtree = techtree;
 		this.level = level;
 	}	
@@ -40,6 +43,14 @@ public abstract class ABuilding {
 		return costs;
 	}	
 	
+	public HeadQuarter getHeadQuarter() {
+		return headQuarter;
+	}
+
+	public void setHeadQuarter(HeadQuarter headQuarter) {
+		this.headQuarter = headQuarter;
+	}
+
 	public ArrayList<ARessource> getBuildCosts() {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
 		for (ARessource r: costs) {
@@ -48,9 +59,21 @@ public abstract class ABuilding {
 		return costs;
 	}
 	
-	public Date getBuildTime() {
-		// TODO !!!!
-		return DateUtils.getFutureDateByHours(2);
+	/** Returns the time needed to build this building
+	 * @return int time to build in seconds
+	 */
+	public int getTimeToBuild() {
+		int combRessCost = 0;
+		for (ARessource r: this.getBuildCosts()) {
+			combRessCost += r.getValue();
+		}
+		return (int)(((combRessCost * 6.6) / 100.0 * (100.0 - this.getHeadQuarter().getLevelModValue())) / GAME_SPEED);
+	}
+	
+	public String getTimeToBuildAsString() {
+		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
+			+ (long)(this.getTimeToBuild() * 1000)			
+				));
 	}
 	
 	public String testLevelMod() {

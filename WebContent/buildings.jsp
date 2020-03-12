@@ -25,13 +25,14 @@
 		<c:choose>
     		<c:when test="${player.getActivePlanet().isBuildingName() == b.getName()}">
         		Dieses Gebäude wird gerade erweitert! <br />
-        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTime()}"/> <br />
+        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTimeAsString()}"/> <br />
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau abbrechen</button>
    			 </c:when>
    			 <c:when test="${player.getActivePlanet().isBuilding()}">
         		Ein anderes Gebäude ist in Bau!
    			 </c:when>    
     		<c:otherwise>
+    			<p>Bauzeit: ${b.getTimeToBuildAsString()}</p>
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau beginnen</button>
     		</c:otherwise>
 		</c:choose>
@@ -57,13 +58,14 @@
 		<c:choose>
     		<c:when test="${player.getActivePlanet().isBuildingName() == b.getName()}">
         		Dieses Gebäude wird gerade erweitert! <br />
-        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTime()}"/> <br />
+        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTimeAsString()}"/> <br />
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau abbrechen</button>
    			 </c:when>
    			 <c:when test="${player.getActivePlanet().isBuilding()}">
         		Ein anderes Gebäude ist in Bau!
    			 </c:when>    
     		<c:otherwise>
+    			<p>Bauzeit: ${b.getTimeToBuildAsString()}</p>
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau beginnen</button>
     		</c:otherwise>
 		</c:choose>
@@ -89,13 +91,14 @@
 		<c:choose>
     		<c:when test="${player.getActivePlanet().isBuildingName() == b.getName()}">
         		Dieses Gebäude wird gerade erweitert! <br />
-        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTime()}"/> <br />
+        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTimeAsString()}"/> <br />
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau abbrechen</button>
    			 </c:when>
    			 <c:when test="${player.getActivePlanet().isBuilding()}">
         		Ein anderes Gebäude ist in Bau!
    			 </c:when>    
     		<c:otherwise>
+    			<p>Bauzeit: ${b.getTimeToBuildAsString()}</p>
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau beginnen</button>
     		</c:otherwise>
 		</c:choose>
@@ -121,13 +124,14 @@
 		<c:choose>
     		<c:when test="${player.getActivePlanet().isBuildingName() == b.getName()}">
         		Dieses Gebäude wird gerade erweitert! <br />
-        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTime()}"/> <br />
+        		Verbleibende Zeit: <c:out value="${player.getBuildEventByCoords(player.getActivePlanet().getCoords()).getRemainingTimeAsString()}"/> <br />
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau abbrechen</button>
    			 </c:when>
    			 <c:when test="${player.getActivePlanet().isBuilding()}">
         		Ein anderes Gebäude ist in Bau!
    			 </c:when>    
     		<c:otherwise>
+    			<p>Bauzeit: ${b.getTimeToBuildAsString()}</p>
         		<button type="submit" name="building" value="<c:out value="${b.getName()}"/>">Bau beginnen</button>
     		</c:otherwise>
 		</c:choose>

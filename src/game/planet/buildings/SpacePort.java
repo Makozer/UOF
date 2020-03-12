@@ -12,8 +12,8 @@ public class SpacePort extends ABuilding {
 	ArrayList<ASpaceShip> buildQueue = new ArrayList<ASpaceShip>();
 	Date timestamp = new Date();
 
-	public SpacePort(TechTree techtree, int level) {
-		super(techtree, level);
+	public SpacePort(HeadQuarter hq, TechTree techtree, int level) {
+		super(hq, techtree, level);
 		this.levelMod = SPACEPORT_LEVELMOD;
 		this.costs = SPACEPORT_COSTS;
 		this.description = SPACEPORT_DESCRIPTION;
