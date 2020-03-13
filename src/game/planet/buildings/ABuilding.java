@@ -30,7 +30,6 @@ public abstract class ABuilding {
 	public void levelUp(Date date) {
 		this.date = date;
 		this.level += 1;
-		// TODO Message erstellen für User
 	}
 	
 	public double getLevelModValue() {
@@ -56,9 +55,9 @@ public abstract class ABuilding {
 	public ArrayList<ARessource> getBuildCosts() {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
 		for (ARessource r: costs) {
-			output.add(r.cloneMe());			
+			output.add(r.cloneMe(1 + this.getLevelModValue()));			
 		}
-		return costs;
+		return output;
 	}
 	
 	/** Returns the time needed to build this building

@@ -125,6 +125,8 @@ public class Player {
 		ABuilding building = planet.getBuildingByName(event.getBuildingName());
 		building.levelUp(event.getEndTime());
 		planet.setIsBuilding("");
+		GameMessage message = new GameMessage(planet.getCoords().asCoords() + " Your " + building.getName() + "(new Level: " + building.getLevel() + ") has finished upgrading!", "Bla bla bla Mr. Freeman.");
+		this.addMessage(message);
 		i.remove();
 		// TODO DATABASE inform!
 	}
@@ -207,11 +209,6 @@ public class Player {
 	
 	
 	public boolean doAttack(Coordinates planetcoords, Coordinates target, Fleet fleet) {
-		// TODO
-		// Zeit Berechnung!
-		// Verbrauch für KraftStoff Berechnung!
-		// Create Game Event
-		//
 		return false;
 	}
 	
@@ -260,7 +257,7 @@ public class Player {
 		this.removeEvent(event);
 		planet.setIsBuilding("");
 		
-		// TODO DataBase Connection -> eintragen		
+		// TODO DataBase Connection -> delete that event	
 		return true;
 	}
 	

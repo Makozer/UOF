@@ -5,12 +5,14 @@ import java.util.*;
 
 public class Message implements Comparable<Message> {
 
-	protected int msgId = 0;
-	protected int fromId = 0;
-	protected int toId = 0;
-	protected String title = "";
-	protected String message = "";
-	protected Date timestamp = null;
+	protected int 		msgId = 0;
+	protected int 		fromId = 0;
+	protected String 	fromName = ""; 
+	protected int 		toId = 0;
+	protected String 	toName = "";
+	protected String 	title = "";
+	protected String 	message = "";
+	protected Date 		timestamp = null;
 	
 	public Message(String title, String message) {
 		this.title = title;
@@ -34,8 +36,7 @@ public class Message implements Comparable<Message> {
 	}
 	
 	public String getFromName() {
-		// TODO : Database abfrage
-		return "Jon Doe";
+		return fromName;
 	}
 
 	public int getToId() {

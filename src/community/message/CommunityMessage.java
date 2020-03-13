@@ -6,7 +6,7 @@ public class CommunityMessage extends Message {
 
 	public CommunityMessage(int fromId, int toId, String title, String message, Date timestamp) {
 		super(fromId, toId, title, message, timestamp);
-		// TODO get msgId from Database
+		// TODO get msgId and names from Database
 	}
 
 }

@@ -68,7 +68,11 @@ public class FleetServlet extends HttpServlet {
 		
 		// Creating the target
         target = new Coordinates(targetgalaxy, targetsolarsystem, targetplanet);
+        // Escaping if the Planet doesnt exist or if its the same planet where the ships start
         if (target.getGalaxy() == 0 || target.getPlanetNumber() == 0 || target.getSolarSystem() == 0) {return;}
+        if (		planet.getCoords().getGalaxy() 			== target.getGalaxy() 
+        		&& 	planet.getCoords().getSolarSystem() 	== target.getSolarSystem() 
+        		&& 	planet.getCoords().getPlanetNumber() 	== target.getPlanetNumber()) { return; }
         
         // Getting the type 
         if (!type.equals("ATTACK") && !type.equals("TRANSPORT")) { return; }
@@ -105,18 +109,23 @@ public class FleetServlet extends HttpServlet {
         } 
         
         // Checking if Planet has enough Tritium
-        // TODO Tritium check & calculation of ressources
+        Tritium requiredFuel = TravelCalc.calculateCosts(planet.getCoords(), target, newFleet);
+        ArrayList<ARessource> requiredRessources = new ArrayList<ARessource>();
+        requiredRessources.add(requiredFuel);
+        if (!planet.hasRessources(requiredRessources)) { return; }
+        
+        // Reducing Tritium on starting planet
+        planet.decreaseRessources(requiredRessources);
         
         // Reducing Ships on Planet
         planet.getFleet().reduceFleet(newFleet);
         System.out.println(newFleet.toString());
         
-        // Calculating the Time to trave
-        // TODO calculate Time
+        // Calculating the Time to travel
+        Date arrivalTime = TravelCalc.calculateTime(planet.getCoords(), target, newFleet.getSpeed());
         
-        // Comment: actually the Fleet flys for free and needs always 3 hours traveltime
         // Adding the Event
-        GameEvent event = new GameEvent(GameEvent.Type.valueOf(type), planet.getCoords(), target, newFleet, ressources, new Date(), new Date(new Date().getTime() + (3 * 3600 * 1000)));
+        GameEvent event = new GameEvent(GameEvent.Type.valueOf(type), planet.getCoords(), target, newFleet, ressources, new Date(), arrivalTime);
         player.addEvent(event);
         
         // Redirect
