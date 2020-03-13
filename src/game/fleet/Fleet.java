@@ -12,6 +12,7 @@ import game.research.*;
 public class Fleet implements Iterable<ASpaceShip> {
 	
 	protected ArrayList<ASpaceShip> fleet = new ArrayList<ASpaceShip>();
+	protected int 					playerId = 0;
 
 	public static void main(String[] args) {
 		
@@ -155,6 +156,26 @@ public class Fleet implements Iterable<ASpaceShip> {
 				}
 			}
 		}
+	}
+	
+	public void reduceFleetByPct(double pct) {
+		for (ASpaceShip ship: fleet) {
+			ship.reduceQuantity(
+					(int)(ship.getQuantity() / 100.0 * pct)
+					);
+		}
+	}
+	
+	public long getCombatPower() {
+		return this.getAttack() + this.getDefense();
+	}
+
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
 	}
 
 	@Override

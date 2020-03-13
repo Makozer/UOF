@@ -86,7 +86,7 @@ public abstract class ASpaceShip extends AGameObject {
 	
 	public void reduceQuantity(int quantity) {
 		if (this.quantity - quantity < 0) {
-			throw new IllegalArgumentException("ASpaceShip.reduceQuantity(" + quantity + ") is not possible!");
+			this.quantity = 1;
 		}
 		this.quantity -= quantity;		
 	}
