@@ -12,7 +12,8 @@
 <table border="1">
 <tr><th>Empfänger</th><td><input type="text" name="toPlayer" /></td></tr>
 <tr><th>Titel der Nachricht</th><th><input type="text" name="title" /></th></tr>
-<tr><td><textarea name="message" cols="66" rows="6"></textarea></td></tr>
+<tr><td colspan="2"><textarea name="message" cols="66" rows="12"></textarea></td></tr>
+<tr><td colspan="2"><input type="submit" /></textarea></td></tr>
 </table>
 
 </form>
