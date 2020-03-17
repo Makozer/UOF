@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import database.DBPeon;
 import game.player.Player;
 import game.utils.NumberUtils;
 
@@ -49,6 +50,7 @@ public class NewMessageServlet extends HttpServlet {
 		int 					toPlayerId = NumberUtils.stringAsInt(toPlayer);
 		
 		// TODO Database connection create Message
+		DBPeon.createNewMessage(player.getPersData().getId(), toPlayerId, title, message);
 		
 		response.sendRedirect(request.getContextPath() + "/messages.jsp");
 
