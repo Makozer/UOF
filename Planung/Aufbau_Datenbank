@@ -1,0 +1,41 @@
+table techtree
+foreign key int playerId
+String research(200)
+
+
+table player
+primkey autoincrease int playerId
+String email
+String displayname
+String prename
+String surname
+(int/date) birthday
+(int/date) created
+(int/date) lastLogin
+
+
+table planets
+primkey combine int galaxy, int solarsystem, int planetnumber
+String name
+String ressources
+String buildins
+String fleet
+
+
+table events
+String type
+coordinates combine int galaxy, int solarsystem, int planetnumber
+target combine int galaxy, int solarsystem, int planetnumber
+String building
+String fleet
+String ressources
+(int/date) starttime
+(int/date) endtime
+
+
+table messages
+int fromPlayerId
+int toPlayerId
+String title
+String message
+(int/date) timestamp
