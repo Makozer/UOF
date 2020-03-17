@@ -49,6 +49,8 @@ public class NewMessageServlet extends HttpServlet {
 		int 					toPlayerId = NumberUtils.stringAsInt(toPlayer);
 		
 		// TODO Database connection create Message
+		
+		response.sendRedirect(request.getContextPath() + "/messages.jsp");
 
 	}
 
