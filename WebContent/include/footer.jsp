@@ -5,7 +5,7 @@
 		</td>
 	</tr>
 	<tr
-		<td colspan="3" style="padding:33px;">&copy;2020 Makozer & Cedric | Impressum | Datenschutzerklärung | Kontakt  | Über Uns</td>
+		<td colspan="3" style="padding:33px;">&copy;2020 Makozer & Cedric | Impressum | Datenschutzerklärung | Kontakt | Über Uns</td>
 	</tr>
 </table>
 </body>
