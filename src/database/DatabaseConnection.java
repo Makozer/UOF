@@ -7,10 +7,10 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 	
 	protected static Connection con;
-	private static final String DB_SERVER = DataBaseSettings.SERVERIP;
-	private static final String DB_NAME = DataBaseSettings.DATABASE;
-	private static final String DB_USER = DataBaseSettings.USER;
-	private static final String DB_PASSWORD = DataBaseSettings.PASSWORD;
+	private static final String DB_SERVER = 	DataBaseSettings.SERVERIP;
+	private static final String DB_NAME = 		DataBaseSettings.DATABASE;
+	private static final String DB_USER = 		DataBaseSettings.USER;
+	private static final String DB_PASSWORD = 	DataBaseSettings.PASSWORD;
 	private static final String DB_DRIVER = "org.postgresql.Driver";
 	private static final String DB_URL = "jdbc:postgresql://" + DB_SERVER + "/" + DB_NAME;
 

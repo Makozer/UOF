@@ -6,6 +6,8 @@
 
 <jsp:include page="./include/header.jsp" />
 <form action="./MessageServlet" method="post">
+<br /><br />
+<a href="newmessage.jsp">Neue Nachricht erstellen</a><br /><br />
 <table border="1">
 <tr><th>Zeitpunkt</th><th>Von</th><th>Titel</th><th>Löschen</th></tr>
 <c:forEach var="msg" items="${ player.getMessages() }">
