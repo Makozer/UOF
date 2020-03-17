@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import game.*;
 import game.fleet.*;
 import game.planet.*;
+import game.player.Player;
 import game.research.*;
 import game.ressource.*;
 import game.utils.NumberUtils;

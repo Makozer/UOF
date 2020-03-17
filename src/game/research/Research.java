@@ -4,7 +4,7 @@ import java.util.*;
 import game.ressource.ARessource;
 import game.utils.*;
 
-public abstract class AResearch {	
+public class Research {	
 	
 	public enum ResearchEnum {		
 		ATTACK,
@@ -18,7 +18,7 @@ public abstract class AResearch {
 	protected AMath 				modification = null;
 	protected ArrayList<ARessource> costs = null;
 	
-	public AResearch(TechTree techtree, ResearchEnum type) {
+	public Research(TechTree techtree, ResearchEnum type) {
 		this.techtree = techtree;
 	}	
 	

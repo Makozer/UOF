@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import game.*;
+import game.player.Player;
 
 /**
  * Servlet implementation class BuildingServlet

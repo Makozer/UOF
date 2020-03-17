@@ -19,9 +19,9 @@ public class Fleet implements Iterable<ASpaceShip> {
 		// TechTree initialisieren, wird fürs Schiff benötigt
 		TechTree techtree = new TechTree();
 		techtree.setLevel("LaserPointer", 11);
-		AResearch lp = new LaserPointer(techtree);
+		Research lp = new LaserPointer(techtree);
 		System.out.println(lp.toString());
-		techtree.addAttackResearch(lp);
+		techtree.addResearch(lp);
 		
 		
 		Fleet fleet = new Fleet();

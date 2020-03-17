@@ -1,9 +1,12 @@
 package game.research;
 
 import java.util.*;
+import java.util.regex.*;
 import game.fleet.*;
 import game.fleet.tier1.Falcon;
+import game.research.Research.ResearchEnum;
 import game.settings.*;
+import game.utils.NumberUtils;
 
 /** This class saves and represents the Players TechTree.
  * @author Martin
@@ -11,14 +14,14 @@ import game.settings.*;
  */
 public class TechTree {
 	
-	private ArrayList<AResearch> attackMod = new ArrayList<AResearch>();
-	private ArrayList<AResearch> defenseMod = new ArrayList<AResearch>();	
-	private ArrayList<AResearch> speedMod = new ArrayList<AResearch>();
-	private ArrayList<AResearch> capacityMod = new ArrayList<AResearch>();
+	private ArrayList<Research> 		research 	= new ArrayList<Research>();
+	private HashMap<String, Integer> 	levels 		= new HashMap<String, Integer>();
 	
-	private HashMap<String, Integer> levels = new HashMap<String, Integer>();
+	public TechTree() {}
 	
-	
+	public TechTree(String sql) {
+		this.sqlLoad(sql);
+	}
 
 	public static void main(String[] args) {
 		TechTree techtree = new TechTree();
@@ -75,10 +78,7 @@ public class TechTree {
 	}
 	
 	public void testFill() {
-		this.addAttackResearch(new LaserPointer(this));
-		this.addDefenseResearch(new LaserPointer(this));
-		this.addSpeedResearch(new LaserPointer(this));
-		this.addCapacityResearch(new LaserPointer(this));
+		this.addResearch(new LaserPointer(this));
 		this.setLevel("LaserPointer", 11);
 		// SpaceShips
 		this.setLevel("SpyDrone", 11);
@@ -87,67 +87,39 @@ public class TechTree {
 		this.setLevel("Yamato", 11);
 	}
 	
-	public void addResearch(AResearch research) {
-		switch (research.getType()) {
-		case ATTACK:
-			this.addAttackResearch(research);
-			break;
-		case DEFEND:
-			this.addDefenseResearch(research);
-			break;
-		case CAPACITY:
-			this.addCapacityResearch(research);
-			break;
-		case SPEED:
-			this.addCapacityResearch(research);
-			break;
-		}
-	}
-	
-	public void addAttackResearch(AResearch research) {
-		attackMod.add(research);
+	public void addResearch(Research research) {
+		this.research.add(research);
 	}
 	
 	public double getAttack() {
 		double output = 0;
-		for (AResearch r: attackMod) {
-			output += r.getModValue();
+		for (Research r: research) {
+			if (r.getType() == ResearchEnum.ATTACK) {output += r.getModValue();}
 		}
 		return output;
-	}
-
-	public void addDefenseResearch(AResearch research) {
-		defenseMod.add(research);
 	}
 	
 	public double getDefense() {
 		double output = 0;
-		for (AResearch r: defenseMod) {
-			output += r.getModValue();
+		for (Research r: research) {
+			if (r.getType() == ResearchEnum.DEFEND) {output += r.getModValue();}
 		}
 		return output;
-	}
-	
-	public void addSpeedResearch(AResearch research) {
-		speedMod.add(research);
 	}
 	
 	public double getSpeed() {
 		double output = 0;
-		for (AResearch r: speedMod) {
-			output += r.getModValue();
+		for (Research r: research) {
+			if (r.getType() == ResearchEnum.SPEED) {output += r.getModValue();}
 		}
 		return output;
 	}
 	
-	public void addCapacityResearch(AResearch research) {
-		capacityMod.add(research);
-	}
 	
 	public double getCapacity() {
 		double output = 0;
-		for (AResearch r: capacityMod) {
-			output += r.getModValue();
+		for (Research r: research) {
+			if (r.getType() == ResearchEnum.CAPACITY) {output += r.getModValue();}
 		}
 		return output;
 	}
@@ -211,6 +183,27 @@ public class TechTree {
 		output.addAll(getResearchedT2SpaceShips());
 		output.addAll(getResearchedT3SpaceShips());
 		return output;
+	}
+	
+	private void sqlLoad(String sql) {
+		String[] levels = sql.split( Pattern.quote( "." ) );
+		String[] techKeyValue = null;
+		for (String tech: levels) {
+			techKeyValue = tech.split( Pattern.quote( "=" ) );
+			this.setLevel(techKeyValue[0], NumberUtils.stringAsInt(techKeyValue[1]));
+		}
+	}
+	
+	public String asSQLString() {
+		String output = "";
+		levels.entrySet().forEach((entry) ->
+			createSQLString(output, entry.getKey(), entry.getValue())
+				);
+		return output;
+	}
+	
+	private final void createSQLString(String string, String key, Integer value) {
+		string += key + "=" + value + ";";
 	}
 		
 }

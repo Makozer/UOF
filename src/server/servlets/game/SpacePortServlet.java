@@ -11,6 +11,7 @@ import game.*;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.SpacePort;
+import game.player.Player;
 import game.research.*;
 import game.ressource.ARessource;
 import game.utils.NumberUtils;

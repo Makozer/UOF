@@ -11,14 +11,14 @@
 
 <table border="1">
 <tr><th>Daten über den Spieler</th></tr>
-<tr><td>Spieler ID:</td><td>${ player.getId() }</td></tr>
-<tr><td>Spieler inGame Nick:</td><td> ${ player.getDisplayName() }</td></tr>
-<tr><td>Spieler EMail:</td><td>  ${ player.getEmail() }</td></tr>
-<tr><td>Spieler Vorname:</td><td>  ${ player.getPreName() }</td></tr>
-<tr><td>Spieler Nachname: </td><td> ${ player.getSurName() }</td></tr>
-<tr><td>Spieler RegistrierungsDatum:</td><td>  ${ player.getCreated() }</td></tr>
-<tr><td>Spieler Last Login:</td><td>  ${ player.getLastLogin() }</td></tr>
-<tr><td>&nbsp;</td></tr>
+<tr><td>Spieler ID:</td><td>${ player.getPersData().getId() }</td></tr>
+<tr><td>Spieler inGame Nick:</td><td> ${ player.getPersData().getDisplayName() }</td></tr>
+<tr><td>Spieler EMail:</td><td>  ${ player.getPersData().getEmail() }</td></tr>
+<tr><td>Spieler Vorname:</td><td>  ${ player.getPersData().getPreName() }</td></tr>
+<tr><td>Spieler Nachname: </td><td> ${ player.getPersData().getSurName() }</td></tr>
+<tr><td>Spieler RegistrierungsDatum:</td><td>  ${ player.getPersData().getCreated() }</td></tr>
+<tr><td>Spieler Last Login:</td><td>  ${ player.getPersData().getLastLogin() }</td></tr>
+<tr><td colspan="2">&nbsp;</td></tr>
 <tr><th>Daten über den Planeten</th></tr>
 <tr><td>Spieler Planetenanzahl: </td><td>${ player.getPlanets().size() } </td></tr>
 <tr><td>Planet 1 Name:</td><td> ${ player.getPlanet(0).getName() } </td></tr>

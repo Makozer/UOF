@@ -1,8 +1,10 @@
-package game;
+package game.player;
 
 import java.util.*;
 
 import community.message.*;
+import game.GameEvent;
+import game.GameEvent.Type;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.*;
@@ -13,18 +15,8 @@ import game.utils.*;
 
 public class Player {
 	
-	private int 	id = 0;
-	private String 	email = "";
-	
-	private String 	displayName = "";
-	private String 	preName = "";
-	private String 	surName = "";
-	private Date	birthday = null;
-	
-	private Date 	created = 	null;
-	private Date 	lastLogin = null;	
-	
-	private TechTree techtree = null;
+	private PersonalData 				persData = null;	
+	private TechTree 					techtree = null;
 	
 	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
 	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
@@ -35,15 +27,8 @@ public class Player {
 	
 	public Player() {}
 
-	public Player(int id, String email, String displayName, String preName, String surName, Date lastLogin,
-			Date created, TechTree techtree) {
-		this.id = id;
-		this.email = email;
-		this.displayName = displayName;
-		this.preName = preName;
-		this.surName = surName;
-		this.lastLogin = lastLogin;
-		this.created = created;
+	public Player(PersonalData data, TechTree techtree) {
+		this.persData = data;
 		this.techtree = techtree;
 	}
 
@@ -136,13 +121,9 @@ public class Player {
 	}
 	
 	public void testFill() {
-		this.id = 1337;
-		this.email = "mk113@web.de";
-		this.displayName = "Makozer";
-		this.preName = "Martin";
-		this.surName = "K";
-		this.created = new Date(2011);
-		this.lastLogin = new Date();
+		
+		PersonalData data = new PersonalData(1337, "mk113@web.de", "Makozer", "Martin", "K", DateUtils.getDate(1989, 3, 11), DateUtils.getDate(2020, 2, 24), new Date());
+		this.setPersData(data);
 		
 		TechTree techtree = new TechTree();
 		techtree.testFill();
@@ -366,12 +347,7 @@ public class Player {
 	}
 	
 	public ArrayList<GameEvent> getEventsSorted() {
-		events.sort(
-				new Comparator<GameEvent>() {
-					public int compare(GameEvent first, GameEvent second) {
-						return first.compareTo(second);
-					}
-				});
+		sortEvents();
 		return events;
 	}
 	
@@ -382,50 +358,14 @@ public class Player {
 						return first.compareTo(second);
 					}
 				});
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
-
-	public String getPreName() {
-		return preName;
-	}
-
-	public void setPreName(String preName) {
-		this.preName = preName;
-	}
-
-	public String getSurName() {
-		return surName;
 	}	
 
-	public Date getBirthday() {
-		return birthday;
+	public PersonalData getPersData() {
+		return persData;
 	}
 
-	public void setSurName(String surName) {
-		this.surName = surName;
+	public void setPersData(PersonalData persData) {
+		this.persData = persData;
 	}
 
 	public TechTree getTechTree() {
@@ -434,14 +374,6 @@ public class Player {
 
 	public void setTechtree(TechTree techtree) {
 		this.techtree = techtree;
-	}
-
-	public Date getLastLogin() {
-		return lastLogin;
-	}
-
-	public Date getCreated() {
-		return created;
 	}
 
 	public Planet getActivePlanet() {
@@ -494,6 +426,9 @@ public class Player {
 		this.hasNewMessage = hasNewMessage;
 	}
 	
+	public String getDisplayName() {
+		return this.persData.getDisplayName();
+	}
 	
 	
 }

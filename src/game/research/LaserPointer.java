@@ -2,7 +2,7 @@ package game.research;
 
 import static game.settings.ResearchSettings.*;
 
-public class LaserPointer extends AResearch {
+public class LaserPointer extends Research {
 
 	public LaserPointer(TechTree techtree) {
 		super(techtree, ResearchEnum.ATTACK);
