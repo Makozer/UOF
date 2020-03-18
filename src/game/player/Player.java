@@ -3,6 +3,7 @@ package game.player;
 import java.util.*;
 
 import community.message.*;
+import database.DBPeon;
 import game.GameEvent;
 import game.GameEvent.Type;
 import game.fleet.*;

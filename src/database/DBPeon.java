@@ -8,8 +8,10 @@ import java.sql.ResultSet;
 
 import game.player.PersonalData;
 import game.utils.ResultToTable;
+import game.player.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.sql.Date;
@@ -38,7 +40,7 @@ public class DBPeon {
 		
 		
 	}
-	public static String getMessages(PersonalData personaldata) {
+	public static ArrayList<Message> getMessages(PersonalData personaldata, Player player) {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
@@ -47,9 +49,10 @@ public class DBPeon {
 					+ "WHERE touserid = " 
 					+ personaldata.getId());
 			ResultSet rs = pstmt.executeQuery();
-			return ResultToTable.convert(rs); 
+			return ResultToTable.convertMessages(rs, player); 
 		} catch (SQLException e) {
-			return e.getMessage();
+			//return e.getMessage();
+			return null;
 		}
 	}
 	
@@ -70,7 +73,7 @@ public class DBPeon {
 				pstmt.setInt(2, message.getFromId());
 				pstmt.setString(3, message.getTitle());
 				pstmt.setString(4, message.getMessage());
-				pstmt.setTimestamp(5,new Timestamp(0), Calendar.getInstance(
+				pstmt.setTimestamp(5,new Timestamp(new java.util.Date().getTime()), Calendar.getInstance(
 					    TimeZone.getTimeZone("UTC")));
 
 			System.out.println("[DEBUG] SQL-Statement Benutzer aktualisieren: " + pstmt.toString());	
@@ -160,7 +163,7 @@ public class DBPeon {
 					+ "email = ?, "
 					+ "agbterms = ?, "
 					+ "lastlogin = ? "
-				+ "WHERE "
+					+ "WHERE "
 					+ "email = ?;"
 			);
 			pstmt.setString(1, PersData.getDisplayName());
