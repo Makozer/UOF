@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import game.player.PersonalData;
+import game.player.Player;
+import game.research.TechTree;
 import database.DBPeon;
 import manager.FehlerManager;
 
@@ -51,7 +53,8 @@ public class RegisterServlet extends HttpServlet {
 			
 			
 			
-			session.setAttribute("PersonalData", persData);	
+			//session.setAttribute("PersonalData", persData);
+			session.setAttribute("Player", new Player(persData, new TechTree()));
 			
 			//session.setAttribute("success", DBPeon.updateBenutzer(persData));
 			//request.setAttribute("message", meldung + " " + benutzer.toString());

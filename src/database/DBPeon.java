@@ -16,6 +16,9 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.sql.Date;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+
 import community.message.Message;
 import java.time.*;
 
@@ -40,14 +43,14 @@ public class DBPeon {
 		
 		
 	}
-	public static ArrayList<Message> getMessages(PersonalData personaldata, Player player) {
+	public static ArrayList<Message> getMessages(Player player) {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
 					"SELECT messageid, touserid, fromuserid, title, message, created "
 					+ "FROM messages "
 					+ "WHERE touserid = " 
-					+ personaldata.getId());
+					+ player.getPersData().getId());
 			ResultSet rs = pstmt.executeQuery();
 			return ResultToTable.convertMessages(rs, player); 
 		} catch (SQLException e) {
