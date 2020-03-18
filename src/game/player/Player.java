@@ -401,6 +401,10 @@ public class Player {
 		this.setHasNewMessage(true);
 	}	
 	
+	public void addMessageArray(ArrayList<Message> messages) {
+		this.messages.addAll(messages);
+	}
+	
 	public void deleteMessage(int msgId) {
 		for (Message m: messages) {
 			if (m.getMsgId() == msgId) {
