@@ -17,7 +17,7 @@
 <ul>
 <li><a href="researchoverview.jsp">Forschungsübersicht</a></li>
 
-<li><a href="galaxy.jsp">Galaxie</a></li>
+<li><a href="./GalaxyServlet?galaxy=${player.getActivePlanet().getCoords().getGalaxy()}&solarsystem=${player.getActivePlanet().getCoords().getSolarSystem()}">Galaxie</a></li>
 <li><a href="example.jsp">TESTSEITE</a></li>
 </ul>
 </div>

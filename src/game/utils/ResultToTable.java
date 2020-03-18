@@ -51,4 +51,25 @@ public class ResultToTable {
 		}
 		return temp;
 	}
+	
+	public static ArrayList<String> convertRsSolarSystem(ResultSet rs) {
+		ArrayList<String> output = new ArrayList<String>();
+		int i = 1;
+		try {
+			ResultSetMetaData rsmd = rs.getMetaData(); // Wofür ist das da?		// TODO	
+			
+			while (rs.next()) {
+				while (rs.getInt(1) > i) {
+					output.add("Leer");
+					i++;
+				}				
+				output.add(rs.getString(2));
+				i++;
+			} // while
+			output.add("Leer");
+		} catch (SQLException e) {
+			
+		}		
+		return output;
+	}
 }

@@ -98,8 +98,8 @@ public class Player {
 		if (planet != null) {
 			planet.getFleet().addFleet(event.getFleet());
 			planet.increaseRessources(event.getRessource());
-			this.getEvents().remove(event);
 			// TODO DATABASE INFORM
+			i.remove();			
 		} else {
 			// TODO calculate with Database from other players planet!!!
 		}

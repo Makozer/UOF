@@ -35,6 +35,11 @@ input, button, option, textarea {
 	padding: 0px 33px;
 }
 
+.error {
+	color: red;
+	font-size: 33px;
+}
+
 .headnav a {
 	font-size:22px;
 	padding: 11px;
