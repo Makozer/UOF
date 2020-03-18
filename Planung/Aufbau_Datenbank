@@ -20,6 +20,7 @@ String name
 String ressources
 String buildins
 String fleet
+TIMESTAMP!
 
 
 table events

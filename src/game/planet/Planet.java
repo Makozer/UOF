@@ -1,6 +1,8 @@
 package game.planet;
 
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import game.fleet.*;
 import game.fleet.tier1.*;
@@ -11,6 +13,7 @@ import game.planet.buildings.mining.*;
 import game.planet.buildings.storage.*;
 import game.research.*;
 import game.ressource.*;
+import game.utils.NumberUtils;
 
 public class Planet {
 	
@@ -33,11 +36,27 @@ public class Planet {
 	// Fleet that idles on the Planet
 	private Fleet					fleet = new Fleet();
 	
+	public Planet(TechTree techtree, Coordinates coordinates, String name, String buildingSQL, String ressourceSQL, String fleetSQL) {
+		this.sqlLoad(techtree, coordinates, name, buildingSQL, ressourceSQL, fleetSQL);
+	}
+	
 	public Planet(TechTree techtree, Coordinates coordinates, String name, 
 						int ironValue, int rareEarthValue, int waterValue, int tritiumValue, 
 						int headQuarterLvl, int universityLvl, int spacePortLvl, 
 						int ironMineLvl, int rareEarthMineLvl, int fountainLvl, int tritiumFabricLvl, 
 						int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl) {
+		this.createThisPlanet(techtree, coordinates, name, 
+				ironValue, rareEarthValue, waterValue, tritiumValue, 
+				headQuarterLvl, universityLvl, spacePortLvl, 
+				ironMineLvl, rareEarthMineLvl, fountainLvl, tritiumFabricLvl, 
+				ironStorageLvl, rareEarthStorageLvl, waterStorageLvl, tritiumStorageLvl);
+	}
+	
+	private void createThisPlanet(TechTree techtree, Coordinates coordinates, String name, 
+			int ironValue, int rareEarthValue, int waterValue, int tritiumValue, 
+			int headQuarterLvl, int universityLvl, int spacePortLvl, 
+			int ironMineLvl, int rareEarthMineLvl, int fountainLvl, int tritiumFabricLvl, 
+			int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl) {
 		
 		Date date = new Date(); // get the actual Date
 		// Basic
@@ -53,6 +72,7 @@ public class Planet {
 		ressources.put(rareEarth.getName(), rareEarth);
 		ressources.put(water.getName(), water);
 		ressources.put(tritium.getName(), tritium);
+		
 		// Buildings
 		HeadQuarter headQuarter = new HeadQuarter(techtree, headQuarterLvl);
 		University university = new University(headQuarter, techtree, universityLvl);
@@ -70,6 +90,7 @@ public class Planet {
 		buildings.put(rareEarthMine.getName(), rareEarthMine);
 		buildings.put(fountain.getName(), fountain);
 		buildings.put(tritiumFabric.getName(), tritiumFabric);
+		
 		// Res Storage Buildings
 		IronStorage ironStorage 		= new IronStorage(headQuarter, techtree, ironStorageLvl);
 		RareEarthStorage rareEarthStorage 	= new RareEarthStorage(headQuarter, techtree, rareEarthStorageLvl);
@@ -79,11 +100,38 @@ public class Planet {
 		buildings.put(rareEarthStorage.getName(), rareEarthStorage);
 		buildings.put(waterStorage.getName(), waterStorage);
 		buildings.put(tritiumStorage.getName(), tritiumStorage);
-		
 	}
 	
 	public static void main(String[] args) {
+		TechTree techtree = new TechTree();
+		Coordinates coordinates = new Coordinates(1, 33, 7);
+		techtree.testFill();
+		Planet planet1 = new Planet(techtree, coordinates, "TestPlanet", 
+				6666, 3333, 9999, 666, 
+				3, 2, 1, 
+				5, 4, 3, 2, 
+				6, 5, 4, 3);
+		System.out.println("Planet Data");
+		System.out.println("Name: " + planet1.getName());
+		System.out.println("Coords: " + planet1.getCoords().asCoords());
+		String ressSQL = planet1.asRessourceSQLString();
+		String buildingSQL = planet1.asBuildingSQLString();
+		planet1.addShip(new Falcon(techtree, 5));
+		planet1.addShip(new Cheetah(techtree, 2));
+		String fleetSQL = planet1.getFleet().asSQLString();
+		System.out.println("Ressourcen: " + ressSQL);
+		System.out.println("Buildings: " + buildingSQL);
+		System.out.println("Fleet: " + fleetSQL);
 		
+		System.out.println("");
+		System.out.println("Planet 2 Data");
+		Planet planet2 = new Planet(techtree, coordinates, "TestPlanet2", ressSQL, buildingSQL, fleetSQL);		
+		ressSQL = planet2.asRessourceSQLString();
+		buildingSQL = planet2.asBuildingSQLString();
+		fleetSQL = planet1.getFleet().asSQLString();
+		System.out.println("Ressourcen: " + ressSQL);
+		System.out.println("Buildings: " + buildingSQL);
+		System.out.println("Fleet: " + fleetSQL);
 	}
 	
 	public void update() {
@@ -124,21 +172,7 @@ public class Planet {
 	}
 	
 	public void addShip(ASpaceShip addShip) {
-		ArrayList<ASpaceShip> fleet = this.fleet.getFleet();
-		ASpaceShip thisShip = null;
-		boolean found = false;
-
-		for (int i = 0; i < fleet.size(); i++) {
-			thisShip = fleet.get(i);
-			if (thisShip.getName() == addShip.getName()) {
-				thisShip.addQuantity(addShip.getQuantity());
-				found = true;
-				break;
-			}
-			if (i == fleet.size() - 1 && found == false) {
-				fleet.add(addShip);
-			}
-		}
+		this.fleet.addShip(addShip);
 	}
 	
 	public void testFill() {
@@ -312,6 +346,53 @@ public class Planet {
 	
 	public ARessource getRessourceByName(String name) {
 		return this.ressources.get(name);
+	}
+	
+	private void sqlLoad(TechTree techtree, Coordinates coordinates, String name, String ressourceSQL, String buildingSQL, String fleetSQL) {
+		
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		
+		String[] sql = buildingSQL.split( Pattern.quote( ";" ) );
+		String[] keyValue = null;
+		for (String tech: sql) {
+			keyValue = tech.split( Pattern.quote( "=" ) );
+			data.put(keyValue[0], NumberUtils.stringAsInt(keyValue[1]));
+		}
+		sql = ressourceSQL.split( Pattern.quote( ";" ) );
+		keyValue = null;
+		for (String tech: sql) {
+			keyValue = tech.split( Pattern.quote( "=" ) );
+			data.put(keyValue[0], NumberUtils.stringAsInt(keyValue[1]));
+		}
+		
+		this.createThisPlanet(techtree, coordinates, name, 
+							data.get("Iron"), data.get("RareEarth"), data.get("Water"), data.get("Tritium"), 
+							data.get("HeadQuarter"), data.get("University"), data.get("SpacePort"), 
+							data.get("IronMine"), data.get("RareEarthMine"), data.get("Fountain"), data.get("TritiumFabric"), 
+							data.get("IronStorage"), data.get("RareEarthStorage"), data.get("WaterStorage"), data.get("TritiumStorage"));
+
+		this.fleet = new Fleet(techtree, fleetSQL);
+	}
+	
+	public String asBuildingSQLString() {
+		String output = "";
+		for (Entry<String, ABuilding> entry : buildings.entrySet()) {
+			output += entry.getKey() + "=" + entry.getValue().getLevel() + ";";
+		}
+		return output;
+	}
+	
+	public String asRessourceSQLString() {
+		String output = "";
+		// TODO Update Ressources
+		for (Entry<String, ARessource> entry : ressources.entrySet()) {
+			output += entry.getKey() + "=" + entry.getValue().getValue() + ";";
+		}
+		return output;
+	}
+	
+	public String asFleetSQLString() {
+		return this.fleet.asSQLString();
 	}
 
 }

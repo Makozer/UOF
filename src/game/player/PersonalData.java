@@ -12,7 +12,7 @@ public class PersonalData {
 	private String 	surName = "";
 	private Date	birthday = null;
 	private boolean consent = false;
-	private String password = "";
+	private String 	password = "";
 	
 	private Date 	created = 	null;
 	private Date 	lastLogin = null;

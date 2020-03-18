@@ -2,17 +2,26 @@ package game.fleet;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 import game.fleet.special.*;
 import game.fleet.tier1.*;
 import game.fleet.tier2.*;
 import game.fleet.tier3.*;
 import game.research.*;
+import game.utils.NumberUtils;
 
 public class Fleet implements Iterable<ASpaceShip> {
 	
 	protected ArrayList<ASpaceShip> fleet = new ArrayList<ASpaceShip>();
 	protected int 					playerId = 0;
+	
+	public Fleet() {}
+	
+	public Fleet(TechTree techtree, String sql) {
+		this.sqlLoad(techtree, sql);
+	}
 
 	public static void main(String[] args) {
 		
@@ -27,11 +36,19 @@ public class Fleet implements Iterable<ASpaceShip> {
 		Fleet fleet = new Fleet();
 		SpyDrone spy = new SpyDrone(techtree, 2);
 		Falcon falcon = new Falcon(techtree, 2);
+		techtree.setLevel(spy.getName(), 10);
 		techtree.setLevel(falcon.getName(), 10);
 		fleet.addShip(spy);
 		fleet.addShip(falcon);
 		System.out.println(falcon.toString());
 		System.out.println(fleet.toString());
+		System.out.println(" ");
+		System.out.println("SQL Test");
+		String sql = fleet.asSQLString();
+		System.out.println(sql);
+		Fleet fleet2 = new Fleet(techtree, sql);
+		System.out.println("SQL2");
+		System.out.println(fleet2.asSQLString());
 	}
 	
 	public void testFill(TechTree techtree) {
@@ -187,6 +204,23 @@ public class Fleet implements Iterable<ASpaceShip> {
 	@Override
 	public Iterator<ASpaceShip> iterator() {
 		return fleet.iterator();
+	}
+	
+	private void sqlLoad(TechTree techtree, String sql) {
+		String[] ships = sql.split( Pattern.quote( ";" ) );
+		String[] shipKeyValue = null;
+		for (String tech: ships) {
+			shipKeyValue = tech.split( Pattern.quote( "=" ) );
+			this.addShip(ShipFabric.createShip(techtree, shipKeyValue[0], NumberUtils.stringAsInt(shipKeyValue[1])));
+		}
+	}
+	
+	public String asSQLString() {
+		String output = "";
+		for (ASpaceShip ship : fleet) {
+			output += ship.getName() + "=" + ship.getQuantity() + ";";
+		}
+		return output;
 	}
 
 }

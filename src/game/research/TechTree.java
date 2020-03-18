@@ -1,6 +1,7 @@
 package game.research;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.regex.*;
 import game.fleet.*;
 import game.fleet.tier1.Falcon;
@@ -26,9 +27,12 @@ public class TechTree {
 	public static void main(String[] args) {
 		TechTree techtree = new TechTree();
 		techtree.testFill();
-		Falcon falcon = new Falcon(techtree, 1);
+		String sql = techtree.asSQLString();
 		System.out.println("test");
-		System.out.println(techtree.asSQLString());
+		System.out.println(sql);
+		TechTree tech2 = new TechTree(sql);
+		System.out.println("test2");
+		System.out.println(tech2.asSQLString());
 
 	}
 	
@@ -141,25 +145,22 @@ public class TechTree {
 	}
 	
 	private void sqlLoad(String sql) {
-		String[] levels = sql.split( Pattern.quote( "." ) );
+		String[] levels = sql.split( Pattern.quote( ";" ) );
 		String[] techKeyValue = null;
 		for (String tech: levels) {
 			techKeyValue = tech.split( Pattern.quote( "=" ) );
 			this.setLevel(techKeyValue[0], NumberUtils.stringAsInt(techKeyValue[1]));
+			// TODO if its a research then add it via Fabric
+			// if (this.hasResearched(techKeyValue[0])) { this.addResearch(ResearchFabric.createResearch(this, techKeyValue[0]));}
 		}
 	}
 	
 	public String asSQLString() {
-		String output = "SQLOutput=0;";
-		// TODO code below seems not to work ... look main method here
-		levels.entrySet().forEach((entry) ->
-			createSQLString(output, entry.getKey(), entry.getValue())
-				);
+		String output = "";
+		for (Entry<String, Integer> entry : levels.entrySet()) {
+			output += entry.getKey() + "=" + entry.getValue() + ";";
+		}
 		return output;
-	}
-	
-	private final void createSQLString(String string, String key, Integer value) {
-		string += key + "=" + value + ";";
 	}
 		
 }

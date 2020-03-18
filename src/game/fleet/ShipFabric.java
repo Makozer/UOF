@@ -21,7 +21,6 @@ public class ShipFabric {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		} 
-		
 		return output;
 		/*
 		 * Class aClass = Class.forName(origin.getClass().getPackageName() + "." + origin.getClass().getSimpleName());
