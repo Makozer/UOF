@@ -14,5 +14,7 @@ Password: <input type="text">
 <form action="./LoginServlet" method="post">
 <button type="submit">Session holen</button>
 </form>
+<a href="register.jsp">No account yet? Register!</a>
+
 
 <jsp:include page="./include/footer.jsp" />

@@ -155,7 +155,7 @@ public class Player {
 		this.events.add(transport);
 		//this.events.add(build);
 		
-		this.addMessage(new GameMessage("HeadQuarter wurde auf 1:33:7 auf LvL 11 erhöht!", "Test"));
+		this.addMessage(new GameMessage("HeadQuarter wurde auf 1:33:7 auf LvL 11 erhï¿½ht!", "Test"));
 		this.addMessage(new CommunityMessage(1337, 666, "You're evil", "muahahahhahaa", new Date()));
 	}
 	
