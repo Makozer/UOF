@@ -38,17 +38,21 @@ public class DBPeon {
 		
 		
 	}
-	public static String getMessages() {
+	public static String getMessages(PersonalData personaldata) {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT messageid, touserid, fromuserid, title, message, created FROM messages ");
+					"SELECT messageid, touserid, fromuserid, title, message, created "
+					+ "FROM messages "
+					+ "WHERE touserid = " 
+					+ personaldata.getId());
 			ResultSet rs = pstmt.executeQuery();
 			return ResultToTable.convert(rs); 
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
 	}
+	
 	public static boolean insertMessage(Message message) {
 		boolean success = false;
 		try {
