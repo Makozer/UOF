@@ -13,15 +13,29 @@ public class Research {
 		CAPACITY
 	}
 	
-	protected ResearchEnum 			type = null;
-	protected TechTree				techtree = null;
-	protected AMath 				modification = null;
-	protected ArrayList<ARessource> costs = null;
+	protected ResearchEnum 				type 			= null;
+	protected TechTree					techtree 		= null;
+	protected AMath 					modification 	= null;
+	protected ArrayList<ARessource> 	costs 			= null;
+	protected ArrayList<Research> 		requiredTech 	= null;
 	
 	public Research(TechTree techtree, ResearchEnum type) {
 		this.techtree = techtree;
 	}	
 	
+
+
+	public Research(ResearchEnum type, TechTree techtree, AMath modification, ArrayList<ARessource> costs,
+			ArrayList<Research> requiredTech) {
+		this.type = type;
+		this.techtree = techtree;
+		this.modification = modification;
+		this.costs = costs;
+		this.requiredTech = requiredTech;
+	}
+
+
+
 	public double getModValue() {
 		return modification.getValue(this.getLevel());
 	}
@@ -50,8 +64,15 @@ public class Research {
 	public String toString() {
 		return "AResearch [level=" + this.getLevel() + ", getValue()=" + getModValue() + "]";
 	}
-	
-	
-	
+
+
+	public ArrayList<Research> getRequiredTech() {
+		return requiredTech;
+	}
+
+	public void setRequiredTech(ArrayList<Research> requiredTech) {
+		this.requiredTech = requiredTech;
+	}
+
 
 }

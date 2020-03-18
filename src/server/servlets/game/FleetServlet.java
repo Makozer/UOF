@@ -103,7 +103,7 @@ public class FleetServlet extends HttpServlet {
             System.out.println("p=" + shipName + "; q=" + quantity);
             
             // Creating and adding the ship to the List
-            if (quantity > 0) { ship = techtree.createShip(shipName, quantity);}
+            if (quantity > 0) { ship = ShipFabric.createShip(techtree, shipName, quantity);}
             if (ship != null) { 
             	if (planetfleet.hasShip(ship)) {newFleet.addShip(ship);} else { return; }  // TODO Error to User      	
             }                        

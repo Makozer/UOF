@@ -4,7 +4,7 @@
 		<td style="width:15%;"> &nbsp;
 		</td>
 	</tr>
-	<tr
+	<tr>
 		<td colspan="3" style="padding:33px;">&copy;2020 Makozer & Cedric | Impressum | Datenschutzerklärung | Kontakt | Über Uns</td>
 	</tr>
 </table>

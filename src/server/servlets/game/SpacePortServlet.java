@@ -7,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import game.*;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.SpacePort;
@@ -66,7 +65,7 @@ public class SpacePortServlet extends HttpServlet {
             quantity = NumberUtils.stringAsInt(request.getParameterValues(shipName)[0]);
             
             // Creating and adding the ship to the List
-            if (quantity > 0) { newShip = techtree.createShip(shipName, quantity);}
+            if (quantity > 0) { newShip = ShipFabric.createShip(techtree, shipName, quantity);}
             if (newShip != null) { 
             	shipCosts = newShip.getCosts(quantity); 
             	if (player.decreaseRess(planet, shipCosts)) { ships.add(newShip); }

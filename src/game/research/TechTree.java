@@ -25,56 +25,11 @@ public class TechTree {
 
 	public static void main(String[] args) {
 		TechTree techtree = new TechTree();
-		techtree.setLevel("Falcon", 10);
+		techtree.testFill();
 		Falcon falcon = new Falcon(techtree, 1);
-		System.out.println(falcon.toString());
+		System.out.println("test");
+		System.out.println(techtree.asSQLString());
 
-	}
-	
-	public ASpaceShip createShip(String name, int quantity) {
-		ASpaceShip output = null;
-		ASpaceShip origin = this.getResearchedShip(name);
-		try {
-			output = origin.cloneMe(quantity);
-			/*
-            output = origin.getClass().getDeclaredConstructor().newInstance();
-            output.setQuantity(quantity);
-            output.setTechtree(this);
-            */
-		} catch (NullPointerException e) {
-			// Everything fine xD
-        } catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} 
-		
-		return output;
-		/*
-		 * Class aClass = Class.forName(origin.getClass().getPackageName() + "." + origin.getClass().getSimpleName());
-	       newShip = (ASpaceShip)aClass.getDeclaredConstructor().newInstance();
-	       newShip.setQuantity(quantity);
-	       newShip.setTechtree(techtree);
-	       ships.add(newShip);
-		 */
-	}
-	
-	public ASpaceShip createShip(ASpaceShip origin, int quantity) {
-		ASpaceShip output = null;
-		try {
-			output = origin.cloneMe(quantity);
-			/*
-            output = origin.getClass().getDeclaredConstructor().newInstance();
-            output.setQuantity(quantity);
-            output.setTechtree(this);
-            */
-        } catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} 
-		
-		return output;
 	}
 	
 	public void testFill() {
@@ -195,7 +150,8 @@ public class TechTree {
 	}
 	
 	public String asSQLString() {
-		String output = "";
+		String output = "SQLOutput=0;";
+		// TODO code below seems not to work ... look main method here
 		levels.entrySet().forEach((entry) ->
 			createSQLString(output, entry.getKey(), entry.getValue())
 				);
