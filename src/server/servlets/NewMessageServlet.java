@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import community.message.CommunityMessage;
+import community.message.Message;
 import database.DBPeon;
 import game.player.Player;
 import game.utils.NumberUtils;
@@ -50,8 +52,8 @@ public class NewMessageServlet extends HttpServlet {
 		int 					toPlayerId = NumberUtils.stringAsInt(toPlayer);
 		
 		// TODO Database connection create Message
-		DBPeon.createNewMessage(player.getPersData().getId(), toPlayerId, title, message);
-		
+		//DBPeon.createNewMessage(player.getPersData().getId(), toPlayerId, title, message);
+		DBPeon.insertMessage(new CommunityMessage(player.getPersData().getId(), toPlayerId, title, message, new java.util.Date()));
 		response.sendRedirect(request.getContextPath() + "/messages.jsp");
 
 	}
