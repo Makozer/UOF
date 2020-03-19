@@ -16,7 +16,7 @@ public class NewPlayerManager {
 		if (!DBPlayer.createPlayer(player, password)) { System.out.println("DBPlayer.createPlayer WAS NULL"); return null; }
 		
 		// get his Id
-		int playerId = DBPlayer.getPlayerIdByDisplayName(player.getDisplayName());
+		int playerId = DBPlayer.getPlayerIdByEmail(data.getEmail());
 		if (playerId == 0) { 
 			System.out.println("PLAYER ID WAS 0");
 			return null; 
