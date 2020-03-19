@@ -247,6 +247,10 @@ public class Player {
 		this.planets.add(planet);
 	}
 	
+	public void addPlanets(ArrayList<Planet> planets) {
+		this.planets.addAll(planets);
+	}
+	
 	public ArrayList<Planet> getPlanets() {
 		return planets;
 	}

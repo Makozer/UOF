@@ -9,11 +9,13 @@
 
 <h1>Universe on Fire</h1>
 <h2>Login</h2>
-Login: <input type="text"><br />
-Password: <input type="text">
 <form action="./LoginServlet" method="post">
-<button type="submit">Session holen</button>
+<h3 class="error">${error}</h3>
+Login: <input type="email" name="email"><br />
+Password: <input type="password" name="password"><br />
+<button type="submit">Login</button>
 </form>
+<br />
 <a href="register.jsp">No account yet? Register!</a>
 
 

@@ -1,4 +1,4 @@
-package manager;
+package database;
 
 import java.util.regex.Pattern;
 

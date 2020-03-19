@@ -1,6 +1,8 @@
 package server.servlets;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +13,10 @@ import javax.servlet.http.HttpSession;
 import game.player.PersonalData;
 import game.player.Player;
 import game.research.TechTree;
+import game.utils.DateUtils;
 import database.DBPeon;
-import manager.FehlerManager;
+import database.FehlerManager;
+import database.NewPlayerManager;
 
 
 @WebServlet("/Register")
@@ -43,23 +47,34 @@ public class RegisterServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 				
-			PersonalData persData = new PersonalData();
+			PersonalData pd = new PersonalData();
+			System.out.println("Trying to register new user ... ");
 			
-			persData.setDisplayName(formDisplayname);
-			persData.setPreName(formFirstname);
-			persData.setSurName(formLastname);
-			persData.setEmail(formEmail);
-			persData.setPassword(formPassword);
+			pd.setDisplayName(formDisplayname);
+			pd.setPreName(formFirstname);
+			pd.setSurName(formLastname);
+			pd.setEmail(formEmail);
+			Date testdate = new Date();
+			pd.setBirthday(testdate);
+			pd.setCreated(testdate);
+			pd.setLastLogin(testdate);
 			
+			System.out.println(pd.toString());
 			
+			Player player = NewPlayerManager.createNewPlayer(pd, formPassword);
+			if (player != null) {
+				session.setAttribute("player", player);
+				DateUtils dateUtils = new DateUtils();
+				session.setAttribute("dateUtils", dateUtils);
+				response.sendRedirect(request.getContextPath() + "/overview.jsp");
+			} else {
+				System.out.println("PLAYER WAS NULL IN REGISTERSERVLET!");
+			}
 			
-			//session.setAttribute("PersonalData", persData);
-			session.setAttribute("Player", new Player(persData, new TechTree()));
+			//session.setAttribute("Player", new Player(pd, new TechTree()));
+
+			//DBPeon.insertBenutzer(pd);
 			
-			//session.setAttribute("success", DBPeon.updateBenutzer(persData));
-			//request.setAttribute("message", meldung + " " + benutzer.toString());
-			DBPeon.insertBenutzer(persData);
-			request.getRequestDispatcher("profil.jsp").forward(request, response);
 			
 			//Ansonsten Eingaben zurueck zum Formular
 		} else {
@@ -68,11 +83,10 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("formFirstname", formFirstname);
 			request.setAttribute("formLastname", formLastname);
 			request.setAttribute("formEmail", formEmail);
-			
-			//request.setAttribute("formPassword", formPassword);
-			//request.setAttribute("formcPassword", formcPassword);
+
 			
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 		}	
 	}
+	
 }

@@ -5,12 +5,10 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import database.DBPeon;
-import game.utils.NumberUtils;
+import javax.servlet.http.*;
+import database.*;
+import game.settings.*;
+import game.utils.*;
 
 /**
  * Servlet implementation class GalaxyServlet
@@ -38,7 +36,9 @@ public class GalaxyServlet extends HttpServlet {
 		int 		solarsystem = NumberUtils.stringAsInt(solarsystemS);
 		
 		// Escaping when User wants to troll
-		if (galaxy < 1 || galaxy > 1 || solarsystem < 1 || solarsystem > 66) {
+		if (galaxy < 1 || galaxy > UniverseSettings.GALAXYMAX || 
+				solarsystem < 1 || solarsystem > UniverseSettings.SOLARSYSTEMMAX) {
+			// Error to User
 			request.setAttribute("galaxy", 1);
 			request.setAttribute("solarsystem", 1);
 			request.setAttribute("error", "FORBIDDEN AREA");

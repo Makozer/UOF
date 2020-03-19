@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 
 import game.player.PersonalData;
 import game.utils.ResultToTable;
+import game.planet.Coordinates;
 import game.player.*;
 
 import java.time.LocalDate;
@@ -126,8 +127,7 @@ public class DBPeon {
 			pstmt.setString(4, PersData.getEmail());
 			pstmt.setDate(5, new Date(new java.util.Date().getTime()));
 			pstmt.setDate(6, new Date(new java.util.Date().getTime()));
-			pstmt.setBoolean(7, PersData.isConsent());
-			pstmt.setString(8, PersData.getPassword());
+
 			
 			System.out.println("[DEBUG] SQL-Statement Benutzer anlegen: " + pstmt.toString());
 			int updatedRows = pstmt.executeUpdate();
@@ -173,7 +173,6 @@ public class DBPeon {
 			pstmt.setString(2, PersData.getPreName());
 			pstmt.setString(3, PersData.getSurName());
 			pstmt.setString(4, PersData.getEmail());
-			pstmt.setBoolean(5, PersData.isConsent());
 			pstmt.setDate(6, new java.sql.Date(PersData.getLastLogin().getTime()));
 			System.out.println("[DEBUG] SQL-Statement Benutzer aktualisieren: " + pstmt.toString());
 			
@@ -210,5 +209,7 @@ public class DBPeon {
 			return null;
 		}
 	}
+	
+	
 	
 }

@@ -21,6 +21,10 @@ public class SpacePort extends ABuilding {
 
 	public ArrayList<ASpaceShip> getBuildQueue() {
 		return buildQueue;
+	}	
+
+	public void setBuildQueue(ArrayList<ASpaceShip> buildQueue) {
+		this.buildQueue = buildQueue;
 	}
 
 	public Date getTimestamp() {

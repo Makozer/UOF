@@ -12,16 +12,15 @@ import game.player.*;
 
 public class GameLoader {
 	
-	public Player loadPlayer(int playerid) {
-		int playerId = 1337;
-		String SQLtechtreeLevels = "Falcon=3;Cheetah=1;LaserPointer=3";
+	public static Player loadPlayer(int playerid) {
+
 		Player player = null;
-		// TODO
-		// DataBase get TechTree by Player ID
 		
 		// DataBase get Data by Player ID
+		player = DBPlayer.getPlayerById(playerid);
 		
 		// DataBase get Planets by Player ID
+		player.addPlanets(DBPlanet.getPlanetsById(playerid));
 		
 		// DataBase get events by Player ID
 		
@@ -31,9 +30,6 @@ public class GameLoader {
 		return player;
 	}
 	
-	private TechTree loadTechTree(String sql) {
-		return new TechTree(sql);
-	}
 	
 	private PersonalData loadPersonalData(int id, String email, String displayName, String preName, String surName, int birthday, int created, int lastLogin) {
 		Date birthdayDate = new Date(birthday * 1000);

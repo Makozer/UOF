@@ -11,8 +11,6 @@ public class PersonalData {
 	private String 	preName = "";
 	private String 	surName = "";
 	private Date	birthday = null;
-	private boolean consent = false;
-	private String 	password = "";
 	
 	private Date 	created = 	null;
 	private Date 	lastLogin = null;
@@ -81,19 +79,11 @@ public class PersonalData {
 		this.lastLogin = lastLogin;
 	}
 
-	public boolean isConsent() {
-		return consent;
+	@Override
+	public String toString() {
+		return "PersonalData [id=" + id + ", email=" + email + ", displayName=" + displayName + ", preName=" + preName
+				+ ", surName=" + surName + ", birthday=" + birthday + ", created=" + created + ", lastLogin="
+				+ lastLogin + "]";
 	}
 
-	public void setConsent(boolean consent) {
-		this.consent = consent;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 }

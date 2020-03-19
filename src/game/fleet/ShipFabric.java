@@ -1,6 +1,10 @@
 package game.fleet;
 
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 import game.research.*;
+import game.utils.NumberUtils;
 
 public class ShipFabric {
 	
@@ -47,6 +51,19 @@ public class ShipFabric {
 		} 
 		
 		return output;
+	}
+	
+	public static ArrayList<ASpaceShip> createArrayFromSQL(TechTree techtree, String sql){
+		ArrayList<ASpaceShip> ships = new ArrayList<ASpaceShip>();
+		if (sql == null) { return ships; }
+		String[] sqlships = sql.split( Pattern.quote( ";" ) );
+		String[] keyValue = null;
+		for (String ship: sqlships) {
+			if (ship.length() < 2) {break;}
+			keyValue = ship.split( Pattern.quote( "=" ) );
+			ships.add(createShip(techtree, keyValue[0], NumberUtils.stringAsInt(keyValue[1])));
+		}
+		return ships;
 	}
 
 }

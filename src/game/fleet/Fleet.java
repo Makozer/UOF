@@ -207,7 +207,8 @@ public class Fleet implements Iterable<ASpaceShip> {
 	}
 	
 	private void sqlLoad(TechTree techtree, String sql) {
-		String[] ships = sql.split( Pattern.quote( ";" ) );
+		if (sql == null) {return;}
+		String[] ships = sql.split( Pattern.quote( ";" ) );		
 		String[] shipKeyValue = null;
 		for (String tech: ships) {
 			shipKeyValue = tech.split( Pattern.quote( "=" ) );

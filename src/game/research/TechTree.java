@@ -147,8 +147,10 @@ public class TechTree {
 	private void sqlLoad(String sql) {
 		String[] levels = sql.split( Pattern.quote( ";" ) );
 		String[] techKeyValue = null;
+		if (levels.length < 1) {return;}
 		for (String tech: levels) {
 			techKeyValue = tech.split( Pattern.quote( "=" ) );
+			if (techKeyValue.length < 2) {return;}
 			this.setLevel(techKeyValue[0], NumberUtils.stringAsInt(techKeyValue[1]));
 			// TODO if its a research then add it via Fabric
 			// if (this.hasResearched(techKeyValue[0])) { this.addResearch(ResearchFabric.createResearch(this, techKeyValue[0]));}

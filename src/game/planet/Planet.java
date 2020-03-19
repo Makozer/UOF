@@ -36,8 +36,8 @@ public class Planet {
 	// Fleet that idles on the Planet
 	private Fleet					fleet = new Fleet();
 	
-	public Planet(TechTree techtree, Coordinates coordinates, String name, String buildingSQL, String ressourceSQL, String fleetSQL) {
-		this.sqlLoad(techtree, coordinates, name, buildingSQL, ressourceSQL, fleetSQL);
+	public Planet(TechTree techtree, Coordinates coordinates, String name, String buildingSQL, String ressourceSQL, String fleetSQL, String spaceportqueueSQL, int timestamp) {
+		this.sqlLoad(techtree, coordinates, name, buildingSQL, ressourceSQL, fleetSQL, spaceportqueueSQL, timestamp);
 	}
 	
 	public Planet(TechTree techtree, Coordinates coordinates, String name, 
@@ -125,10 +125,10 @@ public class Planet {
 		
 		System.out.println("");
 		System.out.println("Planet 2 Data");
-		Planet planet2 = new Planet(techtree, coordinates, "TestPlanet2", ressSQL, buildingSQL, fleetSQL);		
-		ressSQL = planet2.asRessourceSQLString();
-		buildingSQL = planet2.asBuildingSQLString();
-		fleetSQL = planet1.getFleet().asSQLString();
+		//Planet planet2 = new Planet(techtree, coordinates, "TestPlanet2", ressSQL, buildingSQL, fleetSQL);		
+		//ressSQL = planet2.asRessourceSQLString();
+		//buildingSQL = planet2.asBuildingSQLString();
+		//fleetSQL = planet1.getFleet().asSQLString();
 		System.out.println("Ressourcen: " + ressSQL);
 		System.out.println("Buildings: " + buildingSQL);
 		System.out.println("Fleet: " + fleetSQL);
@@ -348,19 +348,21 @@ public class Planet {
 		return this.ressources.get(name);
 	}
 	
-	private void sqlLoad(TechTree techtree, Coordinates coordinates, String name, String ressourceSQL, String buildingSQL, String fleetSQL) {
+	private void sqlLoad(TechTree techtree, Coordinates coordinates, String name, String ressourceSQL, String buildingSQL, String fleetSQL, String spaceportqueueSQL, int timestamp) {
 		
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		
 		String[] sql = buildingSQL.split( Pattern.quote( ";" ) );
 		String[] keyValue = null;
 		for (String tech: sql) {
+			if (tech.length() < 2) {break;}
 			keyValue = tech.split( Pattern.quote( "=" ) );
 			data.put(keyValue[0], NumberUtils.stringAsInt(keyValue[1]));
 		}
 		sql = ressourceSQL.split( Pattern.quote( ";" ) );
 		keyValue = null;
 		for (String tech: sql) {
+			if (tech.length() < 2) {break;}
 			keyValue = tech.split( Pattern.quote( "=" ) );
 			data.put(keyValue[0], NumberUtils.stringAsInt(keyValue[1]));
 		}
@@ -371,6 +373,15 @@ public class Planet {
 							data.get("IronMine"), data.get("RareEarthMine"), data.get("Fountain"), data.get("TritiumFabric"), 
 							data.get("IronStorage"), data.get("RareEarthStorage"), data.get("WaterStorage"), data.get("TritiumStorage"));
 
+		this.getSpacePort().setBuildQueue(ShipFabric.createArrayFromSQL(techtree, spaceportqueueSQL));
+		
+		Date date = new Date((timestamp * 1000));
+		this.getIronMine().setDate(date);
+		this.getRareEarthMine().setDate(date);
+		this.getFountain().setDate(date);
+		this.getTritiumFabric().setDate(date);
+		
+		
 		this.fleet = new Fleet(techtree, fleetSQL);
 	}
 	
@@ -393,6 +404,14 @@ public class Planet {
 	
 	public String asFleetSQLString() {
 		return this.fleet.asSQLString();
+	}
+	
+	public String asSpacePortQueueSQLString() {
+		String output = "";
+		for (ASpaceShip ship : this.getSpacePort().getBuildQueue()) {
+			output += ship.getName() + "=" + ship.getQuantity() + ";";
+		}
+		return output;
 	}
 
 }

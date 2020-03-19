@@ -5,7 +5,7 @@
 <td><a href="profil.jsp">Profil</a></td>
 <td><a href="messages.jsp" class="${ player.hasNewMessage() ? "red" : ""}">Nachrichten</a></td>
 
-<td><a href="./LogoutServler">Logout</a></td>
+<td><a href="./LogoutServlet">Logout</a></td>
 
 </tr>
 </table>

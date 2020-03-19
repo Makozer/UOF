@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import database.DBLogin;
+import database.DBPlayer;
+import database.GameLoader;
 import game.*;
 import game.player.Player;
 import game.utils.*;
@@ -30,6 +33,26 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String email = request.getParameter("email"); 
+		String password = request.getParameter("password"); 
+		
+		int playerid = DBPlayer.getPlayerIdByEmail(email);
+		System.out.println("playerid login:" + playerid);
+		boolean success = DBLogin.comparePassword(playerid, password);
+		
+		if (success) {
+			HttpSession session = request.getSession();
+			Player player = GameLoader.loadPlayer(playerid);
+			session.setAttribute("player", player);
+			DateUtils dateUtils = new DateUtils();
+			session.setAttribute("dateUtils", dateUtils);
+			response.sendRedirect(request.getContextPath() + "/example.jsp");
+		} else {
+			String error = "SomeThing went wrong";
+			request.setAttribute("error", error);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
+		/*
 		HttpSession session = request.getSession();				
 		Player player = new Player();
 		player.testFill();
@@ -37,22 +60,6 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("player", player);
 		session.setAttribute("dateUtils", dateUtils);
 		response.sendRedirect(request.getContextPath() + "/example.jsp");
-		
-		
-		//request.getRequestDispatcher("example.jsp").forward(request, response);
-		
-		//String email = request.getParameter("email");
-		//String password = request.getParameter("password");
-		
-		/*
-		if (email.equals("martin@martin-kohne.de") && password.equals("123")) {
-			//player.setEmail(email);
-			//player.setName("Martin");
-			session.setAttribute("user", player);
-			request.getRequestDispatcher("main.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
 		*/
 		
 	}
