@@ -23,7 +23,7 @@ public class GameLoader {
 		player.addPlanets(DBPlanet.getPlanetsById(playerid));
 		
 		// DataBase get events by Player ID
-		
+		// TODO
 		// DataBase get messages by Player ID
 		
 		
