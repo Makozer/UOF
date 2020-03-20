@@ -1,7 +1,7 @@
 package database;
 
 import java.sql.*;
-import java.util.Date;
+import java.util.*;
 
 import database.utils.PasswordUtils;
 import game.player.*;
@@ -30,8 +30,8 @@ public class DBPlayer {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
 					"WITH uid AS (INSERT INTO public.player(" 
-							+ "displayname, prename, surname, email, created, lastlogin, birthday" + ")"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?)"
+							+ "displayname, prename, surname, email, birthday" + ")"
+					+ " VALUES (?, ?, ?, ?, ?)"
 					+ " RETURNING userid)"
 					+ " INSERT INTO passwoerter(userid, passwort) select userid, ? from uid;"
 				);
@@ -39,14 +39,11 @@ public class DBPlayer {
 				pstmt.setString(2, pd.getPreName());
 				pstmt.setString(3, pd.getSurName());
 				pstmt.setString(4, pd.getEmail());
-				int now = (int)(new Date().getTime() / 1000);
-				pstmt.setInt(5, now);
-				pstmt.setInt(6, now);
-				pstmt.setInt(7, (int)(pd.getBirthday().getTime() / 1000));
-				pstmt.setString(8, PasswordUtils.getSaltyPassword(password));
+				pstmt.setTimestamp(5, new Timestamp(pd.getBirthday().getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+				pstmt.setString(6, PasswordUtils.getSaltyPassword(password));
 
 
-			System.out.println("[DEBUG] SQL-Statement Benutzer aktualisieren: " + pstmt.toString());	
+			System.out.println("[DEBUG] SQL-Statement createPlayer: " + pstmt.toString());	
 			int updatedRows = pstmt.executeUpdate();
 			if (updatedRows > 0) {
 				return true; 
@@ -66,7 +63,7 @@ public class DBPlayer {
 		return false;
 	}
 	
-	public static boolean updatePlayer(Player player) {
+	private static boolean updatePlayer(Player player) {
 		return false;
 	}
 	
@@ -125,21 +122,21 @@ public class DBPlayer {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT userid, email, displayname, prename, surname, created, lastlogin, birthday FROM public.player WHERE userid = ?" 
+					"SELECT userid, email, displayname, prename, surname, birthday, created, lastlogin FROM public.player WHERE userid = ?" 
 					);
 			pstmt.setInt(1, playerid);
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
 				PersonalData pd = new PersonalData(playerid, rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), 
-												new Date((rs.getInt(6) * 1000)), new Date((rs.getInt(7) * 1000)), new Date((rs.getInt(8)) * 1000));
+												DateUtils.stampToDate(rs.getString(6)), DateUtils.stampToDate(rs.getString(7)), DateUtils.stampToDate(rs.getString(8)));
 				return new Player(pd, techtree);
 			} else {
 				return null;
 			}
 			
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println("getPlayerById SQL Error " + e.getMessage());
 		}
 		
 		return player;

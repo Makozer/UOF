@@ -60,5 +60,11 @@ public class Message implements Comparable<Message> {
 		Message other = (Message) o;		
 		return this.timestamp.compareTo(other.getTimestamp());
 	}
+
+	@Override
+	public String toString() {
+		return "Message [msgId=" + msgId + ", fromId=" + fromId + ", fromName=" + fromName + ", toId=" + toId
+				+ ", toName=" + toName + ", title=" + title + ", message=" + message + ", timestamp=" + timestamp + "]";
+	}
 	
 }

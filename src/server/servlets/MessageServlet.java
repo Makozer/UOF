@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import game.player.Player;
+import game.utils.NumberUtils;
 
 /**
  * Servlet implementation class MessageServlet
@@ -32,7 +36,11 @@ public class MessageServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();		
+		Player player = (Player)session.getAttribute("player");
+		int delmsg = NumberUtils.stringAsInt(request.getParameter("msgdel"));
+		player.deleteMessage(delmsg);
+		response.sendRedirect(request.getContextPath() + "/messages.jsp");
 	}
 
 }

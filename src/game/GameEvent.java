@@ -21,7 +21,7 @@ public class GameEvent implements Comparable<GameEvent> {
 	private Coordinates 			coordinates = null;
 	private Coordinates 			target = null;	
 	private String					buildingName = "";
-	private Fleet					fleet = null;	
+	private Fleet					fleet = new Fleet();	
 	private ArrayList<ARessource> 	ressource = null; 	
 	private Date 					startTime = null;
 	private Date 					arrivalTime = null;

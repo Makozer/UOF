@@ -1,6 +1,7 @@
 package server.servlets.game;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import game.*;
 import game.player.Player;
+import static game.settings.GameSettings.*;
 
 /**
  * Servlet implementation class BuildingServlet
@@ -39,13 +41,18 @@ public class BuildingServlet extends HttpServlet {
 		HttpSession session = request.getSession();	
 		String building = request.getParameter("building");
 		Player player = (Player)session.getAttribute("player");
+		if (DEBUGMODE) {System.out.println("Trying to build building(" + building + ")");}
 		if (player.getActivePlanet().isBuilding()) {
 			GameEvent event = player.getBuildEventByCoords(player.getActivePlanet().getCoords());
-			//System.out.println("doCancelBuild:" + event.toString());
+			if (DEBUGMODE) {System.out.println("doCancelBuild:" + event.toString());}
 			player.doCancelBuild(event);
 		} else {
-			//System.out.println("doBuild(" + building + ")");
-			player.doBuild(building);
+			if (DEBUGMODE) {System.out.println("doBuild(" + building + ")");}
+			if(!player.doBuild(building)) {
+				request.setAttribute("error", "Nicht genug Ressourcen!");
+				request.getRequestDispatcher("buildings.jsp").forward(request, response); 
+				return;
+			};
 		}		
 		response.sendRedirect(request.getContextPath() + "/buildings.jsp");
 	}

@@ -1,6 +1,7 @@
 package community.message;
 
 import java.util.*;
+import static game.settings.GameSettings.*;
 
 import game.utils.*;
 
@@ -10,6 +11,7 @@ public class GameMessage extends Message {
 		super(title, message);
 		this.timestamp = new Date();
 		this.msgId = NumberUtils.getRndInt(1000000, 9999999);
+		if (DEBUGMODE) { System.out.println(this.toString());}
 	}	
 
 }

@@ -18,6 +18,11 @@ public class AResMiningBuilding extends ABuilding {
 		this.date = date;
 		this.ressource = ressource;
 	}
+	
+	public void update() {
+		this.ressource.setValue(this.getRessourceValue());
+		this.date = new Date();
+	}
 
 	
 	/** Returns the actual Value of the Ressource

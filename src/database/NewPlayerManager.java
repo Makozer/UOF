@@ -1,5 +1,6 @@
 package database;
 
+import java.util.*;
 import game.planet.*;
 import game.player.*;
 import game.research.*;
@@ -43,7 +44,8 @@ public class NewPlayerManager {
 										500, 500, 500, 0,
 										1, 0, 0,
 										1, 1, 1, 0,
-										1, 1, 1, 0);
+										1, 1, 1, 0,
+										new Date());				
 		
 		// one last check
 		if (DBPlanet.hasPlanet(firstplanetCoords)) { System.out.println("PLANET MEGA ERROR"); return null; }

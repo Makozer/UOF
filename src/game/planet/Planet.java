@@ -13,10 +13,12 @@ import game.planet.buildings.mining.*;
 import game.planet.buildings.storage.*;
 import game.research.*;
 import game.ressource.*;
+import game.utils.DateUtils;
 import game.utils.NumberUtils;
 
 public class Planet {
 	
+	private Date					lastupdate = new Date();
 	private TechTree				techtree = null;
 	
 	// Basic Propertys
@@ -36,7 +38,7 @@ public class Planet {
 	// Fleet that idles on the Planet
 	private Fleet					fleet = new Fleet();
 	
-	public Planet(TechTree techtree, Coordinates coordinates, String name, String buildingSQL, String ressourceSQL, String fleetSQL, String spaceportqueueSQL, int timestamp) {
+	public Planet(TechTree techtree, Coordinates coordinates, String name, String buildingSQL, String ressourceSQL, String fleetSQL, String spaceportqueueSQL, String timestamp) {
 		this.sqlLoad(techtree, coordinates, name, buildingSQL, ressourceSQL, fleetSQL, spaceportqueueSQL, timestamp);
 	}
 	
@@ -44,21 +46,22 @@ public class Planet {
 						int ironValue, int rareEarthValue, int waterValue, int tritiumValue, 
 						int headQuarterLvl, int universityLvl, int spacePortLvl, 
 						int ironMineLvl, int rareEarthMineLvl, int fountainLvl, int tritiumFabricLvl, 
-						int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl) {
+						int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl, Date lastupdate) {
 		this.createThisPlanet(techtree, coordinates, name, 
 				ironValue, rareEarthValue, waterValue, tritiumValue, 
 				headQuarterLvl, universityLvl, spacePortLvl, 
 				ironMineLvl, rareEarthMineLvl, fountainLvl, tritiumFabricLvl, 
-				ironStorageLvl, rareEarthStorageLvl, waterStorageLvl, tritiumStorageLvl);
+				ironStorageLvl, rareEarthStorageLvl, waterStorageLvl, tritiumStorageLvl, lastupdate);
 	}
 	
 	private void createThisPlanet(TechTree techtree, Coordinates coordinates, String name, 
 			int ironValue, int rareEarthValue, int waterValue, int tritiumValue, 
 			int headQuarterLvl, int universityLvl, int spacePortLvl, 
 			int ironMineLvl, int rareEarthMineLvl, int fountainLvl, int tritiumFabricLvl, 
-			int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl) {
+			int ironStorageLvl, int rareEarthStorageLvl, int waterStorageLvl, int tritiumStorageLvl,
+			Date lastupdate) {
 		
-		Date date = new Date(); // get the actual Date
+		Date date = new Date(lastupdate.getTime());
 		// Basic
 		this.techtree = techtree;
 		this.coordinates = coordinates;
@@ -77,6 +80,7 @@ public class Planet {
 		HeadQuarter headQuarter = new HeadQuarter(techtree, headQuarterLvl);
 		University university = new University(headQuarter, techtree, universityLvl);
 		SpacePort spacePort = new SpacePort(headQuarter, techtree, spacePortLvl);
+		spacePort.setDate(date);
 		buildings.put(headQuarter.getName(), headQuarter);
 		buildings.put(university.getName(), university);
 		buildings.put(spacePort.getName(), spacePort);
@@ -110,7 +114,8 @@ public class Planet {
 				6666, 3333, 9999, 666, 
 				3, 2, 1, 
 				5, 4, 3, 2, 
-				6, 5, 4, 3);
+				6, 5, 4, 3, new Date());
+		
 		System.out.println("Planet Data");
 		System.out.println("Name: " + planet1.getName());
 		System.out.println("Coords: " + planet1.getCoords().asCoords());
@@ -135,7 +140,15 @@ public class Planet {
 	}
 	
 	public void update() {
+		updateRessources();
 		updateShipQueue();		
+	}
+	
+	public void updateRessources() {
+		this.getIronMine().update();
+		this.getRareEarthMine().update();
+		this.getFountain().update();
+		this.getTritiumFabric().update();
 	}
 	
 	public void updateShipQueue() {
@@ -348,8 +361,9 @@ public class Planet {
 		return this.ressources.get(name);
 	}
 	
-	private void sqlLoad(TechTree techtree, Coordinates coordinates, String name, String ressourceSQL, String buildingSQL, String fleetSQL, String spaceportqueueSQL, int timestamp) {
+	private void sqlLoad(TechTree techtree, Coordinates coordinates, String name, String ressourceSQL, String buildingSQL, String fleetSQL, String spaceportqueueSQL, String timestamp) {
 		
+		Date lastupdate = DateUtils.stampToDate(timestamp);
 		HashMap<String, Integer> data = new HashMap<String, Integer>();
 		
 		String[] sql = buildingSQL.split( Pattern.quote( ";" ) );
@@ -371,11 +385,11 @@ public class Planet {
 							data.get("Iron"), data.get("RareEarth"), data.get("Water"), data.get("Tritium"), 
 							data.get("HeadQuarter"), data.get("University"), data.get("SpacePort"), 
 							data.get("IronMine"), data.get("RareEarthMine"), data.get("Fountain"), data.get("TritiumFabric"), 
-							data.get("IronStorage"), data.get("RareEarthStorage"), data.get("WaterStorage"), data.get("TritiumStorage"));
+							data.get("IronStorage"), data.get("RareEarthStorage"), data.get("WaterStorage"), data.get("TritiumStorage"), lastupdate);
 
 		this.getSpacePort().setBuildQueue(ShipFabric.createArrayFromSQL(techtree, spaceportqueueSQL));
 		
-		Date date = new Date((timestamp * 1000));
+		Date date = lastupdate;
 		this.getIronMine().setDate(date);
 		this.getRareEarthMine().setDate(date);
 		this.getFountain().setDate(date);
@@ -413,5 +427,13 @@ public class Planet {
 		}
 		return output;
 	}
+
+	public Date getLastupdate() {
+		return lastupdate;
+	}
+
+	public void setLastupdate(Date lastupdate) {
+		this.lastupdate = lastupdate;
+	}	
 
 }

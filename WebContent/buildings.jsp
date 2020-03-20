@@ -8,6 +8,7 @@
 
 <form action="./BuildingServlet" method="post">
 <h1>Gebäude auf ${ player.getActivePlanet().getName()} (${player.getActivePlanet().getCoords().asCoords()})</h1>
+<h2 class="error">${error}</h2>
 <table border="1">
 <tr><th colspan="2">Standard Gebäude</th></tr>
 <c:forEach var="b" items="${player.getActivePlanet().getBasicBuildings()}">

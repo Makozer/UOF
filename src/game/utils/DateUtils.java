@@ -1,8 +1,22 @@
 package game.utils;
 
 import java.util.*;
+import java.util.regex.Pattern;
+import static game.settings.GameSettings.*;
 
 public class DateUtils {
+	
+	public static void main(String[] args) {
+		// STAMP TEST
+		Date date = new Date();
+		System.out.println(date);
+		String stamp = DateUtils.dateToStamp(date);
+		System.out.println(stamp);
+		Date date2 = DateUtils.stampToDate(stamp);
+		System.out.println(date2);
+		String stamp2 = DateUtils.dateToStamp(date2);
+		System.out.println(stamp2);
+	}
 	
 	public static Date getDate(int year, int month, int day) {
 		return getDate(year, month, day, 0, 0, 0, 0);
@@ -67,6 +81,46 @@ public class DateUtils {
 		}
 		
 		return output;
+	}
+	
+	/** Generates a Date with a given timestamp
+	 * @param stamp MUST LOOK LIKE 2020-03-20 01:20:58.000000+01
+	 * @return Date with the stamp as time
+	 */
+	public static Date stampToDate(String stamp) {
+		// Check if NULL
+		if (stamp == null || stamp.length() == 0) {
+			if (DEBUGMODE) {System.out.println("stamp==NULL||0 AT stampToDate");}
+			return null;
+		}
+		
+		String[] split = stamp.split( Pattern.quote( " " ) );
+		String[] cal = split[0].split( Pattern.quote( "-" ) );
+		int year = NumberUtils.stringAsInt(cal[0]);
+		int month = NumberUtils.stringAsInt(cal[1]);
+		int day = NumberUtils.stringAsInt(cal[2]);
+		String[] time = split[1].split( Pattern.quote( ":" ) );
+		int hour = NumberUtils.stringAsInt(time[0]);
+		int min = NumberUtils.stringAsInt(time[1]);
+		int sec = NumberUtils.stringAsInt(time[2].split(Pattern.quote("."))[0]);
+		return getDate(year, month, day, hour, min, sec);
+	}
+	
+	public static String dateToStamp(Date date) {
+		String stamp = "";
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		stamp += cal.get(Calendar.YEAR) + "-" + zeroFill(cal.get(Calendar.MONTH) + 1) + "-" + zeroFill(cal.get(Calendar.DAY_OF_MONTH)) + " ";
+		stamp += zeroFill(cal.get(Calendar.HOUR_OF_DAY)) + ":" + zeroFill(cal.get(Calendar.MINUTE)) + ":" + zeroFill(cal.get(Calendar.SECOND)) + ".000000+01";
+		return stamp;
+	}
+	
+	private static String zeroFill(int n) {
+		if (n < 10) {
+			return "0" + n;
+		} else {
+			return "" + n;
+		}		
 	}
 
 }
