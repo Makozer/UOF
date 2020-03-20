@@ -5,6 +5,7 @@ import static game.settings.GameSettings.DEBUGMODE;
 import java.util.*;
 
 import community.message.*;
+import database.DBEvent;
 import database.DBPeon;
 import database.DBPlanet;
 import game.GameEvent;
@@ -30,6 +31,11 @@ public class Player {
 	private int 						activePlanet 	= 0;
 	
 	public Player() {}
+	
+	public Player(int playerid, TechTree techtree) {
+		this.techtree = techtree;
+		this.persData = new PersonalData(playerid, "", "", "", "", new Date(), new Date(), new Date());
+	}
 
 	public Player(PersonalData data, TechTree techtree) {
 		this.persData = data;
@@ -38,22 +44,6 @@ public class Player {
 
 	public static void main(String[] args) {
 		// Testmain
-		
-		Player player = new Player();
-		TechTree techtree = new TechTree();
-		techtree.testFill();
-		player.testFill();
-		player.setTechtree(techtree);
-		System.out.println("Alle Schiffe:");
-		for (ASpaceShip s: ShipRegister.getWholeShipList(techtree)) {
-			System.out.println(s.toString());
-		}
-		System.out.println("Erforschte Schiffe:");
-		for (ASpaceShip s: techtree.getAllResearchedShips()) {
-			System.out.println(s.toString());
-		}
-		//System.out.println(player.getDefendEvents().size());
-
 	}
 	
 	public void update() {
@@ -123,49 +113,7 @@ public class Player {
 		
 		// Update DataBase
 		DBPlanet.updatePlanet(this, planet);
-	}
-	
-	public void init() {
-		// initalize
-	}
-	
-	public void testFill() {
-		
-		PersonalData data = new PersonalData(1337, "mk113@web.de", "Makozer", "Martin", "K", DateUtils.getDate(1989, 3, 11), DateUtils.getDate(2020, 2, 24), new Date());
-		this.setPersData(data);
-		
-		TechTree techtree = new TechTree();
-		techtree.testFill();
-		this.setTechtree(techtree);
-		Planet planet = new Planet(techtree, new Coordinates(1, 33, 7), "Martin und Nehles Planet", 66666, 33333, 66666, 666, 3, 2, 2, 5, 2, 3, 1, 4, 3, 2, 1, new Date());
-		planet.testFill();
-		this.addPlanet(planet);
-		
-		
-		// Erstellung von 4 BeispielEvents
-		Fleet fleet1 = new Fleet();
-		Fleet fleet2 = new Fleet();
-		fleet1.testFill(techtree);
-		fleet2.testFill(techtree);
-		
-		Date in1h = DateUtils.getFutureDateByHours(1);
-		Date in2h = DateUtils.getFutureDateByHours(2);
-		Date in11h = DateUtils.getFutureDateByHours(11);
-		
-		ArrayList<ARessource> ress = new ArrayList<ARessource>(Arrays.asList(new Iron(1234), new Water(4321)));
-
-		GameEvent attack 	= new GameEvent(GameEvent.Type.ATTACK, 		this.getPlanet(0).getCoords(), 	new Coordinates(1, 33, 6), 		fleet1, null, new Date(), in1h);
-		GameEvent defend 	= new GameEvent(GameEvent.Type.DEFEND, 		new Coordinates(1, 33, 8), 		this.getPlanet(0).getCoords(), 	fleet2, null, new Date(), in2h);
-		GameEvent transport = new GameEvent(GameEvent.Type.TRANSPORT, 	this.getPlanet(0).getCoords(), 	new Coordinates(1, 33, 8), 		fleet2, ress, new Date(), in11h);
-		//GameEvent build 	= new GameEvent(GameEvent.Type.BUILD, 		this.getPlanet(0).getCoords(), 	"HeadQuarter",					ress, new Date(), in22h);
-		
-		this.events.add(attack);
-		this.events.add(defend);
-		this.events.add(transport);
-		//this.events.add(build);
-		
-		this.addMessage(new GameMessage("HeadQuarter wurde auf 1:33:7 auf LvL 11 erh�ht!", "Test"));
-		this.addMessage(new CommunityMessage(1337, 666, "You're evil", "muahahahhahaa", new Date()));
+		DBEvent.deleteEvent(event.getId());
 	}
 	
 	public void increaseRess(Planet planet, ArrayList<ARessource> ress) {
@@ -229,11 +177,16 @@ public class Player {
 		
 		// Creating GameEvent
 		Date endTime = new Date(new Date().getTime() + (long)(building.getTimeToBuild() * 1000));
-		GameEvent event = new GameEvent(GameEvent.Type.BUILD, planetcoords, buildingName, buildCosts, new Date(), endTime);
+		GameEvent event = new GameEvent(this.getPersData().getId(), GameEvent.Type.BUILD, planetcoords, buildingName, buildCosts, new Date(), endTime);
+		
+		//  DB Inform, get EventId
+		int eventid = DBEvent.createEvent(event);
+		if (eventid == 0) { return false; }
+		event.setId(eventid);
 		this.addEvent(event);
 		planet.setIsBuilding(buildingName);
 		
-		// TODO DataBase Connection :)		
+	
 		return true;
 	}
 	
@@ -251,7 +204,8 @@ public class Player {
 		this.removeEvent(event);
 		planet.setIsBuilding("");
 		
-		// TODO DataBase Connection -> delete that event	
+		// DataBase inform
+		DBEvent.deleteEvent(event.getId());	
 		return true;
 	}
 	
@@ -287,6 +241,20 @@ public class Player {
 	
 	public void addEvent(GameEvent event) {
 		this.events.add(event);
+	}
+	
+	public void setEvents(ArrayList<GameEvent> events) {
+		this.events = events;
+		// Build
+		for (Planet planet : planets) {
+			GameEvent buildevent = this.getBuildEventByCoords(planet.getCoords());
+			// GameEvent researchevent = this.getResearchEventByCoords(planet.getCoords());
+			if (buildevent != null) {
+				planet.setIsBuilding(buildevent.getBuildingName());
+			}
+			// if researchevent != null
+		}
+		// TODO same for research at university
 	}
 	
 	public void removeEvent(GameEvent event) {

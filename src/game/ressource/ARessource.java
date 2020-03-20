@@ -46,6 +46,7 @@ public abstract class ARessource {
 	}
 	
 	public abstract ARessource cloneMe();
+	public abstract ARessource cloneMe(int value);
 	public abstract ARessource cloneMe(double multiply);
 	
 	public String getName() {

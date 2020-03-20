@@ -126,7 +126,8 @@ public class FleetServlet extends HttpServlet {
         Date arrivalTime = TravelCalc.calculateTime(planet.getCoords(), target, newFleet.getSpeed());
         
         // Adding the Event
-        GameEvent event = new GameEvent(GameEvent.Type.valueOf(type), planet.getCoords(), target, newFleet, ressources, new Date(), arrivalTime);
+        GameEvent event = new GameEvent(0, player.getPersData().getId(), 0, GameEvent.Type.valueOf(type), planet.getCoords(), target, "", newFleet, ressources, new Date(), arrivalTime);
+        // TODO DATABASE
         player.addEvent(event);
         
         // Redirect

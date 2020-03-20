@@ -20,4 +20,9 @@ public class Iron extends ARessource {
 		return new Iron(this.getValue());
 	}
 
+	@Override
+	public ARessource cloneMe(int value) {
+		return new Iron(value);
+	}	
+
 }

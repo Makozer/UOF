@@ -41,6 +41,7 @@ public class BuildingServlet extends HttpServlet {
 		HttpSession session = request.getSession();	
 		String building = request.getParameter("building");
 		Player player = (Player)session.getAttribute("player");
+		if (player == null) { return; } else { player.update(); }
 		if (DEBUGMODE) {System.out.println("Trying to build building(" + building + ")");}
 		if (player.getActivePlanet().isBuilding()) {
 			GameEvent event = player.getBuildEventByCoords(player.getActivePlanet().getCoords());

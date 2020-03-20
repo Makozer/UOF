@@ -19,5 +19,10 @@ public class Tritium extends ARessource {
 	public ARessource cloneMe() {
 		return new Tritium(this.getValue());
 	}
+	
+	@Override
+	public ARessource cloneMe(int value) {
+		return new Tritium(value);
+	}
 
 }

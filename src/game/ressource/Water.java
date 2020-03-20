@@ -19,5 +19,10 @@ public class Water extends ARessource {
 	public ARessource cloneMe() {
 		return new Water(this.getValue());
 	}
+	
+	@Override
+	public ARessource cloneMe(int value) {
+		return new Water(value);
+	}
 
 }

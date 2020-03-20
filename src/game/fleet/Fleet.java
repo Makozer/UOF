@@ -25,36 +25,6 @@ public class Fleet implements Iterable<ASpaceShip> {
 
 	public static void main(String[] args) {
 		
-		// TechTree initialisieren, wird fürs Schiff benötigt
-		TechTree techtree = new TechTree();
-		techtree.setLevel("LaserPointer", 11);
-		Research lp = new LaserPointer(techtree);
-		System.out.println(lp.toString());
-		techtree.addResearch(lp);
-		
-		
-		Fleet fleet = new Fleet();
-		SpyDrone spy = new SpyDrone(techtree, 2);
-		Falcon falcon = new Falcon(techtree, 2);
-		techtree.setLevel(spy.getName(), 10);
-		techtree.setLevel(falcon.getName(), 10);
-		fleet.addShip(spy);
-		fleet.addShip(falcon);
-		System.out.println(falcon.toString());
-		System.out.println(fleet.toString());
-		System.out.println(" ");
-		System.out.println("SQL Test");
-		String sql = fleet.asSQLString();
-		System.out.println(sql);
-		Fleet fleet2 = new Fleet(techtree, sql);
-		System.out.println("SQL2");
-		System.out.println(fleet2.asSQLString());
-	}
-	
-	public void testFill(TechTree techtree) {
-		this.addShip(new Falcon(techtree, 666));
-		this.addShip(new Cheetah(techtree, 33));
-		this.addShip(new Yamato(techtree, 1));
 	}
 	
 	public int getAttack() {

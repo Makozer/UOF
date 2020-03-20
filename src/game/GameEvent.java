@@ -17,17 +17,21 @@ public class GameEvent implements Comparable<GameEvent> {
 		BUILD
 	}
 	
+	private int						id = 0;
+	private int						playerid = 0;
+	private int						targetplayerid = 0;
 	private Type 					type = null;	
-	private Coordinates 			coordinates = null;
-	private Coordinates 			target = null;	
+	private Coordinates 			coordinates = new Coordinates(0, 0, 0);
+	private Coordinates 			target = new Coordinates(0, 0, 0);	
 	private String					buildingName = "";
 	private Fleet					fleet = new Fleet();	
-	private ArrayList<ARessource> 	ressource = null; 	
-	private Date 					startTime = null;
-	private Date 					arrivalTime = null;
-	private Date 					endTime = null;	
+	private ArrayList<ARessource> 	ressource = new ArrayList<ARessource>(); 	
+	private Date 					startTime = new Date();
+	private Date 					arrivalTime = new Date();
+	private Date 					endTime = new Date();	
 	
-	public GameEvent(Type type, Coordinates coordinates, String buildingName, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
+	public GameEvent(int playerid, Type type, Coordinates coordinates, String buildingName, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
+		this.playerid = playerid; 
 		this.type = type;
 		this.coordinates = coordinates;
 		this.buildingName = buildingName;
@@ -36,19 +40,22 @@ public class GameEvent implements Comparable<GameEvent> {
 		this.endTime = endTime;
 	}
 	
-	public GameEvent(Type type, Coordinates coordinates, Coordinates target, Fleet fleet, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
+	public GameEvent(int id, int playerid, int toplayerid, Type type, Coordinates coordinates, Coordinates target, String buildingName, Fleet fleet, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
+		this.id = id;
+		this.playerid = playerid;
+		this.targetplayerid = toplayerid;
 		this.type = type;
 		this.coordinates = coordinates;
 		this.target = target;
+		this.buildingName = buildingName;
 		this.fleet = fleet;
 		this.ressource = ressource;
 		this.startTime = startTime;		
 		this.endTime = endTime;
-		calculateTime();
-	}
-	
-	private void calculateTime() {
-		this.arrivalTime = new Date(new Date().getTime() + (this.endTime.getTime() - this.startTime.getTime() / 2));
+	}	
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	public Type getType() {
@@ -71,10 +78,12 @@ public class GameEvent implements Comparable<GameEvent> {
 	}
 
 	public Fleet getFleet() {
+		if (this.fleet == null) {return new Fleet();}
 		return fleet;
 	}
 
 	public ArrayList<ARessource> getRessource() {
+		if (this.fleet == null) {return new ArrayList<ARessource>();}
 		return ressource;
 	}
 
@@ -101,13 +110,36 @@ public class GameEvent implements Comparable<GameEvent> {
 		return this.endTime.compareTo(o.getEndTime());
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getPlayerid() {
+		return playerid;
+	}
+
+	public void setPlayerid(int playerid) {
+		this.playerid = playerid;
+	}
+
+	public int getTargetplayerid() {
+		return targetplayerid;
+	}
+
+	public void setTargetplayerid(int toplayerid) {
+		this.targetplayerid = toplayerid;
+	}
+
 	@Override
 	public String toString() {
-		return "GameEvent [type=" + type + ", coordinates=" + coordinates + ", target=" + target + ", buildingName="
-				+ buildingName + ", fleet=" + fleet + ", ressource=" + ressource + ", startTime=" + startTime
-				+ ", arrivalTime=" + arrivalTime + ", endTime=" + endTime + "]";
-	}
-	
-	
-	
+		return "GameEvent [id=" + id + ", playerid=" + playerid + ", targetplayerid=" + targetplayerid + ", type="
+				+ type + ", coordinates=" + coordinates + ", target=" + target + ", buildingName=" + buildingName
+				+ ", fleet=" + fleet + ", ressource=" + ressource + ", startTime=" + startTime + ", arrivalTime="
+				+ arrivalTime + ", endTime=" + endTime + "]";
+	}	
+
 }
