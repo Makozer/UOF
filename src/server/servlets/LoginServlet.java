@@ -36,9 +36,9 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email"); 
 		String password = request.getParameter("password"); 
 		
-		int playerid = DBPlayer.getPlayerIdByEmail(email);
-		System.out.println("playerid login:" + playerid);
+		int playerid = DBPlayer.getPlayerIdByEmail(email);		
 		boolean success = DBLogin.comparePassword(playerid, password);
+		System.out.println("playerid login:" + playerid + ": " + success);
 		
 		if (success) {
 			HttpSession session = request.getSession();
@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("player", player);
 			DateUtils dateUtils = new DateUtils();
 			session.setAttribute("dateUtils", dateUtils);
-			response.sendRedirect(request.getContextPath() + "/example.jsp");
+			response.sendRedirect(request.getContextPath() + "/overview.jsp");
 		} else {
 			String error = "SomeThing went wrong";
 			request.setAttribute("error", error);

@@ -15,14 +15,21 @@
 <table class="main">
 	<tr>
 		<td colspan="3">
+			<c:if test="${not empty player}" >
 			<jsp:include page="headmenu.jsp" />
+			</c:if>
 		</td>
 	</tr>
 	<tr>
 		<td style="width:15%;">
+			<a href="index.jsp">index</a><br />
+			<c:if test="${not empty player}" >			
 			<jsp:include page="leftmenu.jsp" />
+			</c:if>
 		</td>
 		<td style="text-align: center;">
+			<c:if test="${not empty player}" >
+
 			<table class="planetResOv">
 				<tr>
 					<td colspan="4" style="padding:11px;">${player.getActivePlanet().getCoords().asCoords()}  ${player.getActivePlanet().getName()} </td>
@@ -40,3 +47,4 @@
 					<td>${player.getActivePlanet().getTritiumFabric().getResValAsString()}</td>
 				</tr>
 			</table>
+			</c:if>

@@ -3,7 +3,7 @@
 
 <div style="">
 
-<a href="index.jsp">index</a><br />
+
 <ul>
 <li><a href="Page?p=overview">Übersicht</a></li>
 <li><a href="Page?p=buildings">Gebäude</a></li>

@@ -2,12 +2,16 @@ package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import database.utils.*;
 import game.*;
 import game.planet.*;
+import game.player.*;
+import game.utils.ResultToTable;
 
 import static game.settings.GameSettings.*;
 
@@ -57,6 +61,26 @@ public class DBEvent {
 		}
 		
 		return false;
+	}
+	
+	public static ArrayList<GameEvent> getEvents(Player player) {
+		ArrayList<GameEvent> events = new ArrayList<GameEvent>();
+		
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"SELECT eventid, type, thisgalaxy, thissolarsystem, thisplanet, targetgalaxy, targetsolarsystem, targetplanet, building, fleet, ressource, starttime, endttime "
+					+ "FROM public.event "
+					+ "WHERE touserid = " 
+					+ player.getPersData().getId());
+			ResultSet rs = pstmt.executeQuery();
+			//return ResultToTable.convertMessages(rs, player); 
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		
+		return events;
 	}
 
 }

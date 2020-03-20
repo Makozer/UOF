@@ -11,12 +11,16 @@
 <h2>Login</h2>
 <form action="./LoginServlet" method="post">
 <h3 class="error">${error}</h3>
-Login: <input type="email" name="email"><br />
-Password: <input type="password" name="password"><br />
-<button type="submit">Login</button>
+<table>
+<tr><td>EMail:</td><td><input type="email" name="email"></td></tr>
+<tr><td>Password:</td><td><input type="password" name="password"></td></tr>
+<tr><td>&nbsp;</td><td><button type="submit" style="width:111px;">Login</button></td></tr>
+</table>
 </form>
 <br />
-<a href="register.jsp">No account yet? Register!</a>
+<a href="register.jsp" style="font-size:20px;">No account yet? Register!</a>
+<br />
+<a href="#" style="font-size:20px;">Forgot Password?</a>
 
 
 <jsp:include page="./include/footer.jsp" />
