@@ -144,6 +144,35 @@ public class TechTree {
 		return output;
 	}
 	
+	public ArrayList<Research> getResearchedPropulsion() {
+		ArrayList<Research> propulsion = new ArrayList<Research>();
+		for (Research r : ResearchRegister.getPropulsionResearch(this)) {
+			if (r.getRequiredTech().size() == 0) {
+				propulsion.add(r);
+			} else {
+				// TODO 
+			}
+		}
+		return propulsion;
+	}
+	
+	public ArrayList<Research> getResearchedT1Ships() {
+		ArrayList<Research> t1ships = new ArrayList<Research>();
+		boolean check = true;
+		for (Research r : ResearchRegister.getShipT1Research(this)) {
+			if (r.getRequiredTech().size() == 0) {
+				t1ships.add(r);
+			} else {
+				check = true;
+				for (Research req : r.getRequiredTech()) {
+					if (!(this.getLevel(req.getName()) > 0)) { check = false; break; }
+				}	
+				if (check) { t1ships.add(r); }
+			}
+		}
+		return t1ships;
+	}
+	
 	private void sqlLoad(String sql) {
 		String[] levels = sql.split( Pattern.quote( ";" ) );
 		String[] techKeyValue = null;

@@ -148,8 +148,12 @@ public abstract class ASpaceShip extends AGameObject {
 		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
 				+ (long)(this.getTimeToBuild(spaceportlevel) * 1000)			
 					));
-	}
+	}	
 	
+	public AMath getLevelMod() {
+		return levelMod;
+	}
+
 	public double getModValue() {
 		return levelMod.getValue(this.getLevel());
 	}

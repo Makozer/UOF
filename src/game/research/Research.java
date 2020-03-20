@@ -1,5 +1,7 @@
 package game.research;
 
+import static game.settings.GameSettings.GAME_SPEED;
+
 import java.util.*;
 import game.ressource.ARessource;
 import game.utils.*;
@@ -10,10 +12,12 @@ public class Research {
 		ATTACK,
 		DEFEND,
 		SPEED,
-		CAPACITY
+		CAPACITY,
+		SHIP
 	}
 	
 	protected ResearchEnum 				type 			= null;
+	protected String					name			= "";
 	protected TechTree					techtree 		= null;
 	protected AMath 					modification 	= null;
 	protected ArrayList<ARessource> 	costs 			= null;
@@ -25,9 +29,10 @@ public class Research {
 	
 
 
-	public Research(ResearchEnum type, TechTree techtree, AMath modification, ArrayList<ARessource> costs,
+	public Research(ResearchEnum type, String name, TechTree techtree, AMath modification, ArrayList<ARessource> costs,
 			ArrayList<Research> requiredTech) {
 		this.type = type;
+		this.name = name;
 		this.techtree = techtree;
 		this.modification = modification;
 		this.costs = costs;
@@ -48,12 +53,40 @@ public class Research {
 		return costs;
 	}	
 	
+	public int getTimeToResearch() {
+		int timeToBuild = 0;
+		for (ARessource r : this.getResearchCosts()) {
+			timeToBuild += r.getValue();
+		}
+		return timeToBuild;
+	}
+	
+	public int getTimeToResearch(int universitylevel) {	
+		int output = 1;
+		output += 	this.getTimeToResearch();
+		output -= 	(int)(this.getTimeToResearch() / 100.0 * this.getModValue());
+		output -= 	(int)(this.getTimeToResearch() / 100.0 * (universitylevel * 2));
+		output = 	(int)(output / GAME_SPEED);
+		return output;
+	}
+	
+	public String getTimeToResearchAsString(int universitylevel) {
+		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
+				+ (long)(this.getTimeToResearch(universitylevel) * 1000)			
+					));
+	}
+	
 	public ResearchEnum getType() {
 		return type;
 	}
 
 	public String getName() {
-		return this.getClass().getSimpleName();
+		return name;
+	}
+	
+	public String getDescription() {
+		// TODO
+		return "";
 	}
 	
 	public int getLevel() {

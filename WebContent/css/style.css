@@ -60,6 +60,11 @@ input, button, option, textarea {
 	background-color: #a00;
 }
 
+.main .attack td {
+	background-color: green;
+}
+
+
 .intinput {
 	width:55px;
 }

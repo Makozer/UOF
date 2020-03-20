@@ -5,6 +5,9 @@ import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+
+import database.DBEvent;
+import database.DBPlayer;
 import game.*;
 import game.fleet.*;
 import game.planet.*;
@@ -78,6 +81,9 @@ public class FleetServlet extends HttpServlet {
         // Getting the type 
         if (!type.equals("ATTACK") && !type.equals("TRANSPORT")) { return; }
         
+        // Getting target player id
+        int targetplayerid = DBPlayer.getPlayerIdByCoordinates(target);
+        
         // Getting the ressources if its a transport
         if (type.equals("TRANSPORT")) {
         	iron = new Iron(sIron);
@@ -126,8 +132,9 @@ public class FleetServlet extends HttpServlet {
         Date arrivalTime = TravelCalc.calculateTime(planet.getCoords(), target, newFleet.getSpeed());
         
         // Adding the Event
-        GameEvent event = new GameEvent(0, player.getPersData().getId(), 0, GameEvent.Type.valueOf(type), planet.getCoords(), target, "", newFleet, ressources, new Date(), arrivalTime);
-        // TODO DATABASE
+        GameEvent event = new GameEvent(0, player.getPersData().getId(), targetplayerid, GameEvent.Type.valueOf(type), planet.getCoords(), target, "", newFleet, ressources, new Date(), arrivalTime);
+        // DATABASE inform
+        DBEvent.createEvent(event);
         player.addEvent(event);
         
         // Redirect

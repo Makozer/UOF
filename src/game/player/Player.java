@@ -8,6 +8,7 @@ import community.message.*;
 import database.DBEvent;
 import database.DBPeon;
 import database.DBPlanet;
+import database.DBTechTree;
 import game.GameEvent;
 import game.GameEvent.Type;
 import game.fleet.*;
@@ -48,7 +49,7 @@ public class Player {
 	
 	public void update() {
 		// Update Planets
-		for (Planet planet: this.getPlanets()) { planet.update();}
+		for (Planet planet: this.getPlanets()) { planet.update(this);}
 		
 		// Update Events
 		updateEvents();
@@ -72,6 +73,9 @@ public class Player {
 					break;
 				case BUILD:
 					calculateBuild(event, i);
+					break;
+				case RESEARCH:
+					calculateResearch(event, i);
 					break;
 				default:
 					throw new IllegalArgumentException("Wrong Event in your List");				
@@ -116,6 +120,21 @@ public class Player {
 		DBEvent.deleteEvent(event.getId());
 	}
 	
+	public void calculateResearch(GameEvent event, Iterator<GameEvent> i) {
+		Planet planet = this.getPlanetByCoordinates(event.getCoordinates());
+		if (planet == null) {return;}
+		Research research = planet.getResearchByName(event.getBuildingName());
+		this.techtree.setLevel(research.getName(), (this.techtree.getLevel(research.getName()) + 1));
+		planet.setIsResearching("");
+		GameMessage message = new GameMessage(planet.getCoords().asCoords() + " Your " + research.getName() + "(new Level: " + research.getLevel() + ") has finished upgrading!", "Bla bla bla Mr. Freeman.");
+		this.addMessage(message);
+		i.remove();
+		
+		// Update DataBase
+		DBTechTree.updateTechTree(event.getPlayerid(), this.techtree);
+		DBEvent.deleteEvent(event.getId());
+	}
+	
 	public void increaseRess(Planet planet, ArrayList<ARessource> ress) {
 		// Increasing Planets Ressources
 		HashMap<String, ARessource> planetRessources = planet.getRessources();
@@ -151,14 +170,50 @@ public class Player {
 		return false;
 	}
 	
-	public boolean doResearch(Coordinates planetcoords, String research) {
-		// TODO
-		// Create Game Event
-		return false;
+	public boolean doResearch(String researchname) {
+		// Required Objects
+		Planet planet = getActivePlanet();
+		Coordinates planetcoords = planet.getCoords();
+		Research research = getActivePlanet().getResearchByName(researchname); // TODO planet ... -> techtree
+		if (research == null) {System.out.println("doResearch research==null"); return false;}
+		ArrayList<ARessource> researchCosts = research.getResearchCosts();
+				
+		// Check if the Planet has enough Ressources and then decreases
+		if (!this.decreaseRess(planet, researchCosts)) { 
+			if (DEBUGMODE) {for(ARessource r : researchCosts) {System.out.println("r=" + r.toString());}System.out.println("NOT ENOUGH RESSOURCES");}
+			return false; 
+		}
+				
+		// Creating GameEvent
+		Date endTime = new Date(new Date().getTime() + (long)(research.getTimeToResearch(planet.getUniversity().getLevel()) * 1000));
+		GameEvent event = new GameEvent(this.getPersData().getId(), GameEvent.Type.RESEARCH, planetcoords, researchname, researchCosts, new Date(), endTime);
+				
+		//  DB Inform, get EventId
+		int eventid = DBEvent.createEvent(event);
+		if (eventid == 0) { return false; }
+		event.setId(eventid);
+		this.addEvent(event);
+		planet.setIsResearching(researchname);			
+			
+		return true;
 	}
 	
-	public void doCancelResearch(GameEvent event) {
-		// TODO
+	public boolean doCancelResearch(GameEvent event) {
+		// Required Objects
+		Planet planet = getPlanetByCoordinates(event.getCoordinates());
+		Research research = getActivePlanet().getResearchByName(event.getBuildingName());
+		ArrayList<ARessource> buildCosts = research.getResearchCosts();		
+				
+		// Increasing Planets Ressources
+		this.increaseRess(planet, buildCosts);
+				
+		// Deleting GameEvent
+		this.removeEvent(event);
+		planet.setIsResearching("");
+				
+		// DataBase inform
+		DBEvent.deleteEvent(event.getId());	
+		return true;
 	}
 	
 	public boolean doBuild(String buildingName) {
@@ -226,13 +281,12 @@ public class Player {
 	}
 	
 	public Planet getPlanetByCoordinates(Coordinates coordinates) {
-		Planet output = null;
 		for (Planet p: planets) {
 			if (coordinates.asCoords().equals(p.getCoords().asCoords())) {
 				return p;
 			}
 		}
-		return output;
+		return null;
 	}
 	
 	public void removePlanet(Planet planet) {
@@ -248,13 +302,21 @@ public class Player {
 		// Build
 		for (Planet planet : planets) {
 			GameEvent buildevent = this.getBuildEventByCoords(planet.getCoords());
-			// GameEvent researchevent = this.getResearchEventByCoords(planet.getCoords());
+			GameEvent researchevent = this.getResearchEventByCoords(planet.getCoords());
 			if (buildevent != null) {
 				planet.setIsBuilding(buildevent.getBuildingName());
 			}
-			// if researchevent != null
+			if (researchevent != null) {
+				planet.setIsResearching(researchevent.getBuildingName());
+			}
 		}
-		// TODO same for research at university
+		
+		// ATTACK EVENT CONV
+		for (GameEvent event : events) {
+			if (event.getType() == GameEvent.Type.ATTACK && this.getPlanetByCoordinates(event.getTarget()) != null) {
+				event.setType(GameEvent.Type.DEFEND);
+			}
+		}
 	}
 	
 	public void removeEvent(GameEvent event) {
@@ -266,6 +328,18 @@ public class Player {
 		for (GameEvent e: events) {
 			if (e.getCoordinates().asCoords().equals(coordinates.asCoords()) && e.getType() == GameEvent.Type.BUILD) {
 				output = e;
+				return output;
+			}
+		}
+		return output;
+	}
+	
+	public GameEvent getResearchEventByCoords(Coordinates coordinates) {
+		GameEvent output = null;
+		for (GameEvent e: events) {
+			if (e.getCoordinates().asCoords().equals(coordinates.asCoords()) && e.getType() == GameEvent.Type.RESEARCH) {
+				output = e;
+				return output;
 			}
 		}
 		return output;
@@ -327,6 +401,15 @@ public class Player {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
 			if (e.getType() == GameEvent.Type.BUILD) { output.add(e); }
+		}
+		return output;
+	}
+	
+	public ArrayList<GameEvent> getResearchEvents() {
+		sortEvents();
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
+		for (GameEvent e: events) {
+			if (e.getType() == GameEvent.Type.RESEARCH) { output.add(e); }
 		}
 		return output;
 	}

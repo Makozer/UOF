@@ -14,7 +14,8 @@ public class GameEvent implements Comparable<GameEvent> {
 		ATTACK,
 		DEFEND,
 		TRANSPORT,
-		BUILD
+		BUILD,
+		RESEARCH
 	}
 	
 	private int						id = 0;

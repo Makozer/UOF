@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import database.utils.PasswordUtils;
+import game.planet.*;
 import game.player.*;
 import game.research.TechTree;
 import game.utils.DateUtils;
@@ -99,6 +100,31 @@ public class DBPlayer {
 					"SELECT userid FROM public.player WHERE email = ?" 
 					);
 			pstmt.setString(1, email);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+			} else {
+				return 0;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return playerId;
+	}
+	
+	public static int getPlayerIdByCoordinates(Coordinates coordinates) {
+		int playerId = 0;
+		
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"SELECT playerid FROM public.planet WHERE galaxy = ? AND solarsystem = ? AND planetnumber = ?" 
+					);
+			pstmt.setInt(1, coordinates.getGalaxy());
+			pstmt.setInt(2, coordinates.getSolarSystem());
+			pstmt.setInt(3, coordinates.getPlanetNumber());
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				return rs.getInt(1);

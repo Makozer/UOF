@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
+import database.DBPlanet;
 import game.fleet.*;
 import game.fleet.tier1.*;
 import game.fleet.tier2.*;
@@ -11,8 +12,10 @@ import game.fleet.tier3.*;
 import game.planet.buildings.*;
 import game.planet.buildings.mining.*;
 import game.planet.buildings.storage.*;
+import game.player.Player;
 import game.research.*;
 import game.ressource.*;
+import game.settings.ResearchRegister;
 import game.utils.DateUtils;
 import game.utils.NumberUtils;
 
@@ -139,9 +142,9 @@ public class Planet {
 		System.out.println("Fleet: " + fleetSQL);
 	}
 	
-	public void update() {
+	public void update(Player player) {
 		updateRessources();
-		updateShipQueue();		
+		updateShipQueue(player);		
 	}
 	
 	public void updateRessources() {
@@ -151,7 +154,7 @@ public class Planet {
 		this.getTritiumFabric().update();
 	}
 	
-	public void updateShipQueue() {
+	public void updateShipQueue(Player player) {
 		// If no ships are to build, then do nothing
 		if (this.getSpacePort().getBuildQueue().size() == 0) { return; }
 		
@@ -182,6 +185,8 @@ public class Planet {
 			}			
 		} while (diff > 0 && buildqueue.size() > 0);
 		spaceport.setTimestamp(new Date(now.getTime() - (diff * 1000)));
+		
+		DBPlanet.updatePlanet(player, this);
 	}
 	
 	public void addShip(ASpaceShip addShip) {
@@ -248,6 +253,14 @@ public class Planet {
 	
 	public ABuilding getBuildingByName(String name) {
 		return this.buildings.get(name);
+	}
+	
+	public Research getResearchByName(String name) {
+		ArrayList<Research> allresearch = ResearchRegister.getWholeResearchList(this.techtree);
+		for (Research r : allresearch) {
+			if (r.getName().equals(name)) { return r;}
+		}
+		return null;
 	}
 	
 	public ArrayList<ABuilding> getBasicBuildings() {

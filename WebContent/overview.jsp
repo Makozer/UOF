@@ -31,7 +31,7 @@
 <c:choose>
 <c:when test="${player.getAttackEvents().size() > 0}">
 	<c:forEach var="gameEvent" items="${player.getAttackEvents()}">
-		<tr>
+		<tr class="attack">
 			<td><c:out value="${ dateUtils.getRemainingTimeAsString(gameEvent.getEndTime()) }"/></td>
 			<td>Euer Flotte von ${gameEvent.getCoordinates().asCoords()} greift ${gameEvent.getTarget().asCoords()} an.</td>
 		</tr>
@@ -81,6 +81,29 @@
 <c:otherwise>
 	<tr><td colspan="2">
 		Keine Gebäude werden aktuell gebaut.
+	</td></tr>
+</c:otherwise>
+</c:choose>
+
+
+
+<tr><th colspan="2">Forschung</th></tr>
+<c:choose>
+<c:when test="${player.getResearchEvents().size() > 0}">
+	<c:forEach var="gameEvent" items="${player.getResearchEvents()}">
+		<tr>
+			<td><c:out value="${ dateUtils.getRemainingTimeAsString(gameEvent.getEndTime()) }"/></td>
+
+			<td>Auf eurem Planeten ${gameEvent.getCoordinates().asCoords()} wird ${gameEvent.getBuildingName()} erforscht.</td>
+
+			
+			
+		</tr>
+	</c:forEach>
+</c:when>    
+<c:otherwise>
+	<tr><td colspan="2">
+		Keine aktuelle Forschung im Gange.
 	</td></tr>
 </c:otherwise>
 </c:choose>

@@ -7,6 +7,7 @@ import game.ressource.Tritium;
 public class TravelCalc {
 	
 	public static Date calculateTime(Coordinates a, Coordinates b, int speed) {
+		// TODO VARIABLE SPEED SETTINGS BY USER REDUCING TRAVELCOST
 		Date output = null;
 		int addSec = 0;
 		// TODO LOWPRIO include speed factor
