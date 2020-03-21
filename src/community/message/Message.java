@@ -55,6 +55,10 @@ public class Message implements Comparable<Message> {
 		return timestamp;
 	}
 
+	public void setMsgId(int msgId) {
+		this.msgId = msgId;
+	}
+
 	@Override
 	public int compareTo(Message o) {
 		Message other = (Message) o;		

@@ -141,6 +141,7 @@ public abstract class ASpaceShip extends AGameObject {
 		output -= 	(int)(this.timeToBuild / 100.0 * this.getModValue());
 		output -= 	(int)(this.timeToBuild / 100.0 * (spaceportlevel * 2));
 		output = 	(int)(output / GAME_SPEED);
+		if (output < 1) { return 1;}
 		return output;
 	}
 	
@@ -191,13 +192,14 @@ public abstract class ASpaceShip extends AGameObject {
 
 	@Override
 	public String toString() {
-		return this.getName() + "[attack=" + attack + ", defense=" + defense + ", speed=" + speed + ", capacity=" + capacity
+		return "ASpaceShip [attack=" + attack + ", defense=" + defense + ", speed=" + speed + ", capacity=" + capacity
 				+ ", quantity=" + quantity + ", techtree=" + techtree + ", levelMod=" + levelMod + ", costs=" + costs
-				+ ", getResearchCosts()=" + getResearchCosts() + ", getModValue()="
-				+ getModValue() + ", getTimeToBuild()=" + getTimeToBuild(1) + "]";
+				+ ", timeToBuild=" + timeToBuild + ", getAttackAsString()=" + getAttackAsString()
+				+ ", getDefenseAsString()=" + getDefenseAsString() + ", getSpeedAsString()=" + getSpeedAsString()
+				+ ", getCapacity()=" + getCapacity() + "]";
 	}
-	
-	
+
+
 	
 	
 }

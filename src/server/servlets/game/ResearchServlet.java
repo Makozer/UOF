@@ -41,7 +41,7 @@ public class ResearchServlet extends HttpServlet {
 		HttpSession session = request.getSession();	
 		String research = request.getParameter("research");
 		Player player = (Player)session.getAttribute("player");
-		if (player == null) { return; } else { player.update(); }
+		if (player == null) { return; } else { player.update(false); }
 
 		if (DEBUGMODE) {System.out.println("Trying to research (" + research + ")");}
 		if (player.getActivePlanet().isResearching()) {

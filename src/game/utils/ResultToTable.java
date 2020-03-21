@@ -38,14 +38,16 @@ public class ResultToTable {
 	}
 	
 	public static ArrayList<Message> convertMessages(ResultSet rs, Player player) {
-		ArrayList<Message> temp = player.getMessages();
+		ArrayList<Message> temp = new ArrayList<Message>();//player.getMessages();
+		Message tempmsg = null;
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			
-			while (rs.next())
-		      {
-		        temp.add(new Message(rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getDate(6)));
-		      }
+			while (rs.next()) {
+				tempmsg = new Message(rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getDate(6));
+				tempmsg.setMsgId(rs.getInt(1));
+		        temp.add(tempmsg);
+		    }
 		} catch (SQLException e) {
 			
 		}

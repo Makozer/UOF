@@ -6,6 +6,7 @@ import java.util.*;
 
 import community.message.Message;
 import game.player.Player;
+import game.utils.DateUtils;
 import game.utils.ResultToTable;
 
 public class DBMessage {
@@ -57,7 +58,7 @@ public class DBMessage {
 	
 	public static ArrayList<Message> getMessages(Player player) {
 		try {
-			Connection con = DatabaseConnection.getConnection();
+			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
 					"SELECT messageid, touserid, fromuserid, title, message, created "
 					+ "FROM messages "
@@ -68,7 +69,48 @@ public class DBMessage {
 		} catch (SQLException e) {
 			//return e.getMessage();
 			return null;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println("Verbindung konnte nicht geschlossen werden.");
+			} catch (NullPointerException e) {
+				System.err.println(e.toString() + "in getMessages");
+			}
 		}
+	}
+	
+	public static Message getMessageById(int messageid) {		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"SELECT touserid, fromuserid, title, message, created "
+					+ "FROM messages "
+					+ "WHERE messageid = ?;");
+			pstmt.setInt(1,messageid);
+			
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				//new Message(fromId, toId, title, message, timestamp)
+				return new Message(rs.getInt(2), rs.getInt(1), rs.getString(3), rs.getString(4), DateUtils.stampToDate(rs.getString(5)));
+			} else {
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			//return e.getMessage();
+			return null;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println("Verbindung konnte nicht geschlossen werden.");
+			} catch (NullPointerException e) {
+				System.err.println(e.toString() + "in getMessageById");
+			}
+		}
+
 	}
 	
 	public static boolean deleteMessage(Player player, Message message) {

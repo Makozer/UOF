@@ -6,9 +6,12 @@ import java.util.*;
 
 import community.message.*;
 import database.DBEvent;
+import database.DBMessage;
 import database.DBPeon;
 import database.DBPlanet;
+import database.DBPlayer;
 import database.DBTechTree;
+import database.GameLoader;
 import game.GameEvent;
 import game.GameEvent.Type;
 import game.fleet.*;
@@ -47,15 +50,30 @@ public class Player {
 		// Testmain
 	}
 	
-	public void update() {
-		// Update Planets
-		for (Planet planet: this.getPlanets()) { planet.update(this);}
+	public void update(boolean war) {
 		
 		// Update Events
-		updateEvents();
+		updateEvents(war);
+		
+		// Update Planets
+		updatePlanets();
+		
+		updateMessages();
+	}
+	
+	public void updateMessages() {
+		this.setMessages(DBMessage.getMessages(this));
+	}
+	
+	public void updatePlanets() {
+		for (Planet planet: this.getPlanets()) { planet.update(this);}
 	}
 	
 	public boolean updateEvents() {
+		return updateEvents(true);
+	}
+	
+	public boolean updateEvents(boolean war) {
 		Date now = new Date();
 		Iterator<GameEvent> i = events.iterator();
 		while (i.hasNext()) {
@@ -63,10 +81,10 @@ public class Player {
 			if (event.getEndTime().getTime() < now.getTime()) {
 				switch (event.getType()) {
 				case ATTACK:
-					calculateAttack(event, i);
+					if (war) {calculateAttack(event, i);}
 					break;
 				case DEFEND:
-					calculateDefend(event, i);
+					if (war) {calculateDefend(event, i);}
 					break;
 				case TRANSPORT:
 					calculateTransport(event, i);
@@ -86,11 +104,49 @@ public class Player {
 	}
 	
 	public void calculateAttack(GameEvent event, Iterator<GameEvent> i) {
+		// Required Objects
+		// Actual Player
+		Player thisplayer = this;
+		int myplayerid = this.getPersData().getId();
+		Planet myplanet = this.getActivePlanet();
+		Fleet myfleet = event.getFleet();
 		
+
+		// Enemy Player
+		int enemyplayerid = DBPlayer.getPlayerIdByCoordinates(event.getTarget());
+		Player enemyplayer = GameLoader.loadPlayer(enemyplayerid);		
+		Planet enemyplanet = enemyplayer.getPlanetByCoordinates(event.getTarget());
+		Fleet enemyfleet = enemyplanet.getFleet();
+		
+		myfleet.setPlayerId(this.getPersData().getId());
+		enemyfleet.setPlayerId(enemyplayerid);
+		
+		Fleet winner = Combat.fight(myfleet, enemyfleet);
+		if (winner.getPlayerId() == myplayerid) {
+			ArrayList<ARessource> prey = new ArrayList<ARessource>();
+			ARessource iron = enemyplanet.getIron(); ARessource rare = enemyplanet.getRareEarth();ARessource water = enemyplanet.getWater();ARessource tritium = enemyplanet.getTritium();
+			prey.add(iron);prey.add(rare);prey.add(water);prey.add(tritium);
+			Combat.createCombatLog(this, enemyplayer, event.getTarget(), winner, myfleet, enemyfleet, prey);
+			GameEvent survivorevent = new GameEvent(0, myplayerid, myplayerid, GameEvent.Type.TRANSPORT, event.getTarget(), event.getCoordinates(), "", winner, prey, event.getEndTime(), 
+										new Date(new Date().getTime() + (event.getEndTime().getTime() - event.getStartTime().getTime())));
+			DBEvent.createEvent(survivorevent);
+		} else {
+			// Fleet has been destructed
+			Combat.createCombatLog(enemyplayer, this, event.getTarget(), winner, myfleet, enemyfleet, new ArrayList<ARessource>());
+		}
+		
+		// DataBase inform
+		DBEvent.deleteEvent(event.getId());	
+		i.remove();
+
 	}
 	
 	public void calculateDefend(GameEvent event, Iterator<GameEvent> i) {
-		
+		// Required Objects		
+		// Actual Player
+		Player thisplayer = this;
+		Planet myplanet = this.getActivePlanet();
+		Fleet myfleet = myplanet.getFleet();
 	}
 	
 	public void calculateTransport(GameEvent event, Iterator<GameEvent> i) {
@@ -315,6 +371,7 @@ public class Player {
 		for (GameEvent event : events) {
 			if (event.getType() == GameEvent.Type.ATTACK && this.getPlanetByCoordinates(event.getTarget()) != null) {
 				event.setType(GameEvent.Type.DEFEND);
+				System.out.print("conv attack -> defend;");
 			}
 		}
 	}
@@ -492,6 +549,10 @@ public class Player {
 
 	public boolean hasNewMessage() {
 		return hasNewMessage;
+	}
+
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
 	}
 
 	public void setHasNewMessage(boolean hasNewMessage) {

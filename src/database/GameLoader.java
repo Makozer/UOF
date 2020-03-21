@@ -18,7 +18,7 @@ public class GameLoader {
 		player.addMessageArray(DBMessage.getMessages(player));	
 		
 		// Update Player to actual stand
-		player.update();
+		player.update(false);
 		
 		return player;
 	}

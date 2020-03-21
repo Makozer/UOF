@@ -34,7 +34,7 @@ public class Page extends HttpServlet {
 		Player player = (Player)session.getAttribute("player");
 		if (player != null) { 
 			player.setEvents(DBEvent.getEvents(player));
-			player.update(); 
+			player.update(true); 
 		}
 		response.sendRedirect(request.getContextPath() + "/" + page + ".jsp");
 	}

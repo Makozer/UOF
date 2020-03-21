@@ -58,13 +58,13 @@ public class Research {
 		for (ARessource r : this.getResearchCosts()) {
 			timeToBuild += r.getValue();
 		}
-		return timeToBuild;
+		return timeToBuild * 10;
 	}
 	
 	public int getTimeToResearch(int universitylevel) {	
 		int output = 1;
 		output += 	this.getTimeToResearch();
-		output -= 	(int)(this.getTimeToResearch() / 100.0 * this.getModValue());
+		output += 	(int)(this.getTimeToResearch() / 100.0 * this.getModValue());
 		output -= 	(int)(this.getTimeToResearch() / 100.0 * (universitylevel * 2));
 		output = 	(int)(output / GAME_SPEED);
 		return output;

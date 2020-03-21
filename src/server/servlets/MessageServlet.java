@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import database.DBMessage;
 import game.player.Player;
 import game.utils.NumberUtils;
 
@@ -40,6 +41,7 @@ public class MessageServlet extends HttpServlet {
 		Player player = (Player)session.getAttribute("player");
 		int delmsg = NumberUtils.stringAsInt(request.getParameter("msgdel"));
 		player.deleteMessage(delmsg);
+		//DBMessage.deleteMessage(player, delmsg);
 		response.sendRedirect(request.getContextPath() + "/messages.jsp");
 	}
 
