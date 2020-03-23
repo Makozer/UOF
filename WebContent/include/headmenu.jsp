@@ -3,7 +3,7 @@
 <table class="middle headnav">
 <tr>
 <td><a href="profil.jsp">Profil</a></td>
-<td><a href="messages.jsp" class="${ player.hasNewMessage() ? "red" : ""}">Nachrichten</a></td>
+<td><a href="messages.jsp" class="${ player.getInbox().hasNewMessage() ? "red" : ""}">Nachrichten</a></td>
 
 <td><a href="./LogoutServlet">Logout</a></td>
 

@@ -5,40 +5,35 @@ import static game.settings.GameSettings.DEBUGMODE;
 import java.util.*;
 
 import community.message.*;
-import database.DBEvent;
-import database.DBMessage;
-import database.DBPeon;
-import database.DBPlanet;
-import database.DBPlayer;
-import database.DBTechTree;
-import database.GameLoader;
-import game.GameEvent;
+import database.*;
+import game.*;
 import game.GameEvent.Type;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.*;
 import game.research.*;
 import game.ressource.*;
-import game.settings.ShipRegister;
+import game.settings.*;
 import game.utils.*;
 
 public class Player {
 	
-	private PersonalData 				persData = null;	
+	private PersonalData 				persData = new PersonalData(0, "Empty PersonalData", "", "", "", new Date(), new Date(), new Date());	
 	private TechTree 					techtree = null;
 	
 	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
-	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
-	private ArrayList<Message>			messages		= new ArrayList<Message>();
 	
-	boolean 							hasNewMessage 	= false;
+	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
 	private int 						activePlanet 	= 0;
 	
+	private Inbox						inbox 			= new Inbox(this);
+
+
 	public Player() {}
 	
 	public Player(int playerid, TechTree techtree) {
 		this.techtree = techtree;
-		this.persData = new PersonalData(playerid, "", "", "", "", new Date(), new Date(), new Date());
+		this.persData = new PersonalData(playerid, "Empty PersonalData", "", "", "", new Date(), new Date(), new Date());
 	}
 
 	public Player(PersonalData data, TechTree techtree) {
@@ -57,12 +52,7 @@ public class Player {
 		
 		// Update Planets
 		updatePlanets();
-		
-		updateMessages();
-	}
-	
-	public void updateMessages() {
-		this.setMessages(DBMessage.getMessages(this));
+
 	}
 	
 	public void updatePlanets() {
@@ -168,7 +158,7 @@ public class Player {
 		building.levelUp(event.getEndTime());
 		planet.setIsBuilding("");
 		GameMessage message = new GameMessage(planet.getCoords().asCoords() + " Your " + building.getName() + "(new Level: " + building.getLevel() + ") has finished upgrading!", "Bla bla bla Mr. Freeman.");
-		this.addMessage(message);
+		this.getInbox().addMessage(message);
 		i.remove();
 		
 		// Update DataBase
@@ -183,7 +173,7 @@ public class Player {
 		this.techtree.setLevel(research.getName(), (this.techtree.getLevel(research.getName()) + 1));
 		planet.setIsResearching("");
 		GameMessage message = new GameMessage(planet.getCoords().asCoords() + " Your " + research.getName() + "(new Level: " + research.getLevel() + ") has finished upgrading!", "Bla bla bla Mr. Freeman.");
-		this.addMessage(message);
+		this.getInbox().addMessage(message);
 		i.remove();
 		
 		// Update DataBase
@@ -343,7 +333,7 @@ public class Player {
 			}
 		}
 		return null;
-	}
+	}     
 	
 	public void removePlanet(Planet planet) {
 		this.planets.remove(planet);
@@ -476,7 +466,7 @@ public class Player {
 		return events;
 	}
 	
-	public void sortEvents() {
+	private void sortEvents() {
 		events.sort(
 				new Comparator<GameEvent>() {
 					public int compare(GameEvent first, GameEvent second) {
@@ -508,60 +498,13 @@ public class Player {
 	public void setActivePlanet(int activePlanet) {
 		this.activePlanet = activePlanet;
 	}
-
-	public ArrayList<Message> getMessages() {
-		this.messages.sort(
-				new Comparator<Message>() {
-					public int compare(Message first, Message second) {
-						return first.compareTo(second);
-					}
-				});
-		this.setHasNewMessage(false);
-		return messages;
+	
+	public Inbox getInbox() {
+		return inbox;
 	}
 
-	public void addMessage(Message message) {
-		this.messages.add(message);
-		this.setHasNewMessage(true);
-	}	
-	
-	public void addMessageArray(ArrayList<Message> messages) {
-		this.messages.addAll(messages);
-	}
-	
-	public void deleteMessage(int msgId) {
-		for (Message m: messages) {
-			if (m.getMsgId() == msgId) {
-				this.messages.remove(m);
-				break;
-			}
-		}
-		
-	}
-	
-	public int getMessageCount() {
-		return this.messages.size();
-	}
-	
-	public int getNewMessageCount() {
-		return 1;
-	}
-
-	public boolean hasNewMessage() {
-		return hasNewMessage;
-	}
-
-	public void setMessages(ArrayList<Message> messages) {
-		this.messages = messages;
-	}
-
-	public void setHasNewMessage(boolean hasNewMessage) {
-		this.hasNewMessage = hasNewMessage;
-	}
-	
 	public String getDisplayName() {
 		return this.persData.getDisplayName();
 	}
-	
 	
 }

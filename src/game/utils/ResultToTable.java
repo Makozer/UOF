@@ -37,41 +37,4 @@ public class ResultToTable {
 		return table;
 	}
 	
-	public static ArrayList<Message> convertMessages(ResultSet rs, Player player) {
-		ArrayList<Message> temp = new ArrayList<Message>();//player.getMessages();
-		Message tempmsg = null;
-		try {
-			ResultSetMetaData rsmd = rs.getMetaData();
-			
-			while (rs.next()) {
-				tempmsg = new Message(rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getDate(6));
-				tempmsg.setMsgId(rs.getInt(1));
-		        temp.add(tempmsg);
-		    }
-		} catch (SQLException e) {
-			
-		}
-		return temp;
-	}
-	
-	public static ArrayList<String> convertRsSolarSystem(ResultSet rs) {
-		ArrayList<String> output = new ArrayList<String>();
-		int i = 1;
-		try {
-			ResultSetMetaData rsmd = rs.getMetaData(); // Wofür ist das da?		// TODO	
-			
-			while (rs.next()) {
-				while (rs.getInt(1) > i) {
-					output.add("Leer");
-					i++;
-				}				
-				output.add(rs.getString(2));
-				i++;
-			} // while
-			output.add("Leer");
-		} catch (SQLException e) {
-			
-		}		
-		return output;
-	}
 }

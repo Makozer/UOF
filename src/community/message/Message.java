@@ -61,8 +61,9 @@ public class Message implements Comparable<Message> {
 
 	@Override
 	public int compareTo(Message o) {
-		Message other = (Message) o;		
-		return this.timestamp.compareTo(other.getTimestamp());
+		// TODO lowest prio .... y cast this?
+		Message ycastthis = (Message) o;		
+		return this.timestamp.compareTo(ycastthis.getTimestamp());
 	}
 
 	@Override

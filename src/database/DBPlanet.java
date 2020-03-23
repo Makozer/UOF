@@ -179,5 +179,37 @@ public class DBPlanet {
 			}
 		}
 	}
+	
+	public static ArrayList<String> getSolarSystem(int galaxy, int solarsystem) {
+		ArrayList<String> output = new ArrayList<String>();
+		int i = 1;
+		try {
+			Connection con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"SELECT planetnumber, name "
+					+ "FROM planet "
+					+ "WHERE galaxy = " + galaxy + " AND solarsystem = " + solarsystem
+					+ " ORDER BY planetnumber ASC");
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				while (rs.getInt(1) > i) {
+					output.add("Leer");
+					i++;
+				}				
+				output.add(rs.getString(2));
+				i++;
+			} // while
+			output.add("Leer"); // Always one lonely Planet at the end :)
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());			
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println("Verbindung konnte nicht geschlossen werden.");
+			}
+		}
+		return output;
+	}
 
 }

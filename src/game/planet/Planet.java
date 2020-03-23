@@ -185,8 +185,8 @@ public class Planet {
 			}			
 		} while (diff > 0 && buildqueue.size() > 0);
 		spaceport.setTimestamp(new Date(now.getTime() - (diff * 1000)));
-		
-		DBPlanet.updatePlanet(player, this);
+		this.setLastupdate(new Date());
+		//DBPlanet.updatePlanet(player, this);
 	}
 	
 	public void addShip(ASpaceShip addShip) {

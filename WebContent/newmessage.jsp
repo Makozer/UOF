@@ -7,13 +7,13 @@
 <jsp:include page="./include/header.jsp" />
 
 <h1>Neue Nachricht schreiben</h1>
-<form method="post" action="./NewMessageServlet">
-
+<form method="post" action="./MessageServlet">
+<h2 class="error">${error}</h2>
 <table border="1">
-<tr><th>Empfänger</th><td><input type="text" name="toPlayer" /></td></tr>
-<tr><th>Titel der Nachricht</th><th><input type="text" name="title" /></th></tr>
-<tr><td colspan="2"><textarea name="message" cols="66" rows="12"></textarea></td></tr>
-<tr><td colspan="2"><input type="submit" /></textarea></td></tr>
+<tr><th>Empfänger</th><td><input type="text" name="toPlayer" placeholder="Spielername"/></td></tr>
+<tr><th>Titel der Nachricht</th><th><input type="text" name="title" placeholder="Titel" value="${titelcontent}" /></th></tr>
+<tr><td colspan="2"><textarea name="message" cols="66" rows="12" placeholder="Deine Nachricht">${textcontent}</textarea></td></tr>
+<tr><td colspan="2"><input type="submit" /></td></tr>
 </table>
 
 </form>

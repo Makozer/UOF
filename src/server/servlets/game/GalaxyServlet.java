@@ -47,7 +47,7 @@ public class GalaxyServlet extends HttpServlet {
 		}
 		
 		// getting the DataBase Data
-		ArrayList<String> solarsystemA = DBPeon.getSolarSystem(galaxy, solarsystem);		
+		ArrayList<String> solarsystemA = DBPlanet.getSolarSystem(galaxy, solarsystem);		
 		
 		// output
 		if (solarsystemA != null) {

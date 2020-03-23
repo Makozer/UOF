@@ -15,7 +15,8 @@ public class GameLoader {
 		player.setEvents(DBEvent.getEvents(player));
 		
 		// DataBase get messages by Player ID
-		player.addMessageArray(DBMessage.getMessages(player));	
+		// player.getInbox().update();	 
+		// HINT: should work on its own!!!
 		
 		// Update Player to actual stand
 		player.update(false);

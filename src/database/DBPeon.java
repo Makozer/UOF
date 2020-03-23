@@ -44,6 +44,7 @@ public class DBPeon {
 		
 		
 	}
+	/*
 	public static ArrayList<Message> getMessages(Player player) {
 		try {
 			Connection con = DatabaseConnection.getConnection();
@@ -194,22 +195,8 @@ public class DBPeon {
 		return success;
 	}
 	
-	public static ArrayList<String> getSolarSystem(int galaxy, int solarsystem) {
-		try {
-			Connection con = DatabaseConnection.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT planetnumber, name "
-					+ "FROM planet "
-					+ "WHERE galaxy = " + galaxy + " AND solarsystem = " + solarsystem
-					+ " ORDER BY planetnumber ASC");
-			ResultSet rs = pstmt.executeQuery();
-			return ResultToTable.convertRsSolarSystem(rs); 
-		} catch (SQLException e) {
-			//return e.getMessage();
-			return null;
-		}
-	}
 	
 	
+	*/
 	
 }
