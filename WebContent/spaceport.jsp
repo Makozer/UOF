@@ -17,7 +17,7 @@
 <h2>Erforschte Raumschiffe:</h2>
 <table border="1">
 	<tr><th>Erforschte SpezialRaumSchiffe</th><th>Anzahl</th></tr>
-	<c:forEach var="s" items="${ player.getTechTree().getResearchedSpecialSpaceShips() }">
+	<c:forEach var="s" items="${ player.getTechTree().getResearchedSpecialShips() }">
 		<tr><td><c:out value="${s.getName()}"/><br/>Bauzeit: <c:out value="${s.getTimeToBuildAsString(player.getActivePlanet().getSpacePort().getLevel())}"/><br />Benötigte Ressourcen:<br /><c:out value="${s.getCosts()}"/></td><td><input type="text" name="<c:out value="${s.getName()}"/>"></td></tr>	
 	</c:forEach>
 	<tr><th>Erforschte Tier 1 Raumschiffe</th><th>Anzahl</th></tr>

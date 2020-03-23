@@ -111,18 +111,21 @@ public class Player {
 		myfleet.setPlayerId(this.getPersData().getId());
 		enemyfleet.setPlayerId(enemyplayerid);
 		
+		Fleet myfleetclone = myfleet.clone();
+		Fleet enemyfleetclone = enemyfleet.clone();
+		
 		Fleet winner = Combat.fight(myfleet, enemyfleet);
 		if (winner.getPlayerId() == myplayerid) {
 			ArrayList<ARessource> prey = new ArrayList<ARessource>();
 			ARessource iron = enemyplanet.getIron(); ARessource rare = enemyplanet.getRareEarth();ARessource water = enemyplanet.getWater();ARessource tritium = enemyplanet.getTritium();
 			prey.add(iron);prey.add(rare);prey.add(water);prey.add(tritium);
-			Combat.createCombatLog(this, enemyplayer, event.getTarget(), winner, myfleet, enemyfleet, prey);
+			Combat.createCombatLog(this, enemyplayer, event.getTarget(), winner, myfleetclone, enemyfleetclone, prey);
 			GameEvent survivorevent = new GameEvent(0, myplayerid, myplayerid, GameEvent.Type.TRANSPORT, event.getTarget(), event.getCoordinates(), "", winner, prey, event.getEndTime(), 
 										new Date(new Date().getTime() + (event.getEndTime().getTime() - event.getStartTime().getTime())));
 			DBEvent.createEvent(survivorevent);
 		} else {
 			// Fleet has been destructed
-			Combat.createCombatLog(enemyplayer, this, event.getTarget(), winner, myfleet, enemyfleet, new ArrayList<ARessource>());
+			Combat.createCombatLog(enemyplayer, this, event.getTarget(), winner, myfleetclone, enemyfleetclone, new ArrayList<ARessource>());
 		}
 		
 		// DataBase inform

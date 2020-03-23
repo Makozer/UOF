@@ -1,6 +1,8 @@
 package server.servlets;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +45,7 @@ public class LoginServlet extends HttpServlet {
 		if (success) {
 			HttpSession session = request.getSession();
 			Player player = GameLoader.loadPlayer(playerid);
+			player.getPersData().setLastLogin(new Date());
 			session.setAttribute("player", player);
 			DateUtils dateUtils = new DateUtils();
 			session.setAttribute("dateUtils", dateUtils);

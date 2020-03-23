@@ -103,7 +103,7 @@ public class TechTree {
     	return null;
     }
 	
-	public ArrayList<ASpaceShip> getResearchedSpecialSpaceShips() {
+	public ArrayList<ASpaceShip> getResearchedSpecialShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
 		for (ASpaceShip s:ShipRegister.getSpecialShipList(this)) {
 			if (this.getLevel(s.getName()) > 0) { output.add(s);}
@@ -137,7 +137,7 @@ public class TechTree {
 	
 	public ArrayList<ASpaceShip> getAllResearchedShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
-		output.addAll(getResearchedSpecialSpaceShips());
+		output.addAll(getResearchedSpecialShips());
 		output.addAll(getResearchedT1SpaceShips());
 		output.addAll(getResearchedT2SpaceShips());
 		output.addAll(getResearchedT3SpaceShips());

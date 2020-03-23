@@ -164,6 +164,14 @@ public class Fleet implements Iterable<ASpaceShip> {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
+	
+	public Fleet clone() {
+		Fleet clone = new Fleet();
+		for (ASpaceShip ship : this.fleet) {
+			clone.addShip(ship.cloneMe());
+		}
+		return clone;
+	}
 
 	@Override
 	public String toString() {
@@ -192,6 +200,10 @@ public class Fleet implements Iterable<ASpaceShip> {
 			output += ship.getName() + "=" + ship.getQuantity() + ";";
 		}
 		return output;
+	}
+	
+	public void clear() {
+		this.fleet.clear();
 	}
 
 }
