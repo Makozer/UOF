@@ -25,7 +25,7 @@ public class DBMessage {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"INSERT INTO messages(touserid, fromuserid, title, message)"
+					"INSERT INTO messages(touserid, fromuserid, title, msgcontent)"
 					+ " VALUES ("
 					+ "?, "
 					+ "?, "
@@ -43,7 +43,7 @@ public class DBMessage {
 				success = true; 
 			} 
 		} catch (SQLException e) {
-			System.err.println("SQL-Fehler beim Benutzer aktualisieren: " + e.getMessage());
+			System.err.println("SQL Error createMessage: " + e.getMessage());
 		} catch (NullPointerException npe) {
 			System.err.println("Nullpointer@updateBenutzer: " + npe.getMessage());
 		} finally {
@@ -62,7 +62,7 @@ public class DBMessage {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT messageid, touserid, fromuserid, title, message, created "
+					"SELECT messageid, touserid, fromuserid, title, msgcontent, created "
 					+ "FROM messages "
 					+ "WHERE touserid = ?");
 			pstmt.setInt(1,player.getPersData().getId());
@@ -94,7 +94,7 @@ public class DBMessage {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT messageid, touserid, fromuserid, title, message, created "
+					"SELECT messageid, touserid, fromuserid, title, msgcontent, created "
 					+ "FROM messages "
 					+ "WHERE touserid = ? AND created BETWEEN ? AND ?");
 
@@ -127,7 +127,7 @@ public class DBMessage {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT touserid, fromuserid, title, message, created "
+					"SELECT touserid, fromuserid, title, msgcontent, created "
 					+ "FROM messages "
 					+ "WHERE messageid = ?;");
 			pstmt.setInt(1,messageid);

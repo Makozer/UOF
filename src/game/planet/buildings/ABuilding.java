@@ -33,11 +33,11 @@ public abstract class ABuilding {
 	}
 	
 	public double getLevelModValue() {
-		return levelMod.getValue(this.level - 1);
+		return levelMod.getValue(this.level);
 	}
 	
 	public double getLevelModValue(int n) {
-		return levelMod.getValue(n - 1);
+		return levelMod.getValue(n);
 	}
 
 	public ArrayList<ARessource> getCosts() {
@@ -53,9 +53,19 @@ public abstract class ABuilding {
 	}
 
 	public ArrayList<ARessource> getBuildCosts() {
+		return getBuildCosts(this.level);
+	}
+	
+	public ArrayList<ARessource> getBuildCosts(int level) {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
+		double mods = this.getLevelModValue(level - 1);
+		double mod = (mods / 2) * (mods / 66);
 		for (ARessource r: costs) {
-			output.add(r.cloneMe(1 + this.getLevelModValue()));			
+			output.add(
+					r.cloneMe(
+							1 + (mod / 66)
+							)
+					);			
 		}
 		return output;
 	}
@@ -63,12 +73,16 @@ public abstract class ABuilding {
 	/** Returns the time needed to build this building
 	 * @return int time to build in seconds
 	 */
-	public int getTimeToBuild() {
-		int combRessCost = 0;
-		for (ARessource r: this.getBuildCosts()) {
+	public long getTimeToBuild() {
+		return getTimeToBuild(this.level);
+	}
+	
+	public long getTimeToBuild(int level) {
+		long combRessCost = 0;
+		for (ARessource r: this.getBuildCosts(level)) {
 			combRessCost += r.getValue();
 		}
-		return (int)(((combRessCost * 6.6) / 100.0 * (100.0 - this.getHeadQuarter().getLevelModValue())) / GAME_SPEED);
+		return (long)(((combRessCost * 6.6) / 100.0 * (100.0 - this.getHeadQuarter().getLevelModValue())) / GAME_SPEED);
 	}
 	
 	public String getTimeToBuildAsString() {
@@ -77,10 +91,16 @@ public abstract class ABuilding {
 				));
 	}
 	
+	public String getTimeToBuildAsString(int level) {
+		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
+			+ (long)(this.getTimeToBuild(level) * 1000)			
+				));
+	}
+	
 	public String testLevelMod() {
 		String output = this.getName() + " levelModValue: \n";
 		for (int i = 0; i < 12; i++) {
-			output += i + ": \t" + NumberUtils.round2dec(this.getLevelModValue(i)) + ";\n";
+			output += i + ": \t" + NumberUtils.round2decToString(this.getLevelModValue(i)) + ";\n";
 		}
 		return output;
 	}
@@ -91,6 +111,10 @@ public abstract class ABuilding {
 		
 	public String getDescription() {
 		return description;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public int getLevel() {

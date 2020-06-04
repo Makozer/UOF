@@ -7,8 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import database.DBEvent;
-import database.DBPlayer;
+import database.DBUser;
 import game.*;
+import game.event.GameEvent;
 import game.fleet.*;
 import game.planet.*;
 import game.player.Player;
@@ -82,7 +83,7 @@ public class FleetServlet extends HttpServlet {
         if (!type.equals("ATTACK") && !type.equals("TRANSPORT")) { return; }
         
         // Getting target player id
-        int targetplayerid = DBPlayer.getPlayerIdByCoordinates(target);
+        int targetplayerid = DBUser.getPlayerIdByCoordinates(target);
         
         // Getting the ressources if its a transport
         if (type.equals("TRANSPORT")) {

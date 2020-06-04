@@ -16,10 +16,10 @@ public class ClearWholeDB {
 			PreparedStatement pstmt = con.prepareStatement(
 					"DELETE FROM public.event; "
 					+ "DELETE FROM public.messages; "
-					+ "DELETE FROM public.passwoerter; "
-					+ "DELETE FROM public.planet; "
-					+ "DELETE FROM public.player; "
-					+ "DELETE FROM public.techtree; "
+					//+ "DELETE FROM public.passwoerter; "
+					//+ "DELETE FROM public.planet; "
+					//+ "DELETE FROM public.player; "
+					//+ "DELETE FROM public.techtree; "
 				);
 
 

@@ -2,9 +2,13 @@ package database;
 
 import java.sql.*;
 import java.util.Date;
+
+import community.message.CommunityMessage;
+
 import java.util.*;
 import database.utils.*;
 import game.*;
+import game.event.GameEvent;
 import game.fleet.*;
 import game.planet.*;
 import game.player.*;
@@ -37,9 +41,9 @@ public class DBEvent {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"INSERT INTO public.event(" 
-							+ "type, thisgalaxy, thissolarsystem, thisplanet, targetgalaxy, targetsolarsystem, targetplanet, " 
-							+ "building, fleet, ressource, starttime, endttime, playerid, targetplayerid" + ") "
+					"INSERT INTO public.events(" 
+							+ "typ, thisgalaxy, thissolarsystem, thisplanet, targetgalaxy, targetsolarsystem, targetplanet, " 
+							+ "building, fleet, ressource, starttime, endttime, userid, targetuserid" + ") "
 							+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" 
 							+ " RETURNING eventid"
 							+ ";"
@@ -90,12 +94,12 @@ public class DBEvent {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT eventid, type, thisgalaxy, thissolarsystem, "
+					"SELECT eventid, typ, thisgalaxy, thissolarsystem, "
 						+ "thisplanet, targetgalaxy, targetsolarsystem, targetplanet, "
 						+ "building, fleet, ressource, starttime, "
-						+ "endttime, playerid, targetplayerid "
-					+ "FROM public.event "
-					+ "WHERE playerid = ? OR targetplayerid = ?");
+						+ "endttime, userid, targetuserid "
+					+ "FROM public.events "
+					+ "WHERE userid = ? OR targetuserid = ?");
 			pstmt.setInt(1, player.getPersData().getId());
 			pstmt.setInt(2, player.getPersData().getId());
 			ResultSet rs = pstmt.executeQuery();
@@ -132,12 +136,64 @@ public class DBEvent {
 		return events;
 	}
 	
+	public static ArrayList<GameEvent> getEvents(Player player, Date timestamp) {
+		ArrayList<GameEvent> 	events = new ArrayList<GameEvent>();
+		
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"SELECT eventid, typ, thisgalaxy, thissolarsystem, "
+						+ "thisplanet, targetgalaxy, targetsolarsystem, targetplanet, "
+						+ "building, fleet, ressource, starttime, "
+						+ "endttime, userid, targetuserid "
+					+ "FROM public.events "
+					+ "WHERE (userid = ? AND created BETWEEN ? AND ?) OR (targetuserid = ? AND created BETWEEN ? AND ?)");
+			pstmt.setInt(1, player.getPersData().getId());
+			pstmt.setTimestamp(2, new Timestamp(timestamp.getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+			pstmt.setTimestamp(3, new Timestamp(new Date().getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+			pstmt.setInt(4, player.getPersData().getId());
+			pstmt.setTimestamp(5, new Timestamp(timestamp.getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+			pstmt.setTimestamp(6, new Timestamp(new Date().getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+			ResultSet rs = pstmt.executeQuery();
+
+			try {
+				ResultSetMetaData rsmd = rs.getMetaData();
+				
+				while (rs.next())
+			      {
+					events.add(
+							new GameEvent(rs.getInt(1), rs.getInt(14), rs.getInt(15), GameEvent.Type.valueOf(rs.getString(2)),
+											new Coordinates(rs.getInt(3), rs.getInt(4), rs.getInt(5)), new Coordinates(rs.getInt(6), rs.getInt(7), rs.getInt(8)), 
+											rs.getString(9), new Fleet(player.getTechTree(), rs.getString(10)), RessourceUtils.sqlToRessourceArrayList(rs.getString(11)), 
+											DateUtils.stampToDate(rs.getString(12)), DateUtils.stampToDate(rs.getString(13)))
+							);
+			      }
+				return events;
+			} catch (SQLException e) {
+				System.out.println(e.toString());
+			}
+			
+			
+		} catch (SQLException e) {
+			if(DEBUGMODE) {System.out.println(e.getMessage());}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println("Verbindung konnte nicht geschlossen werden.");
+			} catch (NullPointerException e) {
+				System.err.println(e.toString() + "in getMessages");
+			}
+		}
+		return events;
+	}
+	
 	public static boolean deleteEvent(int eventid) {
 		
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"DELETE FROM public.event WHERE eventid = ?;"
+					"DELETE FROM public.events WHERE eventid = ?;"
 				);
 				pstmt.setInt(1, eventid); 
 

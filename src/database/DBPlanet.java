@@ -30,8 +30,8 @@ public class DBPlanet {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"INSERT INTO planet(" 
-							+ "galaxy, solarsystem, planetnumber, playerid, name, ressources, buildings" + ")"
+					"INSERT INTO public.planets(" 
+							+ "galaxy, solarsystem, planetnumber, userid, planetname, ressources, buildings" + ")"
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?);"
 				);
 				pstmt.setInt(1, c.getGalaxy());
@@ -69,8 +69,8 @@ public class DBPlanet {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"UPDATE public.planet SET "
-					+ "name=?, ressources=?, buildings=?, fleet=?, spaceportqueue=?, lastupdate=? "
+					"UPDATE public.planets SET "
+					+ "planetname=?, ressources=?, buildings=?, fleet=?, spaceportqueue=?, lastupdate=? "
 					+ "WHERE galaxy=? AND solarsystem=? AND planetnumber=?;"
 				);
 			pstmt.setString(1, planet.getName());
@@ -123,9 +123,9 @@ public class DBPlanet {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT galaxy, solarsystem, planetnumber, name, ressources, buildings, fleet, spaceportqueue, lastupdate "
-					+ "FROM public.planet "
-					+ "WHERE playerid = ?;" 
+					"SELECT galaxy, solarsystem, planetnumber, planetname, ressources, buildings, fleet, spaceportqueue, lastupdate "
+					+ "FROM public.planets "
+					+ "WHERE userid = ?;" 
 					);
 			pstmt.setInt(1, playerid);
 			ResultSet rs = pstmt.executeQuery();
@@ -158,8 +158,8 @@ public class DBPlanet {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT name "
-					+ "FROM planet "
+					"SELECT planetname "
+					+ "FROM public.planets "
 					+ "WHERE galaxy = " + coordinates.getGalaxy() + " AND solarsystem = " + coordinates.getSolarSystem() + " AND planetnumber = " + coordinates.getPlanetNumber()
 					);
 			ResultSet rs = pstmt.executeQuery();
@@ -186,8 +186,8 @@ public class DBPlanet {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT planetnumber, name "
-					+ "FROM planet "
+					"SELECT planetnumber, planetname "
+					+ "FROM public.planets "
 					+ "WHERE galaxy = " + galaxy + " AND solarsystem = " + solarsystem
 					+ " ORDER BY planetnumber ASC");
 			ResultSet rs = pstmt.executeQuery();

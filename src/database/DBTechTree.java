@@ -27,7 +27,7 @@ public class DBTechTree {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"INSERT INTO public.techtree(playerid, tree)"
+					"INSERT INTO public.techtrees(userid, tree)"
 					+ "VALUES (?, ?);"
 					);
 			pstmt.setInt(1, playerId);
@@ -50,7 +50,7 @@ public class DBTechTree {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"UPDATE public.techtree SET tree=? WHERE playerid=?;"
+					"UPDATE public.techtrees SET tree=? WHERE userid=?;"
 					);
 			pstmt.setString(1, techtree.asSQLString());
 			pstmt.setInt(2, playerId);
@@ -72,7 +72,7 @@ public class DBTechTree {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT tree FROM public.techtree WHERE playerId = ?" 
+					"SELECT tree FROM public.techtrees WHERE userid = ?" 
 					);
 			pstmt.setInt(1, playerid);
 			ResultSet rs = pstmt.executeQuery();

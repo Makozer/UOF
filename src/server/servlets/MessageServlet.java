@@ -69,8 +69,9 @@ public class MessageServlet extends HttpServlet {
 		
 		HttpSession 	session = request.getSession();	
 		Player 			player = (Player)session.getAttribute("player");	
+		if (player == null) {response.sendRedirect(request.getContextPath() + "/index.jsp"); return false;}
 		
-		int 			playerid = DBPlayer.getPlayerIdByDisplayName(playername);
+		int 			playerid = DBUser.getPlayerIdByDisplayName(playername);
 		String 			title = request.getParameter("title");
 		String 			message = request.getParameter("message");
 		
@@ -94,7 +95,7 @@ public class MessageServlet extends HttpServlet {
 	private boolean showMessage(HttpServletRequest request, HttpServletResponse response, int messageid) throws ServletException, IOException {
 		HttpSession 	session = request.getSession();	
 		Player 			player = (Player)session.getAttribute("player");
-		if (player == null) {request.getRequestDispatcher("index.jsp").forward(request, response); return false;}
+		if (player == null) {response.sendRedirect(request.getContextPath() + "/index.jsp"); return false;}
 		Message			message = null;
 		
 		// get the Message and display it to the User
@@ -118,7 +119,7 @@ public class MessageServlet extends HttpServlet {
 	private boolean deleteMessage(HttpServletRequest request, HttpServletResponse response, int messageid) throws ServletException, IOException {
 		HttpSession session = request.getSession();		
 		Player player = (Player)session.getAttribute("player");
-		if (player == null) {request.getRequestDispatcher("index.jsp").forward(request, response); return false;}
+		if (player == null) {response.sendRedirect(request.getContextPath() + "/index.jsp"); return false;}
 		player.getInbox().deleteMessage(messageid);
 		response.sendRedirect(request.getContextPath() + "/messages.jsp");
 		return true;

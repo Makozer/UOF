@@ -7,7 +7,10 @@ import java.util.*;
 import community.message.*;
 import database.*;
 import game.*;
-import game.GameEvent.Type;
+import game.control.Combat;
+import game.control.GameLoader;
+import game.event.GameEvent;
+import game.event.GameEvent.Type;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.*;
@@ -103,8 +106,18 @@ public class Player {
 		
 
 		// Enemy Player
-		int enemyplayerid = DBPlayer.getPlayerIdByCoordinates(event.getTarget());
+		int enemyplayerid = DBUser.getPlayerIdByCoordinates(event.getTarget());
 		Player enemyplayer = GameLoader.loadPlayer(enemyplayerid);		
+		// if Player isnt there anymore
+		if (enemyplayer == null) {
+			GameEvent survivorevent = new GameEvent(0, myplayerid, myplayerid, GameEvent.Type.TRANSPORT, event.getTarget(), event.getCoordinates(), "", event.getFleet(), new ArrayList<ARessource>(), event.getEndTime(), 
+					new Date(new Date().getTime() + (event.getEndTime().getTime() - event.getStartTime().getTime())));
+				DBEvent.createEvent(survivorevent);
+				// DataBase inform
+				DBEvent.deleteEvent(event.getId());	
+				i.remove();
+				return;
+		}
 		Planet enemyplanet = enemyplayer.getPlanetByCoordinates(event.getTarget());
 		Fleet enemyfleet = enemyplanet.getFleet();
 		
@@ -318,6 +331,7 @@ public class Player {
 	}
 	
 	public void addPlanets(ArrayList<Planet> planets) {
+		if (planets == null) {System.err.println("NULLPOINTER @ addPlanets");return;}
 		this.planets.addAll(planets);
 	}
 	

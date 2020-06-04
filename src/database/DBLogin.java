@@ -31,7 +31,7 @@ public class DBLogin {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT passwort FROM public.passwoerter WHERE userid = ?" 
+					"SELECT password FROM public.passwords WHERE userid = ?" 
 					);
 			pstmt.setInt(1, playerid);
 			ResultSet rs = pstmt.executeQuery();

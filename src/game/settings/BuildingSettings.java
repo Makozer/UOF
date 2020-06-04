@@ -41,21 +41,21 @@ public class BuildingSettings {
 	
 	
 	// Ressource Mining Buildings
-	public static final AMath 					IRONMINE_LEVELMOD = BUILDING_RES_MOD;
+	public static final AMath 					IRONMINE_LEVELMOD = new Polynomial(0.0031, 0, 3, 15, 10);
 	public static final ArrayList<ARessource> 	IRONMINE_COSTS = new ArrayList<ARessource>(Arrays.asList(
 													new Iron(300), 
 													new RareEarth(50),
 													new Water(100)));
-	public static final AMath 					RAREEARTHMINE_LEVELMOD = BUILDING_RES_MOD;
+	public static final AMath 					RAREEARTHMINE_LEVELMOD = new Polynomial(0.002, 0, 2, 10, 10);
 	public static final ArrayList<ARessource> 	RAREEARTHMINE_COSTS = new ArrayList<ARessource>(Arrays.asList(
 													new Iron(150), 
 													new RareEarth(50),
 													new Water(100)));
-	public static final AMath 					FOUNTAIN_LEVELMOD = BUILDING_RES_MOD;
+	public static final AMath 					FOUNTAIN_LEVELMOD = new Polynomial(0.0033, 0, 3, 13, 10);
 	public static final ArrayList<ARessource> 	FOUNTAIN_COSTS = new ArrayList<ARessource>(Arrays.asList(
 													new Iron(100), 
 													new RareEarth(10)));
-	public static final AMath 					TRITIUMFABRIC_LEVELMOD = BUILDING_RES_MOD;
+	public static final AMath 					TRITIUMFABRIC_LEVELMOD = new Polynomial(0.0011, 0, 1, 10, 0);
 	public static final ArrayList<ARessource> 	TRITIUMFABRIC_COSTS = new ArrayList<ARessource>(Arrays.asList(
 													new Iron(666), 
 													new RareEarth(1500),

@@ -7,11 +7,18 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="css/style.css?<% Date date = new Date(); out.print( date.toString()); %>"/>
+<script src="./javascript/loader.js?<% Date date = new Date(); out.print( date.toString()); %>"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css?<% out.print( date.toString()); %>"/>
 <title>Universe on Fire</title>
 </head>
-<body>
-
+<body onload="loader()">
+<c:if test="${not empty player}" >
+<input type="hidden" id="ironpersecond" value="${player.getActivePlanet().getIronMine().getResPerSecond()}">
+<input type="hidden" id="rarepersecond" value="${player.getActivePlanet().getRareEarthMine().getResPerSecond()}">
+<input type="hidden" id="waterpersecond" value="${player.getActivePlanet().getFountain().getResPerSecond()}">
+<input type="hidden" id="tritiumpersecond" value="${player.getActivePlanet().getTritiumFabric().getResPerSecond()}">
+</c:if>
+<p id="testp"></p>
 <table class="main">
 	<tr>
 		<td colspan="3">
@@ -41,10 +48,10 @@
 					<td>${ player.getActivePlanet().getTritium().getName() }:</td>
 				</tr>
 				<tr>				
-					<td>${player.getActivePlanet().getIronMine().getResValAsString()}</td>
-					<td>${player.getActivePlanet().getRareEarthMine().getResValAsString()}</td>
-					<td>${player.getActivePlanet().getFountain().getResValAsString()}</td>
-					<td>${player.getActivePlanet().getTritiumFabric().getResValAsString()}</td>
+					<td id="iron">${player.getActivePlanet().getIronMine().getResValAsString()}</td>
+					<td id="rare">${player.getActivePlanet().getRareEarthMine().getResValAsString()}</td>
+					<td id="water">${player.getActivePlanet().getFountain().getResValAsString()}</td>
+					<td id="tritium">${player.getActivePlanet().getTritiumFabric().getResValAsString()}</td>
 				</tr>
 			</table>
 			</c:if>

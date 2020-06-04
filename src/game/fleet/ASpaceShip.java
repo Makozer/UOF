@@ -46,7 +46,7 @@ public abstract class ASpaceShip extends AGameObject {
 	}
 	
 	public String getAttackAsString() {
-		return NumberUtils.round2dec(this.getAttack());
+		return NumberUtils.round2decToString(this.getAttack());
 	}
 
 	public double getDefense() {
@@ -54,7 +54,7 @@ public abstract class ASpaceShip extends AGameObject {
 	}
 	
 	public String getDefenseAsString() {
-		return NumberUtils.round2dec(this.getDefense());
+		return NumberUtils.round2decToString(this.getDefense());
 	}
 
 	public double getSpeed() {
@@ -62,7 +62,7 @@ public abstract class ASpaceShip extends AGameObject {
 	}
 	
 	public String getSpeedAsString() {
-		return NumberUtils.round2dec(this.getSpeed());
+		return NumberUtils.round2decToString(this.getSpeed());
 	}
 
 	public int getCapacity() {

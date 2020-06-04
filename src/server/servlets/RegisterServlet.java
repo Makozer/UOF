@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import game.control.NewPlayerManager;
 import game.player.PersonalData;
 import game.player.Player;
 import game.research.TechTree;
 import game.utils.DateUtils;
-import database.DBPeon;
 import database.FehlerManager;
-import database.NewPlayerManager;
 
 
 @WebServlet("/Register")

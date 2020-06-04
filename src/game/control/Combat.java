@@ -1,9 +1,11 @@
-package game.fleet;
+package game.control;
 
 import java.util.*;
 import community.message.*;
 import static game.settings.GameSettings.*;
 import database.DBMessage;
+import game.fleet.ASpaceShip;
+import game.fleet.Fleet;
 import game.fleet.tier1.Falcon;
 import game.planet.Coordinates;
 import game.player.*;
@@ -27,7 +29,7 @@ public class Combat {
 		System.out.println("A: " + a.getCombatPower());
 		System.out.println("B: " + b.getCombatPower());
 		long combined = a.getCombatPower() + b.getCombatPower();
-		System.out.println("Verteilung der Kampfkraft A " + NumberUtils.round2dec((((double)a.getCombatPower() / (double)combined) * 100.0)) + ":" + NumberUtils.round2dec(((double)b.getCombatPower() / (double)combined) * 100.0) + " B");
+		System.out.println("Verteilung der Kampfkraft A " + NumberUtils.round2decToString((((double)a.getCombatPower() / (double)combined) * 100.0)) + ":" + NumberUtils.round2decToString(((double)b.getCombatPower() / (double)combined) * 100.0) + " B");
 		
 		a.setPlayerId(1);
 		b.setPlayerId(2);
@@ -89,18 +91,15 @@ public class Combat {
 	}
 	
 	public static Fleet fight(Fleet a, Fleet b) {
-		// TODO NOT WORKING PROPERLY, DEFEND ALWAYS WINS
 		// If Fleet a is stronger then b
 		if (a.getCombatPower() > b.getCombatPower()) {			
 			if (a.getCombatPower() > (2 * b.getCombatPower())) {	
-				//if (DEBUGMODE) {System.out.println("a.getCombatPower(" + a.getCombatPower() + ") > 2 * b.getCombatPower(" + b.getCombatPower() + ")");}
 				return a; // If Fleet a is over 2 times stronger then b, then it loses without losses
 			} else {
 				return brawl(a, b);
 			}
 		} else {
 			if (b.getCombatPower() > (2 * a.getCombatPower())) {	
-				//if (DEBUGMODE) {System.out.println("b.getCombatPower(" + b.getCombatPower() + ") > 2 * a.getCombatPower(" + a.getCombatPower() + ")");}
 				return b; // If Fleet b is over 2 times stronger then a, then it loses without losses
 			} else {
 				return brawl(a, b);

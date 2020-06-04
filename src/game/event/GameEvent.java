@@ -1,4 +1,4 @@
-package game;
+package game.event;
 
 import java.util.*;
 

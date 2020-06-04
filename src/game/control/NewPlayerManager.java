@@ -1,6 +1,10 @@
-package database;
+package game.control;
 
 import java.util.*;
+
+import database.DBPlanet;
+import database.DBTechTree;
+import database.DBUser;
 import game.planet.*;
 import game.player.*;
 import game.research.*;
@@ -14,10 +18,10 @@ public class NewPlayerManager {
 		Player player = new Player(data, techtree);
 		
 		// insert Player into DB
-		if (!DBPlayer.createPlayer(player, password)) { System.out.println("DBPlayer.createPlayer WAS NULL"); return null; }
+		if (!DBUser.createPlayer(player, password)) { System.out.println("DBPlayer.createPlayer WAS NULL"); return null; }
 		
 		// get his Id
-		int playerId = DBPlayer.getPlayerIdByEmail(data.getEmail());
+		int playerId = DBUser.getPlayerIdByEmail(data.getEmail());
 		if (playerId == 0) { 
 			System.out.println("PLAYER ID WAS 0");
 			return null; 

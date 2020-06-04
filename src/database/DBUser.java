@@ -10,7 +10,7 @@ import game.research.TechTree;
 import game.utils.DateUtils;
 import game.utils.ResultToTable;
 
-public class DBPlayer {
+public class DBUser {
 	
 	private static Connection con = null;
 	
@@ -22,19 +22,20 @@ public class DBPlayer {
 		//DBPlayer.createPlayer(player, "test");
 		
 		// Test getId
-		System.out.println(DBPlayer.getPlayerIdByDisplayName("TestDisplayName"));
+		System.out.println(DBUser.getPlayerIdByDisplayName("TestDisplayName"));
 	}
 	
 	public static boolean createPlayer(Player player, String password) {
+		boolean success = false;
 		PersonalData pd = player.getPersData();
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"WITH uid AS (INSERT INTO public.player(" 
+					"WITH uid AS (INSERT INTO public.users(" 
 							+ "displayname, prename, surname, email, birthday" + ")"
 					+ " VALUES (?, ?, ?, ?, ?)"
 					+ " RETURNING userid)"
-					+ " INSERT INTO passwoerter(userid, passwort) select userid, ? from uid;"
+					+ " INSERT INTO passwords(userid, password) select userid, ? from uid;"
 				);
 				pstmt.setString(1, player.getDisplayName());
 				pstmt.setString(2, pd.getPreName());
@@ -47,7 +48,7 @@ public class DBPlayer {
 			System.out.println("[DEBUG] SQL-Statement createPlayer: " + pstmt.toString());	
 			int updatedRows = pstmt.executeUpdate();
 			if (updatedRows > 0) {
-				return true; 
+				success = true; 
 			} 
 		} catch (SQLException e) {
 			System.err.println("SQL-Fehler beim Benutzer aktualisieren: " + e.getMessage());
@@ -60,12 +61,45 @@ public class DBPlayer {
 				System.err.println("Verbindung konnte nicht geschlossen werden.");
 			}
 		}
-		//
-		return false;
+		return success;
 	}
 	
-	private static boolean updatePlayer(Player player) {
-		return false;
+	public static boolean updatePlayerData(Player player) {
+		boolean success = false;
+		PersonalData pd = player.getPersData();
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"UPDATE public.users " 
+					+ "SET displayname=?, prename=?, surname=?, email=?, birthday=?"
+					+ " WHERE userid = ?"
+					+ ";"
+				);
+				pstmt.setString(1, pd.getDisplayName());
+				pstmt.setString(2, pd.getPreName());
+				pstmt.setString(3, pd.getSurName());
+				pstmt.setString(4, pd.getEmail());
+				pstmt.setTimestamp(5, new Timestamp(pd.getBirthday().getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+				pstmt.setInt(6, pd.getId());
+
+
+			System.out.println("[DEBUG] SQL-Statement createPlayer: " + pstmt.toString());	
+			int updatedRows = pstmt.executeUpdate();
+			if (updatedRows > 0) {
+				success = true; 
+			} 
+		} catch (SQLException e) {
+			System.err.println("SQL-Fehler beim Benutzer aktualisieren: " + e.getMessage());
+		} catch (NullPointerException npe) {
+			System.err.println("Nullpointer@updateBenutzer: " + npe.getMessage());
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.err.println("Verbindung konnte nicht geschlossen werden.");
+			}
+		}
+		return success;
 	}
 	
 	public static int getPlayerIdByDisplayName(String displayname) {
@@ -74,7 +108,7 @@ public class DBPlayer {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT userid FROM public.player WHERE displayname = ?" 
+					"SELECT userid FROM public.users WHERE displayname = ?" 
 					);
 			pstmt.setString(1, displayname);
 			ResultSet rs = pstmt.executeQuery();
@@ -97,7 +131,7 @@ public class DBPlayer {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT userid FROM public.player WHERE email = ?" 
+					"SELECT userid FROM public.users WHERE email = ?" 
 					);
 			pstmt.setString(1, email);
 			ResultSet rs = pstmt.executeQuery();
@@ -120,7 +154,7 @@ public class DBPlayer {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT playerid FROM public.planet WHERE galaxy = ? AND solarsystem = ? AND planetnumber = ?" 
+					"SELECT playerid FROM public.planets WHERE galaxy = ? AND solarsystem = ? AND planetnumber = ?" 
 					);
 			pstmt.setInt(1, coordinates.getGalaxy());
 			pstmt.setInt(2, coordinates.getSolarSystem());
@@ -148,7 +182,7 @@ public class DBPlayer {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT userid, email, displayname, prename, surname, birthday, created, lastlogin FROM public.player WHERE userid = ?" 
+					"SELECT userid, email, displayname, prename, surname, birthday, created, lastlogin FROM public.users WHERE userid = ?" 
 					);
 			pstmt.setInt(1, playerid);
 			ResultSet rs = pstmt.executeQuery();

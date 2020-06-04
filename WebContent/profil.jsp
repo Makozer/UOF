@@ -14,50 +14,42 @@
 <jsp:include page="./include/header.jsp" />
 
 <div class="container">
-  <h3>profile here</h2>
- 
-<table class="table table-striped table-dark table-hover">
-  <thead>
+  <h2>Profil</h2>
+ <form method="post" action="./ProfilServlet">
+<table>
     <tr>
-      <th>1</th>
-      <th>2</th>
-      <th>change</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Displayname</th>
-      <td>1</td>
-      <td>1</td>
+      <th>Anzeigename</th>
+      <td><input type="text" name="displayname" value="${player.getPersData().getDisplayName()}"></td>
     </tr>
     <tr>
-      <th scope="row">surname</th>
-      <td>2</td>
-      <td>2</td>
+      <th>Vorname</th>
+      <td><input type="text" name="prename" value="${player.getPersData().getPreName()}"></td>
     </tr>
     <tr>
-      <th scope="row">lastname</th>
-      <td>3</td>
-      <td>3</td>
+      <th>Nachname</th>
+      <td><input type="text" name="surname" value="${player.getPersData().getSurName()}"></td>
     </tr>
     <tr>
-      <th scope="row">email</th>
-      <td>4</td>
-      <td>4</td>
-    </tr>
+      <th>E-Mail (Login)</th>
+      <td><input type="text" name="email" value="${player.getPersData().getEmail()}"></td>
+    </tr>    
     <tr>
-      <th scope="row">consent</th>
-      <td>5</td>
-      <td>5</td>
-    </tr>
+      <th>Geburtstag</th>
+      <td><input type="date" name="bday" value="${player.getPersData().getBirthday()}"></td>
+    </tr> 
     <tr>
-      <th scope="row">delete</th>
-      <td>6</td>
-      <td>6</td>
-    </tr>            
-  </tbody>
+      <th>Letzter Login</th>
+      <td>${player.getPersData().getLastLogin()}</td>
+    </tr> 
+    <tr>
+      <th>Account erstellt am</th>
+      <td>${player.getPersData().getCreated()}</td>
+    </tr>   
+    <tr>
+      <td colspan="2"><button type="submit">Daten ändern</button></td>
+    </tr>   
 </table>
-
+</form>
 </div>
 <jsp:include page="./include/footer.jsp" />
 </body>

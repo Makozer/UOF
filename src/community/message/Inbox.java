@@ -65,8 +65,8 @@ public class Inbox {
 			return;
 		}
 		
-		// Cooldown 30 Sec for updating with DataBase to increase overall performance
-		if (    ((new Date().getTime() - this.lastupdate.getTime()) / 1000) > 30   ) {
+		// Cooldown 5 Sec for updating with DataBase to increase overall performance
+		if (    ((new Date().getTime() - this.lastupdate.getTime()) / 1000) > 5 ) {
 			this.messages.addAll(DBMessage.getMessages(player, lastupdate));
 			this.lastupdate = new Date();
 			sortMe();

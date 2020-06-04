@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import database.DBLogin;
-import database.DBPlayer;
-import database.GameLoader;
+import database.DBUser;
 import game.*;
+import game.control.GameLoader;
 import game.player.Player;
 import game.utils.*;
 
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email"); 
 		String password = request.getParameter("password"); 
 		
-		int playerid = DBPlayer.getPlayerIdByEmail(email);		
+		int playerid = DBUser.getPlayerIdByEmail(email);		
 		boolean success = DBLogin.comparePassword(playerid, password);
 		System.out.println("playerid login:" + playerid + ": " + success);
 		
