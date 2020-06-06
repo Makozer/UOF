@@ -10,6 +10,7 @@ function raise() {
 
 function raiseElement(item, index) {
 	var rps = document.getElementById(item + "persecond").value;
+	if (rps == 0) {return;}
 	var increase = 1;
 	var timems = (1000 / rps);
 

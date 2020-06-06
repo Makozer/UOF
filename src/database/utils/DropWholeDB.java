@@ -4,22 +4,26 @@ import static game.settings.GameSettings.DEBUGMODE;
 
 import java.sql.*;
 
-import database.DatabaseConnection;
+import database.*;
 
-public class ClearWholeDB {
-	
+public class DropWholeDB {
+
 	private static Connection con = null;
 
 	public static void main(String[] args) {
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"DELETE FROM public.events; "
-					+ "DELETE FROM public.messages; "
-					+ "DELETE FROM public.passwords; "
-					+ "DELETE FROM public.planets; "
-					+ "DELETE FROM public.users; "
-					+ "DELETE FROM public.techtrees; "
+					"DROP TABLE public.events CASCADE; "
+					+ "DROP TABLE public.messages CASCADE; "
+					+ "DROP TABLE public.passwords CASCADE; "
+					+ "DROP TABLE public.planets CASCADE; "
+					+ "DROP TABLE public.users CASCADE; "
+					+ "DROP TABLE public.techtrees CASCADE; "
+					// Sequence
+					+ "DROP SEQUENCE public.eventid_seq CASCADE; "
+					+ "DROP SEQUENCE public.messageid_seq CASCADE; "
+					+ "DROP SEQUENCE public.userid_seq CASCADE; "
 				);
 
 

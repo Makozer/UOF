@@ -118,6 +118,7 @@ public class EventCenter {
 	public ArrayList<GameEvent> getCalcEvents() {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		Date now = new Date();
+		sortMe();
 		for (GameEvent e : events) {
 			if (now.getTime() > e.getEndTime().getTime()) {
 				output.add(e);
