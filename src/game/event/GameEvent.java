@@ -31,6 +31,10 @@ public class GameEvent implements Comparable<GameEvent> {
 	private Date 					arrivalTime = new Date();
 	private Date 					endTime = new Date();	
 	
+	public GameEvent() {
+		// ONLY FOR TESTING!!!
+	}
+	
 	public GameEvent(int playerid, Type type, Coordinates coordinates, String buildingName, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
 		this.playerid = playerid; 
 		this.type = type;

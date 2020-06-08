@@ -124,7 +124,7 @@ public class UnfoldToDB {
 								+ "endttime timestamp with time zone NOT NULL, "
 								+ "userid integer NOT NULL, "
 								+ "targetuserid integer, "
-								+ "lock character varying COLLATE pg_catalog.\"default\", "
+								+ "lock character varying COLLATE pg_catalog.\"default\" NOT NULL DEFAULT '', "
 								+ "CONSTRAINT eventid_pkey PRIMARY KEY (eventid) "
 								+ ") "
 								
@@ -180,7 +180,7 @@ public class UnfoldToDB {
 						+ "created timestamp with time zone NOT NULL DEFAULT timezone('Europe/Berlin'::text, now()), "
 						+ "birthday timestamp with time zone, "
 						+ "lastlogin timestamp with time zone NOT NULL DEFAULT timezone('Europe/Berlin'::text, now()), "
-						+ "lock character varying COLLATE pg_catalog.\"default\", "
+						+ "lock character varying COLLATE pg_catalog.\"default\" NOT NULL DEFAULT '', "
 						+ "CONSTRAINT userid_pkey PRIMARY KEY (userid), "
 						+ "CONSTRAINT displayname_unique UNIQUE (displayname), "
 						+ "CONSTRAINT email_unique UNIQUE (email), "
