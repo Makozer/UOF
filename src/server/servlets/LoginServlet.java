@@ -14,6 +14,7 @@ import database.DBLogin;
 import database.DBUser;
 import game.*;
 import game.control.GameLoader;
+import game.control.GameUpdate;
 import game.player.Player;
 import game.utils.*;
 
@@ -43,12 +44,22 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("playerid login:" + playerid + ": " + success);
 		
 		if (success) {
+			// Creating Session
 			HttpSession session = request.getSession();
-			Player player = GameLoader.loadPlayer(playerid);
-			player.getPersData().setLastLogin(new Date());
-			session.setAttribute("player", player);
+			
+			// Creating Player
+			Player user = GameLoader.loadPlayer(playerid);
+			user.getPersData().setLastLogin(new Date());
+			session.setAttribute("player", user);
+			
+			// DateUtils
 			DateUtils dateUtils = new DateUtils();
 			session.setAttribute("dateUtils", dateUtils);
+			
+			// GameUpdate
+			GameUpdate gameupdate = new GameUpdate(user);
+			session.setAttribute("update", gameupdate);
+			
 			response.sendRedirect(request.getContextPath() + "/overview.jsp");
 		} else {
 			String error = "SomeThing went wrong";

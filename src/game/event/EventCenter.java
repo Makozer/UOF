@@ -116,18 +116,23 @@ public class EventCenter {
 	
 
 	public ArrayList<GameEvent> getCalcEvents() {
-		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		Date now = new Date();
+		return getCalcEventsToDate(now);
+	}
+	
+	public ArrayList<GameEvent> getCalcEventsToDate(Date date) {
+		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		sortMe();
 		for (GameEvent e : events) {
-			if (now.getTime() > e.getEndTime().getTime()) {
+			if (date.getTime() > e.getEndTime().getTime()) {
 				output.add(e);
 			}
+			// TODO Lowprio break if there arent any more calc events
 		}
 		return output;
 	}
 	
-	private void update() {
+	public void update() {
 		if (this.lastupdate == null) {
 			loadAll();
 			sortMe();

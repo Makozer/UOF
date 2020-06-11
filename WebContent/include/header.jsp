@@ -12,7 +12,15 @@
 <title>Universe on Fire</title>
 </head>
 <body onload="loader()">
+
+<input type="hidden" name="refreshedpage" value="
+<c:if test="${not empty player}" >			
+${ update.pageRefresh() }
+</c:if>
+"/>
 <c:if test="${not empty player}" >
+
+
 <input type="hidden" id="ironpersecond" value="${player.getActivePlanet().getIronMine().getResPerSecond()}">
 <input type="hidden" id="rarepersecond" value="${player.getActivePlanet().getRareEarthMine().getResPerSecond()}">
 <input type="hidden" id="waterpersecond" value="${player.getActivePlanet().getFountain().getResPerSecond()}">

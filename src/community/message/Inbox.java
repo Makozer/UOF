@@ -57,7 +57,7 @@ public class Inbox {
 		return false;
 	}
 	
-	private void update() {
+	public void update() {
 		// if Inbox hasnt loaded once
 		if (this.lastupdate == null) {
 			loadAll();
@@ -67,9 +67,16 @@ public class Inbox {
 		
 		// Cooldown 5 Sec for updating with DataBase to increase overall performance
 		if (    ((new Date().getTime() - this.lastupdate.getTime()) / 1000) > 5 ) {
-			this.messages.addAll(DBMessage.getMessages(player, lastupdate));
+			ArrayList<CommunityMessage> newMsgs = DBMessage.getMessages(player, lastupdate);
 			this.lastupdate = new Date();
-			sortMe();
+			
+			// If there are new Messages then add them to the Inbox and notice User
+			if (newMsgs.size() > 0) {
+				this.messages.addAll(newMsgs);
+				hasnewmsg = true;
+				sortMe();
+			}			
+			
 		}
 		
 	}
