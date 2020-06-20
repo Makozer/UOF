@@ -147,7 +147,7 @@ public class DBEvent {
 						+ "building, fleet, ressource, starttime, "
 						+ "endttime, userid, targetuserid "
 					+ "FROM public.events "
-					+ "WHERE (userid = ? AND created BETWEEN ? AND ?) OR (targetuserid = ? AND created BETWEEN ? AND ?)");
+					+ "WHERE (userid = ? AND endttime BETWEEN ? AND ?) OR (targetuserid = ? AND endttime BETWEEN ? AND ?)");
 			pstmt.setInt(1, player.getPersData().getId());
 			pstmt.setTimestamp(2, new Timestamp(timestamp.getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
 			pstmt.setTimestamp(3, new Timestamp(new Date().getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));

@@ -15,7 +15,6 @@ import game.player.PersonalData;
 import game.player.Player;
 import game.research.TechTree;
 import game.utils.DateUtils;
-import database.FehlerManager;
 
 
 @WebServlet("/Register")
