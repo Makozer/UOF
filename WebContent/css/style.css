@@ -15,7 +15,6 @@
 }
 
 body {
-	background-color: #507;
 	text-align: center;
 }
 
@@ -62,6 +61,12 @@ input, button, option, textarea {
 
 .main .attack td {
 	background-color: green;
+}
+
+.center {
+
+	text-align: center;
+
 }
 
 

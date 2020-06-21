@@ -7,18 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<script src="js/bootstrap.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Register</title>
 </head>
 <body>
+
 <jsp:include page="./include/header.jsp" />
-${statust}
-<div class="signup-form">
+
+<div class="signup-form" style = "position:relative; left:-90px;" >
     <form action="Register" method="post">
-		<h2>Register</h2>
-		<p class="hint-text">Create your account</p>
+		<h2>Universe on Fire: Register</h2>
+		<br></br>
+		${statust}
+		<p class="hint-text ">Create your account</p>
 		<div class="form-group">
         	<input type="text" class="form-control" name="displayname" value="${formDisplayname}" placeholder="Displayname" required="required">
         </div>
@@ -41,10 +41,10 @@ ${statust}
 			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
 		</div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Register Now</button>
         </div>
     </form>
-	<div class="text-center">Already have an account? <a href="#">Sign in</a></div>
+	<div class="text-center">Already have an account? <a href="login.jsp">Sign in</a></div>
 </div>
 
 <jsp:include page="./include/footer.jsp" />

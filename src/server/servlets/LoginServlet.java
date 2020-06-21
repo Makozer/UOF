@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			String error = "SomeThing went wrong";
 			request.setAttribute("error", error);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 		/*
 		HttpSession session = request.getSession();				

@@ -26,7 +26,7 @@ public class Player {
 	private TechTree 					techtree = null;
 	
 	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
-	private EventCenter					eventCenter		= new EventCenter(this);
+	//private EventCenter					eventCenter		= new EventCenter(this);
 	
 	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
 	private int 						activePlanet 	= 0;
@@ -522,9 +522,9 @@ public class Player {
 		return inbox;
 	}
 
-	public EventCenter getEventCenter() {
-		return eventCenter;
-	}
+	//public EventCenter getEventCenter() {
+	//	return eventCenter;
+	//}
 
 	public String getDisplayName() {
 		return this.persData.getDisplayName();

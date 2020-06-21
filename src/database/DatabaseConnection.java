@@ -13,7 +13,7 @@ public class DatabaseConnection {
 	private static final String DB_PASSWORD = 	DataBaseSettings.PASSWORD;
 	private static final String DB_DRIVER = "org.postgresql.Driver";
 	private static final String DB_URL = "jdbc:postgresql://" + DB_SERVER + "/" + DB_NAME + "?";
-
+	
 	/** Initialisiere eine Verbindung zur Datenbank 
 	 * @throws SQLException */
 	private static Connection init() throws SQLException {
