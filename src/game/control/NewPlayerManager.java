@@ -19,7 +19,7 @@ public class NewPlayerManager {
 		
 		// insert Player into DB
 		if (!DBUser.createPlayer(player, password)) { System.out.println("DBPlayer.createPlayer WAS NULL"); return null; }
-		
+		// TODO lowprio returning ID!!! performance!
 		// get his Id
 		int playerId = DBUser.getPlayerIdByEmail(data.getEmail());
 		if (playerId == 0) { 
@@ -57,7 +57,7 @@ public class NewPlayerManager {
 		// insert Planet into DB
 		DBPlanet.createPlanet(player, planet);
 		player.addPlanet(planet);
-		
+		player.loadEvents();
 		return player;
 	}
 

@@ -1,5 +1,7 @@
 package game.fleet;
 
+import static game.settings.GameSettings.GAME_SPEED;
+
 import java.util.Date;
 import game.planet.Coordinates;
 import game.ressource.Tritium;
@@ -28,7 +30,7 @@ public class TravelCalc {
 		} else {
 			addSec = 60 * 60 + (1);
 		}		
-		if (addSec > 0) { output = new Date(new Date().getTime() + (addSec * 1000));}
+		if (addSec > 0) { output = new Date(new Date().getTime() + (long)((addSec * 1000)/ GAME_SPEED));}
 		return output;
 	}
 	

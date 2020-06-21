@@ -16,7 +16,8 @@ public class GameLoader {
 		player.addPlanets(DBPlanet.getPlanetsById(playerid));
 		
 		// DataBase get events by Player ID
-		player.setEvents(DBEvent.getEvents(player));
+		//player.setEvents(DBEvent.getEvents(player));
+		player.loadEvents();
 		
 		// DataBase get messages by Player ID
 		// player.getInbox().update();	 

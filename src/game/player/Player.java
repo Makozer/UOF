@@ -26,7 +26,11 @@ public class Player {
 	private TechTree 					techtree = null;
 	
 	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
+<<<<<<< HEAD
 	//private EventCenter					eventCenter		= new EventCenter(this);
+=======
+	private EventCenter					eventCenter		= null;
+>>>>>>> branch 'master' of https://github.com/Makozer/UOF
 	
 	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
 	private int 						activePlanet 	= 0;
@@ -53,10 +57,10 @@ public class Player {
 	public void update(boolean war) {
 		
 		// Update Events
-		updateEvents(war);
+		//updateEvents(war); // EVENTCENTER OUTSURCED
 		
 		// Update Planets
-		updatePlanets();
+		//updatePlanets();
 
 	}
 	
@@ -359,7 +363,7 @@ public class Player {
 	}	
 	
 	public void addEvent(GameEvent event) {
-		this.events.add(event);
+		this.getEventCenter().addEvent(event);
 	}
 	
 	public void setEvents(ArrayList<GameEvent> events) {
@@ -386,10 +390,12 @@ public class Player {
 	}
 	
 	public void removeEvent(GameEvent event) {
-		this.events.remove(event);
+		this.getEventCenter().removeEvent(event);
 	}
 	
 	public GameEvent getBuildEventByCoords(Coordinates coordinates) {
+		return this.getEventCenter().getBuildEventByCoords(coordinates);
+		/*
 		GameEvent output = null;
 		for (GameEvent e: events) {
 			if (e.getCoordinates().asCoords().equals(coordinates.asCoords()) && e.getType() == GameEvent.Type.BUILD) {
@@ -398,6 +404,7 @@ public class Player {
 			}
 		}
 		return output;
+		*/
 	}
 	
 	public GameEvent getResearchEventByCoords(Coordinates coordinates) {
@@ -463,12 +470,15 @@ public class Player {
 	}
 	
 	public ArrayList<GameEvent> getBuildingEvents() {
+		return eventCenter.getBuildingEvents();
+		/*
 		sortEvents();
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
 			if (e.getType() == GameEvent.Type.BUILD) { output.add(e); }
 		}
 		return output;
+		*/
 	}
 	
 	public ArrayList<GameEvent> getResearchEvents() {
@@ -483,6 +493,12 @@ public class Player {
 	public ArrayList<GameEvent> getEventsSorted() {
 		sortEvents();
 		return events;
+	}
+	
+	public void loadEvents() {
+		if (eventCenter == null) {
+			this.eventCenter = new EventCenter(this);
+		}
 	}
 	
 	private void sortEvents() {

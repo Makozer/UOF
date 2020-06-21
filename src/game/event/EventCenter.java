@@ -133,12 +133,13 @@ public class EventCenter {
 	}
 	
 	public void update() {
+
 		if (this.lastupdate == null) {
 			loadAll();
 			sortMe();
 			return;
 		}
-		
+
 		// Cooldown 10 Sec for updating with DataBase to increase overall performance
 		if (    ((new Date().getTime() - this.lastupdate.getTime()) / 1000) > 10 ) {
 			this.events.addAll(DBEvent.getEvents(user, lastupdate));
@@ -147,7 +148,7 @@ public class EventCenter {
 		}
 	}
 	
-	private void init() {
+	public void init() {
 
 		// Build
 		for (Planet planet : user.getPlanets()) {
@@ -182,6 +183,11 @@ public class EventCenter {
 	private void loadAll() {
 		this.events.addAll(DBEvent.getEvents(user));
 		this.lastupdate = new Date();
+	}
+	
+	public boolean deleteEvent(GameEvent event) {
+		events.remove(event);
+		return true;
 	}
 
 }
