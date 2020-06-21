@@ -26,11 +26,9 @@ public class Player {
 	private TechTree 					techtree = null;
 	
 	private ArrayList<GameEvent> 		events 			= new ArrayList<GameEvent>();	
-<<<<<<< HEAD
-	//private EventCenter					eventCenter		= new EventCenter(this);
-=======
+
 	private EventCenter					eventCenter		= null;
->>>>>>> branch 'master' of https://github.com/Makozer/UOF
+
 	
 	private ArrayList<Planet> 			planets 		= new ArrayList<Planet>();
 	private int 						activePlanet 	= 0;
@@ -538,9 +536,9 @@ public class Player {
 		return inbox;
 	}
 
-	//public EventCenter getEventCenter() {
-	//	return eventCenter;
-	//}
+	public EventCenter getEventCenter() {
+		return eventCenter;
+	}
 
 	public String getDisplayName() {
 		return this.persData.getDisplayName();
