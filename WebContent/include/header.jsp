@@ -8,8 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <script
-	src="./javascript/loader.js?<%Date date = new Date();
-			out.print(date.toString());%>"></script>
+	src="./javascript/loader.js?"></script>
 
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1">
@@ -18,7 +17,7 @@
 	type="image/x-icon">
 <link rel="preload" href="./css/style2.css">
 <link rel="stylesheet" type="text/css"
-	href="css/style.css?<%out.print(date.toString());%>" />
+	href="css/style.css" />
 <link rel="stylesheet" href="./css/icons.css">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/bootstrap-grid.min.css">

@@ -1,4 +1,4 @@
-package game.utils;
+package database.utils;
 
 import game.control.NewPlayerManager;
 import game.player.PersonalData;

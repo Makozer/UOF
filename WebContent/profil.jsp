@@ -52,7 +52,8 @@
 </form>
 
 <div>
-	 <form method="post" action="./FunktionalSQLServlet.java" method="post" onsubmit="return confirm('Are you sure you want to delete your Account?');">
+	${errordelete}
+	 <form method="post" action="./DeleteServlet" method="post" onsubmit="return confirm('Are you sure you want to delete your Account?');">
       <table>
       <tr>
       <td colspan="2"><button type="submit" class="border rounded btn-danger" value="SingleUserDelete">Profil Löschen</button></td>  

@@ -20,13 +20,31 @@ public class FunktionalSQLServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String query = request.getParameter("query"); 
-		String output = "ayay";
-		request.setAttribute("result", output);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
-		
-		// 10 zufällige registrieren, ausgeben, zufällig löschen
+		String aktion = request.getParameter("funktionalaktion"); 
+		String result = "";
+		switch (aktion) {
+		case "Erstellen": 
+			for (int i = 0; i < 10; i++) {
+				database.utils.RandomPlayer.randomPlayer(); 
+			}
+			result = "10 Spieler hinzugefuegt";
+			break; 
+		case "Loeschen": 
+			if (FunktionaleAnforderungen.getBenutzerAnzahl() > 0) {
+					FunktionaleAnforderungen.deleteRandomUser();
+					result = "zufaelliger spieler geloescht";
+			} else {
+				result = "Kein Spieler mehr zum loeschen da";
+			}
+			break; 
+			
+		case "Ausgeben": 
+			result = FunktionaleAnforderungen.getBenutzer(); 
+			break; 
+		}
+		request.setAttribute("result", result);
+		request.getRequestDispatcher("example.jsp").forward(request, response);
 	}
+	
 	
 }
