@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath() + "/overview.jsp");
 		} else {
-			String error = "SomeThing went wrong";
+			String error = "User/password combination wrong";
 			request.setAttribute("error", error);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}

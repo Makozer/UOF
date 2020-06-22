@@ -15,6 +15,7 @@ import game.player.PersonalData;
 import game.player.Player;
 import game.research.TechTree;
 import game.utils.DateUtils;
+import database.utils.*;
 
 
 @WebServlet("/Register")
@@ -33,14 +34,41 @@ public class RegisterServlet extends HttpServlet {
 		String formEmail = request.getParameter("email"); 
 		String formPassword = request.getParameter("password"); 
 		String formcPassword = request.getParameter("confirm_password"); 
-		String formCheckbox = request.getParameter("checkbox");
-
+		String[] formCheckboxes = request.getParameterValues("checkbox"); 
+		
 		String error = "";
 		
 		if(!formPassword.equals(formcPassword)) {
 			error += "Passwoerter stimmen nicht ueberein, Eingabe wdh.! <br>";
+		}		
+		if (!FehlerManager.pruefeEmail(formEmail)) {
+			error += "Geben sie eine gültige Email an. <br/>";
 		}
 		
+		if (!FehlerManager.pruefeEmail(formEmail)) {
+			error += "Geben sie eine gültige Email an. <br/>";
+		}
+		
+		if (FehlerManager.isEmailUsed(formEmail)) {
+			error += "Email bereits registriert. benutzen sie eine andere <br/>";
+		}
+		
+		if (FehlerManager.isNameUsed(formDisplayname)) {
+			error += "Displayname bereits benutzt. benutzen sie einen anderen <br/>";
+		}
+		
+		
+		try {
+			for (String checkbox : formCheckboxes) {
+				boolean fehler = false; 
+				if (!FehlerManager.checkbox(checkbox) && !fehler) {
+					error += "Bitte wählen Sie jede Checkbox aus!";
+					fehler = true; 
+				}
+			}
+		} catch (NullPointerException npe) {
+			error += "Bitte wählen Sie jede Checkbox aus!";
+		}
 		if(error.equals("")) {
 			HttpSession session = request.getSession();
 			
@@ -53,6 +81,7 @@ public class RegisterServlet extends HttpServlet {
 			pd.setSurName(formLastname);
 			pd.setEmail(formEmail);
 			Date testdate = new Date();
+			//bday offensichtlich nicht benutzt?
 			pd.setBirthday(testdate);
 			pd.setCreated(testdate);
 			pd.setLastLogin(testdate);

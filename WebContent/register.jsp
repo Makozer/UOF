@@ -12,13 +12,16 @@
 <body>
 
 <jsp:include page="./include/header.jsp" />
-${statust}
 
+<div>
+
+</div>
 
 <div class="signup-form" style = "position:relative; left:-90px;" >
     <form action="Register" method="post">
-		<h2>Universe on Fire: Register</h2>
+		<h2></h2>
 		<br></br>
+		<div class = "text-secondary">${statust}</div>
 		<p class="hint-text ">Create your account</p>
 		<div class="form-group">
         	<input type="text" class="form-control" name="displayname" value="${formDisplayname}" placeholder="Displayname" required="required">
@@ -39,7 +42,15 @@ ${statust}
             <input type="password" class="form-control" name="confirm_password" value="${formcPassword}" placeholder="Confirm Password" required="required">
         </div>        
         <div class="form-group">
-			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+        <div class="form-check form-check-inline">
+			  <input class="form-check-input" type="checkbox" name="checkbox" required="required">
+			  <label class="form-check-label">I accept the <a href="#">Terms of Use</a></label>
+			</div>
+			&amp;  
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="checkbox" name="checkbox" required="required">
+			  <label class="form-check-label"><a href="#">Privacy Policy</a></label>
+			</div>
 		</div>
 		<div class="form-group">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Register Now</button>

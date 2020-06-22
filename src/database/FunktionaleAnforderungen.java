@@ -120,5 +120,41 @@ public class FunktionaleAnforderungen {
 		return zahl;
 	}
 	
+	public static boolean isDisplayNameUsed(String displayname) {
+		boolean used = false;
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"SELECT * FROM public.users WHERE displayname = ? ;"
+			);
+			pstmt.setString(1, displayname);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				used = true;
+			} 
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Benutzer z�hlen: " + e.getMessage());
+		}
+		return used;
+	}
+	
+	public static boolean isEmailNameUsed(String email) {
+		boolean used = false;
+		try {
+			con = DatabaseConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"SELECT * FROM public.users WHERE email = ? ;"
+			);
+			pstmt.setString(1, email);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				used = true;
+			} 
+		} catch (SQLException e) {
+			System.err.println("Fehler beim Benutzer z�hlen: " + e.getMessage());
+		}
+		return used;
+	}
+	
 	
 }
