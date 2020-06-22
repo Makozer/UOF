@@ -44,12 +44,24 @@
     <tr>
       <th>Account erstellt am</th>
       <td>${player.getPersData().getCreated()}</td>
-    </tr>   
+    </tr>     
     <tr>
-      <td colspan="2"><button type="submit">Daten ändern</button></td>
-    </tr>   
+      <td colspan="2"><button type="submit" class="border rounded">Daten ändern</button></td>  
+    </tr>
 </table>
 </form>
+
+<div>
+	 <form method="post" action="./FunktionalSQLServlet.java" method="post" onsubmit="return confirm('Are you sure you want to delete your Account?');">
+      <table>
+      <tr>
+      <td colspan="2"><button type="submit" class="border rounded btn-danger" value="SingleUserDelete">Profil Löschen</button></td>  
+    </tr>
+	</table>
+    	</form>
+</div>
+
+
 </div>
 <jsp:include page="./include/footer.jsp" />
 </body>

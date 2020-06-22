@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="shortcut icon"
+	href="assets/images/scienceandfiction-battle-99291-144x144.png"
+	type="image/x-icon">
 <link rel="stylesheet" href="./css/bootstrap.css">
 <link rel="stylesheet" href="./css/style.css">
 
@@ -40,6 +42,10 @@
 								</div>
 								<button type="submit" class="btn btn-success btn-lg"
 									id="btnLogin">Login</button>
+									<div class="align-center">
+										<a class="text-dark" href="register.jsp"> No Account yet? Register
+										now!</a>
+								</div>
 							</form>
 						</div>
 					</div>

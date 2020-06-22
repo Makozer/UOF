@@ -15,7 +15,6 @@ public class ResultToTable {
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			
-			//keine id 1 skip
 			rs.next();
 			
 			int col = rsmd.getColumnCount();

@@ -7,17 +7,20 @@
 <jsp:include page="./include/header.jsp" />
 
 <h1>Planeten von ${ player.getDisplayName() }</h1>
-
-<table border="1">
-	<tr>
-		<th>Koordinaten</th>
-		<th>Name</th>
-	</tr>
-	<c:forEach var="planet" items="${player.getPlanets()}">
+<div>
+	<table border="1" style="width: 100%">
 		<tr>
-			<td>${ planet.getCoords().asCoords() }</td>
-			<td>${ planet.getName() }</td>
+			<th>Nr</th>
+			<th>Koordinaten</th>
+			<th>Name</th>
 		</tr>
-	</c:forEach>
-</table>
+		<c:forEach var="planet" items="${player.getPlanets()}" varStatus="Nr">
+			<tr>
+				<td>${Nr.index +1 }.</td>
+				<td>${ planet.getCoords().asCoords() }</td>
+				<td>${ planet.getName() }</td>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
 <jsp:include page="./include/footer.jsp" />

@@ -78,10 +78,10 @@ ${ update.pageRefresh() }
 	</c:if>
 
 
-	<section class="menu cid-s2n8eesi32" id="menu1-1d">
+	<section class="menu cid-s2n8eesi32 " id="menu1-1d">
 
 		<nav
-			class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+			class="navbar border border-danger navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -95,9 +95,9 @@ ${ update.pageRefresh() }
 
 				<div class="menu-logo">
 					<div class="navbar-brand">
-						<span class="navbar-logo"> <a href="overview.jsp"> <img
+						<span class=""> <a href="overview.jsp"> <img
 								src="assets/images/scienceandfiction-battle-99291-144x144.png"
-								alt="Overview" title="" style="height: 4.5rem;">
+								alt="Overview" title="" style="height: 3.5rem;">
 						</a>
 						</span> <span class="navbar-caption-wrap"><a
 							class="navbar-caption text-white display-5" href="overview.jsp">
@@ -105,7 +105,7 @@ ${ update.pageRefresh() }
 					</div>
 				</div>
 
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<div class="collapse navbar-collapse" id="">
 					<ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
 						<li class="nav-item"><a class="text-white display-4"> <img
 								src="./assets/images/iron.jpg" alt="" title="Iron"
@@ -169,15 +169,12 @@ ${ update.pageRefresh() }
 					<jsp:include page="leftmenu.jsp" />
 				</c:if></td>
 			<td style="text-align: center;"><c:if test="${not empty player}">
-
+				<!--  ins leftmenue verschoben-->
 					<table class="planetResOv">
 						<tr>
-							<td colspan="4" style="padding: 11px;">Koordinaten:
-								${player.getActivePlanet().getCoords().asCoords()} <img
-								src="./assets/images/planet.png" alt="Tritium" title=""
-								style="height: 1.5rem;"> Name:
-								${player.getActivePlanet().getName()}
-							</td>
+							<td>
+								<br>
+							</td>        
 						</tr>
 					</table>
 				</c:if>

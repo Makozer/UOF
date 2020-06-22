@@ -6,6 +6,9 @@
 
 <jsp:include page="./include/header.jsp" />
 
+
+
+
 <h1>Neue Nachricht schreiben</h1>
 <form method="post" action="./MessageServlet">
 <h2 class="error">${error}</h2>
@@ -18,3 +21,4 @@
 
 </form>
 <jsp:include page="./include/footer.jsp" />
+

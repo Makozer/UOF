@@ -12,12 +12,13 @@
 <body>
 
 <jsp:include page="./include/header.jsp" />
+${statust}
+
 
 <div class="signup-form" style = "position:relative; left:-90px;" >
     <form action="Register" method="post">
 		<h2>Universe on Fire: Register</h2>
 		<br></br>
-		${statust}
 		<p class="hint-text ">Create your account</p>
 		<div class="form-group">
         	<input type="text" class="form-control" name="displayname" value="${formDisplayname}" placeholder="Displayname" required="required">

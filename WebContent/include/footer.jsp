@@ -14,8 +14,6 @@
 		</footer>
 	</div>
 </section>
-</td>
-</tr>
 </table>
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
