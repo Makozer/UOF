@@ -4,8 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
 
+<!-- testpage with examples -->
 <jsp:include page="./include/header.jsp" />
-
+<br><br>
 <div class="align center">
 	Funktionale Anforderungen:
 	<form action="./FunktionalSQLServlet" method="post">
@@ -18,7 +19,7 @@
 	</form>
 </div>
 
-	${ result }
+${ result }
 
 <h1>BeispielDaten</h1>
 

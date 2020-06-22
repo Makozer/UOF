@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import game.control.NewPlayerManager;
 import game.player.PersonalData;
 import game.player.Player;
-import game.research.TechTree;
 import game.utils.DateUtils;
 import database.utils.*;
 
@@ -41,14 +40,13 @@ public class RegisterServlet extends HttpServlet {
 		if(!formPassword.equals(formcPassword)) {
 			error += "Passwoerter stimmen nicht ueberein, Eingabe wdh.! <br>";
 		}		
+		// da nur clientseitig gecheckt wird 
+
 		if (!FehlerManager.pruefeEmail(formEmail)) {
 			error += "Geben sie eine gültige Email an. <br/>";
 		}
 		
-		if (!FehlerManager.pruefeEmail(formEmail)) {
-			error += "Geben sie eine gültige Email an. <br/>";
-		}
-		
+		//testen ob dp name und mail vorhanden sind in db
 		if (FehlerManager.isEmailUsed(formEmail)) {
 			error += "Email bereits registriert. benutzen sie eine andere <br/>";
 		}
@@ -97,11 +95,6 @@ public class RegisterServlet extends HttpServlet {
 			} else {
 				System.out.println("PLAYER WAS NULL IN REGISTERSERVLET!");
 			}
-			
-			//session.setAttribute("Player", new Player(pd, new TechTree()));
-
-			//DBPeon.insertBenutzer(pd);
-			
 			
 			//Ansonsten Eingaben zurueck zum Formular
 		} else {

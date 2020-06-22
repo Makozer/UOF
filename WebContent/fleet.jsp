@@ -6,6 +6,7 @@
 
 <jsp:include page="./include/header.jsp" />
 
+<!-- Flottenuebersicht -->
 <h1>Flotte</h1>
 <form method="post" action="./FleetServlet">
 	<table border="1">
@@ -19,7 +20,7 @@
 			<tr>
 				<td><c:out value="${ship.getName()}" /></td>
 				<td><c:out value="${ship.getQuantity()}" /></td>
-				<td><input type="text" class="intinput"
+				<td><input type="text" size="30" maxlength="30" class="intinput"
 					name="<c:out value="${ship.getName()}"/>"></td>
 			</tr>
 		</c:forEach>
@@ -30,7 +31,7 @@
 	<table>
 		<tr>
 			<td style="text-align: left;" colspan="4"><input type="radio"
-				name="type" value="ATTACK" checked="checked"> <label>
+				name="type" size="30" maxlength="30" value="ATTACK" checked="checked"> <label>
 					Angriff</label> <br /> <input type="radio" name="type" value="TRANSPORT">
 				<label> Transport von Rohstoffen</label></td>
 		</tr>
@@ -44,10 +45,10 @@
 			<td>Tritium</td>
 		</tr>
 		<tr>
-			<td><input type="number" name="iron" class="intinput"></td>
-			<td><input type="number" name="rare" class="intinput"></td>
-			<td><input type="number" name="water" class="intinput"></td>
-			<td><input type="number" name="tritium" class="intinput"></td>
+			<td><input type="number"  size="30" maxlength="30" name="iron" class="intinput"></td>
+			<td><input type="number"  size="30" maxlength="30" name="rare" class="intinput"></td>
+			<td><input type="number"  size="30" maxlength="30" name="water" class="intinput"></td>
+			<td><input type="number"  size="30" maxlength="30" name="tritium" class="intinput"></td>
 		</tr>
 	</table>
 
@@ -59,9 +60,9 @@
 			<th>Planet</th>
 		</tr>
 		<tr>
-			<td><input type="text" name="galaxy" class="intinput"></td>
-			<td><input type="text" name="solarsystem" class="intinput"></td>
-			<td><input type="text" name="planet" class="intinput"></td>
+			<td><input type="text" size="30" maxlength="30" name="galaxy" class="intinput"></td>
+			<td><input type="text" size="30" maxlength="30" name="solarsystem" class="intinput"></td>
+			<td><input type="text" size="30" maxlength="30" name="planet" class="intinput"></td>
 		</tr>
 	</table>
 	<p>

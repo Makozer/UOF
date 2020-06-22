@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+//nicht implemementiert
 //import org.owasp.esapi.ESAPI;
 
 public class XSSRequestWrapper extends HttpServletRequestWrapper {

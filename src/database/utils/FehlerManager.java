@@ -1,12 +1,25 @@
+/**
+ * zusammengefasste fehlerbehandlung fuer forms - Cedric
+ */
+
 package database.utils;
 
 import java.util.regex.Pattern;
 
 import database.FunktionaleAnforderungen;
-import database.utils.*;
 
+/**
+ * behandelt mgl Fehler bei registrierung
+ * @author cedri
+ *
+ */
 public class FehlerManager {
 	
+	/**
+	 * prueft ob checkboxen getickt sind für registrierung
+	 * @param tick
+	 * @return
+	 */
 	public static boolean checkbox(String tick) {
 		boolean checked = false;
 		// Checkbox ist entweder "on" oder "null" wenn kein Value gesetzt wird
@@ -18,7 +31,11 @@ public class FehlerManager {
 		return checked;
 	}
 	
-
+	/**
+	 * prueft alter auf format  für registrierung
+	 * @param alter
+	 * @return
+	 */
 	public static boolean pruefeAlter(String alter) {
 		boolean valid = false; 
 		// Baut die Regex stellenweise auf. �ber OR getrennt.
@@ -28,6 +45,11 @@ public class FehlerManager {
 		return valid; 
 	}
 	
+	/**
+	 * prueft email auf format  für registrierung
+	 * @param email
+	 * @return
+	 */
 	public static boolean pruefeEmail(String email) {
 		boolean valid = false; 
 		// W�rde auch schoenb@.de matchen. Daher hinter dem @ sollte es mindestens \w+ lauten.
@@ -37,20 +59,37 @@ public class FehlerManager {
 		return valid; 
 	}
 	
-	public static boolean pruefeTelefonnr(String telefonnr) {
-		boolean valid = false;
-		if (Pattern.matches("([+]\\d\\d|0){1}\\d{4}[-/]?\\d{0,10}", telefonnr)) {
-			valid = true;
-		} 
-		return valid; 
-	}
-	
+
+	/**
+	 *  für registrierung -  konfliktvermeidung
+	 * @param displayname
+	 * @return
+	 */
 	public static boolean isNameUsed(String displayname) {
 		return FunktionaleAnforderungen.isDisplayNameUsed(displayname);
 	}
 	
+	/**
+	 * für registrierung -  konfliktvermeidung
+	 * @param email
+	 * @return
+	 */
 	public static boolean isEmailUsed(String email) {
 		return FunktionaleAnforderungen.isEmailNameUsed(email);
 	}
 	
+	/**
+	 * tests if string is null
+	 * @param test
+	 * @return
+	 */
+	public static boolean isNull(String test) {
+		boolean isNull = false;
+		try {
+		    test.equalsIgnoreCase(null);
+		} catch (NullPointerException npe) {
+		    isNull = true;
+		}
+		return isNull;
+	}
 }

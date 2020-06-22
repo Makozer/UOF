@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="WEB-INF/taglib/customtags.tld" prefix="my"%>
-<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.io.*,java.util.*, javax.servlet.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
 
 <jsp:include page="./include/header.jsp" />
-
+<!-- gebauedeuebersicht mit baumenue -->
 <form action="./BuildingServlet" method="post">
-<h1>Gebäude auf ${ player.getActivePlanet().getName()} (${player.getActivePlanet().getCoords().asCoords()})</h1>
-<h2 class="error">${error}</h2>
-	<div class="table" >
-		<table border="1" style= "width:100%">
+	<h1>Gebäude auf ${ player.getActivePlanet().getName()}
+		(${player.getActivePlanet().getCoords().asCoords()})</h1>
+	<h2 class="error">${error}</h2>
+	<div class="table">
+		<table border="1" style="width: 100%">
 			<tr>
 				<th colspan="2">Standard Gebäude</th>
 			</tr>

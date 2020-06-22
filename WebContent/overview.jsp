@@ -5,7 +5,7 @@
 <%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
 
 <jsp:include page="./include/header.jsp" />
-
+<!-- Uebersichtsseite des SPielers ueber seinen events -->
 <h1>Übersicht</h1>
 <div>
 	<table border="1" style="width: 70%">
@@ -13,24 +13,24 @@
 		<tr>
 			<th colspan="2">Feindliche Angriffe</th>
 		</tr>
-		
-			<c:choose>
-				<c:when test="${player.getDefendEvents().size() > 0}">
-					<c:forEach var="gameEvent" items="${player.getDefendEvents()}">
-						<tr class="defend">
-							<td><c:out
-									value="${ dateUtils.getRemainingTimeAsString(gameEvent.getEndTime()) }" /></td>
-							<td>Euer Planet ${gameEvent.getTarget().asCoords()} wird von
-								${gameEvent.getCoordinates().asCoords()} aus angriffen.</td>
-						</tr>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<tr>
-						<td colspan="2">Keine gegnerischen Angriffe.</td>
+
+		<c:choose>
+			<c:when test="${player.getDefendEvents().size() > 0}">
+				<c:forEach var="gameEvent" items="${player.getDefendEvents()}">
+					<tr class="defend">
+						<td><c:out
+								value="${ dateUtils.getRemainingTimeAsString(gameEvent.getEndTime()) }" /></td>
+						<td>Euer Planet ${gameEvent.getTarget().asCoords()} wird von
+							${gameEvent.getCoordinates().asCoords()} aus angriffen.</td>
 					</tr>
-				</c:otherwise>
-			</c:choose>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td colspan="2">Keine gegnerischen Angriffe.</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
 		<tr>
 			<th colspan="2">Eigene Flotten</th>
 		</tr>

@@ -20,16 +20,16 @@
 				<h3>Navigation</h3>
 			</div>
 			<div>
-			<table class="planetResOv border">
-						<tr>
-							<td colspan="4" style="padding: 11px;">Koordinaten:
-								${player.getActivePlanet().getCoords().asCoords()} <br><img
-								src="./assets/images/planet.png" alt="Tritium" title=""
-								style="height: 1.5rem;"><br> PlanetName:
-								${player.getActivePlanet().getName()}
-							</td>
-						</tr>
-					</table>
+				<table class="planetResOv border">
+					<tr>
+						<td colspan="4" style="padding: 11px;">Koordinaten:
+							${player.getActivePlanet().getCoords().asCoords()} <br>
+						<img src="./assets/images/planet.png" alt="Tritium" title=""
+							style="height: 1.5rem;"><br> PlanetName:
+							${player.getActivePlanet().getName()}
+						</td>
+					</tr>
+				</table>
 			</div>
 			<ul class="list-unstyled components">
 
@@ -42,14 +42,15 @@
 				<li><a href="./fleet.jsp">Flotte</a></li>
 
 			</ul>
-			
-			
-				<ul class="list-unstyled components">
-					<li><a href="researchoverview.jsp">Forschungsübersicht</a></li>
-					<li><a href="./GalaxyServlet?galaxy=${player.getActivePlanet().getCoords().getGalaxy()}&solarsystem=${player.getActivePlanet().getCoords().getSolarSystem()}">Galaxie</a></li>
-					<li><a href="combatsim.jsp">Kampfsimulator</a></li>
-					<li><a href="example.jsp">TESTSEITE</a></li>
-				</ul>
+
+
+			<ul class="list-unstyled components">
+				<li><a href="researchoverview.jsp">Forschungsübersicht</a></li>
+				<li><a
+					href="./GalaxyServlet?galaxy=${player.getActivePlanet().getCoords().getGalaxy()}&solarsystem=${player.getActivePlanet().getCoords().getSolarSystem()}">Galaxie</a></li>
+				<li><a href="combatsim.jsp">Kampfsimulator</a></li>
+				<li><a href="example.jsp">TESTSEITE</a></li>
+			</ul>
 		</nav>
 	</div>
 </body>

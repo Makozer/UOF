@@ -1,3 +1,7 @@
+/**
+ * Erzeugt Zufaellige Spieler um die DB zu fuellen auf Testseite - Cedric
+ */
+
 package database.utils;
 
 import game.control.NewPlayerManager;
@@ -6,7 +10,7 @@ import game.player.Player;
 
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
-/*
+/**
  * creates a random Benutzer
  */
 public class RandomPlayer {
@@ -18,6 +22,10 @@ public class RandomPlayer {
 		
 	}
 	
+	/**
+	 * erstellt einen zufaelligen Spieler
+	 * @return
+	 */
 	public static Player randomPlayer() {
 		PersonalData pd = new PersonalData();
 		
@@ -35,7 +43,12 @@ public class RandomPlayer {
 	}
 	
 	
-	//creates random int in specified boundaries
+	/**
+	 * createes random int in specified boundaries
+	 * @param lower
+	 * @param upper
+	 * @return
+	 */
 	private static int randomInt(int lower, int upper) {
 		return ThreadLocalRandom.current().nextInt(lower, upper+1);
 	}

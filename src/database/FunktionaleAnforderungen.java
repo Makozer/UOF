@@ -1,19 +1,20 @@
+/*
+ * Benoetigt um das Profil zu loeschen, auf
+ */
+
 package database;
 
 import java.sql.*;
-import java.util.*;
-
 import database.DatabaseConnection;
-import database.utils.PasswordUtils;
-import game.planet.*;
-import game.player.*;
-import game.research.TechTree;
-import game.utils.DateUtils;
 import game.utils.*;
 
 public class FunktionaleAnforderungen {
 	private static Connection con = null;
 	
+	/**
+	 * zufaelliger Spieler wird geloescht fuer testseite
+	 * @return
+	 */
 	public static boolean deleteRandomUser() {
 		boolean success = false;
 
@@ -41,7 +42,7 @@ public class FunktionaleAnforderungen {
 		return success;
 	}
 	
-	/** Löschen eines Benutzers anhand eines displaynamens (unique). 
+	/** Löschen eines Benutzers anhand eines displaynamens (unique). benoetigt um Profil zu loeschen
 	 * @return Erfolgsstatus, ob die Entfernung aus der Datenbank funktionierte.
 	 */
 	public static boolean deleteUser(String displayname) {
@@ -78,7 +79,7 @@ public class FunktionaleAnforderungen {
 	}
 	
 	/*
-	 * gibt 5 zufaellige Benutzer aus
+	 * gibt bis zu 5 zufaellige Benutzer aus - fuer Testseite
 	 */
 	public static String getBenutzer() {
 		String result = "";
@@ -100,7 +101,12 @@ public class FunktionaleAnforderungen {
 	}
 	
 
-	/** Gibt die Benutzeranzahl zur�ck. */
+	/**
+	 * Gibt die Benutzeranzahl zur�ck. 
+	 * Fuer Testzwecke
+	 * 
+	 * @return
+	 */
 	public static int getBenutzerAnzahl() {
 		int zahl = 0;
 		try {
@@ -120,6 +126,11 @@ public class FunktionaleAnforderungen {
 		return zahl;
 	}
 	
+	/**
+	 * Benoetigt fuer Registration um Konflikte zu vermeiden
+	 * @param displayname
+	 * @return
+	 */
 	public static boolean isDisplayNameUsed(String displayname) {
 		boolean used = false;
 		try {
@@ -138,6 +149,13 @@ public class FunktionaleAnforderungen {
 		return used;
 	}
 	
+	/**
+	 * 
+	 * Benoetigt fuer Registration um Konflikte zu vermeiden
+	 *
+	 * @param email
+	 * @return
+	 */
 	public static boolean isEmailNameUsed(String email) {
 		boolean used = false;
 		try {
@@ -151,7 +169,7 @@ public class FunktionaleAnforderungen {
 				used = true;
 			} 
 		} catch (SQLException e) {
-			System.err.println("Fehler beim Benutzer z�hlen: " + e.getMessage());
+			System.err.println("Fehler beim Benutzer zaehlen: " + e.getMessage());
 		}
 		return used;
 	}

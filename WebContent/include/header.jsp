@@ -10,6 +10,7 @@
 <script
 	src="./javascript/loader.js?"></script>
 
+<!-- Styledokumente -->
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1">
 <link rel="shortcut icon"
@@ -31,33 +32,10 @@
 
 <title>Universe on Fire</title>
 </head>
+
+<!--  Hintergrundbild -->
 <body onload="loader()" class="hubbly">
 
-	<input type="hidden" name="refreshedpage"
-		value="
-<c:if test="${not empty player}" >			
-${ update.pageRefresh() }
-</c:if>
-" />
-
- <!--  
-	<c:choose>
-		<c:when test="${not empty player}">			
-${ update.pageRefresh() }
-    </c:when>
-  
-		<c:otherwise>
-			<script>
-				function pageRedirect() {
-					window.location.replace("../login.jsp");
-				}
-				setTimeout("pageRedirect()");
-			</script>
-			<br />
-		</c:otherwise>
-	
-	</c:choose>
-	-->
 
 	<input type="hidden" name="refreshedpage"
 		value="
@@ -65,6 +43,7 @@ ${ update.pageRefresh() }
 ${ update.pageRefresh() }
 </c:if>
 " />
+
 	<c:if test="${not empty player}">
 		<input type="hidden" id="ironpersecond"
 			value="${player.getActivePlanet().getIronMine().getResPerSecond()}">

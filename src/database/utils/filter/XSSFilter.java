@@ -1,3 +1,5 @@
+
+
 package database.utils.filter;
 import java.io.IOException;
 
@@ -10,7 +12,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * Filter implementation fuer die gesamte seite
+ * @author cedri
+ *
+ */
 @WebFilter("/*")
 public class XSSFilter implements Filter {
 	protected FilterConfig config;
@@ -30,6 +36,7 @@ public class XSSFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
     	System.out.println("Filter ist aufgerufen");
+    	//eigentliche filterung im wrapper
         chain.doFilter(new XSSRequestWrapper((HttpServletRequest) request), response);
     }
 

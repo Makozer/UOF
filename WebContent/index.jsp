@@ -17,7 +17,7 @@
 <meta name="description" content="">
 
 
-<title>Homescreen</title>
+<title>Index</title>
 <link rel="preload" href="./css/style2.css">
 <link rel="stylesheet" href="./css/icons.css">
 <link rel="stylesheet" href="./css/bootstrap.min.css">

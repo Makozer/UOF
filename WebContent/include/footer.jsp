@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<!--  sticky footer  -->
 <section class="cid-s2ptkxm7yb fixed-bottom" id="footer6-1h">
-
 	<div class="container">
 		<footer>
 			<div class="media-container-row align-center pph-white">
 				<div class="col-12">
+				<!-- links noch nicht implementiert -->
 					<p class="pph-text mb-0 pph-fonts-style display-7">©2020
 						Makozer &amp; Cedric | Impressum | Datenschutzerklärung | Kontakt
 						| Über Uns</p>
@@ -14,8 +15,11 @@
 		</footer>
 	</div>
 </section>
+<!--  beginnt im header -->
 </table>
 
+
+<!-- Bis auf Index nicht benutzt atm; am ende um site schnell fertig parsen zu lassen  -->
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/popper/popper.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>

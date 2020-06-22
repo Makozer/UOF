@@ -5,7 +5,7 @@
 <%@ page import="java.io.*,java.util.*, javax.servlet.*"%>
 
 <jsp:include page="./include/header.jsp" />
-
+<!-- Planetenuebersicht -->
 <h1>Planeten von ${ player.getDisplayName() }</h1>
 <div>
 	<table border="1" style="width: 100%">
