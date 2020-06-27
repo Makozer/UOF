@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import database.DBPlanet;
 import game.fleet.*;
 import game.planet.*;
 import game.planet.buildings.SpacePort;
@@ -74,6 +75,8 @@ public class SpacePortServlet extends HttpServlet {
         
         // Adding the list to the SpacePort buildQueue
         planet.getSpacePort().getBuildQueue().addAll(ships);
+        // DB INFORM
+        DBPlanet.updatePlanet(player, planet);
         
         // Redirecting ...
         response.sendRedirect(request.getContextPath() + "/spaceport.jsp");
