@@ -98,7 +98,7 @@ public class TechTree {
 	public ArrayList<Research> getWholeResearch() {
 		return ResearchRegister.getWholeResearchList(this);
 	}
-	
+
 	public ASpaceShip getResearchedShip(String shipName) {
 		ArrayList<ASpaceShip> 	allShips = this.getAllResearchedShips();	// to know which Ships can be build
 		for (ASpaceShip s: allShips) {
@@ -106,7 +106,7 @@ public class TechTree {
 		}
     	return null;
     }
-	
+
 	public ArrayList<ASpaceShip> getResearchedSpecialShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
 		for (ASpaceShip s:ShipRegister.getSpecialShipList(this)) {
@@ -114,7 +114,7 @@ public class TechTree {
 		}
 		return output;
 	}
-	
+
 	public ArrayList<ASpaceShip> getResearchedT1SpaceShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
 		for (ASpaceShip s:ShipRegister.getT1ShipList(this)) {
@@ -138,7 +138,7 @@ public class TechTree {
 		}
 		return output;
 	}
-	
+
 	public ArrayList<ASpaceShip> getAllResearchedShips() {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
 		output.addAll(getResearchedSpecialShips());
@@ -154,16 +154,75 @@ public class TechTree {
 			if (r.getRequiredTech().size() == 0) {
 				propulsion.add(r);
 			} else {
-				// TODO 
+				// when something is required, check if its there
+				for (Research rq : r.getRequiredTech()) {
+					if (1 > this.getLevel(rq.getName())) {
+						break;
+					} else {
+						// TODO Lowprio wont work if there are more required techs then one
+						propulsion.add(r);
+					}
+				}
 			}
 		}
 		return propulsion;
 	}
 	
-	public ArrayList<Research> getResearchedT1Ships() {
+	public ArrayList<Research> getResearchSpecialShips() {
+		ArrayList<Research> specials = new ArrayList<Research>();
+		boolean check = true;
+		for (Research r : ResearchRegister.getSpecialShipResearch(this)) {
+			if (r.getRequiredTech().size() == 0) {
+				specials.add(r);
+			} else {
+				check = true;
+				for (Research req : r.getRequiredTech()) {
+					if (!(this.getLevel(req.getName()) > 0)) { check = false; break; }
+				}	
+				if (check) { specials.add(r); }
+			}
+		}
+		return specials;
+	}
+	
+	public ArrayList<Research> getResearchT1Ships() {
 		ArrayList<Research> t1ships = new ArrayList<Research>();
 		boolean check = true;
 		for (Research r : ResearchRegister.getShipT1Research(this)) {
+			if (r.getRequiredTech().size() == 0) {
+				t1ships.add(r);
+			} else {
+				check = true;
+				for (Research req : r.getRequiredTech()) {
+					if (!(this.getLevel(req.getName()) > 0)) { check = false; break; }
+				}	
+				if (check) { t1ships.add(r); }
+			}
+		}
+		return t1ships;
+	}
+	
+	public ArrayList<Research> getResearchT2Ships() {
+		ArrayList<Research> t1ships = new ArrayList<Research>();
+		boolean check = true;
+		for (Research r : ResearchRegister.getShipT2Research(this)) {
+			if (r.getRequiredTech().size() == 0) {
+				t1ships.add(r);
+			} else {
+				check = true;
+				for (Research req : r.getRequiredTech()) {
+					if (!(this.getLevel(req.getName()) > 0)) { check = false; break; }
+				}	
+				if (check) { t1ships.add(r); }
+			}
+		}
+		return t1ships;
+	}
+	
+	public ArrayList<Research> getResearchT3Ships() {
+		ArrayList<Research> t1ships = new ArrayList<Research>();
+		boolean check = true;
+		for (Research r : ResearchRegister.getShipT3Research(this)) {
 			if (r.getRequiredTech().size() == 0) {
 				t1ships.add(r);
 			} else {
