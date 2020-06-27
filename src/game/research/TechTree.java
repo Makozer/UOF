@@ -95,6 +95,10 @@ public class TechTree {
 		return (int)output;
 	}
 	
+	public ArrayList<Research> getWholeResearch() {
+		return ResearchRegister.getWholeResearchList(this);
+	}
+	
 	public ASpaceShip getResearchedShip(String shipName) {
 		ArrayList<ASpaceShip> 	allShips = this.getAllResearchedShips();	// to know which Ships can be build
 		for (ASpaceShip s: allShips) {

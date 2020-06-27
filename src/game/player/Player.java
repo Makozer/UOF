@@ -52,6 +52,10 @@ public class Player {
 		// Testmain
 	}
 	
+	public void reload() {
+		// TODO Reload from DB
+	}
+	
 	public void update(boolean war) {
 		
 		// Update Events
@@ -65,7 +69,7 @@ public class Player {
 	public void updatePlanets() {
 		for (Planet planet: this.getPlanets()) { planet.update(this);}
 	}
-	
+	/*
 	public boolean updateEvents() {
 		return updateEvents(true);
 	}
@@ -200,7 +204,7 @@ public class Player {
 		DBTechTree.updateTechTree(event.getPlayerid(), this.techtree);
 		DBEvent.deleteEvent(event.getId());
 	}
-	
+	*/
 	public void increaseRess(Planet planet, ArrayList<ARessource> ress) {
 		// Increasing Planets Ressources
 		HashMap<String, ARessource> planetRessources = planet.getRessources();
@@ -406,6 +410,9 @@ public class Player {
 	}
 	
 	public GameEvent getResearchEventByCoords(Coordinates coordinates) {
+		return this.getEventCenter().getResearchEventByCoords(coordinates);
+		// TODO lowprio performance
+		/*
 		GameEvent output = null;
 		for (GameEvent e: events) {
 			if (e.getCoordinates().asCoords().equals(coordinates.asCoords()) && e.getType() == GameEvent.Type.RESEARCH) {
@@ -414,6 +421,7 @@ public class Player {
 			}
 		}
 		return output;
+		*/
 	}
 	
 	public ArrayList<GameEvent> getEvents() {
@@ -440,31 +448,40 @@ public class Player {
 	}
 
 	public ArrayList<GameEvent> getAttackEvents() {
+		return eventCenter.getAttackEvents();
+		/*
 		sortEvents();
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
 			if (e.getType() == GameEvent.Type.ATTACK) { output.add(e); }
 		}
 		return output;
+		*/
 	}
 	
 	public ArrayList<GameEvent> getTransportEvents() {
+		return eventCenter.getTransportEvents();
+		/*
 		sortEvents();
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
 			if (e.getType() == GameEvent.Type.TRANSPORT) { output.add(e); }
 		}
 		return output;
+		*/
 	}
 	
 	
 	public ArrayList<GameEvent> getDefendEvents() {
+		return eventCenter.getDefendEvents();
+		/*
 		sortEvents();
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
 			if (e.getType() == GameEvent.Type.DEFEND) { output.add(e); }
 		}
 		return output;
+		*/
 	}
 	
 	public ArrayList<GameEvent> getBuildingEvents() {
@@ -480,12 +497,16 @@ public class Player {
 	}
 	
 	public ArrayList<GameEvent> getResearchEvents() {
+		// TODO lowprio performance
+		return eventCenter.getResearchEvents();
+		/*
 		sortEvents();
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
 			if (e.getType() == GameEvent.Type.RESEARCH) { output.add(e); }
 		}
 		return output;
+		*/
 	}
 	
 	public ArrayList<GameEvent> getEventsSorted() {

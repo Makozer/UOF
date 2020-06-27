@@ -35,7 +35,8 @@ public class XSSFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
         throws IOException, ServletException {
-    	System.out.println("Filter ist aufgerufen");
+    	//System.out.println("Filter ist aufgerufen");
+    	// FUCKING CONSOLE SPAM JEEEEEEEEEZ
     	//eigentliche filterung im wrapper
         chain.doFilter(new XSSRequestWrapper((HttpServletRequest) request), response);
     }

@@ -38,7 +38,7 @@ public class GameUpdate {
 		System.out.println("pageRefresh() ...");
 		boolean output = false;
 		Date now = new Date();
-
+		
 		user.getInbox().update();	
 
 		output = updatePlayerToDate(user, now);
@@ -47,6 +47,12 @@ public class GameUpdate {
 		
 		// Close connection
 		return output;
+	}
+	
+	public void reloadPlayer() {
+		// Reload the Player ... f0000ck how to do dis :x
+		// TODO Idea -> player.reload()
+		// TODO Idea -> when new msg arrives
 	}
 	
 	private boolean updatePlayerToDate(Player user, Date date) {

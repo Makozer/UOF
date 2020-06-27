@@ -98,6 +98,7 @@ public class FleetServlet extends HttpServlet {
         }
         
         // Checking if Planet has enough ressources
+        // TODO lowprio Maybe check with DB?
         if (type.equals("TRANSPORT") && !planet.hasRessources(ressources)) { return; }
 		
 		// Loop to create a fleet
