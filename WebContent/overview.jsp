@@ -8,7 +8,7 @@
 <!-- Uebersichtsseite des SPielers ueber seinen events -->
 <h1>Übersicht</h1>
 <div>
-	<table border="1" style="width: 70%">
+	<table border="1" style="width: 75%">
 
 		<tr>
 			<th colspan="2">Feindliche Angriffe</th>

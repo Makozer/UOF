@@ -1,5 +1,13 @@
 @charset "ISO-8859-1";
 
+.hubbly {
+	background-image: url("../../../assets/images/hubble-1632627-1600x900.jpg");
+}
+
+.headbtn {
+  width: 15	%;
+}
+
 * {
 	color: #ccc;
 	font-family: Verdana;

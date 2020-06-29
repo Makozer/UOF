@@ -4,8 +4,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-//nicht implemementiert
-//import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.ESAPI;
 
 public class XSSRequestWrapper extends HttpServletRequestWrapper {
 
@@ -67,7 +66,7 @@ public class XSSRequestWrapper extends HttpServletRequestWrapper {
     private String stripXSS(String value) {
         if (value != null) {
 
-             //value = ESAPI.encoder().canonicalize(value);
+             value = ESAPI.encoder().canonicalize(value);
 
             // Avoid null characters
             value = value.replaceAll("\0", "");

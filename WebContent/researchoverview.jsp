@@ -7,7 +7,7 @@
 <jsp:include page="./include/header.jsp" />
 
 <h1>Überblick über Forschung</h1>
-<table border="1">
+<table border="1" style="width: 100%">
 <tr>
 	<th>Name</th>
 	<th>Typ</th>

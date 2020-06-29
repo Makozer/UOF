@@ -7,15 +7,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="./javascript/loader.js?"></script>
+
 <title>Register</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1">
+<link rel="shortcut icon"
+	href="assets/images/scienceandfiction-battle-99291-144x144.png"
+	type="image/x-icon">
+<link rel="preload" href="./css/style2.css">
+<link rel="stylesheet" type="text/css"
+	href="css/style.css" />
+<link rel="stylesheet" href="./css/icons.css">
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="./css/bootstrap-grid.min.css">
+<link rel="stylesheet" href="./css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="assets/tether/tether.min.css">
+<link rel="stylesheet" href="assets/dropdown/css/style.css">
+<link rel="stylesheet" href="assets/theme/css/style.css">
+<link rel="stylesheet" href="./css/style2.css" type="text/css">
+
+
 </head>
-<body>
+<body onload="loader()" class="hubbly">
 <!--  Registrierung der Benutzer -->
-	<jsp:include page="./include/header.jsp" />
+	
 
 	<div></div>
 
-	<div class="signup-form" style="position: relative; left: -90px;">
+	<div class="signup-form" style="position: relative; width: 99%;">
 		<form action="Register" method="post">
 			<h2></h2>
 			<br></br>
@@ -53,7 +74,7 @@
 					value="${formcPassword}" placeholder="Confirm Password"
 					required="required">
 			</div>
-			<div class="form-group">
+			<div class="form-group ">
 				<div class="form-check form-check-inline">
 					<input class="form-check-input" type="checkbox" name="checkbox"
 						required="required"> <label class="form-check-label">I

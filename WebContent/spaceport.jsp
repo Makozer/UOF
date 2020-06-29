@@ -77,7 +77,7 @@
 		</c:forEach>
 		<tr>
 			<th>Baubefehl:</th>
-			<th><input type="submit" value="Bauen"></th>
+			<th><input type="submit" value="Bauen" class="rounded"></th>
 		</tr>
 	</table>
 </form>

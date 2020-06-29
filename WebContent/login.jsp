@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="./css/style.css">
 
 </head>
-<body class="main hubbly">
+<body class="main">
 
 	<div class="container">
 		<div class="row">

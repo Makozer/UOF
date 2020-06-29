@@ -33,7 +33,7 @@
 			</div>
 			<ul class="list-unstyled components">
 
-				<li><a href="./overview.jsp">Übersicht</a></li>
+				<li class=""><a href="./overview.jsp">Übersicht</a></li>
 				<li><a href="./buildings.jsp">Gebäude</a></li>
 				<li><a href="./research.jsp">Forschung</a></li>
 				<li><a href="./spaceport.jsp">Raumschiffproduktion</a></li>

@@ -56,7 +56,7 @@ ${ update.pageRefresh() }
 	</c:if>
 
 
-	<section class="menu cid-s2n8eesi32 " id="menu1-1d">
+	<section class="menu cid-s2n8eesi32" id="menu1-1d">
 
 		<nav
 			class="navbar border border-danger navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
@@ -83,7 +83,7 @@ ${ update.pageRefresh() }
 					</div>
 				</div>
 
-				<div class="collapse navbar-collapse" id="">
+				<div class="collapse navbar-collapse">
 					<ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
 						<li class="nav-item"><a class="text-white display-4"> <img
 								src="./assets/images/iron.jpg" alt="" title="Iron"
@@ -109,12 +109,12 @@ ${ update.pageRefresh() }
 					<div>
 						<table class="middle headnav">
 							<tr>
-								<td class="btn btn-sm btn-light display-2"><img
+								<td class="btn btn-sm btn-link display-2 border"><img
 									src="./assets/images/4092564-about-mobile-ui-profile-ui-user-website_114033.png"
 									alt="Tritium" title="" style="height: 1.5rem;"> <a
 									href="profil.jsp">Profil</a></td>
 									
-								<td class="btn 	btn-sm btn-light display-2"><img src="./assets/images/messageiconfree.png"
+								<td class="btn 	btn-sm btn-link display-2 border"><img src="./assets/images/messageiconfree.png"
 									alt="Tritium" title="" style="height: 1.5rem;"> <a
 									href="messages.jsp"
 									class="${ player.getInbox().hasNewMessage() ? "red" : ""}">
