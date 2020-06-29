@@ -87,27 +87,6 @@ body {
   color: #232323;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6,
-.display-1,
-.display-2,
-.display-3,
-.display-4 {
-  line-height: 1;
-  word-break: break-word;
-  word-wrap: break-word;
-}
-
 .pph-section-title {
   font-style: normal;
   line-height: 1.2;
@@ -349,7 +328,7 @@ figure[pph-media-size] {
 }
 
 .btn-sm {
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 1px;
   transition: all .3s ease-in-out;
 }
@@ -391,7 +370,7 @@ nav .pph-section-btn {
 .btn .pph-iconfont,
 .btn.btn-sm .pph-iconfont {
   cursor: pointer;
-  margin-right: 0.5rem;
+  margin-right: 0.3rem;
 }
 
 .btn.btn-md .pph-iconfont,
@@ -771,8 +750,13 @@ blockquote {
 .navbar {
   display: -webkit-flex;
   -webkit-flex-wrap: wrap;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   -webkit-align-items: center;
   -webkit-justify-content: space-between;
+  
 }
 
 .navbar-collapse {
@@ -782,7 +766,7 @@ blockquote {
 }
 
 .nav-dropdown .link {
-  padding: 0.667em 1.667em !important;
+  padding: 0.267em 0.667em !important;
   margin: 0 !important;
 }
 
@@ -936,8 +920,8 @@ input[type='range'] {
     flex-direction: row;
   }
   .navbar-toggleable .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
   }
   .navbar-toggleable > .container {
     display: flex;
@@ -974,8 +958,8 @@ input[type='range'] {
     flex-direction: row;
   }
   .navbar-toggleable-sm .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
   }
   .navbar-toggleable-sm > .container {
     display: flex;
@@ -1012,8 +996,8 @@ input[type='range'] {
     flex-direction: row;
   }
   .navbar-toggleable-md .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
   }
   .navbar-toggleable-md > .container {
     display: flex;
@@ -1050,8 +1034,8 @@ input[type='range'] {
     flex-direction: row;
   }
   .navbar-toggleable-lg .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.2rem;
+    padding-left: 0.2rem;
   }
   .navbar-toggleable-lg > .container {
     display: flex;
@@ -1088,8 +1072,8 @@ input[type='range'] {
 }
 
 .navbar-toggleable-xl .navbar-nav .nav-link {
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
 }
 
 .navbar-toggleable-xl > .container {

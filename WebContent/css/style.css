@@ -49,7 +49,7 @@ input, button, option, textarea {
 
 .headnav a {
 	font-size:22px;
-	padding: 11px;
+	padding: 4px;
 }
 
 .main {
@@ -90,4 +90,12 @@ a {
 a:hover {
 	color: orange;
 	text-decoration: none;
+}
+
+li {
+  display: inline !important;
+}
+
+a {
+  display: inline !important;
 }
