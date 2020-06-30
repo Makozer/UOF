@@ -1,5 +1,9 @@
 package game.utils;
 
+/**
+ * @author Martin
+ * Abstract class to include any Math.
+ */
 public abstract class AMath {
 
 	public abstract double getValue(int x);

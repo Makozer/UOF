@@ -1,8 +1,12 @@
 package game.utils;
 
 import java.sql.ResultSet;
+
+
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+
+// Not used anymore?
 
 /** Klasse zum Konvertieren eines ResultSets zu einer HTML-Tabelle*/
 public class ResultToTable {

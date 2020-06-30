@@ -4,6 +4,11 @@ import java.util.*;
 import game.ressource.*;
 import game.utils.*;
 
+/**
+ * Stores the Settings for all T3 Ships
+ * @author Martin
+ *
+ */
 public class ShipT3Settings {
 	
 	// YAMATO

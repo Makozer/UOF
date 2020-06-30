@@ -6,6 +6,8 @@ import game.planet.buildings.mining.*;
 import game.research.*;
 import game.ressource.*;
 
+// Test Class for development stuff
+
 public class UnitChecker {
 
 	public static void main(String[] args) {

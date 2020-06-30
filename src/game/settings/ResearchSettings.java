@@ -4,6 +4,8 @@ import java.util.*;
 import game.ressource.*;
 import game.utils.*;
 
+// Unused
+
 public class ResearchSettings {
 	
 	// LaserPointer

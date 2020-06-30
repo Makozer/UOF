@@ -2,6 +2,8 @@ package game.utils;
 
 import java.util.*;
 
+// Not Used
+
 public class GameDate extends Date {
 
 	private static final long serialVersionUID = 1L;

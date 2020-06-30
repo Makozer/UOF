@@ -1,5 +1,11 @@
 package game.ressource;
 
+/**
+ * This Class represents the Ressource Tritium in the Game.
+ * Its used for all Kinds like Costs to build a ship or the Storage on a Planet.
+ * @author Martin
+ *
+ */
 public class Tritium extends ARessource {
 	
 	public Tritium(int ressourcevalue) {

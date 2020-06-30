@@ -3,6 +3,10 @@ package community.message;
 import java.util.*;
 
 
+/**
+ * @author Cedric
+ * This class is used for every Message in the Game, see GameMessage or CommunityMessage
+ */
 public class Message implements Comparable<Message> {
 
 	protected int 		msgId = 0;

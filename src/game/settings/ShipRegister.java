@@ -9,6 +9,11 @@ import game.fleet.tier3.*;
 import game.research.*;
 
 
+/**
+ * Stores all possible Ships to use / build.
+ * @author Martin
+ *
+ */
 public class ShipRegister {	
 	
 	public static final ArrayList<ASpaceShip> getSpecialShipList(TechTree techtree) {
@@ -31,6 +36,11 @@ public class ShipRegister {
 				new Yamato(techtree, 1)));
 	}
 	
+	/**
+	 * Returns all possible Ships without checking if they are researched by the user
+	 * @param techtree
+	 * @return ArrayList<ASpaceShip>
+	 */
 	public static final ArrayList<ASpaceShip> getWholeShipList(TechTree techtree) {
 		ArrayList<ASpaceShip> output = new ArrayList<ASpaceShip>();
 		output.addAll(getSpecialShipList(techtree));

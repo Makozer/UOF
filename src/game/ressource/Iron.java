@@ -1,5 +1,11 @@
 package game.ressource;
 
+/**
+ * This Class represents the Ressource Iron in the Game.
+ * Its used for all Kinds like Costs to build a ship or the Storage on a Planet.
+ * @author Martin
+ *
+ */
 public class Iron extends ARessource {
 
 	public Iron(int ressourcevalue) {

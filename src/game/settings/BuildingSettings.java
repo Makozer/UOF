@@ -4,6 +4,14 @@ import java.util.*;
 import game.ressource.*;
 import game.utils.*;
 
+
+
+/**
+ * This Class stores all the Settings for the Buildings.
+ * 
+ * @author Martin
+ *
+ */
 public class BuildingSettings {
 	
 	public static final AMath					BUILDING_MOD = new Polynomial(1, 0, 0);

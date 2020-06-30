@@ -1,5 +1,11 @@
 package game.ressource;
 
+/**
+ * This Class represents the Ressource Water in the Game.
+ * Its used for all Kinds like Costs to build a ship or the Storage on a Planet.
+ * @author Martin
+ *
+ */
 public class Water extends ARessource {
 
 	public Water(int ressourcevalue) {

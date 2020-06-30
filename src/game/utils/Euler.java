@@ -2,6 +2,8 @@ package game.utils;
 
 // https://www.geeksforgeeks.org/java-math-exp-method-example/
 
+// Not Used
+
 public class Euler extends AMath {
 
 	@Override

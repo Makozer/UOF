@@ -81,6 +81,12 @@ public class Inbox {
 		
 	}
 	
+	public void forceReload() {
+		this.messages.clear();
+		loadAll();
+		sortMe();
+	}
+	
 	private void loadAll() {
 		this.messages.addAll(DBMessage.getMessages(player));
 		this.lastupdate = new Date();

@@ -4,6 +4,11 @@ import java.util.*;
 import game.ressource.*;
 import game.utils.*;
 
+/**
+ * Stores the Settings for all Special Ships
+ * @author Martin
+ *
+ */
 public class ShipSpecialSettings {
 	
 	// SPYDRONE

@@ -2,6 +2,8 @@ package game.research;
 
 import static game.settings.ResearchSettings.*;
 
+// Unused
+
 public class LaserPointer extends Research {
 
 	public LaserPointer(TechTree techtree) {

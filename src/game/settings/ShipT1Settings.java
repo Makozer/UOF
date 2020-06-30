@@ -4,6 +4,11 @@ import java.util.*;
 import game.ressource.*;
 import game.utils.*;
 
+/**
+ * Stores the Settings for all T1 Ships
+ * @author Martin
+ *
+ */
 public class ShipT1Settings {
 	
 	// Falcon

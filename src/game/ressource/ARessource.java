@@ -2,6 +2,12 @@ package game.ressource;
 
 import game.utils.NumberUtils;
 
+/**
+ * This Class represents the Abstract Ressource in the Game.
+ * Its used for all Kinds like Costs to build a ship or the Storage on a Planet.
+ * @author Martin
+ *
+ */
 public abstract class ARessource {
 	
 	protected int ressourcevalue = 0;
@@ -53,6 +59,10 @@ public abstract class ARessource {
 		return this.getClass().getSimpleName();
 	}
 	
+	/**
+	 * Uses its Value as a String in the Web Interface
+	 * @return String Value
+	 */
 	public String getValAsString() {
 		return NumberUtils.shortNumber(ressourcevalue);
 	}

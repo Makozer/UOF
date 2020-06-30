@@ -2,6 +2,11 @@ package game.player;
 
 import java.util.Date;
 
+/**
+ * This Class is for any personal Data about the User / Player
+ * @author Martin
+ *
+ */
 public class PersonalData {
 	
 	private int 	id = 0;
@@ -17,6 +22,17 @@ public class PersonalData {
 	
 	public PersonalData() {}
 	
+	/**
+	 * Constructor to create this Class
+	 * @param id int ID of the User
+	 * @param email
+	 * @param displayName
+	 * @param preName
+	 * @param surName
+	 * @param birthday
+	 * @param created
+	 * @param lastLogin
+	 */
 	public PersonalData(int id, String email, String displayName, String preName, String surName, Date birthday,
 			Date created, Date lastLogin) {
 		super();

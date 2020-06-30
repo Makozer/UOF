@@ -4,6 +4,14 @@ import java.util.*;
 import java.util.regex.Pattern;
 import static game.settings.GameSettings.*;
 
+/**
+ * @author Martin
+ * Util Class for Date Useage
+ */
+/**
+ * @author Martin
+ *
+ */
 public class DateUtils {
 	
 	public static void main(String[] args) {
@@ -18,22 +26,42 @@ public class DateUtils {
 		System.out.println(stamp2);
 	}
 	
+	/**
+	 * @param all converts given ints (yyyy, mm, dd)
+	 * @return Object Date with given Parameters
+	 */
 	public static Date getDate(int year, int month, int day) {
 		return getDate(year, month, day, 0, 0, 0, 0);
 	}
 	
+	/**
+	 * @param all converts given ints (yyyy, mm, dd, hh)
+	 * @return Object Date with given Parameters
+	 */
 	public static Date getDate(int year, int month, int day, int hour) {
 		return getDate(year, month, day, hour, 0, 0, 0);
 	}
 	
+	/**
+	 * @param all converts given ints (yyyy, mm, dd, hh, mm)
+	 * @return Object Date with given Parameters
+	 */
 	public static Date getDate(int year, int month, int day, int hour, int minute) {
 		return getDate(year, month, day, hour, minute, 0, 0);
 	}
 	
+	/**
+	 * @param all converts given ints (yyyy, mm, dd, hh, mm, ss)
+	 * @return Object Date with given Parameters
+	 */
 	public static Date getDate(int year, int month, int day, int hour, int minute, int second) {
 		return getDate(year, month, day, hour, minute, second, 0);
 	}
 	
+	/**
+	 * @param all converts given ints (yyyy, mm, dd, hh, mm, ss, mss)
+	 * @return Object Date with given Parameters
+	 */
 	public static Date getDate(int year, int month, int day, int hour, int minute, int second, int millisecond) {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
@@ -47,6 +75,11 @@ public class DateUtils {
 		return output;
 	}
 	
+	
+	/**
+	 * @param hours how many hours in the future
+	 * @return Date thats now + hours
+	 */
 	public static Date getFutureDateByHours(int hours) {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.HOUR_OF_DAY, hours);
@@ -61,6 +94,11 @@ public class DateUtils {
 		return calendar;
 	}
 	
+	
+	/**
+	 * @param future Date from the future
+	 * @return String how many time is remaining
+	 */
 	public static String getRemainingTimeAsString(Date future) {
 		String output = "";
 		
@@ -106,6 +144,11 @@ public class DateUtils {
 		return getDate(year, month, day, hour, min, sec);
 	}
 	
+	
+	/**
+	 * @param date 
+	 * @return String in TimeStamp Format for usage with database
+	 */
 	public static String dateToStamp(Date date) {
 		String stamp = "";
 		Calendar cal = Calendar.getInstance();

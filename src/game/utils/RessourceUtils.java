@@ -18,6 +18,12 @@ public class RessourceUtils {
 
 	}
 	
+	/**
+	 * Converts a DataBase SQL String to an Array with Ressources
+	 * Example: "Water=123" -> Object Water with Value 123
+	 * @param sql String with SQL Database input
+	 * @return ArrayList<ARessource> an Array with Ressources based on input SQL
+	 */
 	public static ArrayList<ARessource> sqlToRessourceArrayList(String sql) {
 		HashMap<String, ARessource> ressmap = new HashMap<String, ARessource>();
 		Iron iron = new Iron(0); RareEarth rare = new RareEarth(0); Water water = new Water(0); Tritium tritium = new Tritium(0);
@@ -37,6 +43,12 @@ public class RessourceUtils {
 		return ressarray;
 	}
 	
+	/**
+	 * Converts Ressource Object Array to SQL String
+	 * Used for: saving Ressources in Database
+	 * @param ress ArrayList<ARessource> an Array with Ressources that need to be saved
+	 * @return String SQL String thats saved in Database
+	 */
 	public static String arrayToSQL(ArrayList<ARessource> ress) {
 		String sql = "";
 		for (ARessource r : ress) {

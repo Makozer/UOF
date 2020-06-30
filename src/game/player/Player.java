@@ -36,13 +36,27 @@ public class Player {
 	private Inbox						inbox 			= new Inbox(this);
 
 
+	/**
+	 * Only for Tests! Dont use for WebInterface!
+	 */
 	public Player() {}
 	
+	/**
+	 * Only for Tests! Dont use for WebInterface!
+	 * @param playerid
+	 * @param techtree
+	 */
 	public Player(int playerid, TechTree techtree) {
 		this.techtree = techtree;
 		this.persData = new PersonalData(playerid, "Empty PersonalData", "", "", "", new Date(), new Date(), new Date());
 	}
 
+	/**
+	 * Standard Constructor, please use this :)
+	 * Give it a PersonalData and a TechTree
+	 * @param data PersonalData Object for the User
+	 * @param techtree TechTree for the User
+	 */
 	public Player(PersonalData data, TechTree techtree) {
 		this.persData = data;
 		this.techtree = techtree;
@@ -56,16 +70,16 @@ public class Player {
 		// TODO Reload from DB
 	}
 	
-	public void update(boolean war) {
-		
+	public void update(boolean war) {		
 		// Update Events
-		//updateEvents(war); // EVENTCENTER OUTSURCED
-		
+		//updateEvents(war); // EVENTCENTER OUTSURCED		
 		// Update Planets
 		//updatePlanets();
-
 	}
 	
+	/**
+	 * Updates all Planets, used by GameUpdater to keep the Planets up to date when User refreshes the Page
+	 */
 	public void updatePlanets() {
 		for (Planet planet: this.getPlanets()) { planet.update(this);}
 	}
@@ -205,6 +219,13 @@ public class Player {
 		DBEvent.deleteEvent(event.getId());
 	}
 	*/
+	
+	
+	/**
+	 * Use this if a Planet should get more Ressources
+	 * @param planet The Planet that gets more Ressources
+	 * @param ress ArrayList<ARessource> the Ressource thats added to the Planet
+	 */
 	public void increaseRess(Planet planet, ArrayList<ARessource> ress) {
 		// Increasing Planets Ressources
 		HashMap<String, ARessource> planetRessources = planet.getRessources();
@@ -213,6 +234,12 @@ public class Player {
 		}
 	}
 	
+	/**
+	 * Checks if a given Planet has the requested Ressources
+	 * @param planet
+	 * @param ressCosts
+	 * @return true/false if the Planet has the Ressource
+	 */
 	public boolean hasRess(Planet planet, ArrayList<ARessource> ressCosts) {
 		// Check if the Planet has enough Ressources
 		HashMap<String, ARessource> planetRessources = planet.getRessources();
@@ -225,6 +252,12 @@ public class Player {
 		return true;
 	}
 	
+	/**
+	 * Decreases the Ressources of a given Planet. If it fails, this returns false.
+	 * @param planet
+	 * @param ressCosts
+	 * @return true if the Ressources are decreased, false if planet hasnt enough
+	 */
 	public boolean decreaseRess(Planet planet, ArrayList<ARessource> ressCosts) {		
 		if (!this.hasRess(planet, ressCosts)) { return false; }
 		HashMap<String, ARessource> planetRessources = planet.getRessources();
