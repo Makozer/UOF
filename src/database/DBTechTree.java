@@ -7,8 +7,17 @@ import java.sql.SQLException;
 
 import game.research.TechTree;
 
+/**
+ * Class for db techtree updates.
+ * @author cedri
+ *
+ */
 public class DBTechTree {
 
+	/**
+	 * Testmethode.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// Test method
 		TechTree techtree = new TechTree();
@@ -23,6 +32,12 @@ public class DBTechTree {
 		
 	}
 	
+	/**
+	 * Erstellt neuen Forschungsfortschritt fuer nutzer.
+	 * @param playerId
+	 * @param techtree
+	 * @return
+	 */
 	public static boolean createTechTree(int playerId, TechTree techtree) {
 		try {
 			Connection con = DatabaseConnection.getConnection();
@@ -46,6 +61,12 @@ public class DBTechTree {
 		return false;
 	}
 	
+	/**
+	 * updaten den techtree des nutzers.
+	 * @param playerId
+	 * @param techtree
+	 * @return
+	 */
 	public static boolean updateTechTree(int playerId, TechTree techtree) {
 		try {
 			Connection con = DatabaseConnection.getConnection();
@@ -68,6 +89,11 @@ public class DBTechTree {
 		return false;
 	}
 	
+	/**
+	 * holt tech aus db.
+	 * @param playerid
+	 * @return
+	 */
 	public static TechTree getTechTree(int playerid) {
 		try {
 			Connection con = DatabaseConnection.getConnection();

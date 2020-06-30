@@ -7,7 +7,11 @@ import game.utils.*;
 import java.sql.*;
 import java.util.*;
 
-
+/**
+ * NYI
+ * @author cedri
+ *
+ */
 public class DBLock {
 	
 	private static Connection con = null;

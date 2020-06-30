@@ -17,6 +17,11 @@ import game.utils.*;
 
 import static game.settings.GameSettings.*;
 
+/**
+ * Class forr db-eventmanagement.
+ * @author cedri
+ *
+ */
 public class DBEvent {
 	
 	private static Connection con = null;
@@ -33,7 +38,11 @@ public class DBEvent {
 		//Test delete
 		//System.out.println(DBEvent.deleteEvent(1));
 	}
-	
+	/**
+	 * saves event in db.
+	 * @param event
+	 * @return
+	 */
 	public static int createEvent(GameEvent event) {
 		Coordinates c = event.getCoordinates();
 		Coordinates t = event.getTarget();
@@ -87,7 +96,11 @@ public class DBEvent {
 		
 		return 0;
 	}
-	
+	/**
+	 * retrieves events from db.
+	 * @param player
+	 * @return
+	 */
 	public static ArrayList<GameEvent> getEvents(Player player) {
 		ArrayList<GameEvent> events = new ArrayList<GameEvent>();
 		
@@ -135,12 +148,17 @@ public class DBEvent {
 		
 		return events;
 	}
-	
+	/**
+	 * retrieves events from db.
+	 * @param player
+	 * @param timestamp
+	 * @return
+	 */
 	public static ArrayList<GameEvent> getEvents(Player player, Date timestamp) {
 		ArrayList<GameEvent> 	events = new ArrayList<GameEvent>();
 		
 		Date futuredate = DateUtils.getFutureDateByHours(256);
-		// TODO IMPLEMENT EVENT CREATED FIELD AND THEN JUST CHECK NEW CREATED STUFF!°!!!!!!!!
+		// TODO IMPLEMENT EVENT CREATED FIELD AND THEN JUST CHECK NEW CREATED STUFF!ï¿½!!!!!!!!
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
@@ -189,7 +207,11 @@ public class DBEvent {
 		}
 		return events;
 	}
-	
+	/**
+	 * deletes event in db.
+	 * @param eventid
+	 * @return
+	 */
 	public static boolean deleteEvent(int eventid) {
 		
 		try {

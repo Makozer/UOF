@@ -11,6 +11,11 @@ import game.research.TechTree;
 import game.utils.DateUtils;
 import game.utils.ResultToTable;
 
+/**
+ * Class for planets in db.
+ * @author cedri
+ *
+ */
 public class DBPlanet {
 	
 	private static Connection con = null;
@@ -24,6 +29,12 @@ public class DBPlanet {
 		System.out.println(DBPlanet.hasPlanet(shouldNOTExist));
 	}
 	
+	/**
+	 * Planet with owner is created.
+	 * @param player
+	 * @param planet
+	 * @return
+	 */
 	public static boolean createPlanet(Player player, Planet planet) {
 		// required Objects
 		Coordinates c = planet.getCoords();

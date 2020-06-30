@@ -10,6 +10,11 @@ import game.research.TechTree;
 import game.utils.DateUtils;
 import game.utils.ResultToTable;
 
+/**
+ * Klasse fur DB user updates
+ * @author cedri
+ *
+ */
 public class DBUser {
 	
 	private static Connection con = null;
@@ -25,6 +30,12 @@ public class DBUser {
 		System.out.println(DBUser.getPlayerIdByDisplayName("TestDisplayName"));
 	}
 	
+	/**
+	 * Erstellt den neuen Spieler in der db.
+	 * @param player
+	 * @param password
+	 * @return
+	 */
 	public static boolean createPlayer(Player player, String password) {
 		boolean success = false;
 		PersonalData pd = player.getPersData();
@@ -64,6 +75,11 @@ public class DBUser {
 		return success;
 	}
 	
+	/**
+	 * Updated den Spieler in der db
+	 * @param player
+	 * @return
+	 */
 	public static boolean updatePlayerData(Player player) {
 		boolean success = false;
 		PersonalData pd = player.getPersData();
@@ -102,6 +118,11 @@ public class DBUser {
 		return success;
 	}
 	
+	/**
+	 * Sucht die Spielerid mit displayname heraus.
+	 * @param displayname
+	 * @return
+	 */
 	public static int getPlayerIdByDisplayName(String displayname) {
 		int playerId = 0;
 		
@@ -125,6 +146,11 @@ public class DBUser {
 		return playerId;
 	}
 	
+	/**
+	 * Sucht SpielerId mithilfe der email.
+	 * @param email
+	 * @return
+	 */
 	public static int getPlayerIdByEmail(String email) {
 		int playerId = 0;
 		
@@ -148,6 +174,11 @@ public class DBUser {
 		return playerId;
 	}
 	
+	/**
+	 * Gibt Spielerid der entsprechenden koordinaten zurueck.
+	 * @param coordinates
+	 * @return
+	 */
 	public static int getPlayerIdByCoordinates(Coordinates coordinates) {
 		int playerId = 0;
 		
@@ -173,6 +204,11 @@ public class DBUser {
 		return playerId;
 	}
 	
+	/**
+	 * Gibt Spielerobjekt anhand der id zurueck
+	 * @param playerid
+	 * @return
+	 */
 	public static Player getPlayerById(int playerid) {
 		Player player = null;
 		

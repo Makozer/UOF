@@ -13,7 +13,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Filter implementation fuer die gesamte seite
+ * Filter implementation fuer die gesamte seite;
+ * immer angewendet, da nutzername net validiert werden soll.
  * @author cedri
  *
  */

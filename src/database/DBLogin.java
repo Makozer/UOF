@@ -7,6 +7,11 @@ import java.sql.SQLException;
 
 import database.utils.PasswordUtils;
 
+/**
+ * Class for Login db actions.
+ * @author cedri
+ *
+ */
 public class DBLogin {
 
 	public static void main(String[] args) {
@@ -14,6 +19,12 @@ public class DBLogin {
 
 	}
 	
+	/**
+	 * compares userinput and db stored pw.
+	 * @param playerid
+	 * @param password
+	 * @return
+	 */
 	public static boolean comparePassword(int playerid, String password) {
 		String dbpw = getPassword(playerid);
 		String checkpwd = PasswordUtils.getSaltyPassword(password);
@@ -25,6 +36,11 @@ public class DBLogin {
 		}
 	}
 	
+	/**
+	 * retrieves obfuscated userpw from db.
+	 * @param playerid
+	 * @return
+	 */
 	private static String getPassword(int playerid) {
 		String password = "";
 		

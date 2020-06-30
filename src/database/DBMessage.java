@@ -9,7 +9,11 @@ import community.message.*;
 import game.player.*;
 import game.utils.*;
 
-
+/**
+ * Class for messages in db.
+ * @author cedri
+ *
+ */
 public class DBMessage {
 	
 	private static Connection con = null;
@@ -19,6 +23,11 @@ public class DBMessage {
 
 	}
 	
+	/**
+	 * creates new message.
+	 * @param message
+	 * @return
+	 */
 	public static boolean createMessage(Message message) {
 		
 		boolean success = false;
@@ -56,6 +65,11 @@ public class DBMessage {
 		return success;
 	}
 	
+	/**
+	 * retrieves communitymessages.
+	 * @param player
+	 * @return
+	 */
 	public static ArrayList<CommunityMessage> getMessages(Player player) {
 		ArrayList<CommunityMessage> messages = new ArrayList<CommunityMessage>();
 		CommunityMessage 			message = null;
@@ -88,6 +102,12 @@ public class DBMessage {
 		return messages;
 	}
 	
+	/**
+	 * reetrieves messages from db.
+	 * @param player
+	 * @param timestamp
+	 * @return
+	 */
 	public static ArrayList<CommunityMessage> getMessages(Player player, Date timestamp) {
 		ArrayList<CommunityMessage> messages = new ArrayList<CommunityMessage>();
 		CommunityMessage 			message = null;
@@ -122,6 +142,11 @@ public class DBMessage {
 		return messages;
 	}
 	
+	/**
+	 * retrieves message from db by id.
+	 * @param messageid
+	 * @return
+	 */
 	public static Message getMessageById(int messageid) {		
 		Message message = null;
 		try {
@@ -152,6 +177,12 @@ public class DBMessage {
 		return message;
 	}
 	
+	/**
+	 * deletes message from db.
+	 * @param player
+	 * @param message
+	 * @return
+	 */
 	public static boolean deleteMessage(Player player, Message message) {
 		boolean success = false;
 		try {
