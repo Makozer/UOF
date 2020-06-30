@@ -45,6 +45,10 @@ public class GameUpdate {
 		System.out.println(new GameUpdate().toString());
 	}
 	
+	public void update() {
+		this.pageRefresh();
+	}
+	
 	/**
 	 * When a Player refreshes his Browser, this method updates everything
 	 * @return
@@ -93,6 +97,20 @@ public class GameUpdate {
 		
 		return true;		
 	}
+	
+	private boolean updateOtherPlayerById(int playerid) {
+		Date now = new Date();
+		return updateOtherPlayerByIdToDate(playerid, now);
+	}
+	
+	private boolean updateOtherPlayerByIdToDate(int playerid, Date date) {
+		Player otherOne = GameLoader.loadPlayer(playerid);
+		GameUpdate otherGU = new GameUpdate(otherOne);
+		otherGU.updatePlayerToDate(user, date);
+		return true;
+	}
+	
+	
 	
 	/** 
 	 * Calculates all given Events

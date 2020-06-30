@@ -628,8 +628,7 @@ public class Player {
 	
 	/**
 	 * See EventCenter
-	 * @param coordinates
-	 * @return
+	 * Loads and initializes all Events of the Player
 	 */
 	public void loadEvents() {
 		if (eventCenter == null) {
