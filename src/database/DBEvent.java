@@ -21,10 +21,6 @@ public class DBEvent {
 	
 	private static Connection con = null;
 	
-	/**
-	 * Testmethode
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		GameEvent event = new GameEvent(0, 0, 0, GameEvent.Type.BUILD, new Coordinates(1, 33, 7), new Coordinates(1, 33, 6), "HeadQuarter", null, null, new Date(), new Date());
 		int eventid = DBEvent.createEvent(event);
