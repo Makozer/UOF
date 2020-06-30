@@ -199,14 +199,21 @@ public class EventCenter {
 			loadAll();
 			sortMe();
 			return;
+		} else {
+			// WORKAROUND
+			this.events.clear();
+			loadAll();
+			sortMe();
 		}
 
+		/*
 		// Cooldown 10 Sec for updating with DataBase to increase overall performance
 		if (    ((new Date().getTime() - this.lastupdate.getTime()) / 1000) > 10 ) {
 			this.events.addAll(DBEvent.getEvents(user, lastupdate));
 			this.lastupdate = new Date();
 			sortMe();
 		}
+		*/
 	}
 	
 	/**

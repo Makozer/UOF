@@ -139,6 +139,8 @@ public class DBEvent {
 	public static ArrayList<GameEvent> getEvents(Player player, Date timestamp) {
 		ArrayList<GameEvent> 	events = new ArrayList<GameEvent>();
 		
+		Date futuredate = DateUtils.getFutureDateByHours(256);
+		// TODO IMPLEMENT EVENT CREATED FIELD AND THEN JUST CHECK NEW CREATED STUFF!°!!!!!!!!
 		try {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
@@ -150,10 +152,10 @@ public class DBEvent {
 					+ "WHERE (userid = ? AND endttime BETWEEN ? AND ?) OR (targetuserid = ? AND endttime BETWEEN ? AND ?)");
 			pstmt.setInt(1, player.getPersData().getId());
 			pstmt.setTimestamp(2, new Timestamp(timestamp.getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
-			pstmt.setTimestamp(3, new Timestamp(new Date().getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+			pstmt.setTimestamp(3, new Timestamp(futuredate.getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
 			pstmt.setInt(4, player.getPersData().getId());
 			pstmt.setTimestamp(5, new Timestamp(timestamp.getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
-			pstmt.setTimestamp(6, new Timestamp(new Date().getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
+			pstmt.setTimestamp(6, new Timestamp(futuredate.getTime()), Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin")));
 			ResultSet rs = pstmt.executeQuery();
 
 			try {

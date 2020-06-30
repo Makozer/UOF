@@ -15,11 +15,11 @@ public class ClearWholeDB {
 			con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
 					"DELETE FROM public.events; "
-					+ "DELETE FROM public.messages; "
-					+ "DELETE FROM public.passwords; "
-					+ "DELETE FROM public.planets; "
-					+ "DELETE FROM public.users; "
-					+ "DELETE FROM public.techtrees; "
+					//+ "DELETE FROM public.messages; "
+					//+ "DELETE FROM public.passwords; "
+					//+ "DELETE FROM public.planets; "
+					//+ "DELETE FROM public.users; "
+					//+ "DELETE FROM public.techtrees; "
 				);
 
 
