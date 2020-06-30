@@ -1,13 +1,5 @@
 @charset "ISO-8859-1";
 
-.hubbly {
-	background-image: url("../../../assets/images/hubble-1632627-1600x900.jpg");
-}
-
-.headbtn {
-  width: 15	%;
-}
-
 * {
 	color: #ccc;
 	font-family: Verdana;
@@ -49,7 +41,7 @@ input, button, option, textarea {
 
 .headnav a {
 	font-size:22px;
-	padding: 4px;
+	padding: 11px;
 }
 
 .main {
@@ -90,12 +82,4 @@ a {
 a:hover {
 	color: orange;
 	text-decoration: none;
-}
-
-li {
-  display: inline !important;
-}
-
-a {
-  display: inline !important;
 }

@@ -42,7 +42,9 @@ public class DatabaseConnection {
 		}
 	}
 
-	/** Schließe die Verbindung */
+	/**
+	 * Schließt die Verbindung
+	 */
 	public static void closeConnection() {
 		try {
 			con.close();
