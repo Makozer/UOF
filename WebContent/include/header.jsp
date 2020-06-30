@@ -7,8 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<script
-	src="./javascript/loader.js?"></script>
+<script src="./javascript/loader.js?"></script>
 
 <!-- Styledokumente -->
 <meta name="viewport"
@@ -17,8 +16,7 @@
 	href="assets/images/scienceandfiction-battle-99291-144x144.png"
 	type="image/x-icon">
 <link rel="preload" href="./css/style2.css">
-<link rel="stylesheet" type="text/css"
-	href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 <link rel="stylesheet" href="./css/icons.css">
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
@@ -57,82 +55,75 @@ ${ update.pageRefresh() }
 
 
 	<section class="menu cid-s2n8eesi32" id="menu1-1d">
+		<div>
+			<nav
+				class="navbar border border-danger navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+				
 
-		<nav
-			class="navbar border border-danger navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<div class="hamburger">
-					<span></span> <span></span> <span></span> <span></span>
-				</div>
-			</button>
+				<c:if test="${not empty player}">
 
-			<c:if test="${not empty player}">
-
-				<div class="menu-logo">
-					<div class="navbar-brand">
-						<span class=""> <a href="overview.jsp"> <img
-								src="assets/images/scienceandfiction-battle-99291-144x144.png"
-								alt="Overview" title="" style="height: 3.5rem;">
-						</a>
-						</span> <span class="navbar-caption-wrap"><a
-							class="navbar-caption text-white display-5" href="overview.jsp">
-								UOF</a></span>
+					<div class="menu-logo">
+						<div class="navbar-brand">
+							<span class=""> <a href="overview.jsp"> <img
+									src="assets/images/scienceandfiction-battle-99291-144x144.png"
+									alt="Overview" title="" style="height: 3.5rem;">
+							</a>
+							</span> <span class="navbar-caption-wrap"><a
+								class="navbar-caption text-white display-5" href="overview.jsp">
+									UOF</a></span>
+						</div>
 					</div>
-				</div>
 
-				<div class="collapse navbar-collapse">
-					<ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
-						<li class="nav-item"><a class="text-white display-4"> <img
-								src="./assets/images/iron.jpg" alt="" title="Iron"
-								style="height: 1.5rem;"> ${ player.getActivePlanet().getIron().getName() }:
-								${player.getActivePlanet().getIronMine().getResValAsString()}
-						</a></li>
-						<li class="nav-item"><a class="text-white display-4"> <img
-								src="./assets/images/re.png" alt="rareearth" title=""
-								style="height: 1.5rem;"> ${ player.getActivePlanet().getRareEarth().getName() }:
-								${player.getActivePlanet().getRareEarthMine().getResValAsString()}
-						</a></li>
-						<li class="nav-item"><a class="text-white display-4"> <img
-								src="./assets/images/water-icon-flat-vector-illustration-260nw-360343787.jpg"
-								alt="Water" title="" style="height: 1.5rem;"> ${ player.getActivePlanet().getWater().getName() }:
-								${player.getActivePlanet().getFountain().getResValAsString()}
-						</a></li>
-						<li class="nav-item"><a class="text-white display-4"> <img
-								src="./assets/images/39495-200.png" alt="Tritium" title=""
-								style="height: 1.5rem;"> ${ player.getActivePlanet().getTritium().getName() }:
-								${player.getActivePlanet().getTritiumFabric().getResValAsString()}
-						</a></li>
-					</ul>
-					<div>
-						<table class="middle headnav">
-							<tr>
-								<td class="btn btn-sm btn-link display-2 border"><img
-									src="./assets/images/4092564-about-mobile-ui-profile-ui-user-website_114033.png"
-									alt="Tritium" title="" style="height: 1.5rem;"> <a
-									href="profil.jsp">Profil</a></td>
-									
-								<td class="btn 	btn-sm btn-link display-2 border"><img src="./assets/images/messageiconfree.png"
-									alt="Tritium" title="" style="height: 1.5rem;"> <a
-									href="messages.jsp"
-									class="${ player.getInbox().hasNewMessage() ? "red" : ""}">
-									Nachrichten</a>
-								</td>
+					<div class="collapse navbar-collapse">
+						<ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+							<li class="nav-item"><a class="text-white display-4"> <img
+									src="./assets/images/iron.jpg" alt="" title="Iron"
+									style="height: 1.5rem;"> ${ player.getActivePlanet().getIron().getName() }:
+									${player.getActivePlanet().getIronMine().getResValAsString()}
+							</a></li>
+							<li class="nav-item"><a class="text-white display-4"> <img
+									src="./assets/images/re.png" alt="rareearth" title=""
+									style="height: 1.5rem;"> ${ player.getActivePlanet().getRareEarth().getName() }:
+									${player.getActivePlanet().getRareEarthMine().getResValAsString()}
+							</a></li>
+							<li class="nav-item"><a class="text-white display-4"> <img
+									src="./assets/images/water-icon-flat-vector-illustration-260nw-360343787.jpg"
+									alt="Water" title="" style="height: 1.5rem;"> ${ player.getActivePlanet().getWater().getName() }:
+									${player.getActivePlanet().getFountain().getResValAsString()}
+							</a></li>
+							<li class="nav-item"><a class="text-white display-4"> <img
+									src="./assets/images/39495-200.png" alt="Tritium" title=""
+									style="height: 1.5rem;"> ${ player.getActivePlanet().getTritium().getName() }:
+									${player.getActivePlanet().getTritiumFabric().getResValAsString()}
+							</a></li>
+						</ul>
+						<div>
+							<table class="middle headnav">
+								<tr>
+									<td class="btn btn-sm btn-link display-2 border"><img
+										src="./assets/images/4092564-about-mobile-ui-profile-ui-user-website_114033.png"
+										alt="Tritium" title="" style="height: 1.5rem;"> <a
+										href="profil.jsp">Profil</a></td>
 
-							</tr>
-						</table>
+									<td class="btn 	btn-sm btn-link display-2 border"><img
+										src="./assets/images/messageiconfree.png" alt="Tritium"
+										title="" style="height: 1.5rem;"> <a href="messages.jsp"
+										class="${ player.getInbox().hasNewMessage() ? "red" : ""}">
+											Nachrichten</a></td>
+
+								</tr>
+							</table>
+						</div>
+						<div class="navbar-buttons pph-section-btn">
+							<a class="btn btn-sm btn-primary text-nowrap display-4"
+								href="./LogoutServlet">Logout </a>
+						</div>
 					</div>
-					<div class="navbar-buttons pph-section-btn">
-						<a class="btn btn-sm btn-primary display-4" href="./LogoutServlet">Logout
-						</a>
-					</div>
-				</div>
 
-			</c:if>
+				</c:if>
 
-		</nav>
+			</nav>
+		</div>
 	</section>
 
 
@@ -147,12 +138,10 @@ ${ update.pageRefresh() }
 					<jsp:include page="leftmenu.jsp" />
 				</c:if></td>
 			<td style="text-align: center;"><c:if test="${not empty player}">
-				<!--  ins leftmenue verschoben-->
+					<!--  ins leftmenue verschoben-->
 					<table class="planetResOv">
 						<tr>
-							<td>
-								<br>
-							</td>        
+							<td><br></td>
 						</tr>
 					</table>
 				</c:if>

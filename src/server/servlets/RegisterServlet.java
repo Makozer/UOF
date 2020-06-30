@@ -36,6 +36,7 @@ public class RegisterServlet extends HttpServlet {
 		String[] formCheckboxes = request.getParameterValues("checkbox"); 
 		
 		String error = "";
+		//It is not a good idea to validate names, no strong password enforcing 
 		
 		if(!formPassword.equals(formcPassword)) {
 			error += "Passwoerter stimmen nicht ueberein, Eingabe wdh.! <br>";

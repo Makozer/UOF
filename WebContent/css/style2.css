@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap);
-
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 body {
   font-family: Rubik;
@@ -18,7 +18,7 @@ body {
   font-size: 6.8rem;
 }
 .display-2 {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 3rem;
   font-display: swap;
 }
@@ -725,8 +725,9 @@ section.lazy-placeholder:after {
   font-style: normal;
 }
 .cid-s2n8eesi32 .nav-item span {
-  padding-right: 0.4em;
-  line-height: 0.5em;
+  padding-right: 0.2em;
+  line-height: 0.4em;
+  white-space: nowrap;
   vertical-align: text-bottom;
   position: relative;
   text-decoration: none;
@@ -735,8 +736,8 @@ section.lazy-placeholder:after {
   display: -webkit-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.7rem 0 !important;
-  margin: 0rem .65rem !important;
+  padding: 0.4rem 0 !important;
+  margin: 0rem .25rem !important;
   -webkit-align-items: center;
   -webkit-justify-content: center;
 }
@@ -778,7 +779,7 @@ section.lazy-placeholder:after {
   padding-right: 1.5rem;
 }
 .cid-s2n8eesi32 .menu-logo .navbar-brand .navbar-logo {
-  font-size: 3rem;
+  font-size: 2rem;
   transition: font-size 0.25s;
 }
 .cid-s2n8eesi32 .menu-logo .navbar-brand .navbar-logo img {
@@ -806,8 +807,12 @@ section.lazy-placeholder:after {
   align-self: center;
 }
 .cid-s2n8eesi32 .navbar-toggleable-sm .navbar-collapse .navbar-buttons {
+	white-space: nowrap;
+	display: inline-block;
   padding-left: 0;
   padding-bottom: 0;
+   overflow: hidden;
+text-overflow: ellipsis;
 }
 .cid-s2n8eesi32 .dropdown .dropdown-menu {
   background: #333333;
