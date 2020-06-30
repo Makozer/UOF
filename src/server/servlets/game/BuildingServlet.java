@@ -15,7 +15,8 @@ import game.player.Player;
 import static game.settings.GameSettings.*;
 
 /**
- * Servlet implementation class BuildingServlet
+ * @author Martin
+ *
  */
 @WebServlet("/BuildingServlet")
 public class BuildingServlet extends HttpServlet {

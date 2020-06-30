@@ -68,6 +68,10 @@ public class Fleet implements Iterable<ASpaceShip> {
 		return (int)output;
 	}
 	
+	public int size() {
+		return this.fleet.size();
+	}
+	
 	public int getCapacy() {
 		int output = 0;
 		for (ASpaceShip s: fleet) {

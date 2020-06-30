@@ -6,6 +6,11 @@ import database.DBMessage;
 import database.utils.*;
 import game.player.*;
 
+/**
+ * Inbox that manages messages
+ * @author Martin
+ *
+ */
 public class Inbox {
 	
 	private Player 					player 		= null;
@@ -66,7 +71,7 @@ public class Inbox {
 		}
 		
 		// Cooldown 5 Sec for updating with DataBase to increase overall performance
-		if (    ((new Date().getTime() - this.lastupdate.getTime()) / 1000) > 5 ) {
+		if (    ((new Date().getTime() - this.lastupdate.getTime()) / 1000) > 2 ) {
 			ArrayList<CommunityMessage> newMsgs = DBMessage.getMessages(player, lastupdate);
 			this.lastupdate = new Date();
 			

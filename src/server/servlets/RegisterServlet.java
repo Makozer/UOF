@@ -17,6 +17,11 @@ import game.utils.DateUtils;
 import database.utils.*;
 
 
+/**
+ * Registerservlet
+ * @author Martin
+ *
+ */
 @WebServlet("/Register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +31,9 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 
+	/**
+	 * Used to register a new User
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String formDisplayname = request.getParameter("displayname"); 
 		String formFirstname = request.getParameter("first_name"); 

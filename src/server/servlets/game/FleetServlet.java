@@ -75,7 +75,10 @@ public class FleetServlet extends HttpServlet {
 		// Creating the target
         target = new Coordinates(targetgalaxy, targetsolarsystem, targetplanet);
         // Escaping if the Planet doesnt exist or if its the same planet where the ships start
-        if (target.getGalaxy() == 0 || target.getPlanetNumber() == 0 || target.getSolarSystem() == 0) {return;}
+        if (target.getGalaxy() == 0 || target.getPlanetNumber() == 0 || target.getSolarSystem() == 0) {
+        	response.sendRedirect(request.getContextPath() + "/fleet.jsp");
+        	return;
+        }
         if (		planet.getCoords().getGalaxy() 			== target.getGalaxy() 
         		&& 	planet.getCoords().getSolarSystem() 	== target.getSolarSystem() 
         		&& 	planet.getCoords().getPlanetNumber() 	== target.getPlanetNumber()) { return; }
@@ -118,6 +121,11 @@ public class FleetServlet extends HttpServlet {
             }                        
         } 
         
+        if (newFleet.size() == 0) {
+        	response.sendRedirect(request.getContextPath() + "/overview.jsp");
+        	return;
+        }
+        
         // Checking if Planet has enough Tritium
         Tritium requiredFuel = TravelCalc.calculateCosts(planet.getCoords(), target, newFleet);
         ArrayList<ARessource> requiredRessources = new ArrayList<ARessource>();
@@ -141,7 +149,7 @@ public class FleetServlet extends HttpServlet {
         player.addEvent(event);
         
         // Redirect
-        response.sendRedirect(request.getContextPath() + "/Page?p=fleet");
+        response.sendRedirect(request.getContextPath() + "/overview.jsp");
 
 	}
 

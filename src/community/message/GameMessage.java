@@ -5,6 +5,12 @@ import static game.settings.GameSettings.*;
 
 import game.utils.*;
 
+/**
+ * Used for Events etc.
+ * Combatlog etc.
+ * @author Martin
+ *
+ */
 public class GameMessage extends Message {
 
 	public GameMessage(String title, String message) {
