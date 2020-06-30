@@ -34,6 +34,9 @@ public class LoginServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * This Servlet manages the Login for Users
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String email = request.getParameter("email"); 

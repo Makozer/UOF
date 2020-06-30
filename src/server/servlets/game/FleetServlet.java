@@ -39,6 +39,7 @@ public class FleetServlet extends HttpServlet {
 	}
 
 	/**
+	 * The Fleet Servlet which handles Attacks or Ressource Transport requests by the User
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

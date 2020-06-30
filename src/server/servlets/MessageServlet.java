@@ -116,6 +116,15 @@ public class MessageServlet extends HttpServlet {
 		return true;
 	}
 	
+	/**
+	 * Deletes a given Message
+	 * @param request
+	 * @param response
+	 * @param messageid
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private boolean deleteMessage(HttpServletRequest request, HttpServletResponse response, int messageid) throws ServletException, IOException {
 		HttpSession session = request.getSession();		
 		Player player = (Player)session.getAttribute("player");

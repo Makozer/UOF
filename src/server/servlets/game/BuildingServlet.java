@@ -36,6 +36,8 @@ public class BuildingServlet extends HttpServlet {
 	}
 
 	/**
+	 * Servlet for Building requests.
+	 * Trys to build a building on a planet or gives an error if there are not enough ressources
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
