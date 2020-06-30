@@ -7,6 +7,11 @@ import game.ressource.ARessource;
 import game.utils.*;
 import static game.settings.GameSettings.*;
 
+/**
+ * Abstract Class of all Buildings with nearly all needed methods
+ * @author Martin
+ *
+ */
 public abstract class ABuilding {
 	
 	protected TechTree 					techtree = null;
@@ -17,29 +22,55 @@ public abstract class ABuilding {
 	protected String					description = "";
 	protected Date 						date = null;
 	
+	/**
+	 * Constructor, give me an HeadQuarter, a TechTree and my level :)
+	 * @param hq
+	 * @param techtree
+	 * @param level
+	 */
 	public ABuilding(HeadQuarter hq, TechTree techtree, int level) {
 		this.headQuarter = hq;
 		this.techtree = techtree;
 		this.level = level;
 	}	
 	
+	/**
+	 * Increases the level + 1
+	 */
 	public void levelUp() {
 		this.level += 1;
 	}
 	
+	/**
+	 * Increases the level with a Timestamp
+	 * @param date Timestamp
+	 */
 	public void levelUp(Date date) {
 		this.date = date;
 		this.level += 1;
 	}
 	
+	/**
+	 * Returns how much this building modifys the value with its given level
+	 * @return
+	 */
 	public double getLevelModValue() {
 		return levelMod.getValue(this.level);
 	}
 	
+	/**
+	 * Test Method to know how much it would modify with a given level
+	 * @param n level
+	 * @return double modification
+	 */
 	public double getLevelModValue(int n) {
 		return levelMod.getValue(n);
 	}
 
+	/**
+	 * Gets the Basic Costs
+	 * @return ArrayList<ARessource> 
+	 */
 	public ArrayList<ARessource> getCosts() {
 		return costs;
 	}	
@@ -56,6 +87,11 @@ public abstract class ABuilding {
 		return getBuildCosts(this.level);
 	}
 	
+	/** 
+	 * Gets the Costs to upgrade this Building based on its basic Costs and level
+	 * @param level of the Building
+	 * @return ArrayList<ARessource>
+	 */
 	public ArrayList<ARessource> getBuildCosts(int level) {
 		ArrayList<ARessource> output = new ArrayList<ARessource>();
 		double mods = this.getLevelModValue(level - 1);
@@ -77,6 +113,11 @@ public abstract class ABuilding {
 		return getTimeToBuild(this.level);
 	}
 	
+	/** 
+	 * Returns the time needed to build this building with given level
+	 * @param level
+	 * @return int time to build in seconds
+	 */
 	public long getTimeToBuild(int level) {
 		long combRessCost = 0;
 		for (ARessource r: this.getBuildCosts(level)) {
@@ -85,12 +126,22 @@ public abstract class ABuilding {
 		return (long)(((combRessCost * 6.6) / 100.0 * (100.0 - this.getHeadQuarter().getLevelModValue())) / GAME_SPEED);
 	}
 	
+	/**
+	 * Converts remaining time to String
+	 * Used for Web Interface
+	 * @return
+	 */
 	public String getTimeToBuildAsString() {
 		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
 			+ (long)(this.getTimeToBuild() * 1000)			
 				));
 	}
 	
+	/**
+	 * Converts remaining time to String with a given level
+	 * Used for Web Interface
+	 * @return
+	 */
 	public String getTimeToBuildAsString(int level) {
 		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
 			+ (long)(this.getTimeToBuild(level) * 1000)			

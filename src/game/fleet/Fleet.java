@@ -12,6 +12,12 @@ import game.fleet.tier3.*;
 import game.research.*;
 import game.utils.NumberUtils;
 
+/**
+ * The Fleet is the Class which stores SpaceShips
+ * Used everywhere as traveling Fleet or as stationed Fleet on a Planet
+ * @author Martin
+ *
+ */
 public class Fleet implements Iterable<ASpaceShip> {
 	
 	protected ArrayList<ASpaceShip> fleet = new ArrayList<ASpaceShip>();
@@ -19,6 +25,11 @@ public class Fleet implements Iterable<ASpaceShip> {
 	
 	public Fleet() {}
 	
+	/**
+	 * Used to create a Fleet with a SQL String from DataBase
+	 * @param techtree
+	 * @param sql
+	 */
 	public Fleet(TechTree techtree, String sql) {
 		this.sqlLoad(techtree, sql);
 	}
@@ -92,6 +103,10 @@ public class Fleet implements Iterable<ASpaceShip> {
 		this.fleet = fleet.getFleet();
 	}
 	
+	/**
+	 * Adds another Fleet to this existing Fleet
+	 * @param fleet
+	 */
 	public void addFleet(Fleet fleet) {
 		ASpaceShip thisShip = null;
 		ASpaceShip addShip = null;
@@ -124,6 +139,10 @@ public class Fleet implements Iterable<ASpaceShip> {
 		return true;
 	}
 	
+	/**
+	 * Reduces this fleet by another Fleet
+	 * @param fleet
+	 */
 	public void reduceFleet(Fleet fleet) {
 		ASpaceShip thisShip = null;
 		ASpaceShip reduceShip = null;
@@ -184,6 +203,11 @@ public class Fleet implements Iterable<ASpaceShip> {
 		return fleet.iterator();
 	}
 	
+	/**
+	 * Loads a Fleet with a given SQL String
+	 * @param techtree
+	 * @param sql
+	 */
 	private void sqlLoad(TechTree techtree, String sql) {
 		if (sql == null || sql.length() == 0) {return;}
 		String[] ships = sql.split( Pattern.quote( ";" ) );		

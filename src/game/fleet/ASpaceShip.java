@@ -10,6 +10,11 @@ import game.ressource.*;
 import game.utils.*;
 import static game.settings.GameSettings.*;
 
+/**
+ * The Main Abstract Class for every SpaceShip
+ * @author Martin
+ *
+ */
 public abstract class ASpaceShip extends AGameObject {
 	
 	// Basic Attributes
@@ -28,10 +33,18 @@ public abstract class ASpaceShip extends AGameObject {
 	protected ArrayList<ARessource> costs = null;
 	protected int					timeToBuild = 999999;
 	
+	/**
+	 * Dont use this, only for testing
+	 */
 	public ASpaceShip() {
 		this(new TechTree(), 1);
 	}	
 	
+	/**
+	 * Constructor of a Spaceship with its TechTree and Quantity
+	 * @param techtree
+	 * @param quantity
+	 */
 	public ASpaceShip(TechTree techtree, int quantity) {
 		this.setQuantity(quantity);
 		this.techtree = techtree;	
@@ -145,6 +158,11 @@ public abstract class ASpaceShip extends AGameObject {
 		return output;
 	}
 	
+	/**
+	 * Returns the Time to Build as a String for the Web Interface
+	 * @param spaceportlevel
+	 * @return
+	 */
 	public String getTimeToBuildAsString(int spaceportlevel) {
 		return DateUtils.getRemainingTimeAsString(new Date(new Date().getTime() 
 				+ (long)(this.getTimeToBuild(spaceportlevel) * 1000)			
@@ -169,6 +187,11 @@ public abstract class ASpaceShip extends AGameObject {
 		return output;
 	}
 	
+	/**
+	 * Returns a Clone of the Spaceship
+	 * Used to Create or Copy new Ships for Battles etc.
+	 * @return
+	 */
 	public ASpaceShip cloneMe() {
 		ASpaceShip output = null;
 		try {

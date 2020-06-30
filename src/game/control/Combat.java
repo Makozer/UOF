@@ -13,6 +13,11 @@ import game.research.*;
 import game.ressource.ARessource;
 import game.utils.*;
 
+/**
+ * The Main Class to Calculate the Combat between two Fleets
+ * @author Martin
+ *
+ */
 public class Combat {
 	
 	public static void main(String[] args) {
@@ -54,6 +59,17 @@ public class Combat {
 		System.out.println("Siege von B: " + wins[2]);
 	}
 	
+	/**
+	 * Creates the CombatLog Message for both Players when the Attack was calculated
+	 * @param winner
+	 * @param loser
+	 * @param moshpit
+	 * @param survivor
+	 * @param attacker
+	 * @param defender
+	 * @param ress
+	 * @return
+	 */
 	public static boolean createCombatLog(Player winner, Player loser, Coordinates moshpit, Fleet survivor, Fleet attacker, Fleet defender, ArrayList<ARessource> ress) {
 		String msg = "";
 		msg += "Hallo,<br /><br />es hat ein Kampf stattgefunden auf dem Planeten: " + moshpit.asCoords();
@@ -90,6 +106,12 @@ public class Combat {
 		return true;
 	}
 	
+	/**
+	 * The Algorithm to determine which fleet won in a Battle between a or b
+	 * @param a
+	 * @param b
+	 * @return Fleet the fleet that won
+	 */
 	public static Fleet fight(Fleet a, Fleet b) {
 		// If Fleet a is stronger then b
 		if (a.getCombatPower() > b.getCombatPower()) {			
@@ -107,6 +129,12 @@ public class Combat {
 		}
 	}
 	
+	/**
+	 * The Algorithm where both fleets are relative equal to each other and have to fight, one fleet wins but loses some ship in the fight
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	private static Fleet brawl(Fleet a, Fleet b) {
 		long combined = a.getCombatPower() + b.getCombatPower();
 		double apct = (double)a.getCombatPower() / (double)combined * 100.0;

@@ -154,7 +154,7 @@ public class DBUser {
 		try {
 			Connection con = DatabaseConnection.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(
-					"SELECT playerid FROM public.planets WHERE galaxy = ? AND solarsystem = ? AND planetnumber = ?" 
+					"SELECT userid FROM public.planets WHERE galaxy = ? AND solarsystem = ? AND planetnumber = ?" 
 					);
 			pstmt.setInt(1, coordinates.getGalaxy());
 			pstmt.setInt(2, coordinates.getSolarSystem());

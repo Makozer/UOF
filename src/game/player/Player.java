@@ -20,6 +20,12 @@ import game.ressource.*;
 import game.settings.*;
 import game.utils.*;
 
+/**
+ * The MAIN Class of this Game for the Player / User.
+ * Stores nearly everything like Personal Data or the Planets or the Research etc.
+ * @author Martin
+ *
+ */
 public class Player {
 	
 	private PersonalData 				persData = new PersonalData(0, "Empty PersonalData", "", "", "", new Date(), new Date(), new Date());	
@@ -268,11 +274,16 @@ public class Player {
 		return true;
 	}
 	
-	
+	// Unused
 	public boolean doAttack(Coordinates planetcoords, Coordinates target, Fleet fleet) {
 		return false;
 	}
 	
+	/**
+	 * Tries to start a Research on the currently active Planet.
+	 * @param researchname
+	 * @return true or false if the request to research was successful
+	 */
 	public boolean doResearch(String researchname) {
 		// Required Objects
 		Planet planet = getActivePlanet();
@@ -301,6 +312,12 @@ public class Player {
 		return true;
 	}
 	
+	
+	/**
+	 * Cancels a currently happening Research
+	 * @param event The Research
+	 * @return true it was cancelled
+	 */
 	public boolean doCancelResearch(GameEvent event) {
 		// Required Objects
 		Planet planet = getPlanetByCoordinates(event.getCoordinates());
@@ -319,6 +336,11 @@ public class Player {
 		return true;
 	}
 	
+	/**
+	 * Tries to build on the current active Planet
+	 * @param buildingName String the Building Name which should be increased
+	 * @return true if it worked
+	 */
 	public boolean doBuild(String buildingName) {
 		
 		// Required Objects
@@ -348,6 +370,11 @@ public class Player {
 		return true;
 	}
 	
+	/**
+	 * Cancels the Build on the currently active Planet
+	 * @param event
+	 * @return true if cancel was succesful
+	 */
 	public boolean doCancelBuild(GameEvent event) {
 		
 		// Required Objects
@@ -371,6 +398,10 @@ public class Player {
 		this.planets.add(planet);
 	}
 	
+	/** 
+	 * Adds n Planets to the User
+	 * @param planets ArrayList<Planet> Planet of Arrays
+	 */
 	public void addPlanets(ArrayList<Planet> planets) {
 		if (planets == null) {System.err.println("NULLPOINTER @ addPlanets");return;}
 		this.planets.addAll(planets);
@@ -384,6 +415,11 @@ public class Player {
 		return planets.get(n);
 	}
 	
+	/**
+	 * Returns Planet of a given Coordinate if the Player owns this Planet
+	 * @param coordinates
+	 * @return
+	 */
 	public Planet getPlanetByCoordinates(Coordinates coordinates) {
 		for (Planet p: planets) {
 			if (coordinates.asCoords().equals(p.getCoords().asCoords())) {
@@ -397,10 +433,16 @@ public class Player {
 		this.planets.remove(planet);
 	}	
 	
+	/** 
+	 * Adds the given Event to the EventCenter
+	 * @param event
+	 * @see EventCenter
+	 */
 	public void addEvent(GameEvent event) {
 		this.getEventCenter().addEvent(event);
 	}
 	
+	// UNUSED
 	public void setEvents(ArrayList<GameEvent> events) {
 		this.events = events;
 		// Build
@@ -428,6 +470,11 @@ public class Player {
 		this.getEventCenter().removeEvent(event);
 	}
 	
+	/**
+	 * See EventCenter
+	 * @param coordinates
+	 * @return
+	 */
 	public GameEvent getBuildEventByCoords(Coordinates coordinates) {
 		return this.getEventCenter().getBuildEventByCoords(coordinates);
 		/*
@@ -442,6 +489,11 @@ public class Player {
 		*/
 	}
 	
+	/**
+	 * See EventCenter
+	 * @param coordinates
+	 * @return
+	 */
 	public GameEvent getResearchEventByCoords(Coordinates coordinates) {
 		return this.getEventCenter().getResearchEventByCoords(coordinates);
 		// TODO lowprio performance
@@ -457,11 +509,13 @@ public class Player {
 		*/
 	}
 	
+	// Unused
 	public ArrayList<GameEvent> getEvents() {
 		sortEvents();
 		return events;
 	}
 	
+	// Unused
 	public ArrayList<GameEvent> getEvents(String type) {
 		sortEvents();
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
@@ -480,6 +534,11 @@ public class Player {
 		return output;
 	}
 
+	/**
+	 * See EventCenter
+	 * @param coordinates
+	 * @return
+	 */
 	public ArrayList<GameEvent> getAttackEvents() {
 		return eventCenter.getAttackEvents();
 		/*
@@ -492,6 +551,11 @@ public class Player {
 		*/
 	}
 	
+	/**
+	 * See EventCenter
+	 * @param coordinates
+	 * @return
+	 */
 	public ArrayList<GameEvent> getTransportEvents() {
 		return eventCenter.getTransportEvents();
 		/*
@@ -504,7 +568,11 @@ public class Player {
 		*/
 	}
 	
-	
+	/**
+	 * See EventCenter
+	 * @param coordinates
+	 * @return
+	 */
 	public ArrayList<GameEvent> getDefendEvents() {
 		return eventCenter.getDefendEvents();
 		/*
@@ -517,6 +585,11 @@ public class Player {
 		*/
 	}
 	
+	/**
+	 * See EventCenter
+	 * @param coordinates
+	 * @return
+	 */
 	public ArrayList<GameEvent> getBuildingEvents() {
 		return eventCenter.getBuildingEvents();
 		/*
@@ -529,6 +602,11 @@ public class Player {
 		*/
 	}
 	
+	/**
+	 * See EventCenter
+	 * @param coordinates
+	 * @return
+	 */
 	public ArrayList<GameEvent> getResearchEvents() {
 		// TODO lowprio performance
 		return eventCenter.getResearchEvents();
@@ -542,17 +620,23 @@ public class Player {
 		*/
 	}
 	
+	// Unused
 	public ArrayList<GameEvent> getEventsSorted() {
 		sortEvents();
 		return events;
 	}
 	
+	/**
+	 * See EventCenter
+	 * Loads and initializes all Events of the Player
+	 */
 	public void loadEvents() {
 		if (eventCenter == null) {
 			this.eventCenter = new EventCenter(this);
 		}
 	}
 	
+	// Unused
 	private void sortEvents() {
 		events.sort(
 				new Comparator<GameEvent>() {

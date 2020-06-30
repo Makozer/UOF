@@ -5,6 +5,11 @@ import game.planet.buildings.HeadQuarter;
 import game.research.*;
 import game.utils.NumberUtils;
 
+/**
+ * Abstract Class for all Storage Buildings
+ * @author Martin
+ *
+ */
 public abstract class AResStorageBuilding extends ABuilding {
 	
 	public AResStorageBuilding(HeadQuarter hq, TechTree techtree, int level) {

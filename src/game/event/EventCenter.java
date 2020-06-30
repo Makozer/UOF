@@ -7,12 +7,21 @@ import game.planet.Coordinates;
 import game.planet.Planet;
 import game.player.*;
 
+/**
+ * The Players EventCenter, all Events are stored here
+ * @author Martin
+ *
+ */
 public class EventCenter {
 	
 	Player 							user = null;
 	private ArrayList<GameEvent>	events = new ArrayList<GameEvent>();
 	private Date					lastupdate = null;
 	
+	/**
+	 * Constructor of EventCenter for a given Player
+	 * @param user
+	 */
 	public EventCenter(Player user) {
 		this.user = user;
 		update();
@@ -31,6 +40,11 @@ public class EventCenter {
 		this.events.remove(event);
 	}
 	
+	/**
+	 * Returns the building Event for given Coordinates if the Player owns that Planet, returns null if not
+	 * @param coordinates
+	 * @return Event or Null(if there is no building Event or Planet)
+	 */
 	public GameEvent getBuildEventByCoords(Coordinates coordinates) {
 		GameEvent output = null;
 		for (GameEvent e: events) {
@@ -42,6 +56,11 @@ public class EventCenter {
 		return output;
 	}
 	
+	/**
+	 * Returns the research Event for given Coordinates if the Player owns that Planet, returns null if not
+	 * @param coordinates
+	 * @return Event or Null(if there is no research Event or Planet)
+	 */
 	public GameEvent getResearchEventByCoords(Coordinates coordinates) {
 		GameEvent output = null;
 		for (GameEvent e: events) {
@@ -57,6 +76,11 @@ public class EventCenter {
 		return events;
 	}
 	
+	/**
+	 * Returns all Events from a given Type
+	 * @param type ATTACK or DEFEND .. etc
+	 * @return ArrayList<GameEvent> all Events of that Kind
+	 */
 	public ArrayList<GameEvent> getEvents(String type) {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
@@ -65,6 +89,10 @@ public class EventCenter {
 		return output;
 	}
 	
+	/**
+	 * Returns all Fleet Events
+	 * @return ArrayList<GameEvent> Array with all Events of that Type
+	 */
 	public ArrayList<GameEvent> getFleetEvents() {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
@@ -73,6 +101,10 @@ public class EventCenter {
 		return output;
 	}
 
+	/**
+	 * Returns all Attack Events
+	 * @return ArrayList<GameEvent> Array with all Events of that Type
+	 */
 	public ArrayList<GameEvent> getAttackEvents() {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
@@ -81,6 +113,10 @@ public class EventCenter {
 		return output;
 	}
 	
+	/**
+	 * Returns all Transport Events
+	 * @return ArrayList<GameEvent> Array with all Events of that Type
+	 */
 	public ArrayList<GameEvent> getTransportEvents() {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
@@ -90,6 +126,10 @@ public class EventCenter {
 	}
 	
 	
+	/**
+	 * Returns all Defend Events
+	 * @return ArrayList<GameEvent> Array with all Events of that Type
+	 */
 	public ArrayList<GameEvent> getDefendEvents() {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
@@ -98,6 +138,10 @@ public class EventCenter {
 		return output;
 	}
 	
+	/**
+	 * Returns all Buildings Events
+	 * @return ArrayList<GameEvent> Array with all Events of that Type
+	 */
 	public ArrayList<GameEvent> getBuildingEvents() {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
@@ -106,6 +150,10 @@ public class EventCenter {
 		return output;
 	}
 	
+	/**
+	 * Returns all Research Events
+	 * @return ArrayList<GameEvent> Array with all Events of that Type
+	 */
 	public ArrayList<GameEvent> getResearchEvents() {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		for (GameEvent e: events) {
@@ -115,11 +163,21 @@ public class EventCenter {
 	}
 	
 
+	
+	/**
+	 * Returns all Events that need to be calculated because they already happened
+	 * @return ArrayList<GameEvent> of events that need to be calculated
+	 */
 	public ArrayList<GameEvent> getCalcEvents() {
 		Date now = new Date();
 		return getCalcEventsToDate(now);
 	}
 	
+	/**
+	 * Returns all Events that need to be calculated to a certain point of time
+	 * @param date up to all calculate events are returned
+	 * @return
+	 */
 	public ArrayList<GameEvent> getCalcEventsToDate(Date date) {
 		ArrayList<GameEvent> output = new ArrayList<GameEvent>();
 		sortMe();
@@ -132,6 +190,9 @@ public class EventCenter {
 		return output;
 	}
 	
+	/**
+	 * Updates this EventCenter with the DataBase
+	 */
 	public void update() {
 
 		if (this.lastupdate == null) {
@@ -148,6 +209,9 @@ public class EventCenter {
 		}
 	}
 	
+	/**
+	 * Should be used once if the EventCenter is created or started
+	 */
 	public void init() {
 
 		// Build
@@ -171,6 +235,9 @@ public class EventCenter {
 		}
 	}
 	
+	/**
+	 * Sorts all Events
+	 */
 	private void sortMe() {
 		events.sort(
 				new Comparator<GameEvent>() {
@@ -180,11 +247,18 @@ public class EventCenter {
 				});
 	}	
 	
+	/**
+	 * Loads all Events from DataBase 
+	 */
 	private void loadAll() {
 		this.events.addAll(DBEvent.getEvents(user));
 		this.lastupdate = new Date();
 	}
 	
+	/** Deletess a given Event
+	 * @param event
+	 * @return
+	 */
 	public boolean deleteEvent(GameEvent event) {
 		events.remove(event);
 		return true;
