@@ -7,6 +7,11 @@ import game.research.TechTree;
 import game.ressource.*;
 import static game.settings.BuildingSettings.*;
 
+/**
+ * The IronMine of a Planet to generate Iron
+ * @author Martin
+ *
+ */
 public class IronMine extends AResMiningBuilding {
 	
 	public IronMine(HeadQuarter hq, TechTree techtree, int level, Date date, ARessource ressource) {

@@ -8,6 +8,11 @@ import game.ressource.ARessource;
 import static game.settings.BuildingSettings.*;
 import static game.settings.GameSettings.GAME_SPEED;
 
+/**
+ * The Tritium Fabric of a Planet to generate Tritium
+ * @author Martin
+ *
+ */
 public class TritiumFabric extends AResMiningBuilding {
 
 	public TritiumFabric(HeadQuarter hq, TechTree techtree, int level, Date date, ARessource ressource) {

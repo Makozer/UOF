@@ -5,8 +5,18 @@ import database.DBPlanet;
 import database.DBUser;
 import game.player.*;
 
+/**
+ * The Class to Load the Game after a Player logs in
+ * @author Martin
+ *
+ */
 public class GameLoader {
 	
+	/**
+	 * Loads the whole Player from DataBase and returns it
+	 * @param playerid
+	 * @return Player the whole requested Player
+	 */
 	public static Player loadPlayer(int playerid) {
 
 		Player player = DBUser.getPlayerById(playerid);

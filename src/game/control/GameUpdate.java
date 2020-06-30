@@ -17,12 +17,24 @@ import game.player.*;
 import game.research.Research;
 import game.ressource.ARessource;
 
+/**
+ * This Class controls the Game and forces it to update when a Player refreshes the Browser
+ * @author Martin
+ *
+ */
 public class GameUpdate {
 	
 	private Player user;
 	
+	/**
+	 * Only for testing, dont use for WebInterface
+	 */
 	public GameUpdate() {}
 	
+	/**
+	 * Creates the GameUpdate for a given Player
+	 * @param user
+	 */
 	public GameUpdate(Player user) {
 		this.user = user;
 	}
@@ -33,6 +45,10 @@ public class GameUpdate {
 		System.out.println(new GameUpdate().toString());
 	}
 	
+	/**
+	 * When a Player refreshes his Browser, this method updates everything
+	 * @return
+	 */
 	public boolean pageRefresh() {	
 		// TODO Connection create here and give it to all others and close it after refresh
 		System.out.println("pageRefresh() ...");
@@ -55,6 +71,12 @@ public class GameUpdate {
 		// TODO Idea -> when new msg arrives
 	}
 	
+	/**
+	 * Updates a Player to a given Date
+	 * @param user
+	 * @param date
+	 * @return
+	 */
 	private boolean updatePlayerToDate(Player user, Date date) {
 		
 		// Getting the Users EventCenter and update it
@@ -72,6 +94,13 @@ public class GameUpdate {
 		return true;		
 	}
 	
+	/** 
+	 * Calculates all given Events
+	 * @param events
+	 * @param user
+	 * @param date
+	 * @return
+	 */
 	private boolean calculateEvents(ArrayList<GameEvent> events, Player user, Date date) {				
 
 		Iterator<GameEvent> i = events.iterator();
@@ -104,6 +133,11 @@ public class GameUpdate {
 		return true;
 	}
 	
+	/**
+	 * Calculates the Attack
+	 * @param event of the Attack
+	 * @param i the Iterator for the ArrayList to remove savely the Element
+	 */
 	private void calculateAttack(GameEvent event, Iterator<GameEvent> i) {
 		// Required Objects
 		// Actual Player
@@ -155,6 +189,11 @@ public class GameUpdate {
 	}
 	
 
+	/**
+	 * Calculates the Transport
+	 * @param event
+	 * @param i the Iterator for the ArrayList to remove savely the Element
+	 */
 	private void calculateTransport(GameEvent event, Iterator<GameEvent> i) {
 		Planet planet = user.getPlanetByCoordinates(event.getTarget());
 		if (planet != null) {
@@ -167,6 +206,11 @@ public class GameUpdate {
 		}
 	}
 
+	/**
+	 * Calculates a Build on a Planet
+	 * @param event
+	 * @param i the Iterator for the ArrayList to remove savely the Element
+	 */
 	private void calculateBuild(GameEvent event, Iterator<GameEvent> i) {
 		Planet planet = user.getPlanetByCoordinates(event.getCoordinates());
 		if (planet == null) {return;}
@@ -182,6 +226,11 @@ public class GameUpdate {
 		deleteEvent(event);
 	}
 	
+	/**
+	 * Calculates a Research on a Planet
+	 * @param event
+	 * @param i the Iterator for the ArrayList to remove savely the Element
+	 */
 	private void calculateResearch(GameEvent event, Iterator<GameEvent> i) {
 		Planet planet = user.getPlanetByCoordinates(event.getCoordinates());
 		if (planet == null) {return;}
@@ -198,6 +247,11 @@ public class GameUpdate {
 	}
 	
 	
+	/**
+	 * Deletes the given Event and informs the DataBase
+	 * @param event
+	 * @return
+	 */
 	private boolean deleteEvent(GameEvent event) {
 		EventCenter ec = user.getEventCenter();		
 		DBEvent.deleteEvent(event.getId());

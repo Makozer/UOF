@@ -19,6 +19,11 @@ import game.settings.ResearchRegister;
 import game.utils.DateUtils;
 import game.utils.NumberUtils;
 
+/**
+ * The Main Class for Planets, everthing related to Planets happens here.
+ * @author Martin
+ *
+ */
 public class Planet {
 	
 	private Date					lastupdate = new Date();
@@ -41,10 +46,42 @@ public class Planet {
 	// Fleet that idles on the Planet
 	private Fleet					fleet = new Fleet();
 	
+	/**
+	 * Constructor to create a Planet from DataBase Inputs
+	 * @param techtree
+	 * @param coordinates
+	 * @param name
+	 * @param buildingSQL
+	 * @param ressourceSQL
+	 * @param fleetSQL
+	 * @param spaceportqueueSQL
+	 * @param timestamp
+	 */
 	public Planet(TechTree techtree, Coordinates coordinates, String name, String buildingSQL, String ressourceSQL, String fleetSQL, String spaceportqueueSQL, String timestamp) {
 		this.sqlLoad(techtree, coordinates, name, buildingSQL, ressourceSQL, fleetSQL, spaceportqueueSQL, timestamp);
 	}
 	
+	/** Constructor to create a Planet with given Parameters
+	 * @param techtree
+	 * @param coordinates
+	 * @param name
+	 * @param ironValue
+	 * @param rareEarthValue
+	 * @param waterValue
+	 * @param tritiumValue
+	 * @param headQuarterLvl
+	 * @param universityLvl
+	 * @param spacePortLvl
+	 * @param ironMineLvl
+	 * @param rareEarthMineLvl
+	 * @param fountainLvl
+	 * @param tritiumFabricLvl
+	 * @param ironStorageLvl
+	 * @param rareEarthStorageLvl
+	 * @param waterStorageLvl
+	 * @param tritiumStorageLvl
+	 * @param lastupdate
+	 */
 	public Planet(TechTree techtree, Coordinates coordinates, String name, 
 						int ironValue, int rareEarthValue, int waterValue, int tritiumValue, 
 						int headQuarterLvl, int universityLvl, int spacePortLvl, 
@@ -57,6 +94,28 @@ public class Planet {
 				ironStorageLvl, rareEarthStorageLvl, waterStorageLvl, tritiumStorageLvl, lastupdate);
 	}
 	
+	/**
+	 * Creates a Planet with all given Parameters
+	 * @param techtree
+	 * @param coordinates
+	 * @param name
+	 * @param ironValue
+	 * @param rareEarthValue
+	 * @param waterValue
+	 * @param tritiumValue
+	 * @param headQuarterLvl
+	 * @param universityLvl
+	 * @param spacePortLvl
+	 * @param ironMineLvl
+	 * @param rareEarthMineLvl
+	 * @param fountainLvl
+	 * @param tritiumFabricLvl
+	 * @param ironStorageLvl
+	 * @param rareEarthStorageLvl
+	 * @param waterStorageLvl
+	 * @param tritiumStorageLvl
+	 * @param lastupdate
+	 */
 	private void createThisPlanet(TechTree techtree, Coordinates coordinates, String name, 
 			int ironValue, int rareEarthValue, int waterValue, int tritiumValue, 
 			int headQuarterLvl, int universityLvl, int spacePortLvl, 
@@ -142,11 +201,18 @@ public class Planet {
 		System.out.println("Fleet: " + fleetSQL);
 	}
 	
+	/**
+	 * Forces the Planet to Update itself to the current time
+	 * @param player
+	 */
 	public void update(Player player) {
 		updateRessources();
 		updateShipQueue(player);		
 	}
 	
+	/**
+	 * Updates all ressources of the Planet
+	 */
 	public void updateRessources() {
 		this.getIronMine().update();
 		this.getRareEarthMine().update();
@@ -154,6 +220,11 @@ public class Planet {
 		this.getTritiumFabric().update();
 	}
 	
+	/**
+	 * Updates the ShipQueue of the Planet
+	 * Used to produce Spaceships
+	 * @param player the actual Player
+	 */
 	public void updateShipQueue(Player player) {
 		// If no ships are to build, then do nothing
 		if (this.getSpacePort().getBuildQueue().size() == 0) { return; }
@@ -199,12 +270,21 @@ public class Planet {
 		this.fleet.addShip(new Yamato(this.techtree, 1));
 	}
 	
+	/** 
+	 * If the Planet gets more Ressources
+	 * @param ressources
+	 */
 	public void increaseRessources(ArrayList<ARessource> ressources) {
 		for (ARessource r: ressources) {
 			this.getRessourceByName(r.getName()).increaseValue(r.getValue());
 		}
 	}
 	
+	/**
+	 * Checks if the Planet has enough ressources
+	 * @param ressources
+	 * @return
+	 */
 	public boolean hasRessources(ArrayList<ARessource> ressources) {
 		for (ARessource r: ressources) {
 			if (this.getRessourceByName(r.getName()).getValue() < r.getValue()) {return false;};
@@ -212,6 +292,10 @@ public class Planet {
 		return true;
 	}
 	
+	/**
+	 * Decreases the Planets Ressources with the given Ressource Array
+	 * @param ressources ArrayList<ARessource>
+	 */
 	public void decreaseRessources(ArrayList<ARessource> ressources) {
 		for (ARessource r: ressources) {
 			this.getRessourceByName(r.getName()).decreaseValue(r.getValue());
@@ -255,6 +339,11 @@ public class Planet {
 		return this.buildings.get(name);
 	}
 	
+	/**
+	 * Not used
+	 * @param name
+	 * @return
+	 */
 	public Research getResearchByName(String name) {
 		ArrayList<Research> allresearch = ResearchRegister.getWholeResearchList(this.techtree);
 		for (Research r : allresearch) {
@@ -263,6 +352,11 @@ public class Planet {
 		return null;
 	}
 	
+	/**
+	 * Returns all Basic Buildings like HeadQuarter and University
+	 * Used for WebInterface
+	 * @return ArrayList<ABuilding>
+	 */
 	public ArrayList<ABuilding> getBasicBuildings() {
 		ArrayList<ABuilding> output = new ArrayList<ABuilding>();
 		output.add(getHeadQuarter());
@@ -270,12 +364,21 @@ public class Planet {
 		return output;
 	}
 	
+	/**
+	 * Returns all War related Buildings
+	 * Used for Web Interface
+	 * @return ArrayList<ABuilding>
+	 */
 	public ArrayList<ABuilding> getWarBuildings() {
 		ArrayList<ABuilding> output = new ArrayList<ABuilding>();
 		output.add(getSpacePort());
 		return output;
 	}
 	
+	/**
+	 * Returns all Ressource related Buildings for the Web Interface
+	 * @return
+	 */
 	public ArrayList<AResMiningBuilding> getResBuildings() {
 		ArrayList<AResMiningBuilding> output = new ArrayList<AResMiningBuilding>();
 		output.add(getIronMine());
@@ -374,6 +477,17 @@ public class Planet {
 		return this.ressources.get(name);
 	}
 	
+	/**
+	 * Loads the Planet with given DataBase SQL Strings
+	 * @param techtree
+	 * @param coordinates
+	 * @param name
+	 * @param ressourceSQL
+	 * @param buildingSQL
+	 * @param fleetSQL
+	 * @param spaceportqueueSQL
+	 * @param timestamp
+	 */
 	private void sqlLoad(TechTree techtree, Coordinates coordinates, String name, String ressourceSQL, String buildingSQL, String fleetSQL, String spaceportqueueSQL, String timestamp) {
 		
 		Date lastupdate = DateUtils.stampToDate(timestamp);
@@ -412,6 +526,12 @@ public class Planet {
 		this.fleet = new Fleet(techtree, fleetSQL);
 	}
 	
+	/**
+	 * Returns all Buildings as String with their Level
+	 * Example: "HeadQuarter=3; University=2" etc.
+	 * Used for DataBase Storage
+	 * @return String all Buildings
+	 */
 	public String asBuildingSQLString() {
 		String output = "";
 		for (Entry<String, ABuilding> entry : buildings.entrySet()) {
@@ -420,6 +540,11 @@ public class Planet {
 		return output;
 	}
 	
+	/**
+	 * Returns all Ressources as SQL Strings
+	 * Used for Storage in DataBase
+	 * @return
+	 */
 	public String asRessourceSQLString() {
 		String output = "";
 		// TODO Update Ressources
@@ -429,10 +554,20 @@ public class Planet {
 		return output;
 	}
 	
+	/**
+	 * Converts the Fleet on this Planet to a SQL String
+	 * Used to Store Fleet in DataBase
+	 * @return
+	 * @see fleet
+	 */
 	public String asFleetSQLString() {
 		return this.fleet.asSQLString();
 	}
 	
+	/**
+	 * Converts the SpacePortQueue to a String that gets stored in the DataBase
+	 * @return
+	 */
 	public String asSpacePortQueueSQLString() {
 		String output = "";
 		for (ASpaceShip ship : this.getSpacePort().getBuildQueue()) {

@@ -7,6 +7,11 @@ import java.util.*;
 import game.fleet.*;
 import game.research.*;
 
+/**
+ * The SpacePort of a Planet, higher level = faster production of SpaceShips
+ * @author Martin
+ *
+ */
 public class SpacePort extends ABuilding {
 	
 	ArrayList<ASpaceShip> buildQueue = new ArrayList<ASpaceShip>();

@@ -8,6 +8,11 @@ import game.ressource.ARessource;
 import static game.settings.BuildingSettings.*;
 import static game.settings.GameSettings.GAME_SPEED;
 
+/**
+ * The RareEarthMine of a Planet to generate RareEarth
+ * @author Martin
+ *
+ */
 public class RareEarthMine extends AResMiningBuilding {
 
 	public RareEarthMine(HeadQuarter hq, TechTree techtree, int level, Date date, ARessource ressource) {

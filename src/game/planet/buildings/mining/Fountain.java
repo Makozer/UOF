@@ -8,6 +8,11 @@ import game.ressource.*;
 import static game.settings.BuildingSettings.*;
 import static game.settings.GameSettings.GAME_SPEED;
 
+/**
+ * The Fountain of a Planet to generate Water
+ * @author Martin
+ *
+ */
 public class Fountain extends AResMiningBuilding {
 
 	public Fountain(HeadQuarter hq, TechTree techtree, int level, Date date, ARessource ressource) {

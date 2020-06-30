@@ -6,8 +6,20 @@ import java.util.Date;
 import game.planet.Coordinates;
 import game.ressource.Tritium;
 
+/**
+ * The Class where the calculation of Travelspeeds happen
+ * @author Martin
+ *
+ */
 public class TravelCalc {
 	
+	/**
+	 * Calculates the Time from now to the future which is needed to travel from Planet A to planet B with given speed
+	 * @param a
+	 * @param b
+	 * @param speed
+	 * @return
+	 */
 	public static Date calculateTime(Coordinates a, Coordinates b, int speed) {
 		// TODO VARIABLE SPEED SETTINGS BY USER REDUCING TRAVELCOST
 		Date output = null;
@@ -34,6 +46,13 @@ public class TravelCalc {
 		return output;
 	}
 	
+	/**
+	 * Calculates how much Tritium the travel needs
+	 * @param a
+	 * @param b
+	 * @param fleet
+	 * @return
+	 */
 	public static Tritium calculateCosts(Coordinates a, Coordinates b,Fleet fleet) {
 		// TODO LOWPRIO do a better calc then this :D
 		int size = 0;

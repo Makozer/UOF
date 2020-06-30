@@ -11,8 +11,19 @@ import game.research.*;
 import game.settings.*;
 import game.utils.*;
 
+/**
+ * This Class creates a newly registered Player and gives him a random Planet in the Universe etc.
+ * @author Martin
+ *
+ */
 public class NewPlayerManager {
 	
+	/**
+	 * Creates the new Player with his given Personal Data and Password
+	 * @param data Personal Data for the Player
+	 * @param password his Password
+	 * @return Player the new Player as Object
+	 */
 	public static Player createNewPlayer(PersonalData data, String password) {
 		TechTree techtree = new TechTree();
 		Player player = new Player(data, techtree);

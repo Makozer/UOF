@@ -8,8 +8,19 @@ import game.ressource.ARessource;
 import game.utils.DateUtils;
 import game.utils.NumberUtils;
 
+/**
+ * The MainClass for Events in the Game.
+ * Stores all Kinds of Events like building, attacks, research etc.
+ * @author Martin
+ *
+ */
 public class GameEvent implements Comparable<GameEvent> {
 	
+	/**
+	 * The Enum Type of the Event, Attack or Defense ETC
+	 * @author Martin
+	 *
+	 */
 	public enum Type {
 		ATTACK,
 		DEFEND,
@@ -35,6 +46,16 @@ public class GameEvent implements Comparable<GameEvent> {
 		// ONLY FOR TESTING!!!
 	}
 	
+	/**
+	 * Constructor of GameEvent for a Building Event or Research
+	 * @param playerid
+	 * @param type
+	 * @param coordinates
+	 * @param buildingName
+	 * @param ressource
+	 * @param startTime
+	 * @param endTime
+	 */
 	public GameEvent(int playerid, Type type, Coordinates coordinates, String buildingName, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
 		this.playerid = playerid; 
 		this.type = type;
@@ -45,6 +66,20 @@ public class GameEvent implements Comparable<GameEvent> {
 		this.endTime = endTime;
 	}
 	
+	/**
+	 * Constructor of a GameEvent for Attacks or Transport 
+	 * @param id
+	 * @param playerid
+	 * @param toplayerid
+	 * @param type
+	 * @param coordinates
+	 * @param target
+	 * @param buildingName
+	 * @param fleet
+	 * @param ressource
+	 * @param startTime
+	 * @param endTime
+	 */
 	public GameEvent(int id, int playerid, int toplayerid, Type type, Coordinates coordinates, Coordinates target, String buildingName, Fleet fleet, ArrayList<ARessource> ressource, Date startTime, Date endTime) {
 		this.id = id;
 		this.playerid = playerid;
@@ -92,10 +127,18 @@ public class GameEvent implements Comparable<GameEvent> {
 		return ressource;
 	}
 
+	/**
+	 * Returns the remaining TIme as Date
+	 * @return
+	 */
 	public Date getRemainingTime() {
 		return new Date(endTime.getTime() - new Date().getTime());
 	}
 	
+	/**
+	 * Returns the remaining TIme as String
+	 * @return
+	 */
 	public String getRemainingTimeAsString() {
 		return DateUtils.getRemainingTimeAsString(endTime);
 	}

@@ -8,12 +8,24 @@ public class Coordinates {
 	private int solarsystem = 0;
 	private int planetnumber = 0;
 	
+	/**
+	 * Create Coordinates with Galaxy, SolarSystem, PlanetNumber
+	 * @param galaxy
+	 * @param solarsystem
+	 * @param planetnumber
+	 */
 	public Coordinates(int galaxy, int solarsystem, int planetnumber) {
 		this.galaxy = galaxy;
 		this.solarsystem = solarsystem;
 		this.planetnumber = planetnumber;
 	}
 	
+	/**
+	 * Tries to create Coordinates with Strings
+	 * @param galaxy
+	 * @param solar
+	 * @param planet
+	 */
 	public Coordinates(String galaxy, String solar, String planet) {
 		try {
 			this.galaxy = Integer.parseInt(galaxy);
@@ -38,6 +50,10 @@ public class Coordinates {
 		return planetnumber;
 	}
 	
+	/**
+	 * Returns a String with Coordinates like 1:33:7 for WebInterface
+	 * @return
+	 */
 	public String asCoords() {
 		return galaxy + ":" + solarsystem + ":" + planetnumber;
 	}
