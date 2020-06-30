@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Never used
  * Servlet implementation class PlanetSwitchServlet
  */
 @WebServlet("/PlanetSwitchServlet")

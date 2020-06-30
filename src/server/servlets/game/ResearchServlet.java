@@ -35,6 +35,7 @@ public class ResearchServlet extends HttpServlet {
 	}
 
 	/**
+	 * This Servlet manages the Research requests from the User
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

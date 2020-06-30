@@ -12,6 +12,7 @@ import database.DBEvent;
 import game.player.Player;
 
 /**
+ * Not Used anymore
  * Servlet implementation class Page
  */
 @WebServlet("/Page")

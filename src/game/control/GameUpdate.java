@@ -218,8 +218,13 @@ public class GameUpdate {
 			planet.getFleet().addFleet(event.getFleet());
 			planet.increaseRessources(event.getRessource());
 			// TODO DATABASE INFORM
+			DBPlanet.updatePlanet(user, planet);
+			deleteEvent(event);
 			i.remove();			
 		} else {
+			updateOtherPlayerById(event.getTargetplayerid());
+			deleteEvent(event);
+			i.remove();
 			// TODO calculate with Database from other players planet!!!
 		}
 	}

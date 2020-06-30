@@ -38,6 +38,7 @@ public class SpacePortServlet extends HttpServlet {
 	}
 
 	/**
+	 * This Servlet manages the input to Build SpaceShips in the SpacePort
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
