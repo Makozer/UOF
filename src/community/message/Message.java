@@ -2,6 +2,8 @@ package community.message;
 
 import java.util.*;
 
+import database.DBUser;
+
 
 /**
  * @author Cedric
@@ -40,7 +42,9 @@ public class Message implements Comparable<Message> {
 	}
 	
 	public String getFromName() {
-		return fromName;
+		String name = "";
+		name = DBUser.getPlayerById(fromId).getDisplayName();
+		return name;
 	}
 
 	public int getToId() {
